@@ -75,3 +75,11 @@ project and you should be ready to go! It should look something like below:
             Allow from all
         </Directory>
     </VirtualHost>
+
+Steps to Create Secondry Navigation  
+-----------------------------------
+1. Add secondary navigation configuration (navigation.global.php)
+2. Cretae a Service (SecondaryNavigationFactory.php in module\ModuleName\src\ModuleName\Navigation\Service). Factory must inherite DefaultNavigationFactory.
+3. Add this Service to 'service_manager' (navigation.global.php) 
+4. Call view helper with new name of navigation
+

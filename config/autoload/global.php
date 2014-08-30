@@ -12,5 +12,9 @@
  */
 
 return array(
+	'module_layouts' => array(
+        'Main' 		=> 'layout/main.phtml',
+        'Admin'     => 'layout/admin.phtml',
+    ),
     // ...
 );

@@ -127,8 +127,10 @@ img {
 .menu_wrap .nav > li > a:hover,
 .menu_wrap .nav > li.current > a,
 .menu_wrap .nav > li.current > a:hover {
-	color: #d15d5d;
-	background:#303030;
+	/*color: #d15d5d;*/
+	color: #fff;
+	/*background:#303030;*/
+	background:#0085D5;
 }
 .sub-menu > a {position: relative;
 }
@@ -857,6 +859,7 @@ ul.links li a:hover {color:#d15d5d;
 	border-top:1px #a6a6a6 dotted;
 	margin-bottom:12px;
 	color:#747474;
+	font-size: 11px;
 }
 .post_info span {color:#D15D5D;
 }

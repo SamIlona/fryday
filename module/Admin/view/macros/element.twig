@@ -1,0 +1,23 @@
+{% macro getLabelOfElement(form, name) %}
+	{% for element in form %} 
+		{% if element.name == name %}
+			{{ element.label }}
+		{% endif %}
+	{% endfor %}
+{% endmacro %}
+
+{% macro getElement(form, name) %}
+	{% for element in form %} 
+		{% if element.name == name %}
+			{% if element.attributes.type == 'text' %}
+				<input name="{{ element.name }}" type="{{ element.attributes.type }}" id="{{ element.attributes.id }}" value="{{ element.value }}" class="{{ element.attributes.class }}" />
+			{% elseif element.attributes.type == 'file' %}
+				<input name="{{ element.name }}" type="{{ element.attributes.type }}" id="{{ element.attributes.id }}" />
+			{% elseif element.attributes.type == 'textarea' %}
+				<textarea></textarea>
+			{% elseif element.attributes.type == 'submit' %}
+				<input name="{{ element.name }}" type="{{ element.attributes.type }}" class="{{ element.attributes.class }}" value="{{ element.value }}" />
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+{% endmacro %}

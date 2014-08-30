@@ -1,4 +1,10 @@
 <?php
+/*
+За перенаправление всех пользовательских запросов на сайт отвечает файл public/index.php. 
+Затем получает массив настроек приложения, расположенный в config/application.config.php. 
+После запускает Приложение (Application) вызовом функции run(), 
+которое обрабатывает запросы и в итоге отсылает полученный результат обратно пользователю.
+*/
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.
