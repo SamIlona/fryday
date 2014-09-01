@@ -1,0 +1,25 @@
+
+<ul class ="nav main-menu" >
+	<?php foreach ($this->container as $page): ?>
+	<?php $hasChildren = $page->hasPages() ?>
+	<?php if(!$hasChildren): ?>
+	<li <?php $page->isActive() ? 'class = "active"' : '' ?> > 
+		<?php echo $this->navigation('secondary_navigation')->menu()->htmlify($page); ?>
+
+	</li>
+	<?php else: ?>
+	<li <?php $page->isActive() ? 'class = "active"' : '' ?> > 
+	<?php echo $this->navigation('secondary_navigation')->menu()->htmlify($page); ?>
+		<?php if($page->isActive()): ?>
+		<ul style="display: block;" class="dropdown-menu">
+			<?php foreach($page->getPages() as $child): ?>
+            <li>
+                <?php echo $this->navigation('secondary_navigation')->menu()->htmlify($child); ?>
+            </li>
+            <?php endforeach ?>
+		</ul>
+		<?php endif ?>
+	</li>
+	<?php endif ?>
+	<?php endforeach; ?>
+</ul>

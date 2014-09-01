@@ -116,7 +116,11 @@
         <div class="row">
             <div id="sidebar-left" class="col-xs-2 col-sm-2">
                 <?php echo $this->navigation('navigation')->menu()->setUlClass('nav main-menu')->escapeLabels(false); ?>
-                <?php echo $this->navigation('admin_main_navigation')->menu()->setUlClass('nav main-menu')->escapeLabels(false); ?>
+                <?php 
+                    // echo $this->navigation('admin_main_navigation')->menu()->setUlClass('nav main-menu')->escapeLabels(false); 
+                    echo $this->navigation('secondary_navigation')->menu()->setPartial(array('admin/partials/menu.phtml', 'default'))->render(); 
+                    // echo $this->navigation('secondary_navigation')->menu()->setPartial(array('admin/partials/menu.phtml', 'default'))->renderSubMenu(null, 'sidebar', 0);                
+                ?> 
             </div>
             <div id="content" class="col-xs-12 col-sm-10">
                 <!--Start Breadcrumb-->

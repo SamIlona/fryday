@@ -16,16 +16,16 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../view/layout/layout.phtml:6
-#: ../view/layout/layout.phtml:33
+#: ../view/layout/main.phtml:6
+#: ../view/layout/main.phtml:33
 msgid "Skeleton Application"
 msgstr "Skeleton aplikace"
 
-#: ../view/layout/layout.phtml:36
+#: ../view/layout/main.phtml:36
 msgid "Home"
 msgstr "Úvod"
 
-#: ../view/layout/layout.phtml:50
+#: ../view/layout/main.phtml:50
 msgid "All rights reserved."
 msgstr "Všechna práva vyhrazena."
 

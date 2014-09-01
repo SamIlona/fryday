@@ -73,7 +73,10 @@ return array(
         */
         'factories' => array(
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-            'admin_main_navigation' => 'Admin\Navigation\Service\AdminMainNavigationFactory',
+            //'admin_main_navigation' => 'Admin\Navigation\Service\AdminMainNavigationFactory',
+            // 'admin_main_navigation' => 'Fryday\Zend\Navigation\Service\AdminMainNavigationFactory',
+            // 'secondary_navigation' => 'Csn\Zend\Navigation\Service\SecondaryNavigationFactory',
+            'secondary_navigation' => 'Admin\Navigation\Service\SecondaryNavigationFactory'
         ),
         /*
         Абстрактные фабрики (Abstract Factories)
@@ -118,14 +121,14 @@ return array(
                 'route' => 'admin/default',
                 'controller' => 'content',
                 'action' => 'news',
-                'resource'  => 'Admin\Controller\Admin',
+                //'resource'  => 'Admin\Controller\Admin',
                 'pages' => array(
                     array(
-                        'label' => '<i class="fa fa-bullhorn"></i><span class="hidden-xs"> News</span>',
+                        'label' => '<i class="fa fa-bullhorn"></i><span class="hidden-xs"> Add News</span>',
                         'route' => 'admin/default',
                         'controller' => 'content',
-                        'action' => 'news',
-                        'resource'  => 'Admin\Controller\Admin',
+                        'action' => 'add-news',
+                        //'resource'  => 'Admin\Controller\Admin',
                     )
                 )
             ),
@@ -134,7 +137,7 @@ return array(
                 'route' => 'admin/default',
                 'controller' => 'content',
                 'action' => 'events',
-                'resource'  => 'Admin\Controller\Admin',
+                //'resource'  => 'Admin\Controller\Admin',
             ),
         ),
         
@@ -151,10 +154,10 @@ return array(
                 'resource'  => 'Admin\Controller\Admin',
                 'pages' => array(
                     array(
-                        'label' => '<i class="fa fa-bullhorn"></i><span class="hidden-xs"> News</span>',
+                        'label' => '<i class="fa fa-bullhorn"></i><span class="hidden-xs">Add News</span>',
                         'route' => 'admin/default',
                         'controller' => 'content',
-                        'action' => 'news',
+                        'action' => 'add-news',
                         'resource'  => 'Admin\Controller\Admin',
                     )
                 )
@@ -165,6 +168,46 @@ return array(
                 'controller' => 'content',
                 'action' => 'events',
                 'resource'  => 'Admin\Controller\Admin',
+            ),
+        ),
+
+        'secondary' => array(
+            array(
+                'label' => 'Home', //'<i class="fa fa-dashboard"></i><span class="hidden-xs"> Home</span>',
+                'route' => 'admin',
+                // 'type' => 'Csn\Zend\Navigation\Page\Mvc',
+
+            ),
+            array(
+                'label' => 'News',//'<i class="fa fa-bullhorn"></i><span class="hidden-xs"> News</span>',
+                'route' => 'admin/default',
+                'controller' => 'content',
+                'action' => 'news',
+                'resource'  => 'Admin\Controller\Admin',
+                'pages' => array(
+                    array(
+                        'label' => 'Add News', //'<i class="fa fa-bullhorn"></i><span class="hidden-xs">Add News</span>',
+                        'route' => 'admin/default',
+                        'controller' => 'content',
+                        'action' => 'add-news',
+                        'resource'  => 'Admin\Controller\Admin',
+                    ),
+                     array(
+                        'label' => 'Edit News', //'<i class="fa fa-bullhorn"></i><span class="hidden-xs">Add News</span>',
+                        'route' => 'admin/default',
+                        'controller' => 'content',
+                        'action' => 'edit-news',
+                        'resource'  => 'Admin\Controller\Admin',
+                    )
+                )
+            ),
+            array(
+                'label' => 'Events',//'<i class="fa fa-glass"></i><span class="hidden-xs"> Events</span>', 
+                'route' => 'admin/default',
+                'controller' => 'content',
+                'action' => 'events',
+                'resource'  => 'Admin\Controller\Admin',
+                'anchor_css' => 'mmhome'
             ),
         ),
     ),
@@ -188,9 +231,14 @@ return array(
     //         'error/404'               => __DIR__ . '/../view/error/404.phtml',
     //         'error/index'             => __DIR__ . '/../view/error/index.phtml',
     //     ),
+        // 'template_path_stack' => array(
+        //     __DIR__ . '/../view',
+        // ),
+
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+            __NAMESPACE__ => __DIR__ . '/../view'
         ),
+
         'strategies' => array(
             'ZfcTwigViewStrategy',
         ),

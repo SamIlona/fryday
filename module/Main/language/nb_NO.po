@@ -15,15 +15,15 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../view/layout/layout.phtml:6 ../view/layout/layout.phtml:33
+#: ../view/layout/main.phtml:6 ../view/layout/main.phtml:33
 msgid "Skeleton Application"
 msgstr "Skjelettapplikasjon"
 
-#: ../view/layout/layout.phtml:36
+#: ../view/layout/main.phtml:36
 msgid "Home"
 msgstr "Hjem"
 
-#: ../view/layout/layout.phtml:50
+#: ../view/layout/main.phtml:50
 msgid "All rights reserved."
 msgstr "Alle rettigheter reservert."
 

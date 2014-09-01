@@ -2,13 +2,13 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
-        'Main',
         'ZfcBase',
         'DoctrineModule',
         'DoctrineORMModule',
         // 'Application',
         // 'FileManager',
         'ZfcTwig',
+        'Main',
         'Admin'
 
     ),
