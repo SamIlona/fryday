@@ -1,0 +1,49 @@
+{% macro getTable(tableData, page) %}
+
+<div class="box">
+	<div class="box-content">
+		{% if page == 'places-table' %}
+
+
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>ITEMS</th>
+								<th>QTY</th>
+								<th>UNIT PRICE</th>
+								<th>TOTAL</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="m-ticker"><b>Server #1</b><span>SAN Storage 40Gb, vCPU 2 Core, vRAM 2GB</span></td>
+								<td>2</td>
+								<td>$12.5</td>
+								<td>$25</td>
+							</tr>
+							<tr>
+								<td class="m-ticker"><b>Server #2</b><span>SAN Storage 80Gb, vCPU 4 Core, vRAM 4GB</span></td>
+								<td>2</td>
+								<td>$25</td>
+								<td>$50</td>
+							</tr>
+							<tr>
+								<td class="m-ticker"><b>Server #3</b><span>SAN Storage 1600Gb, vCPU 8 Core, vRAM 8GB</span></td>
+								<td>2</td>
+								<td>$50</td>
+								<td>$100</td>
+							</tr>
+							<tr class="active">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><b>$175<sup>*</sup></b></td>
+							</tr>
+						</tbody>
+					</table>
+
+		{% endif %}
+	</div>
+</div>
+
+{% endmacro %}

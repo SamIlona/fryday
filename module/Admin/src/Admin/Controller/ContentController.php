@@ -10,8 +10,11 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 use Main\Entity\News;
+use Main\Entity\City;
+use Main\Entity\Country;
 
 use Admin\Form\AddNewsForm;
+use Admin\Form\AddPlaceForm;
 
 use Doctrine\ORM\EntityManager;
 
@@ -75,6 +78,59 @@ class ContentController extends AbstractActionController
         return new ViewModel();
     }
 
+    public function placesAction()
+    {
+
+        return new ViewModel();
+    }
+
+    public function addPlaceAction()
+    {
+        $this->entityManager = $this->getEntityManager();
+        $qb = $this->entityManager->createQueryBuilder();
+
+        $form = new AddPlaceForm($this->entityManager);
+
+        $place = new City();
+
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+
+            // appling changes
+            $city = $form->get('city')->getValue();
+            $place->setCity($city);
+
+            $countryId = $form->get('country')->getValue();
+            $country = $qb
+                ->select('c')
+                ->from('Main\Entity\Country', 'c')
+                ->where('c.id = :id')
+                ->setParameter('id', $countryId)
+                ->getQuery()
+                ->getSingleResult();
+
+            $place->setCountry($country);            
+
+            if($form->isValid()) {
+                $this->entityManager->persist($place);
+                $this->entityManager->flush();
+            }
+
+            return $this
+                ->redirect()
+                ->toRoute('admin/default', 
+                    array(
+                        'controller' => 'content',
+                        'action' => 'places'
+                    )
+                );
+        }
+        
+        return array(
+            'form' => $form,
+        );
+    }
+
     public function addEventAction()
     {
         return new ViewModel();
@@ -112,5 +168,15 @@ class ContentController extends AbstractActionController
         return array(
             'form' => $form,
         );
+    }
+
+    public function editNewsAction()
+    {
+        return new ViewModel();
+    }
+
+    public function addPlace()
+    {
+        return new ViewModel();
     }
 }

@@ -9,14 +9,31 @@
 {% macro getElement(form, name) %}
 	{% for element in form %} 
 		{% if element.name == name %}
+
+			{# TYPE : text #}
 			{% if element.attributes.type == 'text' %}
 				<input name="{{ element.name }}" type="{{ element.attributes.type }}" id="{{ element.attributes.id }}" value="{{ element.value }}" class="{{ element.attributes.class }}" />
+
+			{# TYPE : file #}
 			{% elseif element.attributes.type == 'file' %}
 				<input name="{{ element.name }}" type="{{ element.attributes.type }}" id="{{ element.attributes.id }}" />
+			
+			{# TYPE : textarea #}
 			{% elseif element.attributes.type == 'textarea' %}
 				<textarea></textarea>
+
+			{# TYPE : submit #}
 			{% elseif element.attributes.type == 'submit' %}
 				<input name="{{ element.name }}" type="{{ element.attributes.type }}" class="{{ element.attributes.class }}" value="{{ element.value }}" />
+
+			{# TYPE : select #}
+			{% elseif element.attributes.type == 'select' %}
+				<select name="{{ element.name }}" class="{{ element.attributes.class }}">
+					{% for key, name in element.options.value_options %}
+					    <option value="{{ key }}" {% if element.value == key %}selected{% endif %}>{{ name }}</option>
+            		{% endfor %}
+        		</select>
+
 			{% endif %}
 		{% endif %}
 	{% endfor %}

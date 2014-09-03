@@ -147,18 +147,19 @@ return array(
                 'route' => 'admin',
             ),
             array(
-                'label' => '<i class="fa fa-bullhorn"></i><span class="hidden-xs"> News</span>',
-                'route' => 'admin/default',
+                'label'     => '<i class="fa fa-bullhorn"></i><span class="hidden-xs"> News</span>',
+                'route'     => 'admin/default',
                 'controller' => 'content',
-                'action' => 'news',
+                'action'    => 'news',
                 'resource'  => 'Admin\Controller\Admin',
-                'pages' => array(
+                'pages'     => array(
                     array(
-                        'label' => '<i class="fa fa-bullhorn"></i><span class="hidden-xs">Add News</span>',
-                        'route' => 'admin/default',
+                        'label'     => '<i class="fa fa-bullhorn"></i><span class="hidden-xs">Add News</span>',
+                        'route'     => 'admin/default',
                         'controller' => 'content',
-                        'action' => 'add-news',
+                        'action'    => 'add-news',
                         'resource'  => 'Admin\Controller\Admin',
+                        // 'class'     => 'dropdown-toggle', 
                     )
                 )
             ),
@@ -189,25 +190,36 @@ return array(
                         'label' => 'Add News', //'<i class="fa fa-bullhorn"></i><span class="hidden-xs">Add News</span>',
                         'route' => 'admin/default',
                         'controller' => 'content',
-                        'action' => 'add-news',
-                        'resource'  => 'Admin\Controller\Admin',
+                        'action' => 'add-news'
                     ),
-                     array(
+                    array(
                         'label' => 'Edit News', //'<i class="fa fa-bullhorn"></i><span class="hidden-xs">Add News</span>',
                         'route' => 'admin/default',
                         'controller' => 'content',
                         'action' => 'edit-news',
-                        'resource'  => 'Admin\Controller\Admin',
-                    )
+                        'visible' => false
+                    ),
                 )
             ),
             array(
                 'label' => 'Events',//'<i class="fa fa-glass"></i><span class="hidden-xs"> Events</span>', 
                 'route' => 'admin/default',
                 'controller' => 'content',
-                'action' => 'events',
-                'resource'  => 'Admin\Controller\Admin',
-                'anchor_css' => 'mmhome'
+                'action' => 'events'
+            ),
+            array(
+                'label' => 'Places',//'<i class="fa fa-glass"></i><span class="hidden-xs"> Events</span>', 
+                'route' => 'admin/default',
+                'controller' => 'content',
+                'action' => 'places',
+                'pages' => array(
+                    array(
+                        'label' => 'Add Place', //'<i class="fa fa-bullhorn"></i><span class="hidden-xs">Add News</span>',
+                        'route' => 'admin/default',
+                        'controller' => 'content',
+                        'action' => 'add-place'
+                    ),
+                ),
             ),
         ),
     ),
