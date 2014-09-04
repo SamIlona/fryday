@@ -12,6 +12,7 @@ use Zend\View\Model\ViewModel;
 use Main\Entity\News;
 use Main\Entity\City;
 use Main\Entity\Country;
+use Main\Entity\Place;
 
 use Admin\Form\AddNewsForm;
 use Admin\Form\AddPlaceForm;
@@ -74,14 +75,18 @@ class ContentController extends AbstractActionController
 
    	public function newsAction()
     {
-
-        return new ViewModel();
+        $news = $this->getEntityManager()->getRepository('Main\Entity\News')->findAll();
+        return array(
+            'newsTableData' => $news,
+        );
     }
 
     public function placesAction()
     {
-
-        return new ViewModel();
+        $places = $this->getEntityManager()->getRepository('Main\Entity\Place')->findAll();
+        return array(
+            'placesTableData' => $places,
+        );
     }
 
     public function addPlaceAction()
@@ -91,25 +96,34 @@ class ContentController extends AbstractActionController
 
         $form = new AddPlaceForm($this->entityManager);
 
-        $place = new City();
+        $place = new Place();
 
         if ($this->request->isPost()) {
             $form->setData($this->request->getPost());
 
             // appling changes
-            $city = $form->get('city')->getValue();
+            $cityId = $form->get('city')->getValue();
+            $city = $qb
+                ->select('ci')
+                ->from('Main\Entity\City', 'ci')
+                ->where('ci.id = :id')
+                ->setParameter('id', $cityId)
+                ->getQuery()
+                ->getSingleResult();
             $place->setCity($city);
 
             $countryId = $form->get('country')->getValue();
             $country = $qb
-                ->select('c')
-                ->from('Main\Entity\Country', 'c')
-                ->where('c.id = :id')
+                ->select('co')
+                ->from('Main\Entity\Country', 'co')
+                ->where('co.id = :id')
                 ->setParameter('id', $countryId)
                 ->getQuery()
                 ->getSingleResult();
+            $place->setCountry($country);
 
-            $place->setCountry($country);            
+            $name = $form->get('name')->getValue();
+            $place->setName($name);
 
             if($form->isValid()) {
                 $this->entityManager->persist($place);
@@ -139,7 +153,9 @@ class ContentController extends AbstractActionController
     public function addNewsAction()
     {
         $this->entityManager = $this->getEntityManager();
-        $form = new AddNewsForm();
+        $qb = $this->entityManager->createQueryBuilder();
+
+        $form = new AddNewsForm($this->entityManager);
 
         $news = new News();
 
@@ -149,6 +165,19 @@ class ContentController extends AbstractActionController
             // appling changes
             $title = $form->get('title')->getValue();
             $news->setTitle($title);
+
+            $text = $form->get('text')->getValue();
+            $news->setText($text);
+
+            $placeId = $form->get('place')->getValue();
+            $place = $qb
+                ->select('p')
+                ->from('Main\Entity\Place', 'p')
+                ->where('p.id = :id')
+                ->setParameter('id', $placeId)
+                ->getQuery()
+                ->getSingleResult();
+            $news->setPlace($place);
 
             if($form->isValid()) {
                 $this->entityManager->persist($news);

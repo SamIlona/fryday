@@ -31,6 +31,17 @@ class AddPlaceForm extends Form
 		));
 
 		$this->add(array(
+			'name' => 'name',
+			'attributes' => array(
+				'type' => 'text',
+				'class' => 'form-control',
+			),
+			'options' => array(
+				'label' => 'Name',
+			),
+		));
+
+		$this->add(array(
 			'name' => 'country',
 			'attributes' => array(
 				'type' => 'select',
@@ -38,18 +49,19 @@ class AddPlaceForm extends Form
 			),
 			'options' => array(
 				'label' => 'Select Country',
-				'value_options' => $this->getCountries(),
+				'value_options' => $this->getAllCountries(),
 			),
 		));
 
 		$this->add(array(
 			'name' => 'city',
 			'attributes' => array(
-				'type' => 'text',
+				'type' => 'select',
 				'class' => 'form-control',
 			),
 			'options' => array(
-				'label' => 'City',
+				'label' => 'Select City',
+				'value_options' => $this->getAllCities(),
 			),
 		));
 
@@ -63,16 +75,33 @@ class AddPlaceForm extends Form
         ));
 	}
 
-	public function getCountries()
+	private function getAllCountries()
     {
+    	$countries = array();
+    	
         $countriesSet = $this->entityManager
             ->getRepository('Main\Entity\Country')
             ->findAll();
 
         foreach ($countriesSet as $country) {
-            $countries[$country->getId()] = $country->getCountry();
+            $countries[$country->getId()] = $country->getName();
         }
 
         return $countries;
+    }
+
+    private function getAllCities()
+    {
+    	$cities = array();
+
+        $citiesSet = $this->entityManager
+            ->getRepository('Main\Entity\City')
+            ->findAll();
+
+        foreach ($citiesSet as $city) {
+            $cities[$city->getId()] = $city->getName();
+        }
+
+        return $cities;
     }
 }

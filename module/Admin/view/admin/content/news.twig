@@ -1,36 +1,7 @@
-<div id="dashboard-header" class="row">
-	<div class="col-xs-12 col-sm-10">
-		<h3>NEWS</h3>
-		<a href="{{ url('admin/default', {'controller': 'content', 'action': 'add-news'}) }}"> Add news</a>
-	</div>
-</div>
+{% import 'macros/table.twig' as tableMacros %}
+
 <div class="row">
-	<div class="col-xs-12">
-		<div class="box ui-draggable ui-droppable">
-			<div class="box-content no-padding">
-				<table class="table table-striped table-bordered table-hover table-heading no-border-bottom">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Title</th>
-							<th>Author</th>
-							<th>Date</th>
-							<th>Country</th>
-							<th>City</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Oracle</td>
-							<td>OracleDB</td>
-							<td>http://oracle.com</td>
-							<td>SQL server</td>
-							<td>Test</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+	<div class="col-xs-12 col-sm-12">
+		{{ tableMacros.getTable(newsTableData, 'news-table') }}
 	</div>
 </div>

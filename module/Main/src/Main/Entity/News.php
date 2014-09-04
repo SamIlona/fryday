@@ -43,7 +43,7 @@ class News
 
     /**
      * @var string
-     * @ORM\Column(name="picture", type="text", nullable=true)
+     * @ORM\Column(name="picture", type="string", nullable=true)
      */
     protected $picture;
 
@@ -66,6 +66,13 @@ class News
     protected $country;
 
     /**
+     * @var integer
+     * @ORM\ManyToOne(targetEntity="Main\Entity\Place", inversedBy="news")
+     * @ORM\JoinColumn(name="place", referencedColumnName="id")
+     */
+    protected $place;
+
+    /**
     * @return string
     */
     public function getTitle()
@@ -80,5 +87,38 @@ class News
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @param null|Main\Entity\Place $place
+     */
+    public function setPlace($place)
+    {
+        $this->place = $place;
+    }
+
+    /**
+     * @return Main\Entity\Place|null 
+     */
+    public function getPlace()
+    {
+        return $this->place;
+    }
+
+    /**
+    * @return string
+    */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     * @return void
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
     }
 }

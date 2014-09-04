@@ -24,38 +24,43 @@ class City
 
     /**
      * @var string
-     * @ORM\Column(name="city", type="string", length=255, nullable=false)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    protected $city;
+    protected $name;
 
     /**
     * @var integer
     * @ORM\ManyToOne(targetEntity="Main\Entity\Country", inversedBy="cities")
-    * @ORM\JoinColumn(name="country", referencedColumnName="id", onDelete="CASCADE")
+    * @ORM\JoinColumn(name="country", referencedColumnName="id")
     */
     protected $country;
 
     /**
-     * Set City
-     * @param string $city
+     * @return integer 
      */
-    public function setCity($city)
+    public function getId()
     {
-        $this->city = $city;
+        return $this->id;
     }
 
     /**
-     * Get City
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
      * @return string 
      */
-    public function getCity()
+    public function getName()
     {
-        return $this->city;
+        return $this->name;
     }
 
     /**
-     * Set Country
-     * @param string $country
+     * @param null|Main\Entity\Country $country
      */
     public function setCountry($country)
     {
@@ -63,8 +68,7 @@ class City
     }
 
     /**
-     * Get Country
-     * @return string 
+     * @return Main\Entity\Country|null 
      */
     public function getCountry()
     {

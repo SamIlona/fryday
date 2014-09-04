@@ -118,7 +118,7 @@
                 <?php // echo $this->navigation('navigation')->menu()->setUlClass('nav main-menu')->escapeLabels(false); ?>
                 <?php 
                     // echo $this->navigation('admin_main_navigation')->menu()->setUlClass('nav main-menu')->escapeLabels(false); 
-                    echo $this->navigation('secondary_navigation')->menu()->setPartial(array('admin/partials/menu.phtml', 'default'))->render(); 
+                    echo $this->navigation('secondary_navigation')->menu()->setPartial(array('partial/menu.phtml', 'default'))->render(); 
                     // echo $this->navigation('secondary_navigation')->menu()->setPartial(array('admin/partials/menu.phtml', 'default'))->renderSubMenu(null, 'sidebar', 0);                
                 ?> 
             </div>

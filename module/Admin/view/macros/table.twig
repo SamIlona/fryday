@@ -2,47 +2,48 @@
 
 <div class="box">
 	<div class="box-content">
+
+		{# Table For Places  #}
 		{% if page == 'places-table' %}
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>PLACE</th>
+						<th>CITY</th>
+						<th>COUNTRY</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in tableData %}
+						<tr>
+							<td class="m-ticker"><b>{{ item.name }}</b><span>Edit | Delete</span></td>
+							<td>{{ item.city.name }}</td>
+							<td>{{ item.country.name }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 
-
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>ITEMS</th>
-								<th>QTY</th>
-								<th>UNIT PRICE</th>
-								<th>TOTAL</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="m-ticker"><b>Server #1</b><span>SAN Storage 40Gb, vCPU 2 Core, vRAM 2GB</span></td>
-								<td>2</td>
-								<td>$12.5</td>
-								<td>$25</td>
-							</tr>
-							<tr>
-								<td class="m-ticker"><b>Server #2</b><span>SAN Storage 80Gb, vCPU 4 Core, vRAM 4GB</span></td>
-								<td>2</td>
-								<td>$25</td>
-								<td>$50</td>
-							</tr>
-							<tr>
-								<td class="m-ticker"><b>Server #3</b><span>SAN Storage 1600Gb, vCPU 8 Core, vRAM 8GB</span></td>
-								<td>2</td>
-								<td>$50</td>
-								<td>$100</td>
-							</tr>
-							<tr class="active">
-								<td></td>
-								<td></td>
-								<td></td>
-								<td><b>$175<sup>*</sup></b></td>
-							</tr>
-						</tbody>
-					</table>
-
+		{% elseif page == 'news-table' %}
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>TITLE</th>
+						<th>PLACE</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in tableData %}
+						<tr>
+							<td class="m-ticker"><b>{{ item.title }}</b><span>Edit | Delete</span></td>
+							<td>{{ item.place.name }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 		{% endif %}
+
+		
 	</div>
 </div>
 

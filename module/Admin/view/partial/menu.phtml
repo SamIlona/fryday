@@ -1,6 +1,7 @@
 <ul class ="nav main-menu" >
 	<?php 
 	foreach ($this->container as $page): 
+		$active = 0; 
 		?>
 		<?php 
 		if($page->hasPages()): 
@@ -23,7 +24,7 @@
 			?>
 
 			<!-- Rendering pages with children  -->
-			<li class=<?php echo $active ? '"gropdown active"' : '"gropdown"' ?> >
+			<li class=<?php echo $active ? 'active' : '' ?> >
 				<?php echo $this->navigation('secondary_navigation')->menu()->htmlify($page); ?>
 				<?php 
 				if($active): 

@@ -24,17 +24,53 @@ class Place
 
     /**
      * @var string
-     * @ORM\ManyToMany(targetEntity="Main\Entity\City", inversedBy="city")
-     * @ORM\JoinColumn(name="city", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    protected $name;
+
+    /**
+     * @var integer
+     * @ORM\ManyToOne(targetEntity="Main\Entity\Country", inversedBy="places")
+     * @ORM\JoinColumn(name="country", referencedColumnName="id")
+     */
+    protected $country;
+
+    /**
+     * @var integer
+     * @ORM\OneToOne(targetEntity="Main\Entity\City")
+     * @ORM\JoinColumn(name="city", referencedColumnName="id")
      */
     protected $city;
 
     /**
-     * @var integer
-     * @ORM\ManyToMany(targetEntity="Main\Entity\Country", inversedBy="country")
-     * @ORM\JoinColumn(name="country", referencedColumnName="id", onDelete="CASCADE")
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Main\Entity\News", mappedBy="place")
      */
-    protected $country;
+    private $news;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
      * @param null|Main\Entity\City $city

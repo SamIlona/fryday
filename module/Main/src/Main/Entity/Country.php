@@ -24,15 +24,21 @@ class Country
 
     /**
      * @var string
-     * @ORM\Column(name="country", type="string", length=255, nullable=true)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
-    private $country;
+    private $name;
 
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="Main\Entity\City", mappedBy="country")
      */
     private $cities;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Main\Entity\Place", mappedBy="country")
+     */
+    private $places;
 
      /**
      * @return int
@@ -43,19 +49,19 @@ class Country
     }
 
     /**
-     * @return Main\Entity\Country|null
+     * @return string
      */
-    public function getCountry()
+    public function getName()
     {
-        return $this->country;
+        return $this->name;
     }
 
     /**
-     * @param null|Application\Entity\Country $country
+     * @param string $name
      * @return void
      */
-    public function setCountry($country)
+    public function setName($name)
     {
-        $this->country = $country;
+        $this->name = $name;
     }
 }
