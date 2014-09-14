@@ -6,11 +6,14 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         // 'Application',
+        
         // 'FileManager',
         'ZfcTwig',
         'Main',
-        'Admin'
-
+        'Admin',
+        'User',
+        'ZF2FileUploadExamples',
+        'Backend',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
@@ -69,4 +72,10 @@ return array(
    // Initial configuration with which to seed the ServiceManager.
    // Should be compatible with Zend\ServiceManager\Config.
    // 'service_manager' => array(),
+    'autoloader' => array(
+        'namespaces' => array(
+            'Fryday'        => __DIR__ . '/../library/Fryday',
+        ),
+        'autoregister_zf' => true,
+    ),
 );

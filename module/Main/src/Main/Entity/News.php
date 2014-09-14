@@ -43,9 +43,9 @@ class News
 
     /**
      * @var string
-     * @ORM\Column(name="picture", type="string", nullable=true)
+     * @ORM\Column(name="image", type="string", nullable=true)
      */
-    protected $picture;
+    protected $image;
 
    /**
     * @var \DateTime
@@ -120,5 +120,22 @@ class News
     public function setText($text)
     {
         $this->text = $text;
+    }
+
+    /**
+    * @return string
+    */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     * @return void
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 }

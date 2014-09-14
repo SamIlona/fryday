@@ -16,7 +16,7 @@
 
 			{# TYPE : file #}
 			{% elseif element.attributes.type == 'file' %}
-				<input name="{{ element.name }}" type="{{ element.attributes.type }}" id="{{ element.attributes.id }}" />
+				<input name="{{ element.name }}" type="{{ element.attributes.type }}" id="{{ element.attributes.id }}" multiple="{{ element.attributes.multiple }}"/>
 			
 			{# TYPE : textarea #}
 			{% elseif element.attributes.type == 'textarea' %}

@@ -31,9 +31,15 @@ class City
     /**
     * @var integer
     * @ORM\ManyToOne(targetEntity="Main\Entity\Country", inversedBy="cities")
-    * @ORM\JoinColumn(name="country", referencedColumnName="id")
+    * @ORM\JoinColumn(name="country", referencedColumnName="id", onDelete="CASCADE")
     */
     protected $country;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Main\Entity\Venue", mappedBy="city")
+     */
+    protected $venues;
 
     /**
      * @return integer 

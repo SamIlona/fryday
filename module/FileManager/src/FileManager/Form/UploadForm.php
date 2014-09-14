@@ -25,6 +25,7 @@ class UploadForm extends Form
         $file->setLabel('Avatar Image Upload')
              ->setAttribute('id', 'image-file')
              ->setAttribute('multiple', true);   // That's it
+        
         $this->add($file);
 		
         $this->add(array(

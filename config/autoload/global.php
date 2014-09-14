@@ -15,6 +15,8 @@ return array(
 	'module_layouts' => array(
         'Main' 		=> 'layout/main.phtml',
         'Admin'     => 'layout/admin.phtml',
+        'User'     	=> 'layout/admin.phtml',
+        'Backend'	=> 'layout/backend.phtml',
     ),
     // ...
 );

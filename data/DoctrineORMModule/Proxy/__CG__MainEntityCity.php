@@ -64,10 +64,10 @@ class City extends \Main\Entity\City implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'name', 'country');
+            return array('__isInitialized__', 'id', 'name', 'country', 'venues');
         }
 
-        return array('__isInitialized__', 'id', 'name', 'country');
+        return array('__isInitialized__', 'id', 'name', 'country', 'venues');
     }
 
     /**

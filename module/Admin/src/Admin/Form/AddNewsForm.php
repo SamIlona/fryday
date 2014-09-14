@@ -6,6 +6,8 @@
 
 namespace Admin\Form;
 
+use Zend\InputFilter;
+use Zend\Form\Element;
 use Zend\Form\Form;
 
 use Main\Entity\Place;
@@ -16,14 +18,17 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 class AddNewsForm extends Form
 {
 	protected $entityManager;
+	protected $_dir;
 
-	public function __construct(ObjectManager $em)
+	public function __construct(ObjectManager $em, $dir, $name = null)
 	{
-		parent::__construct('add-news-form');
+		parent::__construct($name);
 
+		$this->_dir = $dir;
 		$this->entityManager = $em;
-
+		// $this->addElements();
 		$this->setAttribute('method', 'post');
+		// $this->addInputFilter();
 
 		$this->add(array(
 			'name' => 'id',
@@ -42,7 +47,7 @@ class AddNewsForm extends Form
 		));
 
 		$this->add(array(
-			'name' => 'picture',
+			'name' => 'picture-selection-for-news',
 			'attributes' => array(
 				'type' => 'file',
 				'id' => 'picture-selection-for-news',
@@ -80,6 +85,8 @@ class AddNewsForm extends Form
                 'id' => 'submitbutton',
             ),
         ));
+
+        $this->addInputFilter();
 	}
 
 	private function getAllPlaces()
@@ -95,5 +102,40 @@ class AddNewsForm extends Form
         }
 
         return $places;
+    }
+
+    /**
+	 * Adding a RenameUpload filter to our form’s file input, with details on where the valid files should be stored
+	 */
+    public function addInputFilter()
+    {
+        $inputFilter = new InputFilter\InputFilter();
+
+        // File Input
+        $fileInput = new InputFilter\FileInput('picture-selection-for-news');
+        $fileInput->setRequired(true);
+
+        // You only need to define validators and filters
+        // as if only one file was being uploaded. All files
+        // will be run through the same validators and filters
+        // automatically.
+        $fileInput->getValidatorChain()
+            ->attachByName('filesize',      array('max' => 4194304));
+            // ->attachByName('filemimetype',  array('mimeType' => 'image/png, image/x-png, image/jpeg'));
+//            ->attachByName('fileimagesize', array('maxWidth' => 100, 'maxHeight' => 100));
+
+        // All files will be renamed, i.e.:
+        //   ./data/tmpuploads/avatar_4b3403665fea6.png,
+        //   ./data/tmpuploads/avatar_5c45147660fb7.png
+        $fileInput->getFilterChain()->attachByName(
+            'filerenameupload',
+            array(
+                'target'    => $this->_dir, // './data/tmpuploads/avatar.png',
+                'randomize' => true,
+            )
+        );
+        $inputFilter->add($fileInput);
+
+        $this->setInputFilter($inputFilter);
     }
 }

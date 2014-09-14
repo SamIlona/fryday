@@ -1,0 +1,78 @@
+<div class="row">
+	<div class="col-lg-9 col-lg-offset-1">
+		<h2>VENUES 
+			<small>
+				<!-- <span class="label label-primary"> -->
+					<a href="<?php echo $this->url('backend/default', array('controller' => 'venue', 'action' => 'create')); ?>">
+						Add
+					</a>
+				<!-- </span> -->
+			</small>
+		</h2><br>
+	</div>
+</div>
+<?php foreach ($venues as $venue): ?>
+	<div class="row">
+		<div class="col-lg-2 col-lg-offset-1">
+			<?php 
+			$imageBase64 = null; 
+			$imageName = $venue->getProfileImage();
+			if (file_exists($imageName)) {
+				$handle = fopen($imageName, "r");
+				$imageBase64 = fread($handle, filesize($imageName));
+				fclose($handle);
+			}
+			?>
+			<img src="data:image/png;base64,<?php echo base64_encode($imageBase64) ?>" class="img-rounded" height="128" width="128">
+		</div>
+		<div class="col-lg-7">
+			<h4 class="text-left"><?php echo $venue->getName(); ?></h4>
+			<p class="venue-preview-category"><?php echo $venue->getCategory()->getName(); ?></p><br>
+			<i class="fa fa-map-marker fa-fw"></i><?php echo $venue->getCity()->getName(); ?>, <?php echo $venue->getCity()->getCountry()->getName(); ?> 
+		</div>
+	</div>
+	<hr class="col-lg-9 col-lg-offset-1">
+<?php endforeach; ?>
+	
+		
+	
+		
+		
+		
+	
+<!-- </div> -->
+
+		<!-- <table class="table"> -->
+		<!-- <table> -->
+			<!-- <thead> -->
+				<!-- <caption class="text-left">blah blah</caption> -->
+<!-- 				<tr>
+					<th class="col-lg-3"></th>
+					<th class="col-lg-9"></th>
+				</tr>
+			</thead>
+	   		<tbody>
+				<tr>
+					<td>
+					<td>
+
+						
+						<hr>
+						
+						 -->
+	<!-- 					<address>
+							53, B.Khmelnitskogo street<br>
+							Kyiv, Ukraine, 01054<br>
+							<abbr title="Phone">P:</abbr> (123) 456-7890<br>
+							<abbr title="E-mail">E:</abbr> <a href="mailto:#">first.last@example.com</a>
+						</address> -->
+<!-- 					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table> -->
+	<!-- </div> -->
+<!-- </div> -->

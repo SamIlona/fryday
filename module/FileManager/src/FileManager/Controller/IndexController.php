@@ -62,12 +62,12 @@ class IndexController extends AbstractActionController
 				$request->getPost()->toArray(),
 				$request->getFiles()->toArray()
 			);
-			// echo '<pre>';
+			echo '<pre>';
 
-			// print_r($post);
-			// print_r($_FILES);
+			print_r($post);
+			print_r($_FILES);
 
-			// echo '<pre>';
+			echo '<pre>';
 
 			$form->setData($post);
 
@@ -76,7 +76,7 @@ class IndexController extends AbstractActionController
 				// Form is valid, save the form!
 				$this->setFileNames($data);
 				// The data can be saved in the DataBase				
-				return $this->redirect()->toRoute('file-manager');
+				// return $this->redirect()->toRoute('file-manager');
 			}
 		}		
 		

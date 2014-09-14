@@ -36,16 +36,40 @@ if (is_dir('vendor/ZF2/library')) {
 }
 
 if ($zf2Path) {
+    
+    // ADDED BY V.IZMALKOV ----------------------------------
+    // Get application stack configuration
+    // $configuration = include 'config/application.config.php';
+    // ------------------------------------------------------
+
     if (isset($loader)) {
         $loader->add('Zend', $zf2Path);
         $loader->add('ZendXml', $zf2Path);
+
+        // ADDED BY V.IZMALKOV -------------------------------------------------
+        // Registration Fryday Library
+        // foreach ($configuration['autoloader']['namespaces'] as $name => $path) {
+        //     $loader->add($name, dirname($path));
+        // }
+        // $loader->register();
+        // ---------------------------------------------------------------------
+
     } else {
         include $zf2Path . '/Zend/Loader/AutoloaderFactory.php';
-        Zend\Loader\AutoloaderFactory::factory(array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'autoregister_zf' => true
+        Zend\Loader\AutoloaderFactory::factory(
+            array(
+                // ADDED BY V.IZMALKOV ------------------------------------------
+                // Registration Fryday Library
+                // 'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
+                // --------------------------------------------------------------
+                'Zend\Loader\StandardAutoloader' => array(
+                    'autoregister_zf' => true,
+                    // 'namespaces' => array(
+                    //     'Fryday' => __DIR__ . '/vendor/fryday/',
+                    // ),
+                )   
             )
-        ));
+        );
     }
 }
 
