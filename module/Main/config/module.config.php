@@ -24,33 +24,95 @@ return array(
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'country' => array(
-                // 'type'    => 'Literal',
-                'type'    => 'Segment',
+            // 'country' => array(
+            //     //'type'    => 'Literal',
+            //     'type'    => 'Segment',
+            //     'options' => array(
+            //         'route'    => '/[:country]',
+            //         'constraints' => array(
+            //             'country'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+            //         ),
+            //         'defaults' => array(
+            //             '__NAMESPACE__' => 'Main\Controller',
+            //             'controller'    => 'Index',
+            //             'action'        => 'country',
+            //         ),
+            //     ),
+            //     'may_terminate' => true,
+            //     'child_routes' => array(
+            //         'city' => array(
+            //             'type'    => 'Segment',
+            //             'options' => array(
+            //                 'route'    => '/[:city]',
+            //                 'constraints' => array(
+            //                     'city'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+            //                 ),
+            //                 'defaults' => array(
+            //                     '__NAMESPACE__' => 'Main\Controller',
+            //                     'controller'    => 'Index',
+            //                     'action'        => 'city',
+            //                 ),
+            //             ),
+            //         ),
+            //     ),
+            // ),
+            'main' => array(
+                'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/[:country]',
-                    'constraints' => array(
-                        'country'  => '[a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
+                    'route'    => '/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Main\Controller',
                         'controller'    => 'Index',
-                        'action'        => 'country',
+                        'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'city' => array(
+                    // 'default' => array(
+                    //     'type'    => 'Segment',
+                    //     'options' => array(
+                    //         'route'    => '[:controller[/:action[/:id[/:did]]]]',
+                    //         'constraints' => array(
+                    //             'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    //             'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    //             'id'         => '[0-9:-]+',
+                    //             'did'        => '[0-9_-]+',
+                    //         ),
+                    //         'defaults' => array(
+                    //         ),
+                    //     ),
+                    // ),
+                    'static_pages' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:city]',
+                            'route'    => '[:action]',
                             'constraints' => array(
-                                'city'  => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
                                 '__NAMESPACE__' => 'Main\Controller',
                                 'controller'    => 'Index',
-                                'action'        => 'city',
+                                // 'action'        => 'index',
+                                // 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                // 'id'         => '[0-9:-]+',
+                                // 'did'        => '[0-9_-]+',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                    'ukraine_kyiv' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => 'ukraine/kyiv[/:controller[/:action]]',
+                            'constraints' => array(
+                                '__NAMESPACE__' => 'Main\Controller',
+                                'controller'    => 'Index',
+                                'action'        => 'index',
+                                // 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                // 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                // 'id'         => '[0-9:-]+',
+                                // 'did'        => '[0-9_-]+',
+                            ),
+                            'defaults' => array(
                             ),
                         ),
                     ),
@@ -66,6 +128,9 @@ return array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
+        'factories' => array(
+            'frontend_navigation' => 'Fryday\Navigation\Service\FrontendNavigationFactory',
+        ),
     ),
     'translator' => array(
         'locale' => 'en_US',
@@ -79,7 +144,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Main\Controller\Index' => 'Main\Controller\IndexController'
+            'Main\Controller\Index'     => 'Main\Controller\IndexController',
+            // 'Main\Controller\Venues'    => 'Main\Controller\VenuesController',
+            'Main\Controller\Partner'   => 'Main\Controller\PartnerController',
         ),
     ),
     'view_manager' => array(
@@ -97,9 +164,6 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
-        ),
-        'strategies' => array(
-            'ZfcTwigViewStrategy',
         ),
     ),
     // Placeholder for console routes
@@ -133,6 +197,66 @@ return array(
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver',
                 )
             )
+        )
+    ),
+
+    // http://stackoverflow.com/questions/12972316/how-to-set-up-2-navigations-in-zf2
+    'navigation' => array(
+        'frontend' => array(
+            array(
+                'label' => 'Home',
+                'route' => 'main',
+            ),
+            array(
+                'label' => 'Franchise',
+                'route' => 'main/static_pages',
+                'action' => 'franchise',
+            ),
+            array(
+                'label' => 'Advertise',
+                'route' => 'main/static_pages',
+                'action' => 'advertise',
+            ),
+            array(
+                'label' => 'Partner',
+                'route' => 'main/static_pages',
+                'action' => 'partner',
+            ),
+            array(
+                'label' => 'Media',
+                'route' => 'main/static_pages',
+                'action' => 'media',
+            ),
+            array(
+                'label' => 'Member',
+                'route' => 'main/static_pages',
+                'action' => 'member',
+            ),
+            array(
+                'label' => 'Venue',
+                'route' => 'main/static_pages',
+                'action' => 'venue',
+            ),
+            array(
+                'label' => 'Speaker',
+                'route' => 'main/static_pages',
+                'action' => 'speaker',
+            ),
+            array(
+                'label' => 'About',
+                'route' => 'main/static_pages',
+                'action' => 'about',
+            ),
+            array(
+                'label' => 'Contact',
+                'route' => 'main/static_pages',
+                'action' => 'contact',
+            ),
+            array(
+                'label' => 'Event',
+                'route' => 'main/static_pages',
+                'action' => 'event',
+            ),
         )
     ),
 );

@@ -16,36 +16,93 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
-    }
-
-    public function countryAction()
-    {
-        $country = $this->params()->fromRoute('country');
-
-        return new ViewModel(array(
-            'country' => $country
+        return new ViewModel(
+            array(
             )
         );
     }
-
-    public function listCountriesAction()
+    public function venueAction()
     {
-        return new ViewModel();
-    }
-
-    public function cityAction()
-    {
-        $city = $this->params()->fromRoute('city');
-
-        return new ViewModel(array(
-            'city' => $city
+        return new ViewModel(
+            array(
             )
         );
     }
-
-    public function listCitiesAction()
+    public function partnerAction()
     {
-        return new ViewModel();
+        return new ViewModel(
+            array(
+            )
+        );
     }
+    public function franchiseAction()
+    {
+        return new ViewModel(
+            array(
+            )
+        );
+    }
+    public function advertiseAction()
+    {
+        return new ViewModel(
+            array(
+            )
+        );
+    }
+    public function mediaAction()
+    {
+        return new ViewModel(
+            array(
+            )
+        );
+    }
+    public function memberAction()
+    {
+        return new ViewModel(
+            array(
+            )
+        );
+    }
+    public function speakerAction()
+    {
+        return new ViewModel(
+            array(
+            )
+        );
+    }
+    public function aboutAction()
+    {
+        return new ViewModel(
+            array(
+            )
+        );
+    }
+    // public function countryAction()
+    // {
+    //     $country = $this->params()->fromRoute('country');
+
+    //     return new ViewModel(array(
+    //         'country' => $country
+    //         )
+    //     );
+    // }
+    // public function listCountriesAction()
+    // {
+    //     return new ViewModel();
+    // }
+
+    // public function cityAction()
+    // {
+    //     $city = $this->params()->fromRoute('city');
+
+    //     return new ViewModel(array(
+    //         'city' => $city
+    //         )
+    //     );
+    // }
+
+    // public function listCitiesAction()
+    // {
+    //     return new ViewModel();
+    // }
 }

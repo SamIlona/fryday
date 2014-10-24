@@ -24,3 +24,16 @@ body {
 	height: auto;
 	margin-bottom: 5px;
 }
+
+.form-control {
+	margin-bottom: 10px;
+	border-radius: 0px!important;
+}
+
+.navbar-nav > li > a {
+	text-transform: uppercase;
+}
+
+.nav > li > a {
+	text-transform: uppercase;
+}

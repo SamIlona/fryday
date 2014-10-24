@@ -5,14 +5,8 @@ return array(
         'ZfcBase',
         'DoctrineModule',
         'DoctrineORMModule',
-        // 'Application',
-        
-        // 'FileManager',
-        'ZfcTwig',
         'Main',
-        'Admin',
-        'User',
-        'ZF2FileUploadExamples',
+        // 'User',
         'Backend',
     ),
 

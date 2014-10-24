@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-lg-10 col-lg-offset-1">
+		<h4><a href="<?php echo $this->url('backend/default', array('controller' => 'event', 'action' => 'create')); ?>"><i class="fa fa-plus fa-fw"></i> NEW</a></h4>
+		<br>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-10 col-lg-offset-1">
+        <!-- FLASH MESSAGE -->
+        <?php if(count($flashMessages)) : ?>
+            <?php foreach ($flashMessages as $msg) : ?>
+                <div class="alert alert-success col-lg-12" role="alert"><?php echo $msg; ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php //if($errorSaleMessage) : ?>
+            <!-- <div class="alert alert-danger col-lg-12" role="alert"><?php echo $errorSaleMessage; ?></div> -->
+        <?php //endif; ?>
+        <!-- END FLASH MESSAGE -->
+    </div>
+</div>
+
+<?php foreach ($events as $event): ?>
+	<div class="row">
+		<div class="col-lg-2 col-lg-offset-1">
+			<?php 
+			$imageBase64 = null; 
+			$imageName = $event->getProfileImage();
+			if (file_exists($imageName)) {
+				$handle = fopen($imageName, "r");
+				$imageBase64 = fread($handle, filesize($imageName));
+				fclose($handle);
+			}
+			?>
+			<img src="data:image/png;base64,<?php echo base64_encode($imageBase64) ?>" class="img-rounded" height="128" width="128">
+		</div>
+		<div class="col-lg-6">
+			<h4 class="text-left"><?php echo $event->getTitle(); ?></h4>
+			<p class="venue-preview-category"><?php echo $event->getVenue()->getName(); ?></p><br>
+			<i class="fa fa-map-marker fa-fw"></i><?php echo $event->getVenue()->getCity()->getName(); ?>, <?php echo $event->getVenue()->getCity()->getCountry()->getName(); ?> 
+		</div>
+		<div class="col-lg-1">
+			<a href="<?php echo $this->url('backend/default', array('controller' => 'sendmailtest', 'action' => 'index')); ?>"><i class="fa fa-send-o fa-fw"></i> Create Newsletter</a>
+		</div>
+	</div>
+	<hr class="col-lg-9 col-lg-offset-1">
+<?php endforeach; ?>

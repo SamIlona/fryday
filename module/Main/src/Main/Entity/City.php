@@ -8,8 +8,10 @@ use Doctrine\Common\Collections\Collection;
 
 use Zend\Form\Annotation;
 
+//
+
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Main\Entity\Repository\CityRepository")
  * @ORM\Table(name="cities")
  */
 class City
@@ -29,6 +31,12 @@ class City
     protected $name;
 
     /**
+     * @var string
+     * @ORM\Column(name="profile_photo", type="string", length=255, nullable=true)
+     */
+    protected $profileImage;
+
+    /**
     * @var integer
     * @ORM\ManyToOne(targetEntity="Main\Entity\Country", inversedBy="cities")
     * @ORM\JoinColumn(name="country", referencedColumnName="id", onDelete="CASCADE")
@@ -40,6 +48,12 @@ class City
      * @ORM\OneToMany(targetEntity="Main\Entity\Venue", mappedBy="city")
      */
     protected $venues;
+
+   /**
+    * @var Collection
+    * @ORM\OneToMany(targetEntity="Backend\Entity\User", mappedBy="city")
+    */
+   protected $users;
 
     /**
      * @return integer 

@@ -1,0 +1,805 @@
+index.page.tmp
+
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('FRYDAY '. $this->translate('One Of The Largest Networks Of Cosmopolitan Professionals'))->setSeparator(' - ')->setAutoEscape(false) 
+        ; ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ; ?>
+
+        <!-- STYLES -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+            ->prependStylesheet($this->basePath() . '/frontend/css/style.css')
+            ->prependStylesheet($this->basePath() . '/backend/plugins/font-awesome-4.2.0/css/font-awesome.css')
+            ->prependStylesheet($this->basePath() . '/frontend/plugins/bootstrap/css/bootstrap_readable.css')
+            ->prependStylesheet($this->basePath() . '/backend/plugins/bootstrap-3.2.0/dist/css/bootstrap-theme.css')
+        ; ?>
+
+        <!-- SCRIPTS -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/backend/plugins/bootstrap-3.2.0/dist/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/backend/plugins/jquery-ui-1.11.1/jquery-ui.js')
+            ->prependFile($this->basePath() . '/backend/plugins/jquery-2.1.1/jquery-2.1.1.js')
+        ; ?>
+
+    </head>
+    <body>
+
+    <div class="header">
+        <div class="navbar navbar-default navbar-bottom-line">
+             <div class="container">
+                <div class="navbar-header">
+                    <a href="../" class="navbar-brand"><img id="logo-header" src="/frontend/img/logo_fryday.jpg" alt="Logo"></a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav navbar-right navbar-buttons">
+                    <li>
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                            Subscribe
+                        </button>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-center">
+                    <li class='active'><a href="http://builtwithbootstrap.com/" target="_blank">Home</a></li>
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Franchise</a></li>
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Advertise</a></li>
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Partner</a></li>
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Media</a></li>
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Member</a></li>
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Venue</a></li>
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Speaker</a></li>
+                    <!-- <li><a href="http://builtwithbootstrap.com/" target="_blank">About</a></li> -->
+                    <!-- <li><a href="http://builtwithbootstrap.com/" target="_blank">Contact</a></li> -->
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Event</a></li>
+                    <!-- <li><a href="http://builtwithbootstrap.com/" target="_blank">Sign In</a></li> -->
+                    <!-- <li><a href="http://builtwithbootstrap.com/" target="_blank">Choose your city</a></li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- VARIANT 1 -->
+<!--     <div class="container">
+
+        <div class="row">
+            <div class="col-lg-6 main-title"><h6><span>Upcomming Fryday Event<span></h6></div>
+            <div class="col-lg-6 main-title"><h6><span>Latest from Fryday<span></h6></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 right-separate-line">
+                <div class="main-news-primary-item">
+                    <a href="#" style="background:url('/frontend/img/10393927_920085511352434_2798030486837906779_n.png') no-repeat;"><span style=""><h5>Fryday W Election Debate with Mustafa Nayem and Oleksiy Omelyanchuk</h5></span></a>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="main-news-secondary-item">
+                    <a href="#" style="background:url('/frontend/img/1380239_722880964406224_516394437_n.jpg') no-repeat;"><span style="">Kyiv, Ukraine</span></a>
+
+                    <h5>Fryday W with the Ambassador of Sweden, H.E. Andreas von Beckerath</h5> 
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="main-news-secondary-item">
+                    <a href="#" style="background:url('/frontend/img/10615614_923345684359750_8142674995471947942_n.jpg') no-repeat;"><span style="">Event</span></a>
+                    <h5>Fryday Afterwork at Radisson Blu!</h5>                
+                    <h6><i class="fa fa-calendar"></i> October 3, Wednesday</h6>
+                    <h6><i class="fa fa-map-marker"></i> Radisson Kyiv in Kyiv, Ukraine</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <br>
+            <div class="col-lg-12 main-title"><h6><span>Latest from Fryday<span></h6></div>
+            <br>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="main-news-secondary-item">
+                    <a href="#" style="background:url('/frontend/img/10402592_640666179358416_6434383859438745740_n.jpg') no-repeat;"><span style="">Event</span></a>
+                    <h5>Fryday W with the Ambassador of Sweden, H.E. Andreas von Beckerath</h5>                
+                    <h6><i class="fa fa-calendar"></i> October 1, Wednesday</h6>
+                    <h6><i class="fa fa-map-marker"></i> Opera Hotel in Kyiv, Ukraine</h6>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="main-news-secondary-item">
+                    <a href="#" style="background:url('/frontend/img/10615614_923345684359750_8142674995471947942_n.jpg') no-repeat;"><span style="">Event</span></a>
+                    <h5>Fryday Afterwork at Radisson Blu!</h5>                
+                    <h6><i class="fa fa-calendar"></i> October 3, Wednesday</h6>
+                    <h6><i class="fa fa-map-marker"></i> Radisson Kyiv in Kyiv, Ukraine</h6>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="main-news-secondary-item">
+                    <a href="#" style="background:url('/frontend/img/1380239_722880964406224_516394437_n.jpg') no-repeat;"><span style="">Event</span></a>
+                    <h5>Fryday W with the Ambassador of Sweden, H.E. Andreas von Beckerath</h5>                
+                    <h6><i class="fa fa-calendar"></i> October 1, Wednesday</h6>
+                    <h6><i class="fa fa-map-marker"></i> Opera Hotel in Kyiv, Ukraine</h6>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="main-news-secondary-item">
+                    <a href="#" style="background:url('/frontend/img/10615614_923345684359750_8142674995471947942_n.jpg') no-repeat;"><span style="">Event</span></a>
+                    <h5>Fryday Afterwork at Radisson Blu!</h5>                
+                    <h6><i class="fa fa-calendar"></i> October 3, Wednesday</h6>
+                    <h6><i class="fa fa-map-marker"></i> Radisson Kyiv in Kyiv, Ukraine</h6>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- VARIANT 2 -->
+   <!--  <div class="container">
+
+
+        <div class="row">
+            <div class="col-lg-3 main-title"><h6><span>Reports</span></h6></div>
+            <div class="col-lg-6 main-title"><h6><span>Upcomming Events</span></h6></div>
+            <div class="col-lg-3 main-title"><h6><span>Latest posts</span></h6></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-3 ">
+                <div class="main-reports">
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="/frontend/img/10606391_923865784307740_7191311204137597726_n.jpg" alt=""></a></dt>
+                        <dd>
+                            <p><a href="#">Fryday at Gogol BARdello on September 26th! (416 photos)</a></p> 
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="/frontend/img/10701965_916163065078012_7521420539459608375_n.jpg" alt=""></a></dt>
+                        <dd>
+                            <p><a href="#">Fryday at Sofiyskiy Fitness Center Terrace on September 12th!(258 photos)</a></p> 
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="/frontend/img/10460988_913039972056988_8377868417906005004_n.jpg" alt=""></a></dt>
+                        <dd>
+                            <p><a href="#">Fryday at Hilton Kyiv on September 5th! (346 photos)</a></p> 
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="/frontend/img/10407645_912323948795257_6548691570985690445_n.jpg" alt=""></a></dt>
+                        <dd>
+                            <p><a href="#">Fryday W with Igor Gut - "The Formula of a successful company". (252 photos)</a></p> 
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6 main-upcoming-events-col right-separate-line">
+                <div class="main-upcoming-events-item-box">
+                    <dl class="dl-horizontal">
+                        <dt><span>Oct</span>01</dt>
+                        <dd>
+                            <a href="#" style="background:url('/frontend/img/1380239_722880964406224_516394437_n.jpg') no-repeat;"><span style="">Kyiv, Ukraine</span></a>
+                            <h5>Fryday W with the Ambassador of Sweden, H.E. Andreas von Beckerath</h5>
+                        </dd>
+                    </dl>
+                </div>
+
+
+                <div class="main-upcoming-events-item-box">
+                    <dl class="dl-horizontal">
+                        <dt><span>Oct</span>03</dt>
+                        <dd>
+                            <a href="#" style="background:url('/frontend/img/10393927_920085511352434_2798030486837906779_n.png') no-repeat;"><span style="">Kyiv, Ukraine</span></a>
+                            <h5>Fryday W Election Debate with Mustafa Nayem and Oleksiy Omelyanchuk</h5>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3">
+
+            </div>
+        </div>
+    </div> -->
+
+    <!-- VARINT 3 -->
+<!--     <div class="events-tube">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 main-title"><h3><span>Upcoming Events</span></h3><br></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="main-events-box">
+                    <dl class="dl-horizontal">
+                        <dt>Oct<span>01</span><br></dt>
+                        <dd>
+                            <div class="main-events-calendar">
+                                <a href="#" style="background:url('/frontend/img/1380239_722880964406224_516394437_n.jpg') no-repeat;"><span style=""><h5>Fryday W with the Ambassador of Sweden, H.E. Andreas von Beckerath</h5></span></a>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="main-events-box">
+                    <dl class="dl-horizontal">
+                        <dt>Oct<span>03</span></dt>
+                        <dd>
+                            <div class="main-events-calendar">
+                                <a href="#" style="background:url('/frontend/img/10615614_923345684359750_8142674995471947942_n.jpg') no-repeat;"><span style=""><h5>Fryday Afterwork at Radisson Blu!</h5></span></a>
+                            </div>
+                        </dd>                     
+                    </dl>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="main-events-box">
+                    <dl class="dl-horizontal">
+                        <dt>Oct<span>15</span></dt>
+                        <dd>
+                            <div class="main-events-calendar">
+                                <a href="#" style="background:url('/frontend/img/10393927_920085511352434_2798030486837906779_n.png') no-repeat;"><span style=""><h5>Fryday W Election Debate with Mustafa Nayem and Oleksiy Omelyanchuk</h5></span></a>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 main-title-black"><h3><span>Latest from Fryday</span></h3><br></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="main-news-list-item caption-orange">
+                    <a href="#" style="background:url('/frontend/img/10606391_923865784307740_7191311204137597726_n.jpg') no-repeat;"><span style="">Photos</span></a>
+                    <h5>Photos from Fryday™ : Kyiv at Gogol BARdello are available. Enjoy!</h5>                
+                    <h6><i class="fa fa-photo"></i> Photo by Deineko-Kazmiruk Daryna</h6>
+                </div>
+                <div class="main-news-list-item caption-purple">
+                    <a href="#" style="background:url('/frontend/img/547106_353190208057349_1589130915_n.jpg') no-repeat;"><span style="">Partner</span></a>
+                    <h5>Fryday is proud to announce that the Swedish company Volvo will be present at Fryday W with the Ambassador of Sweden on October 1st.</h5>                
+                </div>
+                <div class="main-news-list-item caption-purple">
+                    <a href="#" style="background:url('/frontend/img/10416569_1492205964349538_5447990878000695681_n.jpg') no-repeat;"><span style="">Partner</span></a>
+                    <h5>Fryday is proud to announce Diamond Club as a partner. Diamond Club will be present at Fryday's events and provide very generous gifts for the prize draw.</h5>                
+                </div>
+                <div class="main-news-list-item caption-orange">
+                    <a href="#" style="background:url('/frontend/img/1939722_887946694566316_6091218584497800021_n.jpg') no-repeat;"><span style="">Photos</span></a>
+                    <h5>Please enjoy the photos from Fryday at Pervak on July 25th! </h5>                
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="main-news-list-item caption-purple">
+                    <a href="#" style="background:url('/frontend/img/10629797_921881341172851_676124052145159081_n.jpg') no-repeat;"><span style="">Partner</span></a>
+                    <h5>Fryday is proud to announce that the Swedish bank SEB will be present at Fryday W with the Ambassador of Sweden on October 1st.</h5>
+                </div>
+                <div class="main-news-list-item caption-purple">
+                    <a href="#" style="background:url('/frontend/img/1960793_921331701227815_6623423169475215390_o.png') no-repeat;"><span style="">Partner</span></a>
+                    <h5>Fryday is proud to announce that the Swedish company Väderstad will be present at Fryday W with the Ambassador of Sweden on October 1st.</h5>
+                </div>
+                <div class="main-news-list-item caption-orange">
+                    <a href="#" style="background:url('/frontend/img/10460988_913039972056988_8377868417906005004_n.jpg') no-repeat;"><span style="">Photos</span></a>
+                    <h5>Please enjoy the great set of photos from Fryday at Hilton Kyiv! Feel free to tag yourself and others. </h5>
+                </div>
+                <div class="main-news-list-item caption-orange">
+                    <a href="#" style="background:url('/frontend/img/10366244_878262382201414_7204797577398131210_n.jpg') no-repeat;"><span style="">Photos</span></a>
+                    <h5>Please enjoy the photos from Fryday Kyiv at D*Lux Feel free to tag people you know! </h5>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="main-news-list-item caption-orange">
+                    <a href="#" style="background:url('/frontend/img/10701965_916163065078012_7521420539459608375_n.jpg') no-repeat;"><span style="">Photos</span></a>
+                    <h5>Photos from Fryday at Sofiyskiy Fitness Center are available. Please enjoy and feel free to tag yourself and your friends! </h5>
+                </div>
+                <div class="main-news-list-item caption-green">
+                    <a href="#"><iframe style="z-index:1; position:absolute; width:100%;" src="//www.youtube.com/embed/GHxLSeVNynE" frameborder="0" allowfullscreen></iframe><span style="z-index:2;position:absolute;">Video</span></a>
+                    <h5>Promo video for Myka restaurant</h5>
+                </div>
+                <div class="main-news-list-item caption-orange">
+                    <a href="#" style="background:url('/frontend/img/10599276_912325342128451_8240366449095216551_n.jpg') no-repeat;"><span style="">Photos</span></a>
+                    <h5>Photos from Fryday W with Igor Gut available. Enjoy! </h5>
+                </div>
+                <div class="main-news-list-item caption-green">
+                    <a href="#"><iframe style="z-index:1; position:absolute; width:100%;" src="//www.youtube.com/embed/014A0PlAFh8" frameborder="0" allowfullscreen></iframe><span style="z-index:2;position:absolute;">Video</span></a>
+                    <h5>Fryday W with the Ambassador of the Kingdom of Denmark to Ukraine, Mrs. Merete Juhl (27.11.2013)</h5>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="main-news-list-item caption-purple">
+                    <a href="#" style="background:url('/frontend/img/ORI_LOGO_SML_RGB_BLACK.JPG') no-repeat;"><span style="">Partner</span></a>
+                    <h5>Fryday's partner Oriflame is looking for talented co-workers to its Ukrainian head office. Employment with good conditions and learning available. </h5>
+                </div>
+                <div class="main-news-list-item caption-purple">
+                    <a href="#" style="background:url('/frontend/img/1000228_604435942910213_1273191221_n.jpg') no-repeat;"><span style="">Partner</span></a>
+                    <h5>Custom Case is a partner of Fryday. With Custom Case you can order the cover for your phone that match your style and interests. Custom Case is a great product we highly recommend you try!</h5>
+                </div>
+                <div class="main-news-list-item caption-orange">
+                    <a href="#" style="background:url('/frontend/img/10620601_897489860278666_5311151706183984973_n.jpg') no-repeat;"><span style="">Photos</span></a>
+                    <h5>Photos from Fryday at Heaven Summer Terrace. Enjoy!</h5>
+                </div>
+                <div class="main-news-list-item caption-purple">
+                    <a href="#" style="background:url('/frontend/img/21216_537853716271950_34300625_n.png') no-repeat;"><span style="">Partner</span></a>
+                    <h5>Ferrari Store is one of Fryday's partners. Ferrari Store offers a wide range of clothing and accessories for adults and children from the legendary Ferrari brand!</h5>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- VARIANT 4 -->
+<div class="upcoming-events-tube">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 upcoming-events-title"><h3><span>Upcoming Events</span></h3><br></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="upcoming-events-box">
+                    <div class="upcoming-events-item">
+                        <a href="#" style="background:url('/frontend/img/10460279_891049000922752_8533102592674947408_n.jpg') no-repeat;"><span style=""><h5>Fryday Afterwork at Gogol BARdello</h5></span></a>
+                    </div>
+                    <div class="upcoming-events-caption">
+                        <h6><i class="fa fa-clock-o"></i> 26 September</h6>
+                        <h5><i class="fa fa-map-marker"></i> Gogol BARdello in Kyiv, Ukraine</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="upcoming-events-box">
+                    <div class="upcoming-events-item">
+                        <a href="#" style="background:url('/frontend/img/10414411_863101063717546_1819550123881558197_n.jpg') no-repeat;"><span style=""><h5>Fryday W with the Ambassador of Sweden, H.E. Andreas von Beckerath</h5></span></a>
+                    </div>
+                    <div class="upcoming-events-caption">
+                        <h6><i class="fa fa-clock-o"></i> 01 October</h6>
+                        <h5><i class="fa fa-map-marker"></i> Gogol BARdello in Kyiv, Ukraine</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="upcoming-events-box">
+                    <div class="upcoming-events-item">
+                        <a href="#" style="background:url('/frontend/img/10646646_906656419362010_2093884134882861117_n.jpg') no-repeat;"><span style=""><h5>Fryday Afterwork at Radisson Blu!</h5></span></a>
+                    </div>
+                    <div class="upcoming-events-caption">
+                        <h6><i class="fa fa-clock-o"></i> 03 October</h6>
+                        <h5><i class="fa fa-map-marker"></i> Radisson Blu in Kyiv, Ukraine</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="upcoming-events-box">
+                    <div class="upcoming-events-item">
+                        <a href="#" style="background:url('/frontend/img/10689586_910730545621264_6662326270807332756_n.jpg') no-repeat;"><span style=""><h5>Fryday W Election Debate with Mustafa Nayem and Oleksiy Omelyanchuk</h5></span></a>
+                    </div>
+                     <div class="upcoming-events-caption">
+                        <h6><i class="fa fa-clock-o"></i> 15 October</h6>
+                        <h5><i class="fa fa-map-marker"></i> Radisson Kyiv in Kyiv, Ukraine</h5>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <br>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="upcoming-events-box">
+                    <div class="upcoming-events-item">
+                        <a href="#" style="background:url('/frontend/img/10314597_687304494694584_9130476941353256873_n.jpg') no-repeat;"><span style=""><h5>Fryday Afterwork at Gogol BARdello</h5></span></a>
+                    </div>
+                    <div class="upcoming-events-caption">
+                        <h6><i class="fa fa-clock-o"></i> 26 September</h6>
+                        <h5><i class="fa fa-map-marker"></i> Gogol BARdello in Kyiv, Ukraine</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="upcoming-events-box">
+                    <div class="upcoming-events-item">
+                        <a href="#" style="background:url('/frontend/img/1380239_722880964406224_516394437_n.jpg') no-repeat;"><span style=""><h5>Fryday W with the Ambassador of Sweden, H.E. Andreas von Beckerath</h5></span></a>
+                    </div>
+                    <div class="upcoming-events-caption">
+                        <h6><i class="fa fa-clock-o"></i> 01 October</h6>
+                        <h5><i class="fa fa-map-marker"></i> Gogol BARdello in Kyiv, Ukraine</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="upcoming-events-box">
+                    <div class="upcoming-events-item">
+                        <a href="#" style="background:url('/frontend/img/10615614_923345684359750_8142674995471947942_n.jpg') no-repeat;"><span style=""><h5>Fryday Afterwork at Radisson Blu!</h5></span></a>
+                    </div>
+                    <div class="upcoming-events-caption">
+                        <h6><i class="fa fa-clock-o"></i> 03 October</h6>
+                        <h5><i class="fa fa-map-marker"></i> Radisson Blu in Kyiv, Ukraine</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="upcoming-events-box">
+                    <div class="upcoming-events-item">
+                        <a href="#" style="background:url('/frontend/img/10393927_920085511352434_2798030486837906779_n.png') no-repeat;"><span style=""><h5>Fryday W Election Debate with Mustafa Nayem and Oleksiy Omelyanchuk</h5></span></a>
+                    </div>
+                     <div class="upcoming-events-caption">
+                        <h6><i class="fa fa-clock-o"></i> 15 October</h6>
+                        <h5><i class="fa fa-map-marker"></i> Radisson Kyiv in Kyiv, Ukraine</h5>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 upcoming-events-more"><h3><span>more >></span></h3><br></div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="col-lg-12 secondary-news-title">
+                <h3><span>News</span></h3><br>
+            </div>
+            <div class="col-lg-3">
+                <div class="standard-extend-item">
+                    <div class="upcoming-events-item">
+                        <a href="#" style="background:url('/frontend/img/10615614_923345684359750_8142674995471947942_n.jpg') no-repeat;"><!-- <span style=""><h5>Fryday Afterwork at Radisson Blu!</h5></span> --></a>
+                    </div>
+                    <a class="image" href="#">
+                        <span class="date">06<br>feb</span>
+                        <span class="author">by <strong>kwarc</strong></span>
+                        <img class="img-responsive full-width" src="img/artists/radiohead-L.jpg" alt="Radiohead">
+                    </a>
+                    <h3>
+                        <a href="article-item.html">Radiohead with brand new album?</a>
+                    </h3>
+                    <p>New Radiohead album is 'up in the air', says bassist Colin Greenwood. We're looking forward to it. We love Radiohead and all their albums... <a href="article-item.html" title="more">»</a></p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="upcoming-events-item">
+                    <a href="#" style="background:url('/frontend/img/10615614_923345684359750_8142674995471947942_n.jpg') no-repeat;"><!-- <span style=""><h5>Fryday Afterwork at Radisson Blu!</h5></span> --></a>
+                </div>
+                <div class="standard-extend-item">
+                    <a class="image" href="#">
+                        <span class="date">06<br>feb</span>
+                        <span class="author">by <strong>kwarc</strong></span>
+                        <img class="img-responsive full-width" src="img/artists/radiohead-L.jpg" alt="Radiohead">
+                    </a>
+                    <h3>
+                        <a href="article-item.html">Radiohead with brand new album?</a>
+                    </h3>
+                    <p>New Radiohead album is 'up in the air', says bassist Colin Greenwood. We're looking forward to it. We love Radiohead and all their albums... <a href="article-item.html" title="more">»</a></p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="upcoming-events-item">
+                    <a href="#" style="background:url('/frontend/img/10615614_923345684359750_8142674995471947942_n.jpg') no-repeat;"><!-- <span style=""><h5>Fryday Afterwork at Radisson Blu!</h5></span> --></a>
+                </div>
+                <div class="standard-extend-item">
+                    <a class="image" href="#">
+                        <span class="date">06<br>feb</span>
+                        <span class="author">by <strong>kwarc</strong></span>
+                        <img class="img-responsive full-width" src="img/artists/radiohead-L.jpg" alt="Radiohead">
+                    </a>
+                    <h3>
+                        <a href="article-item.html">Radiohead with brand new album?</a>
+                    </h3>
+                    <p>New Radiohead album is 'up in the air', says bassist Colin Greenwood. We're looking forward to it. We love Radiohead and all their albums... <a href="article-item.html" title="more">»</a></p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="upcoming-events-item">
+                    <a href="#" style="background:url('/frontend/img/10615614_923345684359750_8142674995471947942_n.jpg') no-repeat;"><!-- <span style=""><h5>Fryday Afterwork at Radisson Blu!</h5></span> --></a>
+                </div>
+                <div class="standard-extend-item">
+                    <a class="image" href="#">
+                        <span class="date">06<br>feb</span>
+                        <span class="author">by <strong>kwarc</strong></span>
+                        <img class="img-responsive full-width" src="img/artists/radiohead-L.jpg" alt="Radiohead">
+                    </a>
+                    <h3>
+                        <a href="article-item.html">Radiohead with brand new album?</a>
+                    </h3>
+                    <p>New Radiohead album is 'up in the air', says bassist Colin Greenwood. We're looking forward to it. We love Radiohead and all their albums... <a href="article-item.html" title="more">»</a></p>
+                </div>
+            </div>
+            <div class="col-lg-12 secondary-news-title">
+                <h3><span>Photos and Videos</span></h3>
+            </div>
+            <div class="col-lg-6">
+                <div class="photos-box">
+                    <div class="col-lg-12 primary-preview">
+                        <div class="photos-first-preview" style="background:url('/frontend/img/1926819_927476583946660_7983897544348980896_n.jpg') no-repeat;">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 secondary-preview">
+                        <div class="photos-secondary-preview " style="background:url('/frontend/img/10347716_927472720613713_6441600437332295663_n.jpg') no-repeat;">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 secondary-preview">
+                        <div class="photos-secondary-preview " style="background:url('/frontend/img/10653705_927477700613215_7742371245706538307_n.jpg') no-repeat;">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 secondary-preview">
+                        <div class="photos-secondary-preview " style="background:url('/frontend/img/10665940_927478117279840_2501091922831828186_n.jpg') no-repeat;">
+
+                        </div>
+                    </div>
+                    <div class="photos-title">
+                        <h5>Fryday at Radisson Blu Hotel Kyiv on October 3rd!</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="photos-box">
+                    <div class="col-lg-12 primary-preview">
+                        <div class="photos-first-preview" style="background:url('/frontend/img/1926819_927476583946660_7983897544348980896_n.jpg') no-repeat;">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 secondary-preview">
+                        <div class="photos-secondary-preview " style="background:url('/frontend/img/10347716_927472720613713_6441600437332295663_n.jpg') no-repeat;">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 secondary-preview">
+                        <div class="photos-secondary-preview " style="background:url('/frontend/img/10653705_927477700613215_7742371245706538307_n.jpg') no-repeat;">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 secondary-preview">
+                        <div class="photos-secondary-preview " style="background:url('/frontend/img/10665940_927478117279840_2501091922831828186_n.jpg') no-repeat;">
+
+                        </div>
+                    </div>
+                    <div class="photos-title">
+                        <h5>Fryday at Radisson Blu Hotel Kyiv on October 3rd!</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 secondary-news-title">
+            <div class="secondary-news-title">
+                <h3><span>Partners</span></h3><br>
+            </div>
+        </div>
+    <!--  -->
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="standard-text-list">
+
+                    <div class="item">
+                        <div class="photos-first-preview" style="background:url('/frontend/img/1926819_927476583946660_7983897544348980896_n.jpg') no-repeat;">
+                        </div>
+                        <p>
+                            <a href="tmp-pages/celebration-day.html">Ukrainian language Electrolux washing machine shown by Marketing Director Ukraine Ekaterina Beloblovskaya at Fryday W with Swedish Ambassador von Beckerath http://spilnotv.com/archives/23988</a>
+                        </p>
+                    </div>
+
+                    <div class="item">
+                        <div class="photos-first-preview" style="background:url('/frontend/img/1926819_927476583946660_7983897544348980896_n.jpg') no-repeat;">
+                        </div>
+                        <p>Please welcome Fryday's new partner - DIO-soft Education. One of the best IT Education centers in Kiev. DIO-soft Education improves your skills in programming, testing, IT software Business Analysis and offers series of seminars on the American financial system - http://dio-soft.org/general-information</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="photos-first-preview" style="background:url('/frontend/img/1926819_927476583946660_7983897544348980896_n.jpg') no-repeat;">
+                        </div>
+                        <p>Ferrari Store is one of Fryday's partners. Ferrari Store offers a wide range of clothing and accessories for adults and children from the legendary Ferrari brand!
+
+                        At each Fryday event Ferrari Store will give away Ferrari branded gifts as well as discount certificates.
+                        Ferrari Store: the World of Victory becomes closer!
+                        Ferrari Store, Kyiv, 1-3/2 Chervonoarmiyska Str., 044 200 90 00</p>
+                    </div>
+
+                    <div class="item">
+                        <div class="photos-first-preview" style="background:url('/frontend/img/1926819_927476583946660_7983897544348980896_n.jpg') no-repeat;">
+                        </div>
+                        <p>Fryday's partner Oriflame is looking for talented co-workers to its Ukrainian head office. Employment with good conditions and learning available.
+
+                        "Oriflame is, and always has been, about fulfilling dreams. Our 3 million sales consultants are the heart of our business and the core of what we do. To be able to provide our consultants with the best possible business support, training and motivation, we need extraordinary people to drive and manage our organization. Are you one of them?"
+                        http://goo.gl/DhvGUB</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-lg-3 secondary-news-title"><h3><span>Partners</span></h3></div>
+        <div class="col-lg-4 secondary-news-title"><h3><span>Photos And Videos</span></h3></div>
+        <div class="col-lg-5 secondary-news-title"><h3><span>News</span></h3></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            test
+        </div>
+        <div class="col-lg-4">
+            <div class="photos-box">
+                <div class="col-lg-12 primary-preview">
+                    <div class="photos-first-preview" style="background:url('/frontend/img/1926819_927476583946660_7983897544348980896_n.jpg') no-repeat;">
+                    </div>
+                </div>
+                <div class="col-lg-4 secondary-preview">
+                    <div class="photos-secondary-preview " style="background:url('/frontend/img/10347716_927472720613713_6441600437332295663_n.jpg') no-repeat;">
+                    </div>
+                </div>
+                <div class="col-lg-4 secondary-preview">
+                    <div class="photos-secondary-preview " style="background:url('/frontend/img/10653705_927477700613215_7742371245706538307_n.jpg') no-repeat;">
+                    </div>
+                </div>
+                <div class="col-lg-4 secondary-preview">
+                    <div class="photos-secondary-preview " style="background:url('/frontend/img/10665940_927478117279840_2501091922831828186_n.jpg') no-repeat;">
+
+                    </div>
+                </div>
+                <div class="photos-title">
+                    <h5>Fryday at Radisson Blu Hotel Kyiv on October 3rd!</h5>
+                </div>
+            </div>
+
+            <div class="photos-box">
+                <div class="col-lg-12 primary-preview">
+                    <div class="photos-first-preview" style="background:url('/frontend/img/10678639_927542403940078_6182359908062453073_n.jpg') no-repeat;">
+                    </div>
+                </div>
+                <div class="col-lg-4 secondary-preview">
+                    <div class="photos-secondary-preview " style="background:url('/frontend/img/1798478_927549430606042_7664461871713954201_n.jpg') no-repeat;">
+                    </div>
+                </div>
+                <div class="col-lg-4 secondary-preview">
+                    <div class="photos-secondary-preview " style="background:url('/frontend/img/1524578_927561750604810_4757187239973009991_n.jpg') no-repeat;">
+                    </div>
+                </div>
+                <div class="col-lg-4 secondary-preview">
+                    <div class="photos-secondary-preview " style="background:url('/frontend/img/1496631_927543707273281_5159127444386052733_n.jpg') no-repeat;">
+                    </div>
+                </div>
+                <div class="photos-title">
+                    <h5>Fryday W with Ambassador of Sweden, H.E. Andreas von Beckerath! </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="news-colomn-box">
+                <br>
+                <dl class="dl-horizontal">
+                    <dt>
+                         <div class="main-events-calendar">
+                            <a href="#" style="background:url('/frontend/img/1385436_925604297467222_4722029939735699324_n.jpg') no-repeat;"><span style=""><h5>Fryday W with the Ambassador of Sweden, H.E. Andreas von Beckerath</h5></span></a>
+                        </div>
+                    </dt>
+                    <dd>
+                        <p>Please welcome Fryday's new partner - DIO-soft Education. One of the best IT Education centers in Kiev. DIO-soft Education improves your skills in programming, testing, IT software Business Analysis and offers series of seminars on the American financial system - http://dio-soft.org/general-information</p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="news-colomn-box">
+                <dl class="dl-horizontal">
+                    <dt>
+                         <div class="main-events-calendar">
+                            <a href="#" style="background:url('/frontend/img/1385436_925604297467222_4722029939735699324_n.jpg') no-repeat;"><span style=""><h5>Fryday W with the Ambassador of Sweden, H.E. Andreas von Beckerath</h5></span></a>
+                        </div>
+                    </dt>
+                    <dd>
+                        <p>Please welcome Fryday's new partner - DIO-soft Education. One of the best IT Education centers in Kiev. DIO-soft Education improves your skills in programming, testing, IT software Business Analysis and offers series of seminars on the American financial system - http://dio-soft.org/general-information</p>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+<div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 md-margin-bottom-40">
+                    <!-- About -->
+                    <div class="headline"><h2>About</h2></div>  
+                    <p class="margin-bottom-25 md-margin-bottom-40">Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.</p>    
+                    <!-- End About -->
+
+                    <!-- Monthly Newsletter -->
+                    <div class="headline"><h2>Monthly Newsletter</h2></div> 
+                    <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
+                    <form class="footer-subsribe">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Email Address" type="text">                            
+                            <span class="input-group-btn">
+                                <button class="btn-u" type="button">Subscribe</button>
+                            </span>
+                        </div>                  
+                    </form>                         
+                    <!-- End Monthly Newsletter -->
+                </div><!--/col-md-4-->  
+                
+                <div class="col-md-4 md-margin-bottom-40">
+                    <!-- Recent Blogs -->
+                    <div class="posts">
+                        <div class="headline"><h2>Recent Blog Entries</h2></div>
+                        <dl class="dl-horizontal">
+                            <dt><a href="#"><img src="assets/img/sliders/elastislide/6.jpg" alt=""></a></dt>
+                            <dd>
+                                <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="assets/img/sliders/elastislide/10.jpg" alt=""></a></dt>
+                            <dd>
+                                <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="assets/img/sliders/elastislide/11.jpg" alt=""></a></dt>
+                            <dd>
+                                <p><a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a></p> 
+                            </dd>
+                        </dl>
+                    </div>
+                    <!-- End Recent Blogs -->                    
+                </div><!--/col-md-4-->
+
+                <div class="col-md-4">
+                    <!-- Contact Us -->
+                    <div class="headline"><h2>Contact Us</h2></div> 
+                    <address class="md-margin-bottom-40">
+                        25, Lorem Lis Street, Orange <br>
+                        California, US <br>
+                        Phone: 800 123 3456 <br>
+                        Fax: 800 123 3456 <br>
+                        Email: <a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
+                    </address>
+                    <!-- End Contact Us -->
+
+                    <!-- Social Links -->
+                    <div class="headline"><h2>Stay Connected</h2></div> 
+                    <ul class="social-icons">
+                        <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                        <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
+                        <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                        <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
+                        <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                        <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
+                        <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                    </ul>
+                    <!-- End Social Links -->
+                </div><!--/col-md-4-->
+            </div>
+        </div> 
+    </div>
+
+
+
+    </body>
+</html>

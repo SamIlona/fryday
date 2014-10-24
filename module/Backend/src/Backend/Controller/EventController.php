@@ -42,7 +42,8 @@ class EventController extends Action
         $events = $eventsRepository->findAll();
 
 		return array(
-			'events' => $events, 
+			'events' => $events,
+            'flashMessages' => $this->flashMessenger()->getMessages(),
         );
    	}
 
@@ -77,9 +78,9 @@ class EventController extends Action
             {
                 $data = $eventForm->getData(); // $data is a Entity\Venue object
                 $profileImage = $data->getProfileImage();
-                $venueEntity->setProfileImage($profileImage['tmp_name']);
+                $eventEntity->setProfileImage($profileImage['tmp_name']);
 
-                $this->entityManager->persist($venueEntity);
+                $this->entityManager->persist($eventEntity);
                 $this->entityManager->flush();
 
                 return $this->redirect()->toRoute('backend/default', array('controller' => 'event', 'action' => 'index'));
