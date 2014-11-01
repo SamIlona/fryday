@@ -1,0 +1,71 @@
+<div class="profile container content">
+    	<div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="assets/img/team/5.jpg" alt="">
+                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
+                <hr>
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                <div class="profile-body">
+                    <!--Table Search v2-->
+                    <?php $form->setAttribute('action', $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create')))->prepare(); ?>
+                    <?php echo $this->form()->openTag($form); ?>
+                    <!-- <form action="" class="sky-form"> -->
+                    <header>Create New Venue</header>
+                    
+                    <fieldset>
+                        <section>
+                            <?php echo $this->formLabel($this->form->get('title')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('title')); ?>
+                            </label>
+                        </section>
+
+                        <section>
+                            <?php echo $this->formLabel($this->form->get('profileImage')); ?>
+                            <label for="file" class="input input-file">
+                                <div class="button">
+                                    <?php echo $this->formFile($this->form->get('profileImage')); ?>
+                                    Browse
+                                </div>
+                                <input readonly="" type="text">
+                                <?php //echo $this->formFile($this->form->get('profileImage')); ?>
+                            </label>
+                        </section>              
+                            
+                        <section>
+                            <!-- <label class="label">Select</label> -->
+                            <?php echo $this->formLabel($this->form->get('venue')); ?>
+                            <label class="select">
+                                <?php echo $this->formSelect($this->form->get('venue')); ?>
+                                <i></i>
+                            </label>
+                        </section>
+
+                        <section>
+                            <!-- <label class="label">Textarea</label> -->
+                            <?php echo $this->formLabel($this->form->get('text')); ?>
+                            <label class="textarea">
+                                <!-- <textarea rows="3"></textarea> -->
+                                <?php echo $this->formTextarea($this->form->get('text')); ?>
+                            </label>
+                            <!-- <div class="note"><strong>Note:</strong> height of the textarea depends on the rows attribute.</div> -->
+                        </section>
+                    </fieldset>
+
+                    <footer>
+                        <button type="submit" class="btn-u">Submit</button>
+                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                    </footer>
+                <!-- </form> -->
+                    <?php echo $this->form()->closeTag($form); ?>
+                    <!--End Table Search v2-->
+                </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div>

@@ -15,8 +15,12 @@
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
             ->prependStylesheet($this->basePath() . '/frontend/css/custom.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/themes/default.css')
+            ->prependStylesheet($this->basePath() . '/frontend/css/pages/profile.css')
+            ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_log_reg_v1.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_clients.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_search.css')
+            ->prependStylesheet($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css')
+            ->prependStylesheet($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/css/sky-forms.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/parallax-slider/css/parallax-slider.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/flexslider/flexslider.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/font-awesome/css/font-awesome.min.css')
@@ -267,9 +271,12 @@
           _gaq.push(['_trackPageview']);
 
           (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            var ga = document.createElement('script'); 
+            ga.type = 'text/javascript'; 
+            ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            var s = document.getElementsByTagName('script')[0]; 
+            s.parentNode.insertBefore(ga, s);
           })();
         </script>
         <div title="Scroll Back to Top" style="position: fixed; bottom: 5px; right: 5px; opacity: 0; cursor: pointer;" id="topcontrol"><img src="/frontend/img/up.png" style="width:51px; height:42px"></div>

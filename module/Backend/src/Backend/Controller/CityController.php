@@ -11,7 +11,7 @@ namespace Backend\Controller;
 
 use Backend\Form;
 
-use Main\Entity;
+use Content\Entity;
 
 use Fryday\Mvc\Controller\Action; // use Zend\Mvc\Controller\AbstractActionController;
 

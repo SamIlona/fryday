@@ -1,0 +1,92 @@
+<div class="profile container content">
+    	<div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="assets/img/team/5.jpg" alt="">
+                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
+                <hr>
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                <div class="profile-body">
+                    <!--Table Search v2-->
+                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'user', 'action' => 'create')))->prepare(); ?>
+                    <?php echo $this->form()->openTag($form); ?>
+                    <!-- <form action="" class="sky-form"> -->
+                    <header>Create New User</header>
+                    
+                    <fieldset>
+                        <section>
+                            <?php echo $this->formLabel($this->form->get('firstName')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('firstName')); ?>
+                            </label>
+                        </section>
+
+                        <section>
+                            <?php echo $this->formLabel($this->form->get('lastName')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('lastName')); ?>
+                            </label>
+                        </section>
+                        
+                        <section>
+                            <!-- <label class="label">File input</label>/ -->
+                            <?php echo $this->formLabel($this->form->get('profileImage')); ?>
+                            <label for="file" class="input input-file">
+                                <div class="button">
+                                    <!-- <input id="file" onchange="this.parentNode.nextSibling.value = this.value" type="file"> -->
+                                    <?php echo $this->formFile($this->form->get('profileImage')); ?>
+                                    Browse
+                                </div>
+                                <input readonly="" type="text">
+                                <?php //echo $this->formFile($this->form->get('profileImage')); ?>
+                            </label>
+                        </section>
+
+                        <section>
+                            <?php echo $this->formLabel($this->form->get('username')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('username')); ?>
+                            </label>
+                        </section>
+
+                        <section>
+                            <?php echo $this->formLabel($this->form->get('password')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('password')); ?>
+                            </label>
+                        </section>               
+                            
+                        <section>
+                            <!-- <label class="label">Select</label> -->
+                            <?php echo $this->formLabel($this->form->get('role')); ?>
+                            <label class="select">
+                                <?php echo $this->formSelect($this->form->get('role')); ?>
+                                <!-- <select>
+                                    <option value="0">Choose name</option>
+                                    <option value="1">Alexandra</option>
+                                    <option value="2">Alice</option>
+                                    <option value="3">Anastasia</option>
+                                    <option value="4">Avelina</option>
+                                </select> -->
+                                <i></i>
+                            </label>
+                        </section>
+
+                    </fieldset>
+                    
+                    <footer>
+                        <button type="submit" class="btn-u">Submit</button>
+                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                    </footer>
+                <!-- </form> -->
+                    <?php echo $this->form()->closeTag($form); ?>
+                    <!--End Table Search v2-->
+                </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div>
