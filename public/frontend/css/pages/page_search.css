@@ -5,8 +5,8 @@
 	padding: 20px 0;
 	text-align: center;
 	position: relative;
-	margin-bottom: 20px;
-	background: url(../../img/bg_index.png) 50% 0 repeat fixed;		
+	/*margin-bottom: 20px;*/
+	background: url(../../img/bg_index.jpg) 50% 0 repeat fixed;	
 }
 
 .search-block:before {
@@ -20,12 +20,15 @@
 }
 
 .search-block h1 {
-	color: #fff;
+	color: #666;
 	font-size: 30px;
 	font-weight: 200;
-	text-align: left;
-	margin-bottom: 30px;
+	text-align: center;
+	/*margin-bottom: 30px;*/
 	text-transform: uppercase;
+	background: rgba(255,255,255,0.8);
+	padding: 15px;
+
 }
 
 .search-block .input-group {

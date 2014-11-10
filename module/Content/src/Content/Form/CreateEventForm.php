@@ -64,6 +64,28 @@ class CreateEventForm extends Form
             ->setAttribute('id', 'event-title');
         $this->add($title);
 
+        $date = new Element\Text('date');
+        $date->setLabel('Date')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'label',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'event-date');
+        $this->add($date);
+
+        $time = new Element\Text('time');
+        $time->setLabel('Time')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'label',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'event-time');
+        $this->add($time);
+
         $profileImage = new Element\File('profileImage');
         $profileImage->setLabel('Profile Image')
             ->setLabelAttributes(
@@ -71,8 +93,9 @@ class CreateEventForm extends Form
                     'class' => 'label',
                 )
             )
-            ->setAttribute('class', 'file col-lg-10')
-            ->setAttribute('id', 'event-profileImage');
+            // ->setAttribute('class', 'file col-lg-10')
+            ->setAttribute('id', 'file')
+            ->setAttribute('onchange', 'this.parentNode.nextSibling.value = this.value');
         $this->add($profileImage);
 
         $venue = new Element\Select('venue');
@@ -87,8 +110,8 @@ class CreateEventForm extends Form
             ->setAttribute('id', 'event-venue');
         $this->add($venue);
 
-        $text = new Element\Textarea('text');
-        $text->setLabel('Details')
+        $details = new Element\Textarea('details');
+        $details->setLabel('Details')
             ->setLabelAttributes(
                 array(
                     'class' => 'label',
@@ -98,10 +121,26 @@ class CreateEventForm extends Form
                 array(
                     'class'     => 'form-control',
                     'rows'      => '5',
-                    'id'        => 'event-text',
+                    'id'        => 'event-details',
                 )
             );
-        $this->add($text);
+        $this->add($details);
+
+        $description = new Element\Textarea('description');
+        $description->setLabel('Description')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'label',
+                )
+            )
+            ->setAttributes(
+                array(
+                    'class'     => 'form-control',
+                    'rows'      => '2',
+                    'id'        => 'event-description',
+                )
+            );
+        $this->add($description);
 
         $submit = new Element\Submit('submit');
         $submit

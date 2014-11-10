@@ -24,6 +24,43 @@
                                 <?php echo $this->formInput($this->form->get('title')); ?>
                             </label>
                         </section>
+                        
+                        <section>
+                            <!-- <label class="label">Textarea</label> -->
+                            <?php echo $this->formLabel($this->form->get('description')); ?>
+                            <label class="textarea">
+                                <?php echo $this->formTextarea($this->form->get('description')); ?>
+                            </label>
+                        </section>
+
+                        <div class="row">
+                            <section class="col col-4">
+                                <!-- <label class="label">Name</label> -->
+                                <?php echo $this->formLabel($this->form->get('date')); ?>
+                                <label class="input">
+                                    <i class="icon-append fa fa-calendar"></i>
+                                    <!-- <input name="name" id="name" type="text"> -->
+                                    <?php echo $this->formInput($this->form->get('date')); ?>
+                                </label>
+                            </section>
+                            <section class="col col-4">
+                                <!-- <label class="label">E-mail</label> -->
+                                <?php echo $this->formLabel($this->form->get('time')); ?>
+                                <label class="input">
+                                    <i class="icon-append fa fa-clock-o"></i>
+                                    <!-- <input name="email" id="email" type="email"> -->
+                                    <?php echo $this->formInput($this->form->get('time')); ?>
+                                </label>
+                            </section>
+                            <section class="col col-4">
+                                <!-- <label class="label">Select</label> -->
+                                <?php echo $this->formLabel($this->form->get('venue')); ?>
+                                <label class="select">
+                                    <?php echo $this->formSelect($this->form->get('venue')); ?>
+                                    <i></i>
+                                </label>
+                            </section>
+                        </div>
 
                         <section>
                             <?php echo $this->formLabel($this->form->get('profileImage')); ?>
@@ -38,22 +75,11 @@
                         </section>              
                             
                         <section>
-                            <!-- <label class="label">Select</label> -->
-                            <?php echo $this->formLabel($this->form->get('venue')); ?>
-                            <label class="select">
-                                <?php echo $this->formSelect($this->form->get('venue')); ?>
-                                <i></i>
-                            </label>
-                        </section>
-
-                        <section>
                             <!-- <label class="label">Textarea</label> -->
-                            <?php echo $this->formLabel($this->form->get('text')); ?>
+                            <?php echo $this->formLabel($this->form->get('details')); ?>
                             <label class="textarea">
-                                <!-- <textarea rows="3"></textarea> -->
-                                <?php echo $this->formTextarea($this->form->get('text')); ?>
+                                <?php echo $this->formTextarea($this->form->get('details')); ?>
                             </label>
-                            <!-- <div class="note"><strong>Note:</strong> height of the textarea depends on the rows attribute.</div> -->
                         </section>
                     </fieldset>
 
@@ -69,3 +95,20 @@
             </div>
         </div><!--/end row-->
     </div>
+
+<script>
+    // $(function() {
+    //     $( "#datepicker" ).datepicker({
+    //         prevText: '<i class="fa fa-angle-left"></i>',
+    //         nextText: '<i class="fa fa-angle-right"></i>'
+    //     });
+    // });
+    $('#event-date').datepicker({
+        prevText: '<i class="fa fa-angle-left"></i>',
+        nextText: '<i class="fa fa-angle-right"></i>',
+    });
+    $('#event-time').datetimepicker({
+        format:'H:i',
+        datepicker:false,
+    });
+</script>

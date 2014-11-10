@@ -85,13 +85,13 @@ return array(
                     'static_pages' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '[:action]',
+                            'route'    => ':action[/]',
                             'constraints' => array(
-                                '__NAMESPACE__' => 'Main\Controller',
+                                // '__NAMESPACE__' => 'Main\Controller',
                                 'controller'    => 'Index',
                                 // 'action'        => 'index',
                                 // 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'        => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 // 'id'         => '[0-9:-]+',
                                 // 'did'        => '[0-9_-]+',
                             ),
@@ -99,20 +99,30 @@ return array(
                             ),
                         ),
                     ),
-                    'ukraine_kyiv' => array(
+                    'event_details' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => 'ukraine/kyiv[/:controller[/:action]]',
+                            'route'    => 'event/:id',
                             'constraints' => array(
-                                '__NAMESPACE__' => 'Main\Controller',
-                                'controller'    => 'Index',
-                                'action'        => 'index',
-                                // 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                // 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                // 'id'         => '[0-9:-]+',
-                                // 'did'        => '[0-9_-]+',
+                                'id'            => '[0-9:-]+',
                             ),
                             'defaults' => array(
+                                'controller'    => 'Index',
+                                'action'        => 'view-event',
+                            ),
+                        ),
+                    ),
+                    'cities' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => ':country/:city[/]',
+                            'constraints' => array(
+                                'country' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'city' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller'    => 'Index',
+                                'action'        => 'city-dispatcher',
                             ),
                         ),
                     ),

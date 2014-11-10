@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Content\Entity\Repository\EventRepository")
  * @ORM\Table(name="events")
  */
 class Event
@@ -36,9 +36,9 @@ class Event
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="date_time", type="datetime", nullable=true)
+     * @ORM\Column(name="date_time_event", type="datetime", nullable=true)
      */
-    protected $dateTime;
+    protected $dateTimeEvent;
 
     /**
      * @var string
@@ -54,17 +54,34 @@ class Event
     protected $venue;
 
     /**
-     * @var City
-     * @ORM\ManyToOne(targetEntity="Content\Entity\City", inversedBy="venues")
-     * @ORM\JoinColumn(name="city", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @var text
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
-    protected $city;
+    protected $description;
 
     /**
      * @var text
-     * @ORM\Column(name="text", type="text", nullable=true)
+     * @ORM\Column(name="details", type="text", nullable=true)
      */
-    protected $text;
+    protected $details;
+
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="Admin\Entity\User", inversedBy="events")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    protected $user;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="date_time_created", type="datetime", nullable=true)
+     */
+    protected $dateTimeCreated;
+
+    public function __construct()
+    {
+        $this->dateTimeCreated = new \DateTime();
+    }
 
     /**
      * @return int
@@ -123,18 +140,73 @@ class Event
     }
 
     /**
-     * @param null|Content\Entity\City $city
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
+    * @return \DateTime
+    */
+    public function getDateTimeEvent() {
+        return $this->dateTimeEvent;
     }
 
     /**
-     * @return Content\Entity\City|null 
+    * @param \DateTime $dateTimeEvent
+    */
+    public function setDateTimeEvent($dateTimeEvent) {
+        $this->dateTimeEvent = $dateTimeEvent;
+    }
+
+    /**
+     * @return string
      */
-    public function getCity()
+    public function getDetails()
     {
-        return $this->city;
+        return $this->details;
+    }
+
+    /**
+     * @param string $details
+     * @return void
+     */
+    public function setDetails($details)
+    {
+        $this->details = $details;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @param null|Admin\Entity\User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return Admin\Entity\User|null 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+    * @return \DateTime
+    */
+    public function getDateTimeCreated() {
+        return $this->dateTimeCreated;
     }
 }

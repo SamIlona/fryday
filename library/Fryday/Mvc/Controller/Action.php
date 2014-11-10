@@ -24,9 +24,14 @@ use Doctrine\ORM\EntityManager;
 class Action extends AbstractActionController
 {
 	/**
-     * @var EntityManager
+     * @var Entity Manager
      */
     protected $entityManager; 
+
+    /**
+     * @var Authenticated User
+     */
+    protected $authenticatedUser; 
 
     /**
      * Sets the EntityManager
@@ -56,5 +61,30 @@ class Action extends AbstractActionController
             $this->setEntityManager($this->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
         }
         return $this->entityManager;
+    }
+
+    /**
+     * Sets the Authenticated User
+     *
+     * @access protected
+     * @return PostController
+     */
+    protected function setAuthenticatedUser()
+    {
+        $this->authenticatedUser = $this->identity();
+    }
+
+    /**
+     * Returns the Authenticated User
+     *
+     * @access protected
+     * @return Authenticated User
+     */
+    protected function getAuthenticatedUser()
+    {
+        if (null === $this->authenticatedUser) {
+            $this->setAuthenticatedUser();
+        }
+        return $this->authenticatedUser;
     }
 }

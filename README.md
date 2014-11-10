@@ -83,3 +83,20 @@ Steps to Create Secondry Navigation
 3. Add this Service to 'service_manager' (navigation.global.php) 
 4. Call view helper with new name of navigation
 
+Member
+-------------------------------------------------
+- events list page                              1
+- event's details page                          1
+- custom view helper for choose you city        1
+- registration form                             1
+- ?Photos, gallery                              3
+
+Admin
+-------------------------------------------------
+- add news                                      1
+- add partner                                   1
+- routing for each city                         2
+- navigation with acl                           1
+
+17.11.2014
+

@@ -55,6 +55,7 @@ class EventController extends Action
     public function createAction()
     {
     	$this->entityManager = $this->getEntityManager();
+        $this->authenticatedUser = $this->getAuthenticatedUser();
 
     	$eventForm = new Form\CreateEventForm('event', $this->entityManager);
         $eventForm->setHydrator(new DoctrineHydrator($this->entityManager, 'Content\Entity\Event'));
@@ -69,17 +70,24 @@ class EventController extends Action
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
             );
-
             // var_dump($post);
-
             $eventForm->setData($post);
+
+            $date = $eventForm->get('date')->getValue();
+            $time = $eventForm->get('time')->getValue();
+            $datetime = $date . " " . $time;
 
             if($eventForm->isValid()) 
             {
                 $data = $eventForm->getData(); // $data is a Entity\Venue object
+
                 $profileImage = $data->getProfileImage();
                 $urlProfileImage = explode("./public", $profileImage['tmp_name']);
                 $eventEntity->setProfileImage($urlProfileImage[1]);//->setProfileImage($profileImage['tmp_name']);
+
+                $eventEntity->setDateTimeEvent(new \DateTime($datetime));
+
+                $eventEntity->setUser($this->authenticatedUser);
 
                 $this->entityManager->persist($eventEntity);
                 $this->entityManager->flush();

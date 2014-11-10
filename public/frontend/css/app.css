@@ -1907,6 +1907,7 @@ i.icon-bg-light-grey {
 blockquote {
   padding: 5px 15px;
   border-left-width: 2px;
+  font-size: 14px;
 }
 
 blockquote p {
@@ -2677,7 +2678,7 @@ img.img-circle {
 .bg-color-light-green { background-color: #79d5b3 !important;}
 
 .rgba-red { background-color: rgba(231,76,60,0.8);}
-.rgba-blue{ background-color: rgba(52,152,219,0.8);}
+.rgba-blue{ background-color: rgba(52,152,219,0.95);}
 .rgba-aqua { background-color: rgba(39,215,231,0.8);}
 .rgba-yellow { background-color: rgba(241,196,15,0.8);}
 .rgba-default { background-color: rgba(114,192,44,0.8);}
@@ -2709,7 +2710,7 @@ img.img-circle {
 
 /*Misc*/
 .content {
-  padding-top: 40px;
+  padding-top: 20px;
   padding-bottom: 40px;
 }
 

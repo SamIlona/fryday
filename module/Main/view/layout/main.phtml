@@ -13,6 +13,8 @@
 
         <!-- STYLES -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        
+            ->prependStylesheet($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/custom.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/themes/default.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/profile.css')
@@ -31,16 +33,27 @@
 
         <!-- SCRIPTS -->
         <?php echo $this->headScript()
-            ->prependFile($this->basePath() . '/frontend/js/pages/index.js')
+            ->prependFile($this->basePath() . '/frontend/js/plugins/validation.js')
+            ->prependFile($this->basePath() . '/frontend/js/plugins/datepicker.js')
+            ->prependFile($this->basePath() . '/frontend/js/plugins/masking.js')
+            //->prependFile($this->basePath() . '/frontend/js/pages/index.js')
             ->prependFile($this->basePath() . '/frontend/js/app.js')
-            ->prependFile($this->basePath() . '/frontend/plugins/parallax-slider/js/jquery.cslider.js')           
-            ->prependFile($this->basePath() . '/frontend/plugins/parallax-slider/js/modernizr.js')
-            ->prependFile($this->basePath() . '/frontend/plugins/flexslider/jquery.flexslider-min.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.js')
+            // ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/js/jquery-ui.min.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/js/jquery.maskedinput.min.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/js/jquery.validate.min.js')
+            //->prependFile($this->basePath() . '/frontend/plugins/jquery-ui-1.11.2/jquery-ui.js')
+            //->prependFile($this->basePath() . '/frontend/plugins/parallax-slider/js/jquery.cslider.js')           
+            //->prependFile($this->basePath() . '/frontend/plugins/parallax-slider/js/modernizr.js')
+            //->prependFile($this->basePath() . '/frontend/plugins/flexslider/jquery.flexslider-min.js')
             ->prependFile($this->basePath() . '/frontend/plugins/back-to-top.js')
             ->prependFile($this->basePath() . '/frontend/plugins/bootstrap/js/bootstrap.min.js')
             ->prependFile($this->basePath() . '/frontend/plugins/jquery-migrate-1.2.1.min.js')
-            ->prependFile($this->basePath() . '/frontend/plugins/jquery-1.10.2.min.js')
-            ->prependFile($this->basePath() . 'http://www.google-analytics.com/ga.js')
+            // ->prependFile($this->basePath() . '/frontend/plugins/jquery-1.10.2.min.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.js')
+            //->prependFile($this->basePath() . 'http://www.google-analytics.com/ga.js')
         ; ?>
 
     </head>
@@ -66,7 +79,7 @@
                                 </ul>
                             </li>
                             <li class="topbar-devider"></li>   
-                            <li><a href="page_faq.html">Subscribe</a></li>  
+                            <li><a href="page_faq.html">Registration</a></li>  
 <!--                            <li class="topbar-devider"></li>   
                             <li><a href="page_login.html">Login</a></li>   --> 
                         </ul>
@@ -261,8 +274,16 @@
         <script type="text/javascript">
             jQuery(document).ready(function() {
                 App.init();
-                App.initSliders();        
+                Masking.initMasking();
+                Datepicker.initDatepicker();
+                Validation.initValidation();
             });
+        </script>
+        <script type="text/javascript">
+            // jQuery(document).ready(function() {
+            //     App.init();
+            //     App.initSliders();        
+            // });
         </script>
         <script type="text/javascript">
           var _gaq = _gaq || [];
@@ -279,6 +300,20 @@
             s.parentNode.insertBefore(ga, s);
           })();
         </script>
-        <div title="Scroll Back to Top" style="position: fixed; bottom: 5px; right: 5px; opacity: 0; cursor: pointer;" id="topcontrol"><img src="/frontend/img/up.png" style="width:51px; height:42px"></div>
+
     </body>
+    <script>
+    // $(function() {
+        $('#datetimepicker').datetimepicker({
+            value:'2015/04/15 05:03',
+            formatTime:'H:i',
+            formatDate:'d.m.Y',
+        });
+        $('#datetimepicker1').datetimepicker({
+            value:'2015/04/15 05:03',
+            formatTime:'H:i',
+            formatDate:'d.m.Y',
+        });
+    // });
+</script>
 </html>

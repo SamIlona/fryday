@@ -9,16 +9,19 @@
 
 namespace Main\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Fryday\Mvc\Controller\Action; // use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class IndexController extends Action
 {
     public function indexAction()
     {
-        return new ViewModel(
-            array(
-            )
+        $this->entityManager = $this->getEntityManager();
+        $eventsFirstLine = $this->entityManager->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 0);
+        $eventsSecondLine = $this->entityManager->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 4);
+        return array(
+            'eventsFirstLine'    => $eventsFirstLine,
+            'eventsSecondLine'    => $eventsSecondLine,
         );
     }
     public function venueAction()
@@ -76,6 +79,30 @@ class IndexController extends AbstractActionController
             array(
             )
         );
+    }
+    public function eventAction()
+    {
+        $em = $this->getEntityManager();
+
+        return array(
+            'events' => $em->getRepository('Content\Entity\Event')->findAll(),
+        );
+    }
+    public function viewEventAction()
+    {
+        $em = $this->getEntityManager();
+        $id = $this->event->getRouteMatch()->getParam('id');
+        $event = $this->getEntityManager()->find('Content\Entity\Event', $id);
+
+        return array(
+            'event' => $event,
+        );
+    }
+    public function cityDispatcherAction()
+    {
+        // throw new Zend_Controller_Action_Exception('404 Page not found',404);
+        // return $this->notFoundAction();
+        return array();
     }
     // public function countryAction()
     // {
