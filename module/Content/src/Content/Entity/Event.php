@@ -47,6 +47,13 @@ class Event
     protected $profileImage;
 
     /**
+     * @var City
+     * @ORM\ManyToOne(targetEntity="Content\Entity\City", inversedBy="cities")
+     * @ORM\JoinColumn(name="city", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    protected $city;
+
+    /**
      * @var Venue
      * @ORM\ManyToOne(targetEntity="Content\Entity\Venue", inversedBy="events")
      * @ORM\JoinColumn(name="venue", referencedColumnName="id", nullable=true, onDelete="CASCADE")
@@ -137,6 +144,22 @@ class Event
     public function getVenue()
     {
         return $this->venue;
+    }
+
+    /**
+     * @param null|Content\Entity\City $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return Content\Entity\City|null 
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 
     /**

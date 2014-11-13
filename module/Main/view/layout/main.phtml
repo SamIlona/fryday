@@ -18,6 +18,7 @@
             ->prependStylesheet($this->basePath() . '/frontend/css/custom.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/themes/default.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/profile.css')
+            ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_job.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_log_reg_v1.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_clients.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_search.css')
@@ -65,21 +66,27 @@
                     <div class="container">
                         <!-- Topbar Navigation -->
                         <ul class="loginbar pull-right">
+                            <!-- <li><a href="page_faq.html">Subscribe</a></li> -->
                             <li>
                                 <i class="fa fa-globe"></i>
                                 <a>Choose Your City</a>
-                                <ul class="lenguages">
-<!--                                     <li class="active">
+                                <?php echo $this->navigation('Navigation_c')->menu()->setUlClass('lenguages'); ?>
+<!--                                 <ul class="lenguages">
+                                    <li class="active">
                                         <a href="#">Kiyv <i class="fa fa-check"></i></a> 
-                                    </li> -->
+                                    </li>
                                     <li><a href="#">Kyiv</a></li>
                                     <li><a href="#">Praga</a></li>
                                     <li><a href="#">Tbilisi</a></li>
                                     <li><a href="#">German</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="topbar-devider"></li>   
-                            <li><a href="page_faq.html">Registration</a></li>  
+                            <li><a href="page_faq.html">Registration</a></li>
+<!--                             <li class="topbar-devider"></li>   
+                            <li><a href="page_faq.html">FAQ</a></li>
+                            <li class="topbar-devider"></li>   
+                            <li><a href="page_faq.html">Help</a></li>   -->
 <!--                            <li class="topbar-devider"></li>   
                             <li><a href="page_login.html">Login</a></li>   --> 
                         </ul>
@@ -104,70 +111,18 @@
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse navbar-responsive-collapse">
+
                             <?php
+
+                                // var_dump($this->CitiesHelper()->test());
+                                // echo $this->citiesList();
+                                // echo $this->citiesList();
                                 echo $this->navigation('frontend_navigation')->menu()->setUlClass('nav navbar-nav');
                                 // The first variant of rendering
                                 // echo $this->navigation('navigation')->menu()->setMaxDepth(1)->setMinDepth(1)->setOnlyActiveBranch(true)->setUlClass('nav nav-tabs');
                                 // The second variant via options
                                 //echo $this->navigation('navigation')->menu()->renderMenu(null, array('ulClass' => 'nav nav-tabs', 'minDepth' => 1, 'maxDepth' => 1, 'onlyActiveBranch'  => true));
                             ?>
-                            <!-- <ul class="nav navbar-nav">
-                                <li>
-                                    <a href="/">
-                                        Home
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        Franchise
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        Advertise
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        Partner
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        Media
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        Member
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    <a href="javascript:void(0);">
-                                        Venue
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        Speaker
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        About
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        Contact
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        Event
-                                    </a>
-                                </li>
-                            </ul> -->
                         </div><!--/navbar-collapse-->
                     </div>    
                 </div>            

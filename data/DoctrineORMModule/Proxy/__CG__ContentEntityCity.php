@@ -64,10 +64,10 @@ class City extends \Content\Entity\City implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'name', 'profileImage', 'country', 'users');
+            return array('__isInitialized__', 'id', 'name', 'label', 'route', 'profileImage', 'country', 'users');
         }
 
-        return array('__isInitialized__', 'id', 'name', 'profileImage', 'country', 'users');
+        return array('__isInitialized__', 'id', 'name', 'label', 'route', 'profileImage', 'country', 'users');
     }
 
     /**
@@ -208,6 +208,50 @@ class City extends \Content\Entity\City implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
 
         return parent::getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setLabel($label)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLabel', array($label));
+
+        return parent::setLabel($label);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLabel()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLabel', array());
+
+        return parent::getLabel();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRoute($route)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRoute', array($route));
+
+        return parent::setRoute($route);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoute()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRoute', array());
+
+        return parent::getRoute();
     }
 
     /**

@@ -30,6 +30,18 @@ class City
 
     /**
      * @var string
+     * @ORM\Column(name="label", type="string", length=255, nullable=false)
+     */
+    protected $label;
+
+    /**
+     * @var string
+     * @ORM\Column(name="route", type="string", length=255, nullable=false)
+     */
+    protected $route;
+
+    /**
+     * @var string
      * @ORM\Column(name="profile_photo", type="string", length=255, nullable=true)
      */
     protected $profileImage;
@@ -75,6 +87,38 @@ class City
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $route
+     */
+    public function setRoute($route)
+    {
+        $this->route = $route;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getRoute()
+    {
+        return $this->route;
     }
 
     /**

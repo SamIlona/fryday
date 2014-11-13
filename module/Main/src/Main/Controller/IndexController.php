@@ -16,12 +16,11 @@ class IndexController extends Action
 {
     public function indexAction()
     {
-        $this->entityManager = $this->getEntityManager();
-        $eventsFirstLine = $this->entityManager->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 0);
-        $eventsSecondLine = $this->entityManager->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 4);
+        $em = $this->getEntityManager();
+
         return array(
-            'eventsFirstLine'    => $eventsFirstLine,
-            'eventsSecondLine'    => $eventsSecondLine,
+            'eventsFirstLine'   => $em->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 0),
+            'eventsSecondLine'  => $em->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 4),
         );
     }
     public function venueAction()
@@ -80,7 +79,7 @@ class IndexController extends Action
             )
         );
     }
-    public function eventAction()
+    public function eventsAction()
     {
         $em = $this->getEntityManager();
 
@@ -100,36 +99,15 @@ class IndexController extends Action
     }
     public function cityDispatcherAction()
     {
-        // throw new Zend_Controller_Action_Exception('404 Page not found',404);
-        // return $this->notFoundAction();
-        return array();
+        $em = $this->getEntityManager();
+
+        $cityName = $this->getEvent()->getRouteMatch()->getParam('city');
+        $city = $em->getRepository('Content\Entity\City')->getCityByName($cityName);
+
+        
+        return array(
+            'eventsFirstLine'   => $em->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 0, $city),
+            'eventsSecondLine'  => $em->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 4, $city),
+        );
     }
-    // public function countryAction()
-    // {
-    //     $country = $this->params()->fromRoute('country');
-
-    //     return new ViewModel(array(
-    //         'country' => $country
-    //         )
-    //     );
-    // }
-    // public function listCountriesAction()
-    // {
-    //     return new ViewModel();
-    // }
-
-    // public function cityAction()
-    // {
-    //     $city = $this->params()->fromRoute('city');
-
-    //     return new ViewModel(array(
-    //         'city' => $city
-    //         )
-    //     );
-    // }
-
-    // public function listCitiesAction()
-    // {
-    //     return new ViewModel();
-    // }
 }

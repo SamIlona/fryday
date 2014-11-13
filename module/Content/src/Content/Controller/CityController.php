@@ -74,6 +74,8 @@ class CityController extends Action
                 $profileImage = $data->getProfileImage();
                 $urlProfileImage = explode("./public", $profileImage['tmp_name']);
                 $cityEntity->setProfileImage($urlProfileImage[1]);//->setProfileImage($profileImage['tmp_name']);
+                $cityEntity->setLabel($data->getName());
+                $cityEntity->setRoute('/' . strtolower($data->getCountry()->getName()) . '/' . strtolower($data->getName()));
 
                 $this->entityManager->persist($cityEntity);
                 $this->entityManager->flush();

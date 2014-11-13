@@ -31,4 +31,20 @@ class CityRepository extends EntityRepository
 
 		return $cities;
 	}
+
+	public function getCityByName($name)
+	{
+		$em = $this->getEntityManager();
+
+		$qb = $em->createQueryBuilder();
+
+		$qb->select( 'c' )
+            ->from( 'Content\Entity\City',  'c' )
+            ->where('c.name = :name')
+            ->setParameter('name', $name);
+
+        $events = $qb->getQuery()->getSingleResult();
+
+		return $events;
+	}
 }

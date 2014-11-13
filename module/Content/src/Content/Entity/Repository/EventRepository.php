@@ -21,7 +21,7 @@ use Doctrine\ORM\EntityRepository;
 
 class EventRepository extends EntityRepository
 {
-	public function getEventsForIndexPage($limit, $offset)
+	public function getEventsForIndexPage($limit, $offset, $city = null)
 	{
 		$em = $this->getEntityManager();
 
@@ -32,6 +32,14 @@ class EventRepository extends EntityRepository
             ->setMaxResults( $limit )
             ->setFirstResult( $offset )
             ->orderBy('e.dateTimeEvent', 'ASC');
+
+        if($city != null)
+        {
+        	// var_dump($city);
+
+        	$qb->where('e.city = :cityID')
+        		->setParameter('cityID', $city->getId());
+        }
 
         $events = $qb->getQuery()->getResult();
 

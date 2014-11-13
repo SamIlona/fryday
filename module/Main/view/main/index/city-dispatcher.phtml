@@ -1,0 +1,376 @@
+<div style="background-position: 50% 16px;" class="search-block parallaxBg">
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>
+                Fryday is a network of cosmopolitan professionals
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="container content"> 
+
+
+        <!-- Recent Works -->
+        <div class="headline"><h2>Upcoming Events</h2></div>
+<!--         <div class="heading heading-v1 margin-bottom-40">
+                        <h2>Upcomming Events</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged</p>
+                    </div> -->
+        <div class="row">
+            <?php foreach ($eventsFirstLine as $event): ?>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnails thumbnail-style thumbnail-kenburn">
+                    <div class="index-thumbnail-img easy-block-v1">
+
+                        <div class="index-event-date rgba-blue">
+                            <!-- <span class="index-event-date-day"><?php //echo $event->getDateTimeEvent()->format('d'); ?></span> -->
+                            <span class="index-event-date-month"><?php echo $event->getDateTimeEvent()->format('d'); ?> <?php echo $event->getDateTimeEvent()->format('F'); ?>, <?php echo $event->getDateTimeEvent()->format('l'); ?></span>
+                            <!-- <span>Kyiv</span> -->
+                        </div>
+
+                        <div class="overflow-hidden">
+                            <a href="<?php echo $this->url('main/event_details', array('id' => $event->getId() )); ?>">
+                                <img class="img-responsive" src="<?php echo $event->getProfileImage(); ?>" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <a class="index-event-title  hover-effect fryday-w" href="<?php echo $this->url('main/event_details', array('id' => $event->getId() )); ?>"> <?php echo $event->getTitle(); ?> <span><?php echo $event->getVenue()->getCity()->getName(); ?>, <?php echo $event->getVenue()->getName(); ?></span>
+                        </a>  
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="row">
+            <?php foreach ($eventsSecondLine as $event): ?>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnails thumbnail-style thumbnail-kenburn">
+                    <div class="index-thumbnail-img easy-block-v1">
+                        <div class="index-event-date rgba-blue">
+                            <span class="index-event-date-month"><?php echo $event->getDateTimeEvent()->format('d'); ?> <?php echo $event->getDateTimeEvent()->format('F'); ?>, <?php echo $event->getDateTimeEvent()->format('l'); ?></span>
+                            <!-- <span>Kyiv</span> -->
+                        </div>
+
+                        <div class="overflow-hidden">
+                            <a href="#">
+                                <img class="img-responsive" src="<?php echo $event->getProfileImage(); ?>" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <p><a class="index-event-title  hover-effect fryday-w" href="#">
+                            <?php echo $event->getTitle(); ?>
+                            <span><?php echo $event->getVenue()->getCity()->getName(); ?>, <?php echo $event->getVenue()->getName(); ?></span>
+                        </a> </p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Info Blokcs -->
+        <div class="row margin-bottom-30">
+            <!-- Welcome Block -->
+            <div class="col-md-8 md-margin-bottom-40">
+                <div class="headline"><h2>NEWS FROM FRYDAY</h2></div>
+                <div class="magazine-news">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="magazine-news-img">
+                                <a href="#"><img class="img-responsive" src="/frontend/img/995652_675939865837300_5120003958677719456_n.png" alt=""></a>
+                            </div>
+                            <h3><a href="#">Fryday is launching in San Jose, Costa Rica! Welcome to join!</a></h3>
+                            <div class="by-author">
+                                <strong>By Jack Villo</strong>
+                                <span>/ September 19, 2013</span>
+                            </div> 
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate...</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="magazine-news-img">
+                                <a href="#"><img class="img-responsive" src="/frontend/img/main/2.jpg" alt=""></a>
+                            </div>
+                            <h3><a href="#">Simelque Untine Culpaqui Officia Deserunt</a></h3>
+                            <div class="by-author">
+                                <strong>By Ann Diwver</strong>
+                                <span>/ September 19, 2013</span>
+                            </div> 
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate...</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="magazine-news-img">
+                                <a href="#"><img class="img-responsive" src="/frontend/img/main/3.jpg" alt=""></a>
+                            </div>
+                            <h3><a href="#">Simelque Untine Culpaqui Officia Deserunt</a></h3>
+                            <div class="by-author">
+                                <strong>By Admin</strong>
+                                <span>/ September 19, 2013</span>
+                            </div> 
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate...</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/col-md-8-->        
+
+            <!-- Latest Shots -->
+            <div class="col-md-4">
+                <div class="headline"><h2>PARTNERS</h2></div>
+                <div class="posts margin-bottom-40">
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="/frontend/img/21216_537853716271950_34300625_n.png" alt=""></a></dt>
+                        <dd>
+                            <p><a href="#">Ferrari Store offers a wide range of clothing and accessories for adults and children from the legendary Ferrari brand!</a></p> 
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="/frontend/img/oriflame.jpg" alt=""></a></dt>
+                        <dd>
+                            <p><a href="#">Fryday's partner Oriflame is looking for talented co-workers to its Ukrainian head office.</a></p> 
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="/frontend/img/1000228_604435942910213_1273191221_n.jpg" alt=""></a></dt>
+                        <dd>
+                            <p><a href="#">With Custom Case you can order the cover for your phone that match your style and interests.</a></p> 
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="/frontend/img/547106_353190208057349_1589130915_n.jpg" alt=""></a></dt>
+                        <dd>
+                            <p><a href="#">Fryday is proud to announce that the Swedish company Volvo will be present at Fryday W with the Ambassador of Sweden on October 1st.</a></p> 
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt><a href="#"><img src="/frontend/img/995292.png" alt=""></a></dt>
+                        <dd>
+                            <p><a href="#">We are happy to present Beetroot Resources - our great friend and partner of the next Fryday W on Swedish business in Ukraine!</a></p> 
+                        </dd>
+                    </dl>
+                </div>
+            </div><!--/col-md-4-->
+        </div>  
+        <!-- End Info Blokcs -->
+
+        <!-- Our Clients -->
+        <div id="clients-flexslider" class="flexslider home clients">
+            <div class="headline"><h2>PHOTOS AND VIDEOS</h2></div>  
+            <div class="row service-v1 margin-bottom-40">
+                <div class="col-md-3 md-margin-bottom-40">
+                    <div id="myCarousel1" class="carousel slide carousel-v1">
+                        <div class="carousel-inner">
+                            <div class="item">
+                                <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <p>Cras justo odio, dapibus ac facilisis into egestas.</p>
+                                </div>
+                                </div>
+                            <div class="item active">
+                                <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <p>Justo cras odio apibus ac afilisis lingestas de.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-arrow">
+                            <a class="left carousel-control" href="#myCarousel1" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel1" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div id="myCarousel2" class="carousel slide carousel-v1">
+                        <div class="carousel-inner">
+                            <div class="item">
+                                <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <p>Cras justo odio, dapibus ac facilisis into egestas.</p>
+                                </div>
+                                </div>
+                            <div class="item active">
+                                <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <p>Justo cras odio apibus ac afilisis lingestas de.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-arrow">
+                            <a class="left carousel-control" href="#myCarousel2" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel2" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>      
+                </div>
+                <div class="col-md-3 md-margin-bottom-40">
+                    <iframe width="100%" height="175px" src="//www.youtube.com/embed/014A0PlAFh8" frameborder="0" allowfullscreen></iframe>    
+                </div>
+                <div class="col-md-3">
+                    <div id="myCarousel" class="carousel slide carousel-v1">
+                        <div class="carousel-inner">
+                            <div class="item">
+                                <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <p>Cras justo odio, dapibus ac facilisis into egestas.</p>
+                                </div>
+                                </div>
+                            <div class="item active">
+                                <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <p>Justo cras odio apibus ac afilisis lingestas de.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-arrow">
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>      
+                </div>
+            </div>  
+        </div>
+
+        <div id="clients-flexslider" class="flexslider home clients">
+            <div class="headline"><h2>FRYDAY'S PARTNERS</h2></div>    
+            
+            <div style="overflow: hidden; position: relative;" class="flex-viewport"></div><div style="overflow: hidden; position: relative;" class="flex-viewport"><ul style="width: 3400%; transition-duration: 0.6s; transform: translate3d(0px, 0px, 0px);" class="slides">
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/hp_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/hp.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/igneus_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/igneus.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/vadafone_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/vadafone.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/walmart_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/walmart.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/shell_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/shell.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/natural_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/natural.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/aztec_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/aztec.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/gamescast_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/gamescast.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/cisco_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/cisco.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/everyday_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/everyday.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/cocacola_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/cocacola.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/spinworkx_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/spinworkx.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/shell_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/shell.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/natural_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/natural.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/gamescast_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/gamescast.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/everyday_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/everyday.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                    <li style="width: 125.667px; float: left; display: block;">
+                        <a href="#">
+                            <img src="/frontend/img/clients/spinworkx_grey.png" alt=""> 
+                            <img src="/frontend/img/clients/spinworkx.png" class="color-img" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>

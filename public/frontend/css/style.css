@@ -83,6 +83,7 @@
 
 .topbar ul.loginbar {
 	margin: 0;
+	padding-right: 15px;
 }
 
 .topbar ul.loginbar > li {
@@ -4009,4 +4010,10 @@ body.dark .tp-banner-container .btn-u.btn-brd.btn-u-light {
   background: #f5f5f5;
   overflow: hidden;
   margin-bottom: 30px;
+}
+.img-inputs {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
 }

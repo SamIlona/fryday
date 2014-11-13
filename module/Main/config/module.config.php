@@ -8,6 +8,11 @@
 namespace Main; // SUPER important for Doctrine othervise can not find the Entities
 
 return array(
+    'view_helpers' => array(
+        // 'invokables' => array(
+        //     'citieshelper' => 'Main\View\Helper\citieshelper',
+        // ),
+    ),
     'router' => array(
         'routes' => array(
             'home' => array(
@@ -85,7 +90,7 @@ return array(
                     'static_pages' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => ':action[/]',
+                            'route'    => ':action',
                             'constraints' => array(
                                 // '__NAMESPACE__' => 'Main\Controller',
                                 'controller'    => 'Index',
@@ -102,13 +107,14 @@ return array(
                     'event_details' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => 'event/:id',
+                            'route'    => 'event[/:id]',
                             'constraints' => array(
                                 'id'            => '[0-9:-]+',
                             ),
                             'defaults' => array(
                                 'controller'    => 'Index',
                                 'action'        => 'view-event',
+                                // 'id'            => 0,
                             ),
                         ),
                     ),
@@ -227,11 +233,11 @@ return array(
                 'route' => 'main/static_pages',
                 'action' => 'advertise',
             ),
-            array(
-                'label' => 'Partner',
-                'route' => 'main/static_pages',
-                'action' => 'partner',
-            ),
+            // array(
+            //     'label' => 'Partner',
+            //     'route' => 'main/static_pages',
+            //     'action' => 'partner',
+            // ),
             array(
                 'label' => 'Media',
                 'route' => 'main/static_pages',
@@ -265,7 +271,7 @@ return array(
             array(
                 'label' => 'Event',
                 'route' => 'main/static_pages',
-                'action' => 'event',
+                'action' => 'events',
             ),
         )
     ),

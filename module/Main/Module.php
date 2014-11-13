@@ -19,6 +19,18 @@ initialisation.
 */
 class Module
 {
+    public function getServiceConfig()
+    {    
+         return array(
+            'factories' => array(
+                'Main\Service\CitiesService' => function ($sm) {
+                    return new \Main\Service\CitiesService($sm);
+                },
+                'Navigation_c' => 'Main\Navigation\Service\CitiesNavigationFactory',
+            )
+        );   
+    }
+
     public function onBootstrap($e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
@@ -34,6 +46,12 @@ class Module
                 $controller->layout($config['module_layouts'][$moduleNamespace]);
             }
         }, 100);
+
+        $serviceManager = $e->getApplication()->getServiceManager();
+
+        $serviceManager->get('viewhelpermanager')->setFactory('CitiesHelper', function ($sm) use ($e) {
+            return new \Main\View\Helper\CitiesHelper($sm); 
+        });
     }
 
     public function getConfig()
