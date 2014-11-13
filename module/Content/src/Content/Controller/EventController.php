@@ -86,8 +86,8 @@ class EventController extends Action
                 $eventEntity->setProfileImage($urlProfileImage[1]);//->setProfileImage($profileImage['tmp_name']);
 
                 $eventEntity->setDateTimeEvent(new \DateTime($datetime));
-
                 $eventEntity->setUser($this->authenticatedUser);
+                $eventEntity->setCity($data->getVenue()->getCity());
 
                 $this->entityManager->persist($eventEntity);
                 $this->entityManager->flush();
