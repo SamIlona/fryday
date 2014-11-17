@@ -25,10 +25,10 @@ return array(
                     'all'         => 'administrator',
                 ),
                 'Content\Controller\Venue' => array(
-                    'all'         => 'administrator',
+                    'all'         => array('administrator', 'franchisor'),
                 ),
                 'Content\Controller\Event' => array(
-                    'all'         => 'administrator',
+                    'all'      => array('administrator', 'franchisor'),
                 ),
             )
         )

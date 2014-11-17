@@ -84,4 +84,36 @@ class IndexController extends Action
 			'messages' => $messages,
 		));
     }
+
+
+    public function logoutAction()
+    {
+        // in the controller
+        // $auth = new AuthenticationService();
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        // @todo Set up the auth adapter, $authAdapter
+
+
+        if ($auth->hasIdentity()) {
+            // Identity exists; get it
+            $identity = $auth->getIdentity();
+//-         echo '<pre>';
+//-         print_r($identity);
+//-         echo '</pre>';
+        }
+        $auth->clearIdentity();
+//-     $auth->getStorage()->session->getManager()->forgetMe(); // no way to get to the sessionManager from the storage
+        $sessionManager = new \Zend\Session\SessionManager();
+        $sessionManager->forgetMe();
+        
+        // $view = new ViewModel(array(
+        //    'message' => 'Hello world',
+        // ));
+        // $view->setTemplate('foo/baz-bat/do-something-crazy');
+        // return $view;
+        
+        // return $this->redirect()->toRoute('home');
+        return $this->redirect()->toRoute('main', array('controller' => 'index', 'action' => 'index'));
+    }
 }

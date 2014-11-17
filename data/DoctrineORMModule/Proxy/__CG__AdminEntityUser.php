@@ -64,10 +64,10 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'username', 'password', 'role', 'profileImage');
+            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'username', 'password', 'role', 'city', 'profileImage');
         }
 
-        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'username', 'password', 'role', 'profileImage');
+        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'username', 'password', 'role', 'city', 'profileImage');
     }
 
     /**
@@ -318,6 +318,28 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProfileImage', array());
 
         return parent::getProfileImage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCity($city)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCity', array($city));
+
+        return parent::setCity($city);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCity()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCity', array());
+
+        return parent::getCity();
     }
 
 }

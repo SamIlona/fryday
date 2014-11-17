@@ -2,7 +2,7 @@
     	<div class="row">
             <!--Left Sidebar-->
             <div class="col-md-3 md-margin-bottom-40">
-                <img class="img-responsive profile-img margin-bottom-20" src="assets/img/team/5.jpg" alt="">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo $this->identity()->getProfileImage(); ?>" alt="">
                 <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
                 <hr>
             </div>
@@ -10,9 +10,118 @@
             
             <div class="col-md-9">
                 <!--Profile Body-->
+                
                 <div class="profile-body">
+                    <!-- <div class="col-md-12"> -->
+                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-left margin-bottom-20">Create New Event</a>
 
-                    <div class="table-search-v1 margin-bottom-20">
+                        <br>
+                        <br><br>
+                    <!-- </div> -->
+                    <!-- <div class="profile-body margin-bottom-20"> -->
+                    <!-- <div class="col-md-12"> -->
+                        <div class="tab-v1">
+                            <ul class="nav nav-justified nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#upcoming">Upcoming Events</a></li>
+                                <li><a data-toggle="tab" href="#past">Past Events</a></li>
+                                <!-- <li><a data-toggle="tab" href="#payment">Payment Options</a></li>
+                                <li><a data-toggle="tab" href="#settings">Notification Settings</a></li> -->
+                            </ul>          
+                            <div class="tab-content">
+                                <div id="upcoming" class="profile-edit tab-pane fade in active">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th class="hidden-sm">Title</th>
+                                                    <th>City</th>
+                                                    <th>Venue</th>
+                                                    <th>User</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($upcomingEvents as $event): ?>
+                                                <tr>
+                                                    <td>
+                                                        <div class="date-formats-index-events-list">
+                                                            <span><?php echo $event->getDateTimeEvent()->format('d'); ?></span>
+                                                            <small><?php echo $event->getDateTimeEvent()->format('n'); ?>, <?php echo $event->getDateTimeEvent()->format('Y'); ?></small>
+                                                        </div>
+                                                    </td>
+                                                    <td class="td-width">
+                                                        <h3><a href="<?php echo $this->url('main/event_details', array('id' => $event->getId() )); ?>"><?php echo $event->getTitle(); ?></a></h3>
+                                                        <?php echo $event->getDescription(); ?>
+                                                        <span class="date-time-created-events-list-admin">Created <?php echo $event->getDateTimeCreated()->format('F j, Y'); ?></span>
+                                                    </td>
+                                                    <td  class="hidden-sm">
+                                                        <div class="m-marker">
+                                                            <a href="#"><i class="color-green fa fa-map-marker"></i></a>
+                                                            <a href="#" class="display-b"><?php echo $event->getVenue()->getCity()->getCountry()->getName(); ?></a>
+                                                            <a href="#"><?php echo $event->getVenue()->getCity()->getName(); ?></a>
+                                                        </div>
+                                                    <td>
+                                                        <span><a href="#"><?php echo $event->getVenue()->getName(); ?></a></span>
+                                                    </td>
+                                                    <td>
+                                                        <span><a href="#"><?php echo $event->getUser()->getFirstName(); ?> <?php echo $event->getUser()->getLastName(); ?></a></a></span>
+                                                    </td>
+                                                </tr>
+                                                 <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div id="past" class="profile-edit tab-pane fade">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th class="hidden-sm">Title</th>
+                                                    <th>City</th>
+                                                    <th>Venue</th>
+                                                    <th>User</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($pastEvents as $event): ?>
+                                                <tr>
+                                                    <td>
+                                                        <div class="date-formats-index-events-list">
+                                                            <span><?php echo $event->getDateTimeEvent()->format('d'); ?></span>
+                                                            <small><?php echo $event->getDateTimeEvent()->format('n'); ?>, <?php echo $event->getDateTimeEvent()->format('Y'); ?></small>
+                                                        </div>
+                                                    </td>
+                                                    <td class="td-width">
+                                                        <h3><a href="<?php echo $this->url('main/event_details', array('id' => $event->getId() )); ?>"><?php echo $event->getTitle(); ?></a></h3>
+                                                        <?php echo $event->getDescription(); ?>
+                                                        <span class="date-time-created-events-list-admin">Created <?php echo $event->getDateTimeCreated()->format('F j, Y'); ?></span>
+                                                    </td>
+                                                    <td  class="hidden-sm">
+                                                        <div class="m-marker">
+                                                            <a href="#"><i class="color-green fa fa-map-marker"></i></a>
+                                                            <a href="#" class="display-b"><?php echo $event->getVenue()->getCity()->getCountry()->getName(); ?></a>
+                                                            <a href="#"><?php echo $event->getVenue()->getCity()->getName(); ?></a>
+                                                        </div>
+                                                    <td>
+                                                        <span><a href="#"><?php echo $event->getVenue()->getName(); ?></a></span>
+                                                    </td>
+                                                    <td>
+                                                        <span><a href="#"><?php echo $event->getUser()->getFirstName(); ?> <?php echo $event->getUser()->getLastName(); ?></a></a></span>
+                                                    </td>
+                                                </tr>
+                                                 <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    <!-- </div>   -->
+                    <!-- </div> -->
+                    <!-- <div class="table-search-v1 margin-bottom-20">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -55,7 +164,7 @@
                                 </tbody>
                             </table>
                         </div>    
-                    </div>
+                    </div> -->
                 </div>
                 <!--End Profile Body-->
             </div>

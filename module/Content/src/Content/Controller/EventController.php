@@ -37,13 +37,12 @@ class EventController extends Action
      */
     public function indexAction()
     {
-    	$this->entityManager = $this->getEntityManager();
-        $eventsRepository = $this->entityManager->getRepository('Content\Entity\Event');
-        $events = $eventsRepository->findAll();
+    	$em = $this->getEntityManager();
 
 		return array(
-			'events' => $events,
-            'flashMessages' => $this->flashMessenger()->getMessages(),
+			'upcomingEvents'    => $em->getRepository('Content\Entity\Event')->getEvents(4, 0, 'upcoming'),
+            'pastEvents'        => $em->getRepository('Content\Entity\Event')->getEvents(4, 0, 'past'),
+            'flashMessages'     => $this->flashMessenger()->getMessages(),
         );
    	}
 
@@ -57,7 +56,7 @@ class EventController extends Action
     	$this->entityManager = $this->getEntityManager();
         $this->authenticatedUser = $this->getAuthenticatedUser();
 
-    	$eventForm = new Form\CreateEventForm('event', $this->entityManager);
+    	$eventForm = new Form\CreateEventForm('event', $this->entityManager, $this->authenticatedUser);
         $eventForm->setHydrator(new DoctrineHydrator($this->entityManager, 'Content\Entity\Event'));
         $eventEntity = new Entity\Event();
         $eventForm->bind($eventEntity);
@@ -87,7 +86,15 @@ class EventController extends Action
 
                 $eventEntity->setDateTimeEvent(new \DateTime($datetime));
                 $eventEntity->setUser($this->authenticatedUser);
-                $eventEntity->setCity($data->getVenue()->getCity());
+
+                if ($this->authenticatedUser->getRole()->getName() == 'administrator')
+                {
+                    $eventEntity->setCity($data->getVenue()->getCity());
+                }
+                else 
+                {
+                    $eventEntity->setCity($this->authenticatedUser->getCity());
+                }
 
                 $this->entityManager->persist($eventEntity);
                 $this->entityManager->flush();

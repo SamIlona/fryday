@@ -224,6 +224,11 @@ return array(
                 'route' => 'main',
             ),
             array(
+                'label' => 'Events',
+                'route' => 'main/static_pages',
+                'action' => 'events',
+            ),
+            array(
                 'label' => 'Franchise',
                 'route' => 'main/static_pages',
                 'action' => 'franchise',
@@ -238,11 +243,11 @@ return array(
             //     'route' => 'main/static_pages',
             //     'action' => 'partner',
             // ),
-            array(
-                'label' => 'Media',
-                'route' => 'main/static_pages',
-                'action' => 'media',
-            ),
+            // array(
+            //     'label' => 'Media',
+            //     'route' => 'main/static_pages',
+            //     'action' => 'media',
+            // ),
             array(
                 'label' => 'Member',
                 'route' => 'main/static_pages',
@@ -258,20 +263,21 @@ return array(
                 'route' => 'main/static_pages',
                 'action' => 'speaker',
             ),
+            // array(
+            //     'label' => 'About',
+            //     'route' => 'main/static_pages',
+            //     'action' => 'about',
+            // ),
+            // array(
+            //     'label' => 'Contact',
+            //     'route' => 'main/static_pages',
+            //     'action' => 'contact',
+            // ),
             array(
-                'label' => 'About',
-                'route' => 'main/static_pages',
-                'action' => 'about',
-            ),
-            array(
-                'label' => 'Contact',
-                'route' => 'main/static_pages',
-                'action' => 'contact',
-            ),
-            array(
-                'label' => 'Event',
-                'route' => 'main/static_pages',
-                'action' => 'events',
+                'label' => 'Dashboard',
+                'route' => 'administrator',
+                'resource'      => 'Admin\Controller\Index',
+                'privilege'     => 'index'
             ),
         )
     ),

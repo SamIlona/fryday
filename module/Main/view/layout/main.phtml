@@ -22,6 +22,7 @@
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_log_reg_v1.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_clients.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_search.css')
+            ->prependStylesheet($this->basePath() . '/frontend/plugins/scrollbar/src/perfect-scrollbar.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/css/sky-forms.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/parallax-slider/css/parallax-slider.css')
@@ -41,6 +42,8 @@
             ->prependFile($this->basePath() . '/frontend/js/app.js')
             ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.js')
             // ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/scrollbar/src/perfect-scrollbar.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/scrollbar/src/jquery.mousewheel.js')
             ->prependFile($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/js/jquery-ui.min.js')
             ->prependFile($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/js/jquery.maskedinput.min.js')
             ->prependFile($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/js/jquery.validate.min.js')
@@ -66,29 +69,25 @@
                     <div class="container">
                         <!-- Topbar Navigation -->
                         <ul class="loginbar pull-right">
-                            <!-- <li><a href="page_faq.html">Subscribe</a></li> -->
+                        <?php if ($authenticatedUser = $this->identity()): ?>
+                            <li class="index-top-welcome">
+                                <?php echo "Welcome, " ?>
+                            </li>
+                            <li class="index-top-welcome">
+                                <a><?php echo $authenticatedUser->getFirstName() . " " . $authenticatedUser->getLastName(); ?></a>
+                                <ul class="lenguages">
+                                    <li><a href="<?php echo $this->url('administrator/default', array('controller' => 'index', 'action' => 'logout' )); ?>">Logout</a>
+                            </li>
+                                </ul>
+                        <?php else: ?>
                             <li>
                                 <i class="fa fa-globe"></i>
                                 <a>Choose Your City</a>
                                 <?php echo $this->navigation('Navigation_c')->menu()->setUlClass('lenguages'); ?>
-<!--                                 <ul class="lenguages">
-                                    <li class="active">
-                                        <a href="#">Kiyv <i class="fa fa-check"></i></a> 
-                                    </li>
-                                    <li><a href="#">Kyiv</a></li>
-                                    <li><a href="#">Praga</a></li>
-                                    <li><a href="#">Tbilisi</a></li>
-                                    <li><a href="#">German</a></li>
-                                </ul> -->
                             </li>
                             <li class="topbar-devider"></li>   
                             <li><a href="page_faq.html">Registration</a></li>
-<!--                             <li class="topbar-devider"></li>   
-                            <li><a href="page_faq.html">FAQ</a></li>
-                            <li class="topbar-devider"></li>   
-                            <li><a href="page_faq.html">Help</a></li>   -->
-<!--                            <li class="topbar-devider"></li>   
-                            <li><a href="page_login.html">Login</a></li>   --> 
+                        <?php endif; ?>
                         </ul>
                         <!-- End Topbar Navigation -->
                     </div>

@@ -4017,3 +4017,8 @@ body.dark .tp-banner-container .btn-u.btn-brd.btn-u-light {
 	right: 0px;
 	bottom: 0px;
 }
+.index-top-welcome {
+	color: #7C8082;
+	font-size: 11px;
+	text-transform: uppercase;
+}

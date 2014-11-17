@@ -21,9 +21,26 @@ use Doctrine\ORM\EntityRepository;
 
 class VenueRepository extends EntityRepository
 {
-	public function getAllVenuesAsOptions()
+	public function getAllVenuesAsOptions($user = null)
 	{
-		$venuesSet = $this->getEntityManager()->getRepository('Content\Entity\Venue')->findAll();
+		$em = $this->getEntityManager();
+
+		$qb = $em->createQueryBuilder();
+
+		$venues = array();
+
+		$qb->select( 'v' )
+            ->from( 'Content\Entity\Venue',  'v' );
+
+        if($user->getRole()->getName() != 'administrator')
+        {
+        	$qb->where('v.city = :cityID')
+        		->setParameter('cityID', $user->getCity()->getId());
+        }
+
+        $venuesSet = $qb->getQuery()->getResult();
+
+		// $venuesSet = $this->getEntityManager()->getRepository('Content\Entity\Venue')->findAll();
 
 		foreach ($venuesSet as $venue) {
 			$venues[$venue->getId()] = $venue->getName();

@@ -146,17 +146,17 @@ class CreateUserForm extends Form
             ->setAttribute('id', 'create-user-role');
         $this->add($role);
 
-        // $city = new Element\Select('city');
-        // $city->setLabel('City')
-        //     ->setLabelAttributes(
-        //         array(
-        //             'class' => 'required control-label col-lg-4',
-        //         )
-        //     )
-        //     ->setValueOptions($this->entityManager->getRepository('Content\Entity\City')->getAllCitiesAsOptions())
-        //     ->setAttribute('class', 'form-control')
-        //     ->setAttribute('id', 'create-user-city');
-        // $this->add($city);
+        $city = new Element\Select('city');
+        $city->setLabel('City')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'label',
+                )
+            )
+            ->setValueOptions($this->entityManager->getRepository('Content\Entity\City')->getAllCitiesAsOptions())
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'create-user-city');
+        $this->add($city);
 
         $submit = new Element\Submit('submit');
         $submit
@@ -186,27 +186,4 @@ class CreateUserForm extends Form
 
         $this->setInputFilter($inputFilter);
     }
-
-    /**
-     * Fetching all venues
-     *
-     * @return array|$venues
-     */
-    // private function getVenues()
-    // {
-    //     $venues = array(
-    //         '0' => '...',
-    //     );
-
-    //     $venuesSet = $this
-    //         ->entityManager
-    //         ->getRepository('Main\Entity\Venue')
-    //         ->findAll();
-
-    //     foreach ($venuesSet as $venue) {
-    //         $venues[$venue->getId()] = $venue->getName();
-    //     }
-
-    //     return $venues;
-    // }
 }

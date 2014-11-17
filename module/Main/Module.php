@@ -6,6 +6,7 @@
 
 namespace Main;
 
+use Zend\View\HelperPluginManager;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -52,6 +53,59 @@ class Module
         $serviceManager->get('viewhelpermanager')->setFactory('CitiesHelper', function ($sm) use ($e) {
             return new \Main\View\Helper\CitiesHelper($sm); 
         });
+    }
+
+    public function getViewHelperConfig()
+    {
+        return array(
+            'factories' => array(
+                // This will overwrite the native navigation helper
+                'navigation' => function(HelperPluginManager $pm) {
+                    $sm = $pm->getServiceLocator();
+                    $config = $sm->get('Config');
+
+                    // Setup ACL:
+                    $acl = new \Admin\Acl\Acl($config);
+
+                    // Get the AuthenticationService
+                    $auth = $sm->get('Zend\Authentication\AuthenticationService');
+                    $role = \Admin\Acl\Acl::DEFAULT_ROLE;
+
+                    if ($auth->hasIdentity()) {
+                        // $user = $auth->getIdentity();
+                        $role = $auth->getIdentity()->getRole()->getName();
+                    //     $usrlId = $user->getUsrlId(); // Use a view to get the name of the role
+                    //     // TODO we don't need that if the names of the roles are comming from the DB
+                    //     switch ($usrlId) {
+                    //         case 0 :
+                    //             $role = Acl::DEFAULT_ROLE; // guest
+                    //             break;
+                    //         case 1 :
+                    //             $role = 'qualifier';
+                    //             break;
+                    //         case 2 :
+                    //             $role = 'sale';
+                    //             break;
+                    //         case 3 :
+                    //             $role = 'admin';
+                    //             break;
+                    //         default :
+                    //             $role = Acl::DEFAULT_ROLE; // guest
+                    //             break;
+                    //     }
+                    }
+
+                    // Get an instance of the proxy helper
+                    $navigation = $pm->get('Zend\View\Helper\Navigation');
+                    
+                    // Store ACL and role in the proxy helper:
+                    $navigation->setAcl($acl)->setRole($role); // 'member'
+
+                    // Return the new navigation helper instance
+                    return $navigation;
+                }
+            ),
+        );
     }
 
     public function getConfig()

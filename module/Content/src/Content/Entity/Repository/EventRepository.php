@@ -21,11 +21,13 @@ use Doctrine\ORM\EntityRepository;
 
 class EventRepository extends EntityRepository
 {
-	public function getEventsForIndexPage($limit, $offset, $city = null)
+	public function getEvents($limit, $offset, $type, $city = null)
 	{
 		$em = $this->getEntityManager();
 
 		$qb = $em->createQueryBuilder();
+
+        $timeNow = new \DateTime();
 
 		$qb->select( 'e' )
             ->from( 'Content\Entity\Event',  'e' )
@@ -33,11 +35,22 @@ class EventRepository extends EntityRepository
             ->setFirstResult( $offset )
             ->orderBy('e.dateTimeEvent', 'ASC');
 
+        if($type == 'upcoming')
+        {
+        $qb->where('e.dateTimeEvent > :time');
+        } 
+        elseif ($type == 'past') 
+        {
+        $qb->where('e.dateTimeEvent < :time');
+        }
+        
+        $qb->setParameter('time', $timeNow);
+
         if($city != null)
         {
         	// var_dump($city);
 
-        	$qb->where('e.city = :cityID')
+        	$qb->andWhere('e.city = :cityID')
         		->setParameter('cityID', $city->getId());
         }
 

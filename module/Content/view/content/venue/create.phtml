@@ -2,7 +2,7 @@
     	<div class="row">
             <!--Left Sidebar-->
             <div class="col-md-3 md-margin-bottom-40">
-                <img class="img-responsive profile-img margin-bottom-20" src="assets/img/team/5.jpg" alt="">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo $this->identity()->getProfileImage(); ?>" alt="">
                 <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
                 <hr>
             </div>
@@ -37,14 +37,16 @@
                             </label>
                         </section>              
                             
-                        <section>
-                            <!-- <label class="label">Select</label> -->
-                            <?php echo $this->formLabel($this->form->get('city')); ?>
-                            <label class="select">
-                                <?php echo $this->formSelect($this->form->get('city')); ?>
-                                <i></i>
-                            </label>
-                        </section>
+                         <?php if ($this->identity()->getRole()->getName() == 'administrator'): ?>
+                            <section>
+                                <!-- <label class="label">Select</label> -->
+                                <?php echo $this->formLabel($this->form->get('city')); ?>
+                                <label class="select">
+                                    <?php echo $this->formSelect($this->form->get('city')); ?>
+                                    <i></i>
+                                </label>
+                            </section>
+                        <?php endif; ?>
                     </fieldset>
 
                     <fieldset>

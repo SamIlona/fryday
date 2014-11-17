@@ -65,7 +65,7 @@ class User
      * @ORM\ManyToOne(targetEntity="Content\Entity\City", inversedBy="users")
      * @ORM\JoinColumn(name="city", referencedColumnName="id", nullable=true, onDelete="CASCADE", unique=false)
      */
-    //protected $city;
+    protected $city;
 
     /**
      * @var string
@@ -180,16 +180,16 @@ class User
     /**
      * @param null|Content\Entity\City $city
      */
-    // public function setCity($city)
-    // {
-    //     $this->city = $city;
-    // }
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
 
     /**
      * @return Content\Entity\City|null 
      */
-    // public function getCity()
-    // {
-    //     return $this->city;
-    // }
+    public function getCity()
+    {
+        return $this->city;
+    }
 }

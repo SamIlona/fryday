@@ -37,7 +37,7 @@ class CreateEventForm extends Form
      *
      * @param null|string|int $name Optional name for the element
      */
-    public function __construct($name = null, $entityManager)
+    public function __construct($name = null, $entityManager, $user)
     {
         parent::__construct($name);
         $this->setAttributes(
@@ -47,11 +47,11 @@ class CreateEventForm extends Form
             )
         );
         $this->entityManager = $entityManager;
-        $this->addElements();
+        $this->addElements($user);
         $this->addInputFilter();
     }
 
-    public function addElements()
+    public function addElements($user)
     {
         $title = new Element\Text('title');
         $title->setLabel('Title')
@@ -105,7 +105,7 @@ class CreateEventForm extends Form
                     'class' => 'label',
                 )
             )
-            ->setValueOptions($this->entityManager->getRepository('Content\Entity\Venue')->getAllVenuesAsOptions())
+            ->setValueOptions($this->entityManager->getRepository('Content\Entity\Venue')->getAllVenuesAsOptions($user))
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'event-venue');
         $this->add($venue);

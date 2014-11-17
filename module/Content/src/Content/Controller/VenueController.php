@@ -71,6 +71,7 @@ class VenueController extends Action
     public function createAction()
     {
     	$this->entityManager = $this->getEntityManager();
+        $this->authenticatedUser = $this->getAuthenticatedUser();
 
     	$venueForm = new Form\CreateVenueForm('venue', $this->entityManager);
         $venueForm->setHydrator(new DoctrineHydrator($this->entityManager, 'Content\Entity\Venue'));
@@ -96,6 +97,11 @@ class VenueController extends Action
                 $profileImage = $data->getProfileImage();
                 $urlProfileImage = explode("./public", $profileImage['tmp_name']);
                 $venueEntity->setProfileImage($urlProfileImage[1]);//->setProfileImage($profileImage['tmp_name']);
+
+                if ($this->authenticatedUser->getRole()->getName() == 'franchisor')
+                {
+                    $venueEntity->setCity($this->authenticatedUser->getCity());
+                }
 
                 $this->entityManager->persist($venueEntity);
                 $this->entityManager->flush();

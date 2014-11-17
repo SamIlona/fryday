@@ -19,8 +19,8 @@ class IndexController extends Action
         $em = $this->getEntityManager();
 
         return array(
-            'eventsFirstLine'   => $em->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 0),
-            'eventsSecondLine'  => $em->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 4),
+            'eventsFirstLine'   => $em->getRepository('Content\Entity\Event')->getEvents(4, 0, 'upcoming'),
+            'eventsSecondLine'  => $em->getRepository('Content\Entity\Event')->getEvents(4, 4, 'upcoming'),
         );
     }
     public function venueAction()
@@ -106,8 +106,8 @@ class IndexController extends Action
 
         
         return array(
-            'eventsFirstLine'   => $em->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 0, $city),
-            'eventsSecondLine'  => $em->getRepository('Content\Entity\Event')->getEventsForIndexPage(4, 4, $city),
+            'eventsFirstLine'   => $em->getRepository('Content\Entity\Event')->getEvents(4, 0, 'upcoming', $city),
+            'eventsSecondLine'  => $em->getRepository('Content\Entity\Event')->getEvents(4, 4, 'upcoming', $city),
         );
     }
 }
