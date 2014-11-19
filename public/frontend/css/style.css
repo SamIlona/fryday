@@ -4022,3 +4022,37 @@ body.dark .tp-banner-container .btn-u.btn-brd.btn-u-light {
 	font-size: 11px;
 	text-transform: uppercase;
 }
+.cities-list-line {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.7);
+	padding: 5px;
+}
+.cities-list-line ul > li {
+	display: inline;
+	list-style: none;
+	text-transform: uppercase;
+	padding: 5px;
+}
+.cities-list-line-bar {
+	display: inline;
+	list-style: none;
+}
+/*.cities-list-line-bar ul{
+	display: inline;
+	list-style: none;
+}*/
+/*.cities-list-line-bar ul > li{
+	display: inline;
+	list-style: none;
+	text-transform: uppercase;
+}*/
+.cities-list-line-bar a {
+	text-decoration: none;
+	color: #AAA;
+}
+.cities-list-line-bar a:hover {
+	text-decoration: none;
+	color: #FFF;
+}

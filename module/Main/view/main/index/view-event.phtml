@@ -16,8 +16,9 @@
                         <div class="jobs-wrapper col-md-8 col-sm-7">           
                             <h3 class="title"></h3>
                             <div class="event-main-img">
-                                <img class="img-responsive" src="<?php echo $event->getProfileImage(); ?>" alt="">
+                                <img class="img-responsive" src="<?php echo $event->getProfileImage(); ?>" alt="<?php echo $event->getTitle(); ?>">
                             </div>
+                            <div class="fb-like" data-href="https://fryday.net/event/<?php $event->getVenue()->getId(); ?>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div><br><br>
                             <div class="box box-border page-row">
                                 <blockquote class="hero-unify">
                                     <ul class="list-unstyled">
