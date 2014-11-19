@@ -4052,6 +4052,10 @@ body.dark .tp-banner-container .btn-u.btn-brd.btn-u-light {
 	text-decoration: none;
 	color: #AAA;
 }
+.cities-list-line-bar li.active a {
+	text-decoration: none;
+	color: #FFF;
+}
 .cities-list-line-bar a:hover {
 	text-decoration: none;
 	color: #FFF;
