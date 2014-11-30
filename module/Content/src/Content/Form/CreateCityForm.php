@@ -83,6 +83,7 @@ class CreateCityForm extends Form
                 )
             )
             ->setValueOptions($this->entityManager->getRepository('Content\Entity\Country')->getAllCountriesAsOptions())
+            ->setEmptyOption('Select country...')
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'city-country');
         $this->add($country);

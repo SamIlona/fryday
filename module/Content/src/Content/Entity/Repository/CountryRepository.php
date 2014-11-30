@@ -23,7 +23,7 @@ class CountryRepository extends EntityRepository
 {
 	public function getAllCountriesAsOptions()
 	{
-		$countriesSet = $this->getEntityManager()->getRepository('Content\Entity\Country')->findAll();
+		$countriesSet = $this->getEntityManager()->getRepository('Content\Entity\Country')->findBy(array(), array('name'=>'asc'));
 
 		foreach ($countriesSet as $country) {
 			$countries[$country->getId()] = $country->getName();
