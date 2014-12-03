@@ -13,7 +13,7 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
 use Zend\ServiceManager\ServiceManager;
-use Zend\Mail\Transport\Smtp;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
 use Zend\Mail\Transport\SmtpOptions;
 
 class Module
@@ -28,8 +28,8 @@ class Module
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                    'Fryday' => __DIR__ . '/../../library/Fryday/',
+                    __NAMESPACE__   => __DIR__ . '/src/' . __NAMESPACE__,
+                    'Fryday'        => __DIR__ . '/../../library/Fryday/',
                 ),
             ),
         );
@@ -41,9 +41,9 @@ class Module
             'factories' => array(
                 'mail.transport' => function (ServiceManager $serviceManager) {
                     $config = $serviceManager->get('Config');
-                    $transport = new Smtp();                
+                    $transport = new SmtpTransport();                
                     // via GMAIL
-                    // $transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));
+                    //$transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));
                     // via LOCAL
                     $transport->setOptions(new SmtpOptions(
                             array(

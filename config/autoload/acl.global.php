@@ -18,6 +18,9 @@ return array(
                 'Admin\Controller\User' => array(
                     'all'         => 'administrator',
                 ),
+                'Admin\Controller\Mailer' => array(
+                    'all'         => 'administrator',
+                ),
                 'Main\Controller\Index' => array(
                     'all'         => 'guest',
                 ),

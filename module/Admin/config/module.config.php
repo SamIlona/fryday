@@ -20,6 +20,7 @@ return array(
         'invokables' => array(
             'Admin\Controller\Index'    => 'Admin\Controller\IndexController',
             'Admin\Controller\User'     => 'Admin\Controller\UserController',
+            'Admin\Controller\Mailer'   => 'Admin\Controller\MailerController',
             // 'Content\Controller\City'   => 'Content\Controller\CityController',
         ),
     ),
@@ -204,6 +205,24 @@ return array(
                 'class' => 'list-group-item',
             ),
             array(
+                'label' => '<i class="fa fa-glass"></i> Events',
+                'route' => 'administrator_content/default',
+                'controller' => 'event',
+                'class' => 'list-group-item',
+            ),
+            array(
+                'label' => '<i class="fa fa-envelope"></i> Mailer',
+                'route' => 'administrator/default',
+                'controller' => 'mailer',
+                'class' => 'list-group-item',
+            ),
+            array(
+                'label' => '<i class="fa fa-database "></i> Subscribers',
+                'route' => 'administrator/default',
+                'controller' => 'profile',
+                'class' => 'list-group-item',
+            ),
+            array(
                 'label' => '<i class="fa fa-group"></i> Users',
                 'route' => 'administrator/default',
                 'controller' => 'user',
@@ -213,12 +232,6 @@ return array(
                 'label' => '<i class="fa fa-map-marker"></i> Cities',
                 'route' => 'administrator_content/default',
                 'controller' => 'city',
-                'class' => 'list-group-item',
-            ),
-            array(
-                'label' => '<i class="fa fa-glass"></i> Events',
-                'route' => 'administrator_content/default',
-                'controller' => 'event',
                 'class' => 'list-group-item',
             ),
             array(

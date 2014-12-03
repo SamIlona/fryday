@@ -98,7 +98,7 @@ return array(
             'backend' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/admin',
+                    'route'    => '/admin_back',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Backend\Controller',
                         'controller'    => 'Index',
