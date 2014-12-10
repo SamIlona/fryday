@@ -65,7 +65,7 @@ class MailerController extends Action
 
 				foreach ($subscribers as $subscriber) {
 					$mailService = $this->getServiceLocator()->get('AcMailer\Service\MailService');
-	            	$mailService->setSubject('This is the subject')->setBody('This is the body');
+	            	$mailService->setSubject('FRYDAY NEWSLETER IN ACTION')->setBody('Please go to fryday.net/admin/mailer and theck this out. Previously add subscribers to the list.');
 
 		            $message = $mailService->getMessage();
 					$message->setTo($subscriber->getEmail());
