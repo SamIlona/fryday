@@ -47,4 +47,21 @@ class CityRepository extends EntityRepository
 
 		return $events;
 	}
+
+	// TODO: Check the correctness!!
+	public function getCityByID($id)
+	{
+		$em = $this->getEntityManager();
+
+		$qb = $em->createQueryBuilder();
+
+		$qb->select( 'c' )
+            ->from( 'Content\Entity\City',  'c' )
+            ->where('c.id = :id')
+            ->setParameter('id', $id);
+
+        $events = $qb->getQuery()->getSingleResult();
+
+		return $events;
+	}
 }

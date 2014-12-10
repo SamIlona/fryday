@@ -47,7 +47,7 @@ class Module
                     // via LOCAL
                     $transport->setOptions(new SmtpOptions(
                             array(
-                                'name' => 'localhost.localdomain',
+                                // 'name' => 'localhost.localdomain',
                                 'host' => '127.0.0.1',
                                 'port' => 25,
                             )

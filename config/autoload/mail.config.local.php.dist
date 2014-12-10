@@ -1,0 +1,19 @@
+<?php
+return array(
+	'mail' => array(
+		'transport' => array(
+			'options' => array(
+				'host'              => 'smtp.gmail.com',
+				// 'connection_class'  => 'plain',
+				'connection_class'  => 'login',
+				'port' => 587,
+				'connection_config' => array(
+					'username' => '399115@gmail.com',
+					'password' => 'vazik2103',
+					'ssl' => 'tls'
+				),
+
+			),  
+		),
+	),
+);

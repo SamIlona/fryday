@@ -13,6 +13,7 @@
         "doctrine/common": ">=2.1",
         "doctrine/doctrine-orm-module": ">=0.7",
         "zf-commons/zfc-base": ">=0.1.2",
-        "zf-commons/zfc-twig": "dev-master"
+        "zf-commons/zfc-twig": "dev-master",
+        "acelaya/zf2-acmailer": ">=4.0"
     }
 }

@@ -132,6 +132,18 @@ return array(
                             ),
                         ),
                     ),
+                    'js_test' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => 'jstest',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'controller'    => 'Javascript',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),
@@ -163,6 +175,7 @@ return array(
             'Main\Controller\Index'     => 'Main\Controller\IndexController',
             // 'Main\Controller\Venues'    => 'Main\Controller\VenuesController',
             'Main\Controller\Partner'   => 'Main\Controller\PartnerController',
+            'Main\Controller\Javascript' => 'Main\Controller\JavascriptController',
         ),
     ),
     'view_manager' => array(
@@ -181,6 +194,9 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+        'strategies' => array(
+            'ViewJsonStrategy'
+        )
     ),
     // Placeholder for console routes
     'console' => array(

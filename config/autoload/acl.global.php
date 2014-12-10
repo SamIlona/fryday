@@ -21,7 +21,13 @@ return array(
                 'Admin\Controller\Mailer' => array(
                     'all'         => 'administrator',
                 ),
+                'Admin\Controller\Subscriber' => array(
+                    'all'         => 'administrator',
+                ),
                 'Main\Controller\Index' => array(
+                    'all'         => 'guest',
+                ),
+                'Main\Controller\Javascript' => array(
                     'all'         => 'guest',
                 ),
                 'Content\Controller\City' => array(

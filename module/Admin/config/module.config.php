@@ -18,9 +18,10 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Admin\Controller\Index'    => 'Admin\Controller\IndexController',
-            'Admin\Controller\User'     => 'Admin\Controller\UserController',
-            'Admin\Controller\Mailer'   => 'Admin\Controller\MailerController',
+            'Admin\Controller\Index'        => 'Admin\Controller\IndexController',
+            'Admin\Controller\User'         => 'Admin\Controller\UserController',
+            'Admin\Controller\Mailer'       => 'Admin\Controller\MailerController',
+            'Admin\Controller\Subscriber'   => 'Admin\Controller\SubscriberController',
             // 'Content\Controller\City'   => 'Content\Controller\CityController',
         ),
     ),
@@ -219,7 +220,7 @@ return array(
             array(
                 'label' => '<i class="fa fa-database "></i> Subscribers',
                 'route' => 'administrator/default',
-                'controller' => 'profile',
+                'controller' => 'subscriber',
                 'class' => 'list-group-item',
             ),
             array(
