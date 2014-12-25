@@ -17,7 +17,11 @@ class IndexController extends Action
 {
     public function indexAction()
     {
-        return new ViewModel();
+    	$em = $this->getEntityManager();
+
+        return new ViewModel(array(
+        	'upcomingEvents'    => $em->getRepository('Admin\Entity\Event')->getEvents(10, 0, 'upcoming'),
+   		));
     }
 
     public function loginAction()

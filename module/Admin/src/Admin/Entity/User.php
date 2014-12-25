@@ -62,7 +62,7 @@ class User
 
     /**
      * @var City
-     * @ORM\ManyToOne(targetEntity="Content\Entity\City", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="Admin\Entity\City", inversedBy="users")
      * @ORM\JoinColumn(name="city", referencedColumnName="id", nullable=true, onDelete="CASCADE", unique=false)
      */
     protected $city;
@@ -178,7 +178,7 @@ class User
     }
 
     /**
-     * @param null|Content\Entity\City $city
+     * @param null|Admin\Entity\City $city
      */
     public function setCity($city)
     {
@@ -186,7 +186,7 @@ class User
     }
 
     /**
-     * @return Content\Entity\City|null 
+     * @return Admin\Entity\City|null 
      */
     public function getCity()
     {

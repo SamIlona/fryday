@@ -107,9 +107,9 @@ return array(
                     'event_details' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => 'event[/:id]',
+                            'route'    => ':country/:city/event/:dateslug/:titleslug',
                             'constraints' => array(
-                                'id'            => '[0-9:-]+',
+                                'dateslug'      => '[0-9:-]+',
                             ),
                             'defaults' => array(
                                 'controller'    => 'Index',

@@ -1,0 +1,64 @@
+<div class="profile container content">
+    	<div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo $this->identity()->getProfileImage(); ?>" alt="">
+                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
+                <hr>
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                
+                 
+                    <div class="profile-body">
+                        <div class="profile-bio">
+                            <div class="col-md-12">
+                                <h2><?php echo $event->getTitle(); ?></h2>
+                            </div>
+                                <div class="row">
+                                    <div class="event-main-img">
+                                    <img class="img-responsive" src="<?php echo $event->getProfileImage(); ?>" alt="<?php echo $event->getTitle(); ?>">
+                                </div>
+                                <div class="col-md-12">
+                                    
+                                    <span><strong>Date:</strong> <?php echo $event->getDateTimeEvent()->format('l, F jS'); ?></span>
+                                    <span><strong>Time:</strong> <?php echo $event->getDateTimeEvent()->format('H:i'); ?></span>
+                                    <span><strong>Venue:</strong> <?php echo $event->getVenue()->getName(); ?></span>
+                                    <span><strong>Entrance fee:</strong> <?php echo $event->getEntranceFee(); ?> UAH</span>
+                                    <hr>
+                                    <p><?php echo nl2br($event->getDetails()); ?></p>
+                                </div>
+                            </div>    
+                        
+                            <footer>
+                                <!-- <div class="inline-group">
+                                    <label class="checkbox"><?php //echo $this->formCheckbox($this->form->get('publish')); ?><i></i> Publish</label>
+
+                                    <label class="checkbox"><?php //echo $this->formCheckbox($this->form->get('newsletter')); ?><i></i> Newsletter</label> 
+                                </div> -->
+                            <!-- <?php //echo $this->formLabel($this->form->get('publish')); ?> -->
+                            
+                        <!-- <section> -->
+                            <!-- <label class="label">Textarea</label> -->
+                            <!-- <?php //echo $this->formLabel($this->form->get('submit')); ?> -->
+                            <!-- <label class="button"> -->
+                            <?php $form->setAttribute('action', $this->url('administrator_content/event_preview', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )))->prepare(); ?>
+                            <?php echo $this->form()->openTag($form); ?>
+                                <br><?php echo $this->formButton($this->form->get('submit'), 'Publish'); ?>
+                            <?php echo $this->form()->closeTag($form); ?>
+                            <!-- </label> -->
+                        <!-- </section> -->
+                        <!-- <button type="submit" class="btn-u">Submit</button> --><!-- 
+                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button> -->
+                    </footer>
+                <!-- </form> -->
+                    
+                </div><!--/end row-->
+
+                </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div>

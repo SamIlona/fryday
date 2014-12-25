@@ -26,7 +26,7 @@
                                         <li><strong>Time:</strong> <?php echo $event->getDateTimeEvent()->format('H:i'); ?></li>
                                         <li><strong>Venue:</strong> <?php echo $event->getVenue()->getName(); ?></li>
                                         <li><strong>Address:</strong> <?php echo $event->getVenue()->getAddress(); ?></li>
-                                        <li><strong>Entrance fee:</strong> 50UAH</li>
+                                        <li><strong>Entrance fee:</strong> <?php echo $event->getEntranceFee(); ?> UAH</li>
                                     </ul>  
                                 </blockquote>
                               

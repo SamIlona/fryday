@@ -4,12 +4,13 @@ return array(
     'modules' => array(
         
         'ZfcBase',
+        'SeoUrl',
         'DoctrineModule',
         'DoctrineORMModule',
         'AcMailer',
         'Main',
         'Admin',
-        'Content',
+        //'Content',
         // 'Backend',
     ),
 

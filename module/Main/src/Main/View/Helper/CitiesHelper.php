@@ -15,7 +15,7 @@ class CitiesHelper extends AbstractHelper
     public function test()
     {
         $em = $this->sm->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        return $em->getRepository('Content\Entity\City')->findAll();
+        return $em->getRepository('Admin\Entity\City')->findAll();
     }
     
     public function __construct($sm) 

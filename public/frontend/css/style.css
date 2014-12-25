@@ -3627,10 +3627,17 @@ ul.labels-demo li {
 	font-size: 11px;
 }
 
+.m-center {
+	/*font-size: 11px;*/
+	text-align: center;
+}
+
 .table-search-v1 .m-marker i {
-	float: left;
+	/*float: left;*/
 	min-width: 20px;
 	font-size: 26px;
+	text-align: center;
+	position: relative;
 }
 
 .table-search-v1 .m-marker .display-b {
@@ -3641,7 +3648,7 @@ ul.labels-demo li {
 }
 
 .table-search-v1 .td-width {
-	width: 60%;
+	width: 50%;
 }
 
 /*Table_Search-V2

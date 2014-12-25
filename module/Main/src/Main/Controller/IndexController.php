@@ -19,8 +19,8 @@ class IndexController extends Action
         $em = $this->getEntityManager();
 
         return array(
-            'eventsFirstLine'   => $em->getRepository('Content\Entity\Event')->getEvents(4, 0, 'upcoming'),
-            'eventsSecondLine'  => $em->getRepository('Content\Entity\Event')->getEvents(4, 4, 'upcoming'),
+            'eventsFirstLine'   => $em->getRepository('Admin\Entity\Event')->getEvents(4, 0, 'upcoming'),
+            'eventsSecondLine'  => $em->getRepository('Admin\Entity\Event')->getEvents(4, 4, 'upcoming'),
         );
     }
     public function venueAction()
@@ -84,17 +84,17 @@ class IndexController extends Action
         $em = $this->getEntityManager();
 
         return array(
-            'events' => $em->getRepository('Content\Entity\Event')->findAll(),
+            'events' => $em->getRepository('Admin\Entity\Event')->findAll(),
         );
     }
     public function viewEventAction()
     {
         $em = $this->getEntityManager();
-        $id = $this->event->getRouteMatch()->getParam('id');
-        $event = $this->getEntityManager()->find('Content\Entity\Event', $id);
+        $titleslug = $this->event->getRouteMatch()->getParam('titleslug');
+        $dateslug = $this->event->getRouteMatch()->getParam('dateslug');
 
         return array(
-            'event' => $event,
+            'event' => $em->getRepository('Admin\Entity\Event')->getEventBySlug($titleslug, $dateslug),
         );
     }
     public function cityDispatcherAction()
@@ -102,12 +102,12 @@ class IndexController extends Action
         $em = $this->getEntityManager();
 
         $cityName = $this->getEvent()->getRouteMatch()->getParam('city');
-        $city = $em->getRepository('Content\Entity\City')->getCityByName($cityName);
+        $city = $em->getRepository('Admin\Entity\City')->getCityByName($cityName);
 
         
         return array(
-            'eventsFirstLine'   => $em->getRepository('Content\Entity\Event')->getEvents(4, 0, 'upcoming', $city),
-            'eventsSecondLine'  => $em->getRepository('Content\Entity\Event')->getEvents(4, 4, 'upcoming', $city),
+            'eventsFirstLine'   => $em->getRepository('Admin\Entity\Event')->getEvents(4, 0, 'upcoming', $city),
+            'eventsSecondLine'  => $em->getRepository('Admin\Entity\Event')->getEvents(4, 4, 'upcoming', $city),
         );
     }
 }

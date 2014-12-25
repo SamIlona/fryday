@@ -14,7 +14,7 @@ use Zend\Form\Form;
 use Zend\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 
-// use Content\Entity\VenueCategory;
+// use Admin\Entity\VenueCategory;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
@@ -153,7 +153,7 @@ class CreateUserForm extends Form
                     'class' => 'label',
                 )
             )
-            ->setValueOptions($this->entityManager->getRepository('Content\Entity\City')->getAllCitiesAsOptions())
+            ->setValueOptions($this->entityManager->getRepository('Admin\Entity\City')->getAllCitiesAsOptions())
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'create-user-city');
         $this->add($city);

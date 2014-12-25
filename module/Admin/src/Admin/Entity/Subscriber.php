@@ -42,7 +42,7 @@ class Subscriber
 
     /**
      * @var City
-     * @ORM\ManyToOne(targetEntity="Content\Entity\City", inversedBy="cities")
+     * @ORM\ManyToOne(targetEntity="Admin\Entity\City", inversedBy="cities")
      * @ORM\JoinColumn(name="city", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $city;
@@ -91,7 +91,7 @@ class Subscriber
     }
 
     /**
-     * @param null|Content\Entity\City $city
+     * @param null|Admin\Entity\City $city
      */
     public function setCity($city)
     {
@@ -99,7 +99,7 @@ class Subscriber
     }
 
     /**
-     * @return Content\Entity\City|null 
+     * @return Admin\Entity\City|null 
      */
     public function getCity()
     {

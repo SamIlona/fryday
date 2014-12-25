@@ -21,7 +21,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
  * City form
  *
  * @category   Fryday_Application
- * @package    Content
+ * @package    Admin
  * @subpackage Form
  */
 class CreateSubscriberForm extends Form 
@@ -91,7 +91,7 @@ class CreateSubscriberForm extends Form
                     'class' => 'label',
                 )
             )
-            ->setValueOptions($this->entityManager->getRepository('Content\Entity\City')->getAllCitiesAsOptions())
+            ->setValueOptions($this->entityManager->getRepository('Admin\Entity\City')->getAllCitiesAsOptions())
             ->setEmptyOption('Select city...')
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'create-subscriber-city');

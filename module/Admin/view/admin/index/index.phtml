@@ -76,17 +76,20 @@
                                 </div>
                                 <div id="scrollbar2" class="panel-body contentHolder ps-container">
 
+                                <?php foreach ($upcomingEvents as $event): ?>
 
                                     <div class="profile-event">
                                         <div class="date-formats">
-                                            <span>25</span>
-                                            <small>05, 2014</small>
+                                            <span><?php echo $event->getDateTimeEvent()->format('d'); ?></span>
+                                            <small><?php echo $event->getDateTimeEvent()->format('m'); ?>, <?php echo $event->getDateTimeEvent()->format('Y'); ?></small>
                                         </div>
                                         <div class="overflow-h">
-                                            <h3 class="heading-xs"><a href="#">GitHub seminars in Japan.</a></h3>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry printing.</p>
+                                            <h3 class="heading-xs"><a href="<?php echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>"><?php echo $event->getTitle(); ?></a></h3>
+                                            <p><?php echo $event->getDescription(); ?></p>
                                         </div>    
                                     </div>
+
+                                <?php endforeach; ?>
 
                                     
                                 <div style="width: 389px; display: none; left: 0px; bottom: 3px;" class="ps-scrollbar-x-rail"><div style="left: 0px; width: 0px;" class="ps-scrollbar-x"></div></div><div style="top: 0px; height: 320px; display: inherit; right: 3px;" class="ps-scrollbar-y-rail"><div style="top: 0px; height: 178px;" class="ps-scrollbar-y"></div></div></div>    

@@ -30,13 +30,13 @@ return array(
                 'Main\Controller\Javascript' => array(
                     'all'         => 'guest',
                 ),
-                'Content\Controller\City' => array(
+                'Admin\Controller\City' => array(
                     'all'         => 'administrator',
                 ),
-                'Content\Controller\Venue' => array(
+                'Admin\Controller\Venue' => array(
                     'all'         => array('administrator', 'franchisor'),
                 ),
-                'Content\Controller\Event' => array(
+                'Admin\Controller\Event' => array(
                     'all'      => array('administrator', 'franchisor'),
                 ),
             )

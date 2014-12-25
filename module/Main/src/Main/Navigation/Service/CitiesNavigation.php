@@ -15,7 +15,7 @@ class CitiesNavigation extends DefaultNavigationFactory
             //FETCH data from table menu :
             // $fetchMenu = $serviceLocator->get('menu')->fetchAll();
             $em = $serviceLocator->get('Doctrine\ORM\EntityManager');
-            $fetchCitiesMenu = $em->getRepository('Content\Entity\City')->findBy(array(), array('name' => 'ASC'));//->findAll();
+            $fetchCitiesMenu = $em->getRepository('Admin\Entity\City')->findBy(array(), array('name' => 'ASC'));//->findAll();
  
             $configuration['navigation'][$this->getName()] = array();
 

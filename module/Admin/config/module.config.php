@@ -22,6 +22,9 @@ return array(
             'Admin\Controller\User'         => 'Admin\Controller\UserController',
             'Admin\Controller\Mailer'       => 'Admin\Controller\MailerController',
             'Admin\Controller\Subscriber'   => 'Admin\Controller\SubscriberController',
+            'Admin\Controller\City'         => 'Admin\Controller\CityController',
+            'Admin\Controller\Event'        => 'Admin\Controller\EventController',
+            'Admin\Controller\Venue'        => 'Admin\Controller\VenueController',
             // 'Content\Controller\City'   => 'Content\Controller\CityController',
         ),
     ),
@@ -143,7 +146,20 @@ return array(
                                 'id'            => '[0-9:]+',
                             ),
                             'defaults' => array(
-                                '__NAMESPACE__' => 'Content\Controller',
+                                '__NAMESPACE__' => 'Admin\Controller',
+                            ),
+                        ),
+                    ),
+                    'event_preview' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:country/:city/previewevent/:dateslug/:titleslug',
+                            'constraints' => array(
+                                'dateslug'      => '[0-9:-]+',
+                            ),
+                            'defaults' => array(
+                                'controller'    => 'Admin\Controller\Event',
+                                'action'        => 'pre-view',
                             ),
                         ),
                     ),
