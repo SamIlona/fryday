@@ -30,6 +30,23 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
  */
 class CityController extends Action
 {
+    protected $_dir = null;
+
+    protected function getUploadPath()
+    {
+        $config = $this->getServiceLocator()->get('Config');
+        $uploadDir = $config['path_to_uploads']['city'];
+
+        if (!is_dir($uploadDir )) 
+        {
+            $oldmask = umask(0);
+            mkdir($uploadDir , 0777);
+            umask($oldmask);
+        }
+
+        return $uploadDir;
+    }
+
 	/**
      * List All Cities
      *
@@ -43,6 +60,49 @@ class CityController extends Action
         return array(
             'cities' => $cities,
             // 'flashMessages' => $this->flashMessenger()->getMessages(),
+        );
+    }
+
+    public function createFirstStepAction()
+    {
+        $em = $this->getEntityManager();
+        $uploadDir = $this->getUploadPath();
+
+        $cityForm = new Form\CreateCityFirstStepForm('new-city-form', $em);
+        $cityForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\City'));
+        $cityEntity = new Entity\City();
+        $cityForm->bind($cityEntity);
+
+        $request = $this->getRequest();
+        if($request->isPost())
+        {
+            $post = $request->getPost();
+
+            $cityForm->setData($post);
+
+            if($cityForm->isValid()) 
+            {
+                $data = $cityForm->getData();
+
+                $this->entityManager->persist($cityEntity);
+                $this->entityManager->flush();
+
+                $city = $em->getRepository('Admin\Entity\City')->getLastAddedCity();
+                $cityID = $city->getId();
+                $currentPartnerUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $cityID;               
+                if (!is_dir($currentPartnerUploadDir )) 
+                {
+                    $oldmask = umask(0);
+                    mkdir($currentPartnerUploadDir, 0777);
+                    umask($oldmask);
+                }
+
+                // return $this->redirect()->toRoute('administrator_content/default', array('controller' => 'city', 'action' => 'index'));
+            }
+        }
+
+        return array(
+            'form' => $cityForm,
         );
     }
 

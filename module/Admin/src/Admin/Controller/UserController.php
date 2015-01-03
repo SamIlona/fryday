@@ -87,4 +87,15 @@ class UserController extends Action
             'form' => $createUserForm,
         );
     }
+
+    public function profileAction()
+    {
+        $em = $this->getEntityManager();
+        $user = $this->getAuthenticatedUser();
+        return array(
+            'user' => $user,
+            
+        );
+    }
+
 }

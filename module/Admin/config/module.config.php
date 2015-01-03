@@ -13,6 +13,7 @@ return array(
     'path_to_uploads' => array(
         'partner'   => 'public/uploads/partners',
         'event'     => 'public/uploads/events',
+        'city'      => 'public/uploads/cities',
     ),
     'htimg' => [
         'filters' => [
@@ -235,14 +236,36 @@ return array(
             array(
                 'label' => '<i class="fa fa-user"></i> Profile',
                 'route' => 'administrator/default',
-                'controller' => 'profile',
+                'controller' => 'user',
+                'action' => 'profile',
                 'class' => 'list-group-item',
+                // 'pages' => array(
+                //     array(
+                //         'label' => 'Profile', // 'Child #1',
+                //         // 'route' => 'album',
+                //         'params' => array('action' => 'profile'),
+                //         // 'resource' => 'Album\Controller\Album',
+                //         // 'privilege'    => 'add',
+                //     ),
+                // ),
             ),
             array(
                 'label' => '<i class="fa fa-group"></i> Users',
                 'route' => 'administrator/default',
                 'controller' => 'user',
+                'action' => 'index',
                 'class' => 'list-group-item',
+                // 'pages' => array(
+                //     array(
+                //         'label' => '<i class="fa fa-user"></i> Profile', // 'Child #1',
+                //         'route' => 'administrator/default',
+                //         'controller' => 'user',
+                //         'action' => 'profile',
+                //         // 'params' => array('action' => 'profile'),
+                //         // 'resource' => 'Album\Controller\Album',
+                //         // 'privilege'    => 'add',
+                //     ),
+                // ),
             ),
             array(
                 'label' => '<i class="fa fa-glass"></i> Events',
@@ -280,12 +303,12 @@ return array(
                 'controller' => 'venue',
                 'class' => 'list-group-item',
             ),
-            array(
-                'label' => '<i class="fa fa-cog"></i> Settings',
-                'route' => 'administrator/default',
-                'controller' => 'profile',
-                'class' => 'list-group-item',
-            ),
+            // array(
+            //     'label' => '<i class="fa fa-cog"></i> Settings',
+            //     'route' => 'administrator/default',
+            //     'controller' => 'profile',
+            //     'class' => 'list-group-item',
+            // ),
         ),
     ),
 );

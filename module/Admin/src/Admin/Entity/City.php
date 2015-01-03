@@ -24,19 +24,19 @@ class City
 
     /**
      * @var string
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     protected $name;
 
     /**
      * @var string
-     * @ORM\Column(name="label", type="string", length=255, nullable=false)
+     * @ORM\Column(name="label", type="string", length=255, nullable=true)
      */
     protected $label;
 
     /**
      * @var string
-     * @ORM\Column(name="route", type="string", length=255, nullable=false)
+     * @ORM\Column(name="route", type="string", length=255, nullable=true)
      */
     protected $route;
 

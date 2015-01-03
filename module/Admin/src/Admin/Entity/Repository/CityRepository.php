@@ -21,6 +21,27 @@ use Doctrine\ORM\EntityRepository;
 
 class CityRepository extends EntityRepository
 {
+
+    public function getLastAddedCity()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select( 'c' )
+            ->from( 'Admin\Entity\City',  'c' )
+            ->orderBy('c.id', 'DESC')
+            ->setMaxResults(1);
+
+        try
+        {
+            return  $qb->getQuery()->getSingleResult();
+        }
+        catch(\Doctrine\ORM\NoResultException $e)
+        {
+            return null;
+        }
+    }
+
 	public function getAllCitiesAsOptions()
 	{
 		$citiesSet = $this->getEntityManager()->getRepository('Admin\Entity\City')->findAll();
