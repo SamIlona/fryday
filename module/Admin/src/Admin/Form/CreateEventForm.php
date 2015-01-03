@@ -32,6 +32,12 @@ class CreateEventForm extends Form
      * @var EntityManager
      */
     protected $entityManager;
+
+    /**
+     * @var _dir
+     */
+    protected $_dir;
+
 	/**
      * Constructor
      *

@@ -10,6 +10,22 @@
 namespace Admin;
 
 return array(
+    'path_to_uploads' => array(
+        'partner'   => 'public/uploads/partners',
+        'event'     => 'public/uploads/events',
+    ),
+    'htimg' => [
+        'filters' => [
+            'my_thumbnail' => [ // this is  filter service
+                'type' => 'thumbnail', // this is a filter loader
+                'options' => [  // filter loader passes these options to a Filter which manipulates the image
+                    'width' => 100,
+                    'height' => 100,
+                    'format' => 'jpeg' // format is optional and defaults to the format of given image
+                ]
+            ]        
+        ]
+    ],
     'service_manager' => array(
         'factories' => array(
             'navigation'        => 'Zend\Navigation\Service\DefaultNavigationFactory',
@@ -25,7 +41,8 @@ return array(
             'Admin\Controller\City'         => 'Admin\Controller\CityController',
             'Admin\Controller\Event'        => 'Admin\Controller\EventController',
             'Admin\Controller\Venue'        => 'Admin\Controller\VenueController',
-            // 'Content\Controller\City'   => 'Content\Controller\CityController',
+            'Admin\Controller\Partner'      => 'Admin\Controller\PartnerController',
+            'Admin\Controller\Newsletter'   => 'Admin\Controller\NewsletterController',
         ),
     ),
     'view_manager' => array(
@@ -222,9 +239,21 @@ return array(
                 'class' => 'list-group-item',
             ),
             array(
+                'label' => '<i class="fa fa-group"></i> Users',
+                'route' => 'administrator/default',
+                'controller' => 'user',
+                'class' => 'list-group-item',
+            ),
+            array(
                 'label' => '<i class="fa fa-glass"></i> Events',
                 'route' => 'administrator_content/default',
                 'controller' => 'event',
+                'class' => 'list-group-item',
+            ),
+            array(
+                'label' => '<i class="fa fa-briefcase"></i> Partners',
+                'route' => 'administrator/default',
+                'controller' => 'partner',
                 'class' => 'list-group-item',
             ),
             array(
@@ -237,12 +266,6 @@ return array(
                 'label' => '<i class="fa fa-database "></i> Subscribers',
                 'route' => 'administrator/default',
                 'controller' => 'subscriber',
-                'class' => 'list-group-item',
-            ),
-            array(
-                'label' => '<i class="fa fa-group"></i> Users',
-                'route' => 'administrator/default',
-                'controller' => 'user',
                 'class' => 'list-group-item',
             ),
             array(

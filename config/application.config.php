@@ -8,6 +8,8 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'AcMailer',
+        'HtImgModule',
+        'WebinoImageThumb',
         'Main',
         'Admin',
         //'Content',

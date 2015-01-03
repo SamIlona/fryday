@@ -1,0 +1,56 @@
+<div class="profile container content">
+    	<div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo $this->identity()->getProfileImage(); ?>" alt="">
+                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
+                <hr>
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                <div class="profile-body">
+                    <!--Table Search v2-->
+                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'create')))->prepare(); ?>
+                    <?php echo $this->form()->openTag($form); ?>
+                    <!-- <form action="" class="sky-form"> -->
+                    <header>Create New Subscriber</header>
+                    
+                    <fieldset>
+                        <section>
+                            <?php echo $this->formLabel($this->form->get('partner1')); ?>
+                            <label class="select">
+                                <?php echo $this->formSelect($this->form->get('partner1')); ?>
+                            </label>
+                        </section>
+
+                        <section>
+                            <?php echo $this->formLabel($this->form->get('partner2')); ?>
+                            <label class="select">
+                                <?php echo $this->formSelect($this->form->get('partner2')); ?>
+                            </label>
+                        </section>
+
+                        <section>
+                            <?php echo $this->formLabel($this->form->get('partner3')); ?>
+                            <label class="select">
+                                <?php echo $this->formSelect($this->form->get('partner3')); ?>
+                                <i></i>
+                            </label>
+                        </section>
+
+                    </fieldset>
+                    
+                    <footer>
+                        <button type="submit" class="btn-u">Submit</button>
+                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                    </footer>
+                <!-- </form> -->
+                    <?php echo $this->form()->closeTag($form); ?>
+                    <!--End Table Search v2-->
+                </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div>

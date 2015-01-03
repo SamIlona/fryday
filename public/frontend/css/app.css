@@ -2754,3 +2754,83 @@ img.img-circle {
    -ms-transform: scale(2) rotate(5deg);
    transform: scale(2) rotate(5deg);
 }
+
+/*Colored Content Boxes
+------------------------------------*/
+.service-block {
+  padding: 20px 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.service-block p,
+.service-block h2 {
+  color: #fff;
+}
+
+.service-block h2 a:hover{
+  text-decoration: none;
+}
+
+.service-block-light,
+.service-block-default {
+  background: #fafafa;
+  border: solid 1px #eee; 
+}
+
+.service-block-default:hover {
+  box-shadow: 0 0 8px #eee;
+}
+
+.service-block-light p,
+.service-block-light h2,
+.service-block-default p,
+.service-block-default h2 {
+  color: #555;
+}
+
+.service-block-u {
+  background: #72c02c;
+}
+.service-block-blue {
+  background: #3498db;
+}
+.service-block-red {
+  background: #e74c3c;
+}
+.service-block-sea {
+  background: #1abc9c;
+}
+.service-block-grey {
+  background: #95a5a6;
+}
+.service-block-yellow {
+  background: #f1c40f;
+}
+.service-block-orange {
+  background: #e67e22;
+}
+.service-block-green {
+  background: #2ecc71;
+}
+.service-block-purple {
+  background: #9b6bcc;
+}
+.service-block-aqua {
+  background: #27d7e7;
+}
+.service-block-brown {
+  background: #9c8061;
+}
+.service-block-dark-blue {
+  background: #4765a0;
+}
+.service-block-light-green {
+  background: #79d5b3;
+}
+.service-block-dark {
+  background: #555;
+}
+.service-block-light {
+  background: #ecf0f1;
+}

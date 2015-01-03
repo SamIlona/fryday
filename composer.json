@@ -15,6 +15,8 @@
         "zf-commons/zfc-base": ">=0.1.2",
         "zf-commons/zfc-twig": "dev-master",
         "acelaya/zf2-acmailer": ">=4.0",
-        "cyrkulewski/seo-url": "dev-master"
+        "cyrkulewski/seo-url": "dev-master",
+        "hrevert/ht-img-module": "0.3.*",
+        "webino/webino-image-thumb": "2.0.0-RC1"
     }
 }

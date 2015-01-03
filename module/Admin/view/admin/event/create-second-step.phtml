@@ -1,0 +1,166 @@
+<div class="profile container content">
+    	<div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img id="ava" class="img-responsive profile-img margin-bottom-20" src="<?php echo $this->identity()->getProfileImage(); ?>" alt="">
+                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
+                <hr>
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                <div class="profile-body">
+                    <!--Table Search v2-->
+                    <?php $form->setAttribute('action', $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create-second-step', 'id' => $eventID)))->prepare(); ?>
+                    <?php echo $this->form()->openTag($form); ?>
+                    <!-- <form action="" class="sky-form"> -->
+                    <header><?php echo $event->getTitle(); ?></header>
+                    
+
+                    <fieldset>
+                            <div class="col col-12 imag_center">
+                                <img style="max-height: 320px;max-width: 640px; "id="blah" src="/frontend/img/noimage.png" alt="your image" />
+                            </div>
+
+                            <section class="col col-6">
+                                <?php echo $this->formLabel($this->form->get('image')); ?>
+                                <label for="file" class="input input-file">
+                                    <div class="button">
+                                        <?php echo $this->formFile($this->form->get('image')); ?>
+                                        Browse
+                                    </div>
+                                    <input readonly="" type="text">
+                                    <?php //echo $this->formFile($this->form->get('profileImage')); ?>
+                                </label>
+                                <?php echo $this->formInput($this->form->get('x')); ?>
+                                <?php echo $this->formInput($this->form->get('y')); ?>
+                                <?php echo $this->formInput($this->form->get('w')); ?>
+                                <?php echo $this->formInput($this->form->get('h')); ?>
+                                <?php echo $this->formInput($this->form->get('cw')); ?>
+                                <?php echo $this->formInput($this->form->get('ch')); ?>
+                            </section>
+
+
+                        <section class="col col-6">
+                            <?php echo $this->formLabel($this->form->get('venue')); ?>
+                            <label class="select">
+                                <?php echo $this->formSelect($this->form->get('venue')); ?>
+                            </label>
+                        </section>
+                        
+                        <section class="col-md-12">
+                            <?php echo $this->formLabel($this->form->get('entrancefee')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('entrancefee')); ?>
+                            </label>
+                        </section>
+
+                        <section class="col-md-12">
+                            <!-- <label class="label">Textarea</label> -->
+                            <?php echo $this->formLabel($this->form->get('details')); ?>
+                            <label class="textarea">
+                                <?php echo $this->formTextarea($this->form->get('details')); ?>
+                            </label>
+                        </section>
+
+                    </fieldset>
+
+                    <footer>
+                        <button type="submit" class="btn-u">Create</button>
+                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                    </footer>
+                <!-- </form> -->
+                    <?php echo $this->form()->closeTag($form); ?>
+                    <!--End Table Search v2-->
+                </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div>
+
+<script>
+    // $(function() {
+    //     $( "#datepicker" ).datepicker({
+    //         prevText: '<i class="fa fa-angle-left"></i>',
+    //         nextText: '<i class="fa fa-angle-right"></i>'
+    //     });
+    // });
+    $('#event-date').datepicker({
+        prevText: '<i class="fa fa-angle-left"></i>',
+        nextText: '<i class="fa fa-angle-right"></i>',
+    });
+    $('#event-time').datetimepicker({
+        format:'H:i',
+        datepicker:false,
+    });
+
+    function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+
+
+    // $(document).ready(function () {
+    //     $('#ava').imgAreaSelect({
+    //         handles: true,
+    //         onSelectEnd: someFunction
+    //     });
+    // });
+
+    $(document).ready(function () {
+        $('#blah').imgAreaSelect({ 
+            // maxWidth: 200, 
+            // maxHeight: 150, 
+            aspectRatio: '2:1',
+            handles: true,
+            // show: true,
+            onSelectChange: preview,
+        });
+    });
+
+    $("#event-image").change(function(){
+        readURL(this);
+    });
+
+    function preview(img, selection) {  
+
+        // var img = document.getElementById('#blah'); 
+        $('#event-cw').val(img.clientWidth);  
+        $('#event-ch').val(img.clientHeight); 
+
+
+        // var scaleX = selection.width;  
+        // var scaleY = selection.height;   
+      
+        // $('#blah + div > img').css({  
+        //     // width: Math.round(scaleX * ) + 'px',  
+        //     // height: Math.round(scaleY * ) + 'px',
+        //     width: Math.round(scaleX + 10) + 'px',  
+        //     height: Math.round(scaleY) + 'px',
+        //     marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',  
+        //     marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'  
+        // });  
+        $('#event-x').val(selection.x1);  
+        $('#event-y').val(selection.y1);  
+        // $('#x2').val(selection.x2);  
+        // $('#y2').val(selection.y2);  
+
+        
+
+        $('#event-w').val(selection.width);  
+        $('#event-h').val(selection.height);  
+        //  $('#partner-ch').val(10); 
+    } 
+
+</script>

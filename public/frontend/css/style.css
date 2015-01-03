@@ -4067,3 +4067,13 @@ body.dark .tp-banner-container .btn-u.btn-brd.btn-u-light {
 	text-decoration: none;
 	color: #FFF;
 }
+
+.imag_center  {
+	text-align: center;
+	width: 100%;
+	padding-bottom: 30px;
+}
+
+.imag_center img {
+	text-align: center;
+}

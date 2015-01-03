@@ -64,8 +64,26 @@ class MailerController extends Action
 				// var_dump($subscribers);
 
 				foreach ($subscribers as $subscriber) {
+
+					$this->renderer = $this->getServiceLocator()->get('ViewRenderer');  
+					$content = $this->renderer->render('email/tpl/template', null);
+					$html = new MimePart($content);  
+					$html->type = "text/html"; 
+
+					$pathToImage = "public/img/anders_avatar.jpg";
+					$image = new MimePart(fopen($pathToImage, 'r'));
+					$image->type = "image/jpeg";
+
+					$body = new MimeMessage();
+					$body->setParts(array($html, $image));
+
 					$mailService = $this->getServiceLocator()->get('AcMailer\Service\MailService');
-	            	$mailService->setSubject('FRYDAY NEWSLETER IN ACTION')->setBody('Please go to fryday.net/admin/mailer and theck this out. Previously add subscribers to the list.');
+	            	$mailService->setSubject('FRYDAY NEWSLETER IN ACTION')
+	            				// ->setBody('Body');
+	            				->setBody($body);
+	            				// ->setTemplate('admin/emails/mail');
+	            				// ->setTemplate('email/tpl/template');
+
 
 		            $message = $mailService->getMessage();
 					$message->setTo($subscriber->getEmail());

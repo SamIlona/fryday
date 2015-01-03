@@ -13,13 +13,51 @@
                 
                  
                     <div class="profile-body">
+                        <div class="row">
+                    <!-- <div class="col-md-6">
+                        <div class="alert alert-info fade in">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4>Info! Important Message!</h4>
+                            <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+                            <p>
+                                <a class="btn-u btn-u-xs btn-u-default" href="#"><i class="fa fa-cog"></i> Take this action</a> 
+                                <a class="btn-u btn-u-xs btn-u-dark" href="#"><i class="fa fa-flask"></i> Or do this</a>
+                            </p>
+                        </div>
+                    </div> -->
+                    <div class="col-md-12">
+                        <div class="alert alert-warning fade in">
+                            <h4>Newsletter not created!</h4>
+                            <p>You can not sending mail for this event. Newsletter should be created first to inform subcribers about event.</p>
+                            <p>
+                                <!-- <a class="btn-u btn-u-xs btn-u-red" href="#">Take this action</a> --> <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'create' )); ?>">Create newsletter</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                        <!-- <div class="alert alert-success fade in margin-bottom-40">
+                            <h4>Event Published!</h4>
+                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+                        </div> -->
+
+                        <!-- <div class="alert alert-danger fade in"> -->
+                            <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button> -->
+                            <!-- <h4>Newsletter didn't send!</h4>
+                            <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+                            <p>
+                                <a class="btn-u btn-u-red" href="#">Send Mails To Subscribers</a> 
+                                <a class="btn-u btn-u-sea" href="#">Create Template</a>
+                            </p>
+                        </div> -->
+
                         <div class="profile-bio">
                             <div class="col-md-12">
                                 <h2><?php echo $event->getTitle(); ?></h2>
                             </div>
                                 <div class="row">
                                     <div class="event-main-img">
-                                    <img class="img-responsive" src="<?php echo $event->getProfileImage(); ?>" alt="<?php echo $event->getTitle(); ?>">
+                                    <img class="img-responsive" src="<?php echo $event->getImage(); ?>" alt="<?php //echo $event->getTitle(); ?>">
+                                    <!-- <img class="img-responsive" src="/img/logo.png" alt="<?php //echo $event->getTitle(); ?>"> -->
                                 </div>
                                 <div class="col-md-12">
                                     
@@ -33,6 +71,7 @@
                             </div>    
                         
                             <footer>
+                                <button type="submit" class="btn-u">Leave Unpublished</button>
                                 <!-- <div class="inline-group">
                                     <label class="checkbox"><?php //echo $this->formCheckbox($this->form->get('publish')); ?><i></i> Publish</label>
 
@@ -44,11 +83,13 @@
                             <!-- <label class="label">Textarea</label> -->
                             <!-- <?php //echo $this->formLabel($this->form->get('submit')); ?> -->
                             <!-- <label class="button"> -->
-                            <?php $form->setAttribute('action', $this->url('administrator_content/event_preview', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )))->prepare(); ?>
-                            <?php echo $this->form()->openTag($form); ?>
-                                <br><?php echo $this->formButton($this->form->get('submit'), 'Publish'); ?>
-                            <?php echo $this->form()->closeTag($form); ?>
+                            <?php //$form->setAttribute('action', $this->url('administrator_content/event_preview', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )))->prepare(); ?>
+                            <?php //echo $this->form()->openTag($form); ?>
+                            <?php echo $this->formButton($this->form->get('submit'), 'Publish'); ?>
+                            <?php //echo $this->form()->closeTag($form); ?>
                             <!-- </label> -->
+                            <button type="submit" class="btn-u">Send to Subscribers</button>
+                            <button type="submit" class="btn-u">Create event on Facebook</button>
                         <!-- </section> -->
                         <!-- <button type="submit" class="btn-u">Submit</button> --><!-- 
                         <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button> -->

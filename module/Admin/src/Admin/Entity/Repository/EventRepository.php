@@ -21,6 +21,25 @@ use Doctrine\ORM\EntityRepository;
 
 class EventRepository extends EntityRepository
 {
+    public function getLastAddedEvent()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select( 'e' )
+            ->from( 'Admin\Entity\Event',  'e' )
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults(1);
+
+        try
+        {
+            return  $qb->getQuery()->getSingleResult();
+        }
+        catch(\Doctrine\ORM\NoResultException $e)
+        {
+            return null;
+        }
+    }
 	public function getEvents($limit, $offset, $type, $city = null)
 	{
 		$em = $this->getEntityManager();

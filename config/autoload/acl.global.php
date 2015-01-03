@@ -39,6 +39,12 @@ return array(
                 'Admin\Controller\Event' => array(
                     'all'      => array('administrator', 'franchisor'),
                 ),
+                'Admin\Controller\Partner' => array(
+                    'all'      => array('administrator', 'franchisor'),
+                ),
+                'Admin\Controller\Newsletter' => array(
+                    'all'      => array('administrator', 'franchisor'),
+                ),
             )
         )
     )

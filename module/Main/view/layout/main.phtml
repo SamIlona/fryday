@@ -14,6 +14,7 @@
         <!-- STYLES -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
         
+            ->prependStylesheet($this->basePath() . '/frontend/plugins/jquery.imgareaselect-0.9.10/css/imgareaselect-default.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/custom.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/themes/default.css')
@@ -35,6 +36,7 @@
 
         <!-- SCRIPTS -->
         <?php echo $this->headScript()
+
             ->prependFile($this->basePath() . '/frontend/js/plugins/validation.js')
             ->prependFile($this->basePath() . '/frontend/js/plugins/datepicker.js')
             ->prependFile($this->basePath() . '/frontend/js/plugins/masking.js')
@@ -47,6 +49,9 @@
             ->prependFile($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/js/jquery-ui.min.js')
             ->prependFile($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/js/jquery.maskedinput.min.js')
             ->prependFile($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/js/jquery.validate.min.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/jquery.imgareaselect-0.9.10/scripts/jquery.imgareaselect.pack.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/jquery.imgareaselect-0.9.10/scripts/jquery.min.js')
+
             //->prependFile($this->basePath() . '/frontend/plugins/jquery-ui-1.11.2/jquery-ui.js')
             //->prependFile($this->basePath() . '/frontend/plugins/parallax-slider/js/jquery.cslider.js')           
             //->prependFile($this->basePath() . '/frontend/plugins/parallax-slider/js/modernizr.js')
