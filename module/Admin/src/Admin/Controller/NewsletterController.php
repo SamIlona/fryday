@@ -48,46 +48,44 @@ class NewsletterController extends Action
 
     public function createAction()
     {
-        $this->entityManager = $this->getEntityManager();
+        $em = $this->getEntityManager();
+        $eventID = $this->params()->fromRoute('id');
+        $eventEntity = $em->getRepository('Admin\Entity\Event')->findOneBy(array('id' => $eventID));
 
-        $createNewsletterForm = new Form\CreateNewsletterForm('create-subscriber-form', $this->entityManager);
-        // $createSubscriberForm->setHydrator(new DoctrineHydrator($this->entityManager, 'Admin\Entity\Subscriber'));
-        
-        // $subscriberEntity = new Entity\Subscriber();
-        // $createSubscriberForm->bind($subscriberEntity);
+        $createNewsletterForm = new Form\CreateNewsletterForm('create-subscriber-form', $em);
+        $createNewsletterForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\Newsletter'));
+        $newletterEntity = new Entity\Newsletter();
+        $createNewsletterForm->bind($newletterEntity);
 
-        // $request = $this->getRequest();
-        // if($request->isPost())
-        // {
-        //     // // Make certain to merge the files info!
-        //     // $post = array_merge_recursive(
-        //     //     $request->getPost()->toArray(),
-        //     //     $request->getFiles()->toArray()
-        //     // );
+        $request = $this->getRequest();
+        if($request->isPost())
+        {
+            $post = $request->getPost();
 
-        //     $post = $request->getPost();
+            $createNewsletterForm->setData($post);
 
-        //     $createSubscriberForm->setData($post);
+            if($createNewsletterForm->isValid()) 
+            {
+                $data = $createNewsletterForm->getData();
+                $newletterEntity->setEvent($eventEntity);
+                $eventEntity->setNewsletter(true);
 
-        //     if($createSubscriberForm->isValid()) 
-        //     {
-        //         $data = $createSubscriberForm->getData();
+                $this->entityManager->persist($newletterEntity);
+                $this->entityManager->flush();
 
-        //         // var_dump($data);
-
-        // //         $profileImage = $data->getProfileImage();
-        // //         $urlProfileImage = explode("./public", $profileImage['tmp_name']);
-        // //         $userEntity->setProfileImage($urlProfileImage[1]);
-
-        //         $this->entityManager->persist($subscriberEntity);
-        //         $this->entityManager->flush();
-
-        //         return $this->redirect()->toRoute('administrator/default', array('controller' => 'subscriber', 'action' => 'index'));
-        //     }
-        // }
+                return $this->redirect()->toRoute('administrator_content/event_preview', array(
+                    'country'   => $eventEntity->getCity()->getCountry()->getName(), 
+                    'city'      => $eventEntity->getCity()->getName(), 
+                    'dateslug'  => $eventEntity->getDateSlug(), 
+                    'titleslug' => $eventEntity->getTitleSlug(), 
+                    )
+                );
+            }
+        }
 
         return array(
             'form' => $createNewsletterForm,
+            'event' => $eventEntity,
         );
     }
 }

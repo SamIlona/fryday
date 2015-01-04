@@ -162,9 +162,6 @@ class PartnerController extends Action
                              
                 $logoData           = $dataForm->getLogo();
                 $logoName           = end(explode("$currentPartnerUploadDir". DIRECTORY_SEPARATOR, $logoData['tmp_name']));
-                var_dump($logoData);
-                var_dump($logoName);
-                var_dump($currentPartnerUploadDir);
                 $thumb              = $thumbnailer->create($logoData['tmp_name'], $options = array(), $plugins = array());   
                 $currentDimantions  = $thumb->getCurrentDimensions();
 
@@ -200,7 +197,7 @@ class PartnerController extends Action
                 $this->entityManager->persist($partnerEntity);
                 $this->entityManager->flush();
 
-                // return $this->redirect()->toRoute('administrator_content/default', array('controller' => 'partner', 'action' => 'index'));
+                return $this->redirect()->toRoute('administrator_content/default', array('controller' => 'partner', 'action' => 'index'));
             }
         }
 

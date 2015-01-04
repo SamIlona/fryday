@@ -104,6 +104,7 @@ class CreateEventSecondStepForm extends Form
                 )
             )
             ->setValueOptions($this->entityManager->getRepository('Admin\Entity\Venue')->getAllVenuesAsOptions($user))
+            ->setEmptyOption('Select venue...')
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'event-venue');
         $this->add($venue);

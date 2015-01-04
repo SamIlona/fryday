@@ -160,15 +160,9 @@ class VenueController extends Action
                     $post['y'] === '') 
                 {
                     if($currentDimantions['height'] / $currentDimantions['width'] < 0.5)
-                    {
                         $thumb->cropFromCenter($currentDimantions['height'] * 2, $currentDimantions['height']);
-                        $thumb_square->cropFromCenter($currentDimantions['width']);
-                    }
                     else 
-                    {
                         $thumb->cropFromCenter($currentDimantions['width'], $currentDimantions['width'] / 2);
-                        $thumb_square->cropFromCenter($currentDimantions['height']);
-                    }
                 }
                 else 
                 {
@@ -182,8 +176,13 @@ class VenueController extends Action
                 }
 
                 $thumb->resize(640, 320);
-                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'resize_' . $imageName;
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'rectangle640x320_' . $imageName;
                 $thumb->save($resizedImg);
+                
+                if($currentDimantions['height'] / $currentDimantions['width'] < 1)
+                    $thumb_square->cropFromCenter($currentDimantions['height'], $currentDimantions['height']);
+                else 
+                    $thumb_square->cropFromCenter($currentDimantions['width'], $currentDimantions['width']);
 
                 $thumb_square->resize(60, 60);
                 $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    

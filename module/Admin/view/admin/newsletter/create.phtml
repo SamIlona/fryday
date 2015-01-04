@@ -12,10 +12,10 @@
                 <!--Profile Body-->
                 <div class="profile-body">
                     <!--Table Search v2-->
-                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'create')))->prepare(); ?>
+                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'newsletter', 'action' => 'create', 'id' => $event->getId())))->prepare(); ?>
                     <?php echo $this->form()->openTag($form); ?>
                     <!-- <form action="" class="sky-form"> -->
-                    <header>Create New Subscriber</header>
+                    <header>Create Newsletter</header>
                     
                     <fieldset>
                         <section>
@@ -23,6 +23,7 @@
                             <label class="select">
                                 <?php echo $this->formSelect($this->form->get('partner1')); ?>
                             </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('partner1')); ?>
                         </section>
 
                         <section>
@@ -30,6 +31,7 @@
                             <label class="select">
                                 <?php echo $this->formSelect($this->form->get('partner2')); ?>
                             </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('partner2')); ?>
                         </section>
 
                         <section>
@@ -38,12 +40,13 @@
                                 <?php echo $this->formSelect($this->form->get('partner3')); ?>
                                 <i></i>
                             </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('partner3')); ?>
                         </section>
 
                     </fieldset>
                     
                     <footer>
-                        <button type="submit" class="btn-u">Submit</button>
+                        <button type="submit" class="btn-u">Create</button>
                         <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
                     </footer>
                 <!-- </form> -->

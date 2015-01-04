@@ -108,11 +108,11 @@ class EventController extends Action
 
                 $event = $em->getRepository('Admin\Entity\Event')->getLastAddedEvent();
                 $eventID = $event->getId();
-                $currentEventUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $eventID;               
-                if (!is_dir($currentEventUploadDir )) 
+                $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $eventID;               
+                if (!is_dir($currentUploadDir )) 
                 {
                     $oldmask = umask(0);
-                    mkdir($currentEventUploadDir, 0777);
+                    mkdir($currentUploadDir, 0777);
                     umask($oldmask);
                 }
 
@@ -137,9 +137,9 @@ class EventController extends Action
         $user = $this->getAuthenticatedUser();
         $uploadDir = $this->getUploadPath();
         $eventID = $this->params()->fromRoute('id');
-        $currentEventUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $eventID;
+        $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $eventID;
         $thumbnailer = $this->getServiceLocator()->get('WebinoImageThumb');
-    	$eventForm = new Form\CreateEventSecondStepForm('event', $em, $user, $currentEventUploadDir);
+    	$eventForm = new Form\CreateEventSecondStepForm('event', $em, $user, $currentUploadDir);
         $eventForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\Event'));
         $eventEntity = $em->getRepository('Admin\Entity\Event')->findOneBy(array('id' => $eventID));
         $eventForm->bind($eventEntity);
@@ -160,8 +160,9 @@ class EventController extends Action
 
                 $city               = $dataForm->getVenue()->getCity();
                 $imageData          = $dataForm->getImage();
-                $imageName          = end(explode("$currentEventUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
+                $imageName          = end(explode("$currentUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
                 $thumb              = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());
+                $thumb_square       = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());
                 $currentDimantions  = $thumb->getCurrentDimensions();
 
 
@@ -185,12 +186,21 @@ class EventController extends Action
                 }
 
                 $thumb->resize(640, 320);
-                $resizedImg = $currentEventUploadDir . DIRECTORY_SEPARATOR . 'resized_' . $imageName;
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName;
                 $thumb->save($resizedImg);
 
                 $thumb->resize(224, 112);
-                $mailImg = $currentEventUploadDir . DIRECTORY_SEPARATOR . 'mail_' . $imageName;    
-                $thumb->save($mailImg);       
+                $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName;    
+                $thumb->save($mailImg);
+
+                if($currentDimantions['height'] / $currentDimantions['width'] < 1)
+                    $thumb_square->cropFromCenter($currentDimantions['height'], $currentDimantions['height']);
+                else 
+                    $thumb_square->cropFromCenter($currentDimantions['width'], $currentDimantions['width']);
+
+                $thumb_square->resize(60, 60);
+                $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
+                $thumb_square->save($mailImg);     
 
                 $eventEntity->setImage($imageName);
                 $eventEntity->setCity($city);
