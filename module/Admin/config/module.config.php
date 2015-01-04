@@ -15,6 +15,7 @@ return array(
         'event'     => 'public/uploads/events',
         'city'      => 'public/uploads/cities',
         'user'      => 'public/uploads/users',
+        'venue'     => 'public/uploads/venues'
     ),
     'htimg' => [
         'filters' => [

@@ -21,6 +21,26 @@ use Doctrine\ORM\EntityRepository;
 
 class VenueRepository extends EntityRepository
 {
+    public function getLastAddedVenue()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select( 'v' )
+            ->from( 'Admin\Entity\Venue',  'v' )
+            ->orderBy('v.id', 'DESC')
+            ->setMaxResults(1);
+
+        try
+        {
+            return  $qb->getQuery()->getSingleResult();
+        }
+        catch(\Doctrine\ORM\NoResultException $e)
+        {
+            return null;
+        }
+    }
+
 	public function getAllVenuesAsOptions($user = null)
 	{
 		$em = $this->getEntityManager();

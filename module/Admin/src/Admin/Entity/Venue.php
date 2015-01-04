@@ -61,9 +61,9 @@ class Venue
 
     /**
      * @var string
-     * @ORM\Column(name="profile_photo", type="string", length=255, nullable=true)
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
-    protected $profileImage;
+    protected $image;
 
     /**
      * @var string
@@ -172,19 +172,19 @@ class Venue
     }
 
     /**
-     * @param string $profileImage
+     * @param string $image
      */
-    public function setProfileImage($profileImage)
+    public function setImage($image)
     {
-        $this->profileImage = $profileImage;
+        $this->image = $image;
     }
 
     /**
      * @return string 
      */
-    public function getProfileImage()
+    public function getImage()
     {
-        return $this->profileImage;
+        return $this->image;
     }
 
     /**

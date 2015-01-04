@@ -1,0 +1,144 @@
+<div class="profile container content">
+    	<div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $this->identity()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $this->identity()->getImage(); ?>" alt="">
+                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
+                <hr>
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                <div class="profile-body">
+                    <!--Table Search v2-->
+                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'venue', 'action' => 'create-second-step', 'id' => $venueID)))->prepare(); ?>
+                    <?php echo $this->form()->openTag($form); ?>
+                    <!-- <form action="" class="sky-form"> -->
+                    <header>Add User</header>
+                    
+                    <fieldset>
+                        <div class="col col-12 imag_center">
+                            <img style="max-height: 320px;max-width: 640px; "id="imagepreview" src="/frontend/img/noimage.png" alt="your image" />
+                        </div>
+                        
+                        <section class="col-md-12">
+                            <!-- <label class="label">File input</label>/ -->
+                            <?php echo $this->formLabel($this->form->get('image')); ?>
+                            <label for="file" class="input input-file">
+                                <div class="button">
+                                    <!-- <input id="file" onchange="this.parentNode.nextSibling.value = this.value" type="file"> -->
+                                    <?php echo $this->formFile($this->form->get('image')); ?>
+                                    Browse
+                                </div>
+                                <input readonly="" type="text">
+                                <?php //echo $this->formFile($this->form->get('profileImage')); ?>
+                            </label>
+                            <?php echo $this->formInput($this->form->get('x')); ?>
+                            <?php echo $this->formInput($this->form->get('y')); ?>
+                            <?php echo $this->formInput($this->form->get('w')); ?>
+                            <?php echo $this->formInput($this->form->get('h')); ?>
+                            <?php echo $this->formInput($this->form->get('cw')); ?>
+                            <?php echo $this->formInput($this->form->get('ch')); ?>
+
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('image')); ?>
+                        </section>
+<!-- 
+                        <section>
+                            <?php //echo $this->formLabel($this->form->get('username')); ?>
+                            <label class="input">
+                                <?php //echo $this->formInput($this->form->get('username')); ?>
+                            </label>
+                        </section> -->
+
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('address')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('address')); ?>
+                            </label>
+
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('address')); ?>
+                        </section>
+
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('website')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('website')); ?>
+                            </label>
+
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('website')); ?>
+                        </section>
+
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('email')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('email')); ?>
+                            </label>
+
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('email')); ?>
+                        </section>
+
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('phone')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('phone')); ?>
+                            </label>
+
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('phone')); ?>
+                        </section>
+
+                    </fieldset>
+                    
+                    <footer>
+                        <button type="submit" class="btn-u">Save</button>
+                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                    </footer>
+                <!-- </form> -->
+                    <?php echo $this->form()->closeTag($form); ?>
+                    <!--End Table Search v2-->
+                </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div>
+    <script>
+
+    function readURL(input) 
+    {
+        if (input.files && input.files[0]) 
+        {
+            var reader = new FileReader();
+
+            reader.onload = function (e) 
+            {
+                $('#imagepreview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(document).ready(function () {
+        $('#imagepreview').imgAreaSelect({ 
+            // maxWidth: 200, 
+            // maxHeight: 150, 
+            aspectRatio: '2:1',
+            handles: true,
+            // show: true,
+            onSelectChange: preview,
+        });
+    });
+
+    $("#venue-image").change(function(){
+        readURL(this);
+    });
+
+    function preview(img, selection) {  
+        $('#venue-cw').val(img.clientWidth);  
+        $('#venue-ch').val(img.clientHeight);  
+        $('#venue-x').val(selection.x1);  
+        $('#venue-y').val(selection.y1); 
+        $('#venue-w').val(selection.width);  
+        $('#venue-h').val(selection.height);
+    }
+    </script>

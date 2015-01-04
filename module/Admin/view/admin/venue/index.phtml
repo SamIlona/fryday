@@ -11,7 +11,7 @@
             <div class="col-md-9">
                 <!--Profile Body-->
                 <div class="profile-body">
-                    <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'venue', 'action' => 'create' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-left margin-bottom-20">Add Venue</a>
+                    <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'venue', 'action' => 'create-first-step' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-left margin-bottom-20">Add Venue</a>
                     <div class="table-search-v2 margin-bottom-20">
                         <div class="table-responsive">
                             <table class="table table-hover">
@@ -27,7 +27,7 @@
                                     <?php foreach ($venues as $venue): ?>
                                     <tr>
                                         <td>
-                                            <img class="rounded" src="<?php echo $venue->getProfileImage(); ?>" alt="">
+                                            <img class="rounded" src="<?php echo $filesDir . DIRECTORY_SEPARATOR . $venue->getId() . DIRECTORY_SEPARATOR . 'square60x60_' . $venue->getImage(); ?>" alt="">
                                         </td>
                                         <td class="td-width">
                                             <h3><a href="#"><?php echo $venue->getName(); ?></a></h3>

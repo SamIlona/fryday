@@ -30,6 +30,20 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
  */
 class VenueController extends Action
 {
+    protected function getUploadPath()
+    {
+        $config = $this->getServiceLocator()->get('Config');
+        $uploadDir = $config['path_to_uploads']['venue'];
+
+        if (!is_dir($uploadDir )) 
+        {
+            $oldmask = umask(0);
+            mkdir($uploadDir , 0777);
+            umask($oldmask);
+        }
+
+        return $uploadDir;
+    }
     /**
      * List All Venues
      *
@@ -43,24 +57,8 @@ class VenueController extends Action
 
         return array(
             'venues' => $venues, 
+            'filesDir' => end(explode("public", $this->getUploadPath())),
         );
-        
-        // return array(
-        //     'venues' => $venues,
-        // );
-        // $this->init();
-        // $file = urldecode($this->params()->fromRoute('id'));
-        // $filename = $this->_dir . DIRECTORY_SEPARATOR . $file;
-        // $filename = './data/uploads/venues/phpQMddxI_541497228e23b';
-        // $contents = null;
-        // if (file_exists($filename)) {
-        //     $handle = fopen($filename, "r"); // "r" - not r but b for Windows "b" - keeps giving me errors no file
-        //     $contents = fread($handle, filesize($filename));
-        //     fclose($handle);
-        // }
-        // return array(
-        //     'contents' => $contents
-        // );
     }
 
     /**
@@ -68,40 +66,133 @@ class VenueController extends Action
      *
      * @return \Zend\View\Model\ViewModel|array
      */
-    public function createAction()
+    public function createFirstStepAction()
     {
-    	$this->entityManager = $this->getEntityManager();
-        $this->authenticatedUser = $this->getAuthenticatedUser();
-
-    	$venueForm = new Form\CreateVenueForm('venue', $this->entityManager);
-        $venueForm->setHydrator(new DoctrineHydrator($this->entityManager, 'Admin\Entity\Venue'));
+        $em = $this->getEntityManager();
+        $sl = $this->getServiceLocator();
+        $authenticatedUser = $this->getAuthenticatedUser();
+        $slug = $sl->get('SeoUrl\Slug');
+        $uploadDir = $this->getUploadPath();
+        $venueForm = new Form\CreateVenueFirstStepForm('venue', $em);
+        $venueForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\Venue'));
         $venueEntity = new Entity\Venue();
         $venueForm->bind($venueEntity);
 
         $request = $this->getRequest();
         if($request->isPost())
         {
-            // Make certain to merge the files info!
-            $post = array_merge_recursive(
-                $request->getPost()->toArray(),
-                $request->getFiles()->toArray()
-            );
-
-            // var_dump($post);
+            $post = $request->getPost();
 
             $venueForm->setData($post);
 
             if($venueForm->isValid()) 
             {
-                $data = $venueForm->getData(); // $data is a Entity\Venue object
-                $profileImage = $data->getProfileImage();
-                $urlProfileImage = explode("./public", $profileImage['tmp_name']);
-                $venueEntity->setProfileImage($urlProfileImage[1]);//->setProfileImage($profileImage['tmp_name']);
+                $data = $venueForm->getData();
 
-                if ($this->authenticatedUser->getRole()->getName() == 'franchisor')
+                if ($authenticatedUser->getRole()->getName() == 'franchisor')
+                    $venueEntity->setCity($authenticatedUser->getCity());
+                
+                $em->persist($venueEntity);
+                $em->flush();
+
+                $venue = $em->getRepository('Admin\Entity\Venue')->getLastAddedVenue();
+                $venueID = $venue->getId();
+                $currentVenueUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $venueID;               
+                if (!is_dir($currentVenueUploadDir )) 
                 {
-                    $venueEntity->setCity($this->authenticatedUser->getCity());
+                    $oldmask = umask(0);
+                    mkdir($currentVenueUploadDir, 0777);
+                    umask($oldmask);
                 }
+
+                return $this->redirect()->toRoute('administrator_content/default', array('controller' => 'venue', 'action' => 'create-second-step', 'id' => $venueID));
+
+            }
+        }
+
+        return array(
+            'form' => $venueForm,
+        );
+    }
+
+    /**
+     * Create venue
+     *
+     * @return \Zend\View\Model\ViewModel|array
+     */
+    public function createSecondStepAction()
+    {
+    	$em = $this->getEntityManager();
+        $user = $this->getAuthenticatedUser();
+        $venueID = $this->params()->fromRoute('id');
+        $uploadDir = $this->getUploadPath();
+        $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $venueID;
+        $thumbnailer = $this->getServiceLocator()->get('WebinoImageThumb');
+    	$venueForm = new Form\CreateVenueSecondStepForm('venue', $em, $currentUploadDir);
+        $venueForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\Venue'));
+        $venueEntity = $em->getRepository('Admin\Entity\Venue')->findOneBy(array('id' => $venueID));
+
+        // var_dump($venueEntity);
+
+        $venueForm->bind($venueEntity);
+
+        $request = $this->getRequest();
+        if($request->isPost())
+        {
+            $post = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+
+            $venueForm->setData($post);
+
+            if($venueForm->isValid()) 
+            {
+                $dataForm           = $venueForm->getData();
+
+                $imageData          = $dataForm->getImage();
+                $imageName          = end(explode("$currentUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
+                $thumb              = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());
+                $thumb_square       = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());
+                $currentDimantions  = $thumb->getCurrentDimensions();
+
+                if($post['x'] === '' ||
+                    $post['y'] === '') 
+                {
+                    if($currentDimantions['height'] / $currentDimantions['width'] < 0.5)
+                    {
+                        $thumb->cropFromCenter($currentDimantions['height'] * 2, $currentDimantions['height']);
+                        $thumb_square->cropFromCenter($currentDimantions['width']);
+                    }
+                    else 
+                    {
+                        $thumb->cropFromCenter($currentDimantions['width'], $currentDimantions['width'] / 2);
+                        $thumb_square->cropFromCenter($currentDimantions['height']);
+                    }
+                }
+                else 
+                {
+                    $scale = $currentDimantions['width'] / $post['cw'];
+
+                    $thumb->crop($post['x'] * $scale, 
+                                 $post['y'] * $scale,
+                                 $post['w'] * $scale, 
+                                 $post['h'] * $scale
+                                );
+                }
+
+                $thumb->resize(640, 320);
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'resize_' . $imageName;
+                $thumb->save($resizedImg);
+
+                $thumb_square->resize(60, 60);
+                $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
+                $thumb_square->save($mailImg);
+
+                $venueEntity->setImage($imageName);
+
+                // $venueEntity->setLabel($dataForm->getName());
+                // $venueEntity->setRoute('/' . strtolower($dataForm->getCountry()->getName()) . '/' . strtolower($dataForm->getName()));
 
                 $this->entityManager->persist($venueEntity);
                 $this->entityManager->flush();
@@ -112,6 +203,7 @@ class VenueController extends Action
 
         return array(
         	'form' => $venueForm,
+            'venueID' => $venueID,
         );
     }
 }
