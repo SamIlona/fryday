@@ -205,7 +205,8 @@ class EventController extends Action
                 $eventEntity->setImage($imageName);
                 $eventEntity->setCity($city);
                 $eventEntity->setPubished(false);
-                $eventEntity->setNewsletter(false);
+                $eventEntity->setNewsletterCreated(false);
+                $eventEntity->setNewsletterSend(false);
 
                 $this->entityManager->persist($eventEntity);
                 $this->entityManager->flush();

@@ -68,6 +68,14 @@ class Newsletter
     }
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @param null|Admin\Entity\Event $event
      */
     public function setEvent($event)

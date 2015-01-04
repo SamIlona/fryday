@@ -104,10 +104,23 @@ class Event
     protected $pubished;
 
     /**
-     * @var boolean
-     * @ORM\Column(name="newsletter", type="boolean", nullable=true)
+     * @var Newsletter
+     * @ORM\ManyToOne(targetEntity="Admin\Entity\Newsletter")
+     * @ORM\JoinColumn(name="newsletter", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $newsletter;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="newsletter_created", type="boolean", nullable=true)
+     */
+    protected $newsletterCreated;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="newsletter_send", type="boolean", nullable=true)
+     */
+    protected $newsletterSend;
 
     /**
      * @var \DateTime
@@ -328,7 +341,7 @@ class Event
     }
 
     /**
-     * @param boolean $newsletter
+     * @param null|Admin\Entity\Newsletter $newsletter
      */
     public function setNewsletter($newsletter)
     {
@@ -336,10 +349,42 @@ class Event
     }
 
     /**
-     * @return boolean $newsletter
+     * @return Admin\Entity\Newsletter|null 
      */
     public function getNewsletter()
     {
         return $this->newsletter;
+    }
+
+    /**
+     * @param boolean $newsletterCreated
+     */
+    public function setNewsletterCreated($newsletterCreated)
+    {
+        $this->newsletterCreated = $newsletterCreated;
+    }
+
+    /**
+     * @return boolean $newsletterCreated
+     */
+    public function getNewsletterCreated()
+    {
+        return $this->newsletterCreated;
+    }
+
+    /**
+     * @param boolean $newsletterSend
+     */
+    public function setNewsletterSend($newsletterSend)
+    {
+        $this->newsletterSend = $newsletterSend;
+    }
+
+    /**
+     * @return boolean $newsletterSend
+     */
+    public function getNewsletterSend()
+    {
+        return $this->newsletterSend;
     }
 }

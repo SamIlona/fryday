@@ -68,8 +68,10 @@ class NewsletterController extends Action
             {
                 $data = $createNewsletterForm->getData();
                 $newletterEntity->setEvent($eventEntity);
-                $eventEntity->setNewsletter(true);
+                $eventEntity->setNewsletterCreated(true);
+                $eventEntity->setNewsletter($newletterEntity);
 
+                $this->entityManager->persist($eventEntity);
                 $this->entityManager->persist($newletterEntity);
                 $this->entityManager->flush();
 
@@ -86,6 +88,27 @@ class NewsletterController extends Action
         return array(
             'form' => $createNewsletterForm,
             'event' => $eventEntity,
+        );
+    }
+
+    public function viewAction()
+    {
+        $em                 = $this->getEntityManager();
+        $newsletterID       = $this->params()->fromRoute('id');
+        $newsletterEntity   = $em->getRepository('Admin\Entity\Newsletter')->findOneBy(array('id' => $newsletterID));
+
+        $eventEntity    = $newsletterEntity->getEvent();
+        $partner1Entity = $newsletterEntity->getPartner1();
+        $partner2Entity = $newsletterEntity->getPartner2();
+        $partner3Entity = $newsletterEntity->getPartner3();
+
+        $this->layout('layout/mail-template-1'); 
+
+        return array(
+            'event' => $newsletterEntity->getEvent(),
+            'partner1' => $newsletterEntity->getPartner1(),
+            'partner2' => $newsletterEntity->getPartner2(),
+            'partner3' => $newsletterEntity->getPartner3(),
         );
     }
 }

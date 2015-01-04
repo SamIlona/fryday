@@ -26,6 +26,7 @@
                         </div>
                     </div> -->
                     <div class="col-md-12">
+                        <?php if(!$event->getNewsletterCreated()): ?>
                         <div class="alert alert-warning fade in">
                             <h4>Newsletter not created!</h4>
                             <p>You can not sending mail for this event. Newsletter should be created first to inform subcribers about event.</p>
@@ -33,6 +34,16 @@
                                 <!-- <a class="btn-u btn-u-xs btn-u-red" href="#">Take this action</a> --> <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'create', 'id' => $event->getId())); ?>">Create newsletter</a>
                             </p>
                         </div>
+                        <?php else: ?>
+                        <div class="alert alert-info fade in">
+                            <h4>Newsletter created!</h4>
+                            <p>Newsletter created but wasn't sent to subscribers.</p>
+                            <p>
+                                <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'create', 'id' => $event->getId())); ?>">Sent newsletter</a>
+                                <a class="btn-u btn-u-xs btn-u-orange" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Show template</a>
+                            </p>
+                        </div> 
+                        <?php endif; ?>
                     </div>
                 </div>
                         <!-- <div class="alert alert-success fade in margin-bottom-40">
@@ -55,9 +66,11 @@
                                 <h2><?php echo $event->getTitle(); ?></h2>
                             </div>
                                 <div class="row">
+                                <div class="col-md-12">
                                     <div class="event-main-img">
                                     <img class="img-responsive" src="<?php echo '/uploads/events' . DIRECTORY_SEPARATOR . $event->getId() . DIRECTORY_SEPARATOR . 'rect640x320_' .$event->getImage(); ?>" alt="<?php //echo $event->getTitle(); ?>">
                                     <!-- <img class="img-responsive" src="/img/logo.png" alt="<?php //echo $event->getTitle(); ?>"> -->
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     
