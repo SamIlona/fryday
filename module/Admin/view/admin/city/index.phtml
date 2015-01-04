@@ -2,7 +2,7 @@
     	<div class="row">
             <!--Left Sidebar-->
             <div class="col-md-3 md-margin-bottom-40">
-                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo $this->identity()->getProfileImage(); ?>" alt="">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $this->identity()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $this->identity()->getImage(); ?>" alt="">
                 <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
                 <hr>
             </div>
@@ -20,26 +20,24 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Profile Image</th>
+                                        <th>Image</th>
                                         <th class="hidden-sm">Name</th>
                                         <th>Country</th>
-                                        <!-- <th>Franchisors</th> -->
+                                        <th>Franchisors</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($cities as $city): ?>
                                     <tr>
                                         <td>
-                                            <img class="rounded" src="<?php echo $city->getProfileImage(); ?>" alt="">
+                                            <img class="rounded" src="<?php echo $filesDir . DIRECTORY_SEPARATOR . $city->getId() . DIRECTORY_SEPARATOR . 'square60x60_' . $city->getImage(); ?>" alt="">
                                         </td>
                                         <td class="td-width">
                                             <h3><a href="#"><?php echo $city->getName(); ?></a></h3>
                                             <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non malesuada ante. Donec vel arcu.</p>
                                             <small class="hex">Joined February 28, 2014</small> -->
                                         </td>
-                                        <!-- <td>
-                                            <span class="label label-success">Success</span>
-                                        </td> -->
+                                        
                                         <td><?php echo $city->getCountry()->getName(); ?>
                                             <!-- <ul class="list-inline s-icons">
                                                 <li>
@@ -65,6 +63,9 @@
                                             </ul>
                                             <span><a href="#">info@example.com</a></span>
                                             <span><a href="#">www.htmlstream.com</a></span>-->
+                                        </td>
+                                        <td>
+                                            <span class="label label-success">Success</span>
                                         </td>
                                     </tr>
                                      <?php endforeach; ?>

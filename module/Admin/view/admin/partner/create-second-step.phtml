@@ -2,7 +2,7 @@
     	<div class="row">
             <!--Left Sidebar-->
             <div class="col-md-3 md-margin-bottom-40">
-                <img id="ava" class="img-responsive profile-img margin-bottom-20" src="<?php echo $this->identity()->getProfileImage(); ?>" alt="">
+                <img id="ava" class="img-responsive profile-img margin-bottom-20" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $this->identity()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $this->identity()->getImage(); ?>" alt="">
                 <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
                 <hr>
             </div>
@@ -93,16 +93,6 @@
         }
     }
 
-
-
-
-    // $(document).ready(function () {
-    //     $('#ava').imgAreaSelect({
-    //         handles: true,
-    //         onSelectEnd: someFunction
-    //     });
-    // });
-
     $(document).ready(function () {
         $('#blah').imgAreaSelect({ 
             // maxWidth: 200, 
@@ -146,6 +136,6 @@
         $('#partner-w').val(selection.width);  
         $('#partner-h').val(selection.height);  
         //  $('#partner-ch').val(10); 
-    } 
+    }
 
 </script>

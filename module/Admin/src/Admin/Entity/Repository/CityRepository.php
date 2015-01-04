@@ -46,11 +46,18 @@ class CityRepository extends EntityRepository
 	{
 		$citiesSet = $this->getEntityManager()->getRepository('Admin\Entity\City')->findAll();
 
-		foreach ($citiesSet as $city) {
-			$cities[$city->getId()] = $city->getName();
-		}
-
-		return $cities;
+        if($citiesSet != null) 
+        {
+    		foreach ($citiesSet as $city) 
+            {
+    			$cities[$city->getId()] = $city->getName();
+    		}
+            return $cities;
+        }
+        else
+        {
+            return array();
+        }
 	}
 
 	public function getCityByName($name)

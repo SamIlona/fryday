@@ -49,17 +49,17 @@ class LoginForm extends Form
 
     public function addElements()
     {
-        $username = new Element\Text('username');
-        $username->setLabel('Login')
+        $email = new Element\Text('email');
+        $email->setLabel('E-mail')
             ->setLabelAttributes(
                 array(
                     'class' => 'required control-label col-lg-4',
                 )
             )
             ->setAttribute('class', 'form-control')
-            ->setAttribute('id', 'username')
-            ->setAttribute('placeholder', 'Username');
-        $this->add($username);
+            ->setAttribute('id', 'email')
+            ->setAttribute('placeholder', 'E-mail');
+        $this->add($email);
 
         $password = new Element\Password('password');
         $password->setLabel('Password')

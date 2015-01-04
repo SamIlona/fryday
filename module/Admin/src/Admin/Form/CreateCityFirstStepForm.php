@@ -132,7 +132,7 @@ class CreateCityFirstStepForm extends Form
                         'name' => 'not_empty', 
                         'options' => array(
                             'messages' => array(
-                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Please enter city name!' 
+                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Please enter city name' 
                             ),
                         ),
                     ),

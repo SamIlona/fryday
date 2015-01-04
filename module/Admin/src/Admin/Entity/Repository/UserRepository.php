@@ -21,5 +21,34 @@ use Doctrine\ORM\EntityRepository;
 
 class UserRepository extends EntityRepository
 {
-	
+	public function getAllUsersAsOptions()
+	{
+		$usersSet = $this->getEntityManager()->getRepository('Admin\Entity\User')->findAll();
+
+		foreach ($usersSet as $user) {
+			$users[$user->getId()] = $user->getFirstName() . " " . $user->getLastName();
+		}
+
+		return $users;
+	}
+
+    public function getLastAddedUser()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select( 'u' )
+            ->from( 'Admin\Entity\User',  'u' )
+            ->orderBy('u.id', 'DESC')
+            ->setMaxResults(1);
+
+        try
+        {
+            return  $qb->getQuery()->getSingleResult();
+        }
+        catch(\Doctrine\ORM\NoResultException $e)
+        {
+            return null;
+        }
+    }
 }

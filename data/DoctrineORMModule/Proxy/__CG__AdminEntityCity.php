@@ -64,10 +64,10 @@ class City extends \Admin\Entity\City implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'name', 'label', 'route', 'profileImage', 'country', 'users');
+            return array('__isInitialized__', 'id', 'name', 'label', 'route', 'image', 'country', 'users');
         }
 
-        return array('__isInitialized__', 'id', 'name', 'label', 'route', 'profileImage', 'country', 'users');
+        return array('__isInitialized__', 'id', 'name', 'label', 'route', 'image', 'country', 'users');
     }
 
     /**
@@ -257,23 +257,23 @@ class City extends \Admin\Entity\City implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setProfileImage($profileImage)
+    public function setImage($image)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProfileImage', array($profileImage));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setImage', array($image));
 
-        return parent::setProfileImage($profileImage);
+        return parent::setImage($image);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getProfileImage()
+    public function getImage()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProfileImage', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImage', array());
 
-        return parent::getProfileImage();
+        return parent::getImage();
     }
 
     /**

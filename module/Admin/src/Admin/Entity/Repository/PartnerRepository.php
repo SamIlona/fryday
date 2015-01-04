@@ -51,6 +51,4 @@ class PartnerRepository extends EntityRepository
             return null;
         }
     }
-
-
 }

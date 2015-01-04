@@ -14,6 +14,7 @@ return array(
         'partner'   => 'public/uploads/partners',
         'event'     => 'public/uploads/events',
         'city'      => 'public/uploads/cities',
+        'user'      => 'public/uploads/users',
     ),
     'htimg' => [
         'filters' => [
@@ -57,7 +58,7 @@ return array(
                 'object_manager' => 'Doctrine\ORM\EntityManager',
                 // object_repository can be used instead of the object_manager key
                 'identity_class' => 'Admin\Entity\User', //'Application\Entity\User',
-                'identity_property' => 'username', // 'username', // 'email',
+                'identity_property' => 'email', // 'username', // 'email',
                 'credential_property' => 'password', // 'password',
                 'credential_callable' => function(Entity\User $user, $passwordGiven) { // not only User
                     // return my_awesome_check_test($user->getPassword(), $passwordGiven);

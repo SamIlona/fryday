@@ -2,7 +2,7 @@
     	<div class="row">
             <!--Left Sidebar-->
             <div class="col-md-3 md-margin-bottom-40">
-                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo $this->identity()->getProfileImage(); ?>" alt="">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $this->identity()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $this->identity()->getImage(); ?>" alt="">
                 <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
                 <hr>
             </div>
@@ -11,7 +11,7 @@
             <div class="col-md-9">
                 <!--Profile Body-->
                 <div class="profile-body">
-                    <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'venue', 'action' => 'create' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-left margin-bottom-20">Create New Venue</a>
+                    <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'venue', 'action' => 'create' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-left margin-bottom-20">Add Venue</a>
                     <div class="table-search-v2 margin-bottom-20">
                         <div class="table-responsive">
                             <table class="table table-hover">

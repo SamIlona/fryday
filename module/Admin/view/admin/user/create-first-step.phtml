@@ -12,60 +12,44 @@
                 <!--Profile Body-->
                 <div class="profile-body">
                     <!--Table Search v2-->
-                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'create')))->prepare(); ?>
+                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'user', 'action' => 'create-first-step')))->prepare(); ?>
                     <?php echo $this->form()->openTag($form); ?>
                     <!-- <form action="" class="sky-form"> -->
-                    <header>Create New Subscriber</header>
+                    <header>Add User</header>
                     
                     <fieldset>
-                        <section>
-                            <?php echo $this->formLabel($this->form->get('name')); ?>
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('firstName')); ?>
                             <label class="input">
-                                <?php echo $this->formInput($this->form->get('name')); ?>
+                                <?php echo $this->formInput($this->form->get('firstName')); ?>
                             </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('firstName')); ?>
                         </section>
 
-                        <section>
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('lastName')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('lastName')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('lastName')); ?>
+                        </section>
+
+                        <section class="col-md-12">
                             <?php echo $this->formLabel($this->form->get('email')); ?>
                             <label class="input">
                                 <?php echo $this->formInput($this->form->get('email')); ?>
                             </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('email')); ?>
                         </section>
 
-<!--                         <section>
-                            <?php //echo $this->formLabel($this->form->get('lastName')); ?>
-                            <label class="input">
-                                <?php //echo $this->formInput($this->form->get('lastName')); ?>
-                            </label>
-                        </section> -->
-                        
-<!--                         <section>
-                            <?php //echo $this->formLabel($this->form->get('profileImage')); ?>
-                            <label for="file" class="input input-file">
-                                <div class="button">
-                                    <?php //echo $this->formFile($this->form->get('profileImage')); ?>
-                                    Browse
-                                </div>
-                                <input readonly="" type="text">
-                                <?php //echo $this->formFile($this->form->get('profileImage')); ?>
-                            </label>
-                        </section> -->
-
-<!--                         <section>
-                            <?php //echo $this->formLabel($this->form->get('username')); ?>
-                            <label class="input">
-                                <?php //echo $this->formInput($this->form->get('username')); ?>
-                            </label>
-                        </section> -->
-
-<!--                         <section>
+                        <!-- <section>
                             <?php //echo $this->formLabel($this->form->get('password')); ?>
                             <label class="input">
                                 <?php //echo $this->formInput($this->form->get('password')); ?>
                             </label>
-                        </section> -->               
+                        </section>   -->             
                             
-<!--                         <section>
+                        <!-- <section>
                             <?php //echo $this->formLabel($this->form->get('role')); ?>
                             <label class="select">
                                 <?php //echo $this->formSelect($this->form->get('role')); ?>
@@ -73,18 +57,18 @@
                             </label>
                         </section> -->
 
-                        <section>
-                            <?php echo $this->formLabel($this->form->get('city')); ?>
+                        <!-- <section>
+                            <?php //echo $this->formLabel($this->form->get('city')); ?>
                             <label class="select">
-                                <?php echo $this->formSelect($this->form->get('city')); ?>
+                                <?php //echo $this->formSelect($this->form->get('city')); ?>
                                 <i></i>
                             </label>
-                        </section>
+                        </section> -->
 
                     </fieldset>
                     
                     <footer>
-                        <button type="submit" class="btn-u">Submit</button>
+                        <button type="submit" class="btn-u">Next</button>
                         <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
                     </footer>
                 <!-- </form> -->

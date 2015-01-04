@@ -210,7 +210,7 @@ class CreatePartnerSecondStepForm extends Form
         $imageInput->getFilterChain()->attachByName(
             'filerenameupload',
             array(
-                'target'        =>  $this->_dir . DIRECTORY_SEPARATOR . 'partner_image',
+                'target'        => $this->_dir . DIRECTORY_SEPARATOR . 'partner_image',
                 'randomize'     => true,
                 // 'overwrite'     => true,
                 // 'use_upload_name' => true,

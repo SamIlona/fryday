@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Admin\Entity\Repository\UserRepository")
  * @ORM\Table(name="users")
  */
 class User
@@ -42,9 +42,9 @@ class User
 
     /**
      * @var string
-     * @ORM\Column(name="username", type="string", length=255, nullable=true, unique=false)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true, unique=false)
      */
-    protected $username;
+    protected $email;
 
     /**
      * @var string
@@ -69,9 +69,9 @@ class User
 
     /**
      * @var string
-     * @ORM\Column(name="profile_photo", type="string", length=255, nullable=true, unique=false)
+     * @ORM\Column(name="image", type="string", length=255, nullable=true, unique=false)
      */
-    protected $profileImage;
+    protected $image;
 
     /**
      * @return int
@@ -114,19 +114,19 @@ class User
     }
 
     /**
-     * @param string $username
+     * @param string $email
      */
-    public function setUsername($username)
+    public function setEmail($email)
     {
-        $this->username = $username;
+        $this->email = $email;
     }
 
     /**
      * @return string 
      */
-    public function getUsername()
+    public function getEmail()
     {
-        return $this->username;
+        return $this->email;
     }
 
     /**
@@ -162,19 +162,19 @@ class User
     }
 
     /**
-     * @param string $profileImage
+     * @param string $image
      */
-    public function setProfileImage($profileImage)
+    public function setImage($image)
     {
-        $this->profileImage = $profileImage;
+        $this->image = $image;
     }
 
     /**
      * @return string 
      */
-    public function getProfileImage()
+    public function getImage()
     {
-        return $this->profileImage;
+        return $this->image;
     }
 
     /**

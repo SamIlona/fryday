@@ -59,6 +59,7 @@ class CityController extends Action
 
         return array(
             'cities' => $cities,
+            'filesDir' => end(explode("public", $this->getUploadPath())),
             // 'flashMessages' => $this->flashMessenger()->getMessages(),
         );
     }
@@ -97,7 +98,7 @@ class CityController extends Action
                     umask($oldmask);
                 }
 
-                // return $this->redirect()->toRoute('administrator_content/default', array('controller' => 'city', 'action' => 'index'));
+                return $this->redirect()->toRoute('administrator_content/default', array('controller' => 'city', 'action' => 'create-second-step', 'id' => $cityID));
             }
         }
 
@@ -106,36 +107,76 @@ class CityController extends Action
         );
     }
 
-    public function createAction()
+    public function createSecondStepAction()
     {
-    	$this->entityManager = $this->getEntityManager();
-
-        $createCityForm = new Form\CreateCityForm('new-city-form', $this->entityManager);
-        $createCityForm->setHydrator(new DoctrineHydrator($this->entityManager, 'Admin\Entity\City'));
-        $cityEntity = new Entity\City();
+    	$em = $this->getEntityManager();
+        $user = $this->getAuthenticatedUser();
+        $cityID = $this->params()->fromRoute('id');
+        $uploadDir = $this->getUploadPath();
+        $currentCityUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $cityID;
+        $thumbnailer = $this->getServiceLocator()->get('WebinoImageThumb');
+        $createCityForm = new Form\CreateCitySecondStepForm('new-city-form', $em, $user, $currentCityUploadDir);
+        $createCityForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\City'));
+        $cityEntity = $em->getRepository('Admin\Entity\City')->findOneBy(array('id' => $cityID));
         $createCityForm->bind($cityEntity);
 
         $request = $this->getRequest();
         if($request->isPost())
         {
-            // Make certain to merge the files info!
             $post = array_merge_recursive(
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
             );
 
-            // var_dump($post);
-
             $createCityForm->setData($post);
 
             if($createCityForm->isValid()) 
             {
-                $data = $createCityForm->getData();
-                $profileImage = $data->getProfileImage();
-                $urlProfileImage = explode("./public", $profileImage['tmp_name']);
-                $cityEntity->setProfileImage($urlProfileImage[1]);//->setProfileImage($profileImage['tmp_name']);
-                $cityEntity->setLabel($data->getName());
-                $cityEntity->setRoute('/' . strtolower($data->getCountry()->getName()) . '/' . strtolower($data->getName()));
+                $dataForm           = $createCityForm->getData();
+                
+                $imageData          = $dataForm->getImage();
+                $imageName          = end(explode("$currentCityUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
+                $thumb              = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());
+                $thumb_square       = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());  
+                $currentDimantions  = $thumb->getCurrentDimensions();
+
+                if($post['x'] === '' ||
+                    $post['y'] === '') 
+                {
+                    if($currentDimantions['height'] / $currentDimantions['width'] < 0.5)
+                    {
+                        $thumb->cropFromCenter($currentDimantions['height'] * 2, $currentDimantions['height']);
+                        $thumb_square->cropFromCenter($currentDimantions['width']);
+                    }
+                    else 
+                    {
+                        $thumb->cropFromCenter($currentDimantions['width'], $currentDimantions['width'] / 2);
+                        $thumb_square->cropFromCenter($currentDimantions['height']);
+                    }
+                }
+                else 
+                {
+                    $scale = $currentDimantions['width'] / $post['cw'];
+
+                    $thumb->crop($post['x'] * $scale, 
+                                 $post['y'] * $scale,
+                                 $post['w'] * $scale, 
+                                 $post['h'] * $scale
+                                );
+                }
+
+                $thumb->resize(640, 320);
+                $resizedImg = $currentCityUploadDir . DIRECTORY_SEPARATOR . 'resize_' . $imageName;
+                $thumb->save($resizedImg);
+
+                $thumb_square->resize(60, 60);
+                $mailImg = $currentCityUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
+                $thumb_square->save($mailImg);
+
+                $cityEntity->setImage($imageName);
+
+                $cityEntity->setLabel($dataForm->getName());
+                $cityEntity->setRoute('/' . strtolower($dataForm->getCountry()->getName()) . '/' . strtolower($dataForm->getName()));
 
                 $this->entityManager->persist($cityEntity);
                 $this->entityManager->flush();
@@ -146,6 +187,7 @@ class CityController extends Action
 
         return array(
             'form' => $createCityForm,
+            'cityID' => $cityID,
         );
     }
 
