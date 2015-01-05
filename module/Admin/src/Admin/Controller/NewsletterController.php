@@ -111,4 +111,59 @@ class NewsletterController extends Action
             'partner3' => $newsletterEntity->getPartner3(),
         );
     }
+
+    public function sendAction()
+    {
+        $em                 = $this->getEntityManager();
+        $newsletterID       = $this->params()->fromRoute('id');
+        $newsletterEntity   = $em->getRepository('Admin\Entity\Newsletter')->findOneBy(array('id' => $newsletterID));
+
+        $eventEntity        = $newsletterEntity->getEvent();
+        $cityID             = $eventEntity->getCity()->getId();
+        $subscribers        = $this->entityManager->getRepository('Admin\Entity\Subscriber')->getSubscribersByCityID($cityID);
+
+        foreach ($subscribers as $subscriber) 
+        {
+            $mailService = $this->getServiceLocator()->get('AcMailer\Service\MailService');
+            $mailService->setSubject($eventEntity->getTitle())
+                // ->setTemplate('email/tpl/template', 
+                ->setTemplate('admin/newsletter/view',
+                    array(
+                        'event'      => $eventEntity, 
+                        'partner1' => $newsletterEntity->getPartner1(),
+                        'partner2' => $newsletterEntity->getPartner2(),
+                        'partner3' => $newsletterEntity->getPartner3(),
+        //                                 'title'     => $title,
+        //                                 'details'   => $details,
+                    )
+                );
+
+            $message = $mailService->getMessage();
+            $message->setTo($subscriber->getEmail());
+
+            $result = $mailService->send();
+                        // if ($result->isValid()) {
+                        //     // echo 'Message sent. Congratulations!';
+                        // } else {
+                        //     if ($result->hasException()) {
+                        //         echo sprintf('An error occurred. Exception: \n %s', $result->getException()->getTraceAsString());
+
+                        //     } else {
+                        //         echo sprintf('An error occurred. Message: %s', $result->getMessage());
+                                
+                        //     }
+                        //     // return $this->redirect()->toRoute('administrator/default');
+                        //     // return new ViewModel();
+                        // }
+        }
+
+        return $this->redirect()->toRoute('administrator_content/event_preview', 
+            array(
+                'country'   => $eventEntity->getCity()->getCountry()->getName(), 
+                'city'      => $eventEntity->getCity()->getName(), 
+                'dateslug'  => $eventEntity->getDateSlug(), 
+                'titleslug' => $eventEntity->getTitleSlug(), 
+            )
+        );
+    }
 }

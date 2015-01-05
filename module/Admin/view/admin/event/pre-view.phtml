@@ -37,10 +37,10 @@
                         <?php else: ?>
                         <div class="alert alert-info fade in">
                             <h4>Newsletter created!</h4>
-                            <p>Newsletter created but wasn't sent to subscribers.</p>
+                            <p>Newsletter created but was not sent to subscribers.</p>
                             <p>
-                                <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'create', 'id' => $event->getId())); ?>">Sent newsletter</a>
-                                <a class="btn-u btn-u-xs btn-u-orange" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Show template</a>
+                                <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'send', 'id' => $event->getNewsletter()->getId())); ?>">Send Newsletter</a>
+                                <a class="btn-u btn-u-xs btn-u-orange" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Show Template</a>
                             </p>
                         </div> 
                         <?php endif; ?>
