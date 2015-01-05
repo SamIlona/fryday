@@ -16,7 +16,7 @@
                                     <table class="deviceWidth" cellpadding="0" cellspacing="0" align="left" border="0">
                                         <tbody><tr>
                                             <td class="center" style="padding: 20px 0px 10px 0px">
-                                                <a href="#"><img src="/frontend/img/logo_fryday_resized.jpg"></a>
+                                                <a href="#"><img src="http://fryday.net/frontend/img/logo_fryday_resized.jpg"></a>
                                             </td>
                                         </tr>
                                     </tbody></table><!--End logo-->
@@ -73,7 +73,7 @@
                                 <table class="deviceWidth" cellpadding="0" cellspacing="0" align="left" border="0">
                                         <tbody><tr>
                                             <td style="padding: 0px 0px " class="center" valign="top">
-                                                <a href="<?php echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>"><img hight="170" src="<?php echo '/uploads/events/' . $event->getId() . DIRECTORY_SEPARATOR . 'rect640x320_' . $event->getImage(); ?>" width="350"></a>
+                                                <a href="<?php echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>"><img hight="170" src="<?php echo 'http://fryday.net/uploads/events/' . $event->getId() . DIRECTORY_SEPARATOR . 'rect640x320_' . $event->getImage(); ?>" width="350"></a>
                                             </td>
                                         </tr>
                                     </tbody></table> 
