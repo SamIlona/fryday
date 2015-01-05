@@ -40,7 +40,7 @@
 
                         <div class="overflow-hidden">
                             <a href="<?php echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>">
-                                <img class="img-responsive" src="<?php echo $event->getProfileImage(); ?>" alt="">
+                                <img class="img-responsive" src="<?php echo '/uploads/events/' . $event->getId() . DIRECTORY_SEPARATOR . 'rect640x320_' . $event->getImage(); ?>" alt="">
                             </a>
                         </div>
                     </div>
