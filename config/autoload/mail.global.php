@@ -41,13 +41,13 @@ return array(
          * and no smtp_user is provided
          * Default value is an empty string
          */
-        'from' => 'fryday_test',
+        'from' => 'Fryday',
 
         /*
          * From name to be displayed instead of from address.
          * Default value is an empty string
          */
-        'from_name' => 'fryday_test',
+        'from_name' => 'Fryday',
 
         /*
          * Destination addresses of sent emails. It can be an email address as string or an array of email addresses.
