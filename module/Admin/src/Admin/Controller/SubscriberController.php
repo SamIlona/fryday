@@ -42,7 +42,7 @@ class SubscriberController extends Action
 
         return array(
             'subscribers' => $subscribers,
-            // 'flashMessages' => $this->flashMessenger()->getMessages(),
+            'flashMessages' => $this->flashMessenger()->getMessages(),
         );
     }
 
@@ -88,6 +88,83 @@ class SubscriberController extends Action
 
         return array(
             'form' => $createSubscriberForm,
+        );
+    }
+
+    public function csvParseAction()
+    {
+        $em = $this->getEntityManager();
+
+        $csvParseForm = new Form\CsvParseForm('create-subscriber-form', $em);
+
+        $request = $this->getRequest();
+        if($request->isPost())
+        {
+            $post = $request->getPost();
+
+            $csvParseForm->setData($post);
+
+            if($csvParseForm->isValid()) 
+            {
+                $data = $csvParseForm->getData();
+
+                $csvText    = $data['csvText'];
+                $cityID     = $data['city'];
+                $city       = $em->getRepository('Admin\Entity\City')->getCityByID($cityID);
+                $rows       = explode("\n", $csvText);
+
+                foreach($rows as $row => $data)
+                {
+                    //get row data
+                    if(strlen($data) > 1)
+                    {
+                        $row_data = explode(',', $data);
+
+                        $info[$row]['email']        = $row_data[0];
+                        $info[$row]['firstName']    = $row_data[1];
+                        $info[$row]['company']      = $row_data[2];
+                        $info[$row]['lastName']     = $row_data[3];
+                        $info[$row]['phone']        = $row_data[4];
+                        $info[$row]['position']     = $row_data[5];
+                        $info[$row]['city']         = $row_data[6];
+
+                        if(($subscriber = $em
+                            ->getRepository('Admin\Entity\Subscriber')
+                            ->getSubscriberByEmail($info[$row]['email'])) == null)
+                        {
+                            $subscriberEntity = new Entity\Subscriber();
+
+                            $subscriberEntity->setFirstName($info[$row]['firstName']);
+                            $subscriberEntity->setLastName($info[$row]['lastName']);
+                            $subscriberEntity->setEmail($info[$row]['email']);
+                            $subscriberEntity->setPhone($info[$row]['phone']);
+                            $subscriberEntity->setCompany($info[$row]['company']);
+                            $subscriberEntity->setPosition($info[$row]['position']);
+
+                            $subscriberEntity->setCity($city);
+
+                            $em->persist($subscriberEntity);
+                            $em->flush();
+                        }
+                        else
+                        {
+                            $this->flashMessenger()->addMessage('<strong> - ' . $info[$row]['email'] . '</strong> ' 
+                                . $info[$row]['firstName'] . " "
+                                . $info[$row]['lastName'] . " "
+                                . $info[$row]['company'] . " "
+                                . $info[$row]['phone'] . " "
+                                . $info[$row]['position'] );
+                        }
+                    }
+                }
+                // var_dump($info);
+                return $this->redirect()->toRoute('administrator/default', array('controller' => 'subscriber', 'action' => 'index'));
+            }
+        }
+
+        return array(
+            // 'flashMessages' => $this->flashMessenger()->getMessages(),
+            'form' => $csvParseForm,
         );
     }
 }

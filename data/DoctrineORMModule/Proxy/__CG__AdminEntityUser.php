@@ -64,10 +64,10 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'username', 'password', 'role', 'city', 'profileImage');
+            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'password', 'role', 'city', 'image');
         }
 
-        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'username', 'password', 'role', 'city', 'profileImage');
+        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'password', 'role', 'city', 'image');
     }
 
     /**
@@ -235,23 +235,23 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setUsername($username)
+    public function setEmail($email)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsername', array($username));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', array($email));
 
-        return parent::setUsername($username);
+        return parent::setEmail($email);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getUsername()
+    public function getEmail()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsername', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmail', array());
 
-        return parent::getUsername();
+        return parent::getEmail();
     }
 
     /**
@@ -301,23 +301,23 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setProfileImage($profileImage)
+    public function setImage($image)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProfileImage', array($profileImage));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setImage', array($image));
 
-        return parent::setProfileImage($profileImage);
+        return parent::setImage($image);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getProfileImage()
+    public function getImage()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProfileImage', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImage', array());
 
-        return parent::getProfileImage();
+        return parent::getImage();
     }
 
     /**

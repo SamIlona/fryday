@@ -30,15 +30,39 @@ class Subscriber
 
 	/**
      * @var string
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
-    protected $name;
+    protected $firstName;
+
+    /**
+     * @var string
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
+     */
+    protected $lastName;
 
 	/**
      * @var string
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", type="string", length=255, nullable=false, unique=true)
      */
     protected $email;
+
+    /**
+     * @var string
+     * @ORM\Column(name="company", type="string", length=255, nullable=true)
+     */
+    protected $company;
+
+    /**
+     * @var string
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     */
+    protected $phone;
+
+    /**
+     * @var string
+     * @ORM\Column(name="position", type="string", length=255, nullable=true)
+     */
+    protected $position;
 
     /**
      * @var City
@@ -59,19 +83,35 @@ class Subscriber
     }
 
     /**
-     * @param string $name
+     * @param string $firstName
      */
-    public function setName($name)
+    public function setFirstName($firstName)
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
     }
 
     /**
      * @return string 
      */
-    public function getName()
+    public function getFirstName()
     {
-        return $this->name;
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
     }
 
     /**
@@ -111,5 +151,53 @@ class Subscriber
     */
     public function getDateTimeCreated() {
         return $this->dateTimeCreated;
+    }
+
+    /**
+     * @param string $company
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param string $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }
