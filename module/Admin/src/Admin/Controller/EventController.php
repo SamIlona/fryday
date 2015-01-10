@@ -56,7 +56,6 @@ class EventController extends Action
 		return array(
 			'upcomingEvents'    => $em->getRepository('Admin\Entity\Event')->getEvents(10, 0, 'upcoming'),
             'pastEvents'        => $em->getRepository('Admin\Entity\Event')->getEvents(10, 0, 'past'),
-            'flashMessages'     => $this->flashMessenger()->getMessages(),
         );
    	}
 
@@ -166,8 +165,8 @@ class EventController extends Action
                 $currentDimantions  = $thumb->getCurrentDimensions();
 
 
-                if($post['x'] === '' ||
-                    $post['y'] === '') 
+                if($post['xStartCrop'] === '' ||
+                    $post['yStartCrop'] === '') 
                 {
                     if($currentDimantions['height'] / $currentDimantions['width'] < 0.5) 
                         $thumb->cropFromCenter($currentDimantions['height'] * 2, $currentDimantions['height']);
@@ -176,12 +175,12 @@ class EventController extends Action
                 }
                 else 
                 {
-                    $scale = $currentDimantions['width'] / $post['cw'];
+                    $scale = $currentDimantions['width'] / $post['widthCurrent'];
 
-                    $thumb->crop($post['x'] * $scale, 
-                                 $post['y'] * $scale,
-                                 $post['w'] * $scale, 
-                                 $post['h'] * $scale
+                    $thumb->crop($post['xStartCrop'] * $scale, 
+                                 $post['yStartCrop'] * $scale,
+                                 $post['widthCrop'] * $scale, 
+                                 $post['heightCrop'] * $scale
                                 );
                 }
 
@@ -200,16 +199,22 @@ class EventController extends Action
 
                 $thumb_square->resize(60, 60);
                 $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
-                $thumb_square->save($mailImg);     
+                $thumb_square->save($mailImg);
+
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName, 0777);
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName, 0777); 
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName, 0777);    
 
                 $eventEntity->setImage($imageName);
                 $eventEntity->setCity($city);
-                $eventEntity->setPubished(false);
+                $eventEntity->setPublished(false);
                 $eventEntity->setNewsletterCreated(false);
                 $eventEntity->setNewsletterSend(false);
 
                 $this->entityManager->persist($eventEntity);
                 $this->entityManager->flush();
+
+                $this->flashMessenger()->addMessage('<strong>Well done!</strong> Event has been successfully created!');
 
                 return $this->redirect()->toRoute('administrator_content/event_preview', array(
                     'country'   => $dataForm->getVenue()->getCity()->getCountry()->getName(), 
@@ -230,103 +235,176 @@ class EventController extends Action
     public function preViewAction() 
     {
         $em = $this->getEntityManager();
-        $this->authenticatedUser = $this->getAuthenticatedUser();
         $user = $this->getAuthenticatedUser();
         $titleslug = $this->event->getRouteMatch()->getParam('titleslug');
         $dateslug = $this->event->getRouteMatch()->getParam('dateslug');
-
         $event = $em->getRepository('Admin\Entity\Event')->getEventBySlug($titleslug, $dateslug);
-
-
-        // // We encourage to use Dependency Injection instead of Service Locator
-        // $thumbnailer = $this->getServiceLocator()->get('WebinoImageThumb');
-        // $imagePath   = 'public/frontend/img/prev_event_3.png';
-        // $thumb       = $thumbnailer->create($imagePath, $options = array(), $plugins = array());
-
-        // $thumb->resize(231, 144);
-
-        // $thumb->save('module/Admin/view/email/tpl/prev_event_3_resized.png');
-
-        // $thumb->show();
-        // // or/and
-        
-
         $eventForm = new Form\PreviewEventForm('event', $em, $user);
-
-        
-        // $request = $this->getRequest();
-        // if($request->isPost())
-        // {
-        //     $event->setPubished(true);
-
-        //     if($event->getNewsletter())
-        //     {
-
-            
-        //         $title = $event->getTitle();
-        //         $details = $event->getDescription();
-        //         $profileImage = $event->getProfileImage();
-
-        //         $img2 = explode("/uploads/events/profileimages/", $profileImage);
-
-        //         $cityID = $event->getVenue()->getCity()->getId();
-
-        //             $subscribers = $this->entityManager->getRepository('Admin\Entity\Subscriber')->getSubscribersByCityID($cityID);
-
-                    
-
-        //             foreach ($subscribers as $subscriber)
-        //             {
-        //                 $mailService = $this->getServiceLocator()->get('AcMailer\Service\MailService');
-        //                 $mailService->setSubject('FRYDAY NEWSLETER IN ACTION')
-        //                             ->setTemplate('admin/emails/mail', array(
-        //                                 'imag'      => $img2[1], 
-        //                                 'title'     => $title,
-        //                                 'details'   => $details,
-        //                             ));
-
-        //                 $img = 'public' . $profileImage;
-
-        //                 // var_dump($img );
-
-        //                 $mailService->setAttachments(array(
-        //                     'public/email/logo_fryday.jpg',
-        //                     $img,
-        //                 ));
-
-        //                 $message = $mailService->getMessage();
-        //                 $message->setTo($subscriber->getEmail());
-
-        //                 $result = $mailService->send();
-        //                 if ($result->isValid()) {
-        //                     // echo 'Message sent. Congratulations!';
-        //                 } else {
-        //                     if ($result->hasException()) {
-        //                         echo sprintf('An error occurred. Exception: \n %s', $result->getException()->getTraceAsString());
-
-        //                     } else {
-        //                         echo sprintf('An error occurred. Message: %s', $result->getMessage());
-                                
-        //                     }
-        //                     // return $this->redirect()->toRoute('administrator/default');
-        //                     // return new ViewModel();
-        //                 }
-        //             }
-        //         }
-        //     $em->persist($event);
-        //     $em->flush();
-
-        //     return $this->redirect()->toRoute('main/event_details', array(
-        //         'country' => $event->getCity()->getCountry()->getName(), 
-        //         'city' => $event->getCity()->getName(), 
-        //         'dateslug' => $event->getDateSlug(), 
-        //         'titleslug' => $event->getTitleSlug()
-        //     ));
-        // }
         
         return array(
             'event' => $event,
             'form' => $eventForm,
+            'flashMessages' => $this->flashMessenger()->getMessages(),
+        );
+    }
+
+    public function publishAction()
+    {
+        $em = $this->getEntityManager();
+        $eventID = $this->params()->fromRoute('id');
+        $uploadDir = $this->getUploadPath();
+        $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $eventID;
+        $eventEntity = $em->getRepository('Admin\Entity\Event')->findOneBy(array('id' => $eventID));
+        
+        $eventEntity->setPublished(true);
+        
+        $em->persist($eventEntity);
+        $em->flush();
+
+        $this->flashMessenger()->addMessage('Event published!');
+
+        return $this->redirect()->toRoute('administrator_content/event_preview', array(
+            'country'   => $eventEntity->getCity()->getCountry()->getName(), 
+            'city'      => $eventEntity->getCity()->getName(), 
+            'dateslug'  => $eventEntity->getDateSlug(), 
+            'titleslug' => $eventEntity->getTitleSlug(), 
+        ));
+    }
+
+    public function unPublishAction()
+    {
+        $em = $this->getEntityManager();
+        $eventID = $this->params()->fromRoute('id');
+        $eventEntity = $em->getRepository('Admin\Entity\Event')->findOneBy(array('id' => $eventID));
+        
+        $eventEntity->setPublished(false);
+        
+        $em->persist($eventEntity);
+        $em->flush();
+
+        $this->flashMessenger()->addMessage('Event unpublished!');
+
+        return $this->redirect()->toRoute('administrator_content/event_preview', array(
+            'country'   => $eventEntity->getCity()->getCountry()->getName(), 
+            'city'      => $eventEntity->getCity()->getName(), 
+            'dateslug'  => $eventEntity->getDateSlug(), 
+            'titleslug' => $eventEntity->getTitleSlug(), 
+        ));
+    }
+
+    public function editAction()
+    {
+        $em = $this->getEntityManager();
+        $eventID = $this->params()->fromRoute('id');
+        $uploadDir = $this->getUploadPath();
+        $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $eventID;
+        $user = $this->getAuthenticatedUser();
+        $eventForm = new Form\EditEventForm('event', $em, $user, $currentUploadDir);
+        $eventEntity = $em->getRepository('Admin\Entity\Event')->findOneBy(array('id' => $eventID));
+        $thumbnailer = $this->getServiceLocator()->get('WebinoImageThumb');
+
+        $request = $this->getRequest();
+
+        if($request->isPost())
+        {
+            $post = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+
+            var_dump($post);
+
+            // remember name and path to the image if new image has not been uploaded
+            $imageName = $eventEntity->getImage();
+            $imagePath = $currentUploadDir. DIRECTORY_SEPARATOR . $imageName;
+
+            $eventForm->bind($eventEntity);
+            $eventForm->setData($post);
+            
+            if ($eventForm->isValid()) 
+            {
+                $dataForm               = $eventForm->getData();
+                $city                   = $dataForm->getVenue()->getCity();
+                $imageData              = $dataForm->getImage();
+
+                if(!$imageData['tmp_name'] == '')
+                {
+                    $imageName          = end(explode("$currentUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
+                    $imagePath          = $imageData['tmp_name'];
+                }
+                    
+                $thumb              = $thumbnailer->create($imagePath, $options = array(), $plugins = array());
+                $thumb_square       = $thumbnailer->create($imagePath, $options = array(), $plugins = array());
+                $currentDimantions  = $thumb->getCurrentDimensions();
+
+                if($post['xStartCrop'] === '' ||
+                    $post['yStartCrop'] === '') 
+                {
+                    if($currentDimantions['height'] / $currentDimantions['width'] < 0.5) 
+                        $thumb->cropFromCenter($currentDimantions['height'] * 2, $currentDimantions['height']);
+                    else 
+                        $thumb->cropFromCenter($currentDimantions['width'], $currentDimantions['width'] / 2);
+                }
+                else 
+                {
+                    $scale = $currentDimantions['width'] / $post['widthCurrent'];
+
+                    $thumb->crop($post['xStartCrop'] * $scale, 
+                                 $post['yStartCrop'] * $scale,
+                                 $post['widthCrop'] * $scale, 
+                                 $post['heightCrop'] * $scale
+                                );
+                }
+
+                $thumb->resize(640, 320);
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName;
+                $thumb->save($resizedImg);
+
+                $thumb->resize(224, 112);
+                $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName;    
+                $thumb->save($mailImg);
+
+                if($currentDimantions['height'] / $currentDimantions['width'] < 1)
+                    $thumb_square->cropFromCenter($currentDimantions['height'], $currentDimantions['height']);
+                else 
+                    $thumb_square->cropFromCenter($currentDimantions['width'], $currentDimantions['width']);
+
+                $thumb_square->resize(60, 60);
+                $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
+                $thumb_square->save($mailImg);   
+
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName, 0777);
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName, 0777); 
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName, 0777); 
+
+                $eventEntity->setImage($imageName);
+                $eventEntity->setCity($city);
+
+                $this->getEntityManager()->persist($eventEntity);
+                $this->getEntityManager()->flush();
+
+                $eventEntity = $em->getRepository('Admin\Entity\Event')->findOneBy(array('id' => $eventID));
+                
+                return $this->redirect()->toRoute('administrator_content/event_preview', array(
+                    'country'   => $eventEntity->getCity()->getCountry()->getName(), 
+                    'city'      => $eventEntity->getCity()->getName(), 
+                    'dateslug'  => $eventEntity->getDateSlug(), 
+                    'titleslug' => $eventEntity->getTitleSlug(), 
+                ));
+            }
+        }
+        else
+        {
+            $eventForm->bind($eventEntity);
+            $dateTimeEvent = $eventEntity->getDateTimeEvent();
+            $eventForm->get('date')->setValue($dateTimeEvent->format('d/m/Y'));
+            $eventForm->get('time')->setValue($dateTimeEvent->format('H:i'));
+        }
+
+        return array(
+            'event' => $eventEntity,
+            'form' => $eventForm,
+            'flashMessages' => $this->flashMessenger()->getMessages(),
         );
     }
 }

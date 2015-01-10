@@ -75,6 +75,8 @@ class NewsletterController extends Action
                 $this->entityManager->persist($newletterEntity);
                 $this->entityManager->flush();
 
+                
+
                 return $this->redirect()->toRoute('administrator_content/event_preview', array(
                     'country'   => $eventEntity->getCity()->getCountry()->getName(), 
                     'city'      => $eventEntity->getCity()->getName(), 

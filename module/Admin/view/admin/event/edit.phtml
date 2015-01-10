@@ -12,16 +12,30 @@
                 <!--Profile Body-->
                 <div class="profile-body">
                     <!--Table Search v2-->
-                    <?php $form->setAttribute('action', $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create-second-step', 'id' => $eventID)))->prepare(); ?>
+                    <?php $form->setAttribute('action', $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'edit', 'id' => $event->getId())))->prepare(); ?>
                     <?php echo $this->form()->openTag($form); ?>
                     <!-- <form action="" class="sky-form"> -->
                     <header><?php echo $event->getTitle(); ?></header>
                     
 
                     <fieldset>
+                        <section class="col-md-12">
+                            <?php echo $this->formLabel($this->form->get('title')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('title')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('title')); ?>
+                        </section>
+
+                            <?php if($event->getImage() != null): ?>
+                            <div class="col col-12 imag_center">
+                                <img style="max-height: 320px;max-width: 640px; "id="blah" src="<?php echo '/uploads/events' . DIRECTORY_SEPARATOR . $event->getId() . DIRECTORY_SEPARATOR . $event->getImage(); ?>" alt="your image" />
+                            </div>
+                            <?php else: ?>
                             <div class="col col-12 imag_center">
                                 <img style="max-height: 320px;max-width: 640px; "id="blah" src="/frontend/img/noimage.png" alt="your image" />
                             </div>
+                            <?php endif; ?>
 
                             <section class="col col-6">
                                 <?php echo $this->formLabel($this->form->get('image')); ?>
@@ -48,6 +62,24 @@
                                 <?php echo $this->formSelect($this->form->get('venue')); ?>
                             </label>
                         </section>
+
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('date')); ?>
+                            <label class="input">
+                                <i class="icon-append fa fa-calendar"></i>
+                                <?php echo $this->formInput($this->form->get('date')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('date')); ?>
+                        </section>
+
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('time')); ?>
+                            <label class="input">
+                                <i class="icon-append fa fa-clock-o"></i>
+                                <?php echo $this->formInput($this->form->get('time')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('time')); ?>
+                        </section>
                         
                         <section class="col-md-12">
                             <?php echo $this->formLabel($this->form->get('entrancefee')); ?>
@@ -67,7 +99,7 @@
                     </fieldset>
 
                     <footer>
-                        <button type="submit" class="btn-u">Create</button>
+                        <button type="submit" class="btn-u">Save</button>
                         <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
                     </footer>
                 <!-- </form> -->
@@ -80,12 +112,6 @@
     </div>
 
 <script>
-    // $(function() {
-    //     $( "#datepicker" ).datepicker({
-    //         prevText: '<i class="fa fa-angle-left"></i>',
-    //         nextText: '<i class="fa fa-angle-right"></i>'
-    //     });
-    // });
     $('#event-date').datepicker({
         prevText: '<i class="fa fa-angle-left"></i>',
         nextText: '<i class="fa fa-angle-right"></i>',
@@ -93,6 +119,7 @@
     $('#event-time').datetimepicker({
         format:'H:i',
         datepicker:false,
+        step:15,
     });
 
     function readURL(input) {
@@ -108,15 +135,12 @@
         }
     }
 
+    var x1 = 20;
 
-
-
-    // $(document).ready(function () {
-    //     $('#ava').imgAreaSelect({
-    //         handles: true,
-    //         onSelectEnd: someFunction
-    //     });
-    // });
+    console.log(typeof $('#x-start-crop').val());
+    console.log($('#y-start-crop').val() + $('#height-crop').val());
+    console.log($('#y-start-crop').val() + $('#height-crop').val());
+    console.log($('#y-start-crop').val() + $('#height-crop').val());
 
     $(document).ready(function () {
         $('#blah').imgAreaSelect({ 
@@ -126,10 +150,14 @@
             handles: true,
             // show: true,
             onSelectChange: preview,
+            x1: parseInt($('#x-start-crop').val(), 10),
+            y1: parseInt($('#y-start-crop').val(), 10),
+            x2: parseInt($('#x-start-crop').val(), 10) + parseInt($('#width-crop').val(), 10),
+            y2: parseInt($('#y-start-crop').val(), 10) + parseInt($('#height-crop').val(), 10),
         });
     });
 
-    $("#event-image").change(function(){
+    $("#image").change(function(){
         readURL(this);
     });
 

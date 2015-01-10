@@ -14,38 +14,44 @@
                  
                     <div class="profile-body">
                         <div class="row">
-                    <!-- <div class="col-md-6">
-                        <div class="alert alert-info fade in">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h4>Info! Important Message!</h4>
-                            <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                            <p>
-                                <a class="btn-u btn-u-xs btn-u-default" href="#"><i class="fa fa-cog"></i> Take this action</a> 
-                                <a class="btn-u btn-u-xs btn-u-dark" href="#"><i class="fa fa-flask"></i> Or do this</a>
-                            </p>
+                            <div class="col-md-12">
+
+                                <?php if(count($flashMessages)) : ?>
+                                <div class="alert alert-success fade in">
+                                    <?php foreach ($flashMessages as $msg) : ?>
+                                    <?php echo $msg; ?> <br>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php endif; ?>
+
+                                <?php if(!$event->getNewsletterCreated()): ?>
+                                <div class="alert alert-warning fade in">
+                                    <h4>Newsletter has not been created, you can not sending mails to inform subcribers about this event</h4>
+                                    <p>
+                                        <!-- <a class="btn-u btn-u-xs btn-u-red" href="#">Take this action</a> --> <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'create', 'id' => $event->getId())); ?>">Create newsletter</a>
+                                    </p>
+                                </div>
+                                <?php else: ?>
+                                <div class="alert alert-warning fade in">
+                                    <h4>Newsletter about this event has not been sent to subscribers</h4>
+                                    <p>
+                                        <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'send', 'id' => $event->getNewsletter()->getId())); ?>">Send</a>
+                                        <a class="btn-u btn-u-xs btn-u-dark-blue" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Preview</a>
+                                        <a class="btn-u btn-u-xs btn-u-orange" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Edit</a>
+                                        <a class="btn-u btn-u-xs btn-u-red" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Delete</a>
+                                    </p>
+                                </div> 
+                                <?php endif; ?>
+                            </div>
                         </div>
-                    </div> -->
-                    <div class="col-md-12">
-                        <?php if(!$event->getNewsletterCreated()): ?>
-                        <div class="alert alert-warning fade in">
-                            <h4>Newsletter not created!</h4>
-                            <p>You can not sending mail for this event. Newsletter should be created first to inform subcribers about event.</p>
-                            <p>
-                                <!-- <a class="btn-u btn-u-xs btn-u-red" href="#">Take this action</a> --> <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'create', 'id' => $event->getId())); ?>">Create newsletter</a>
-                            </p>
-                        </div>
+                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'edit', 'id' => $event->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-pencil"></i> Edit</a>
+                        <?php if($event->getPublished()): ?>
+                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'unpublish', 'id' => $event->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-times"></i> Unpublish</a>
                         <?php else: ?>
-                        <div class="alert alert-info fade in">
-                            <h4>Newsletter created!</h4>
-                            <p>Newsletter created but was not sent to subscribers.</p>
-                            <p>
-                                <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'send', 'id' => $event->getNewsletter()->getId())); ?>">Send Newsletter</a>
-                                <a class="btn-u btn-u-xs btn-u-orange" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Show Template</a>
-                            </p>
-                        </div> 
+                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'publish', 'id' => $event->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-share"></i> Publish</a>
                         <?php endif; ?>
-                    </div>
-                </div>
+                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-facebook"></i> Create Event On Facebook</a>
+                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create-first-step' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-trash-o"></i> Delete Event</a>
                         <!-- <div class="alert alert-success fade in margin-bottom-40">
                             <h4>Event Published!</h4>
                             At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
@@ -84,28 +90,7 @@
                             </div>    
                         
                             <footer>
-                                <button type="submit" class="btn-u">Leave Unpublished</button>
-                                <!-- <div class="inline-group">
-                                    <label class="checkbox"><?php //echo $this->formCheckbox($this->form->get('publish')); ?><i></i> Publish</label>
 
-                                    <label class="checkbox"><?php //echo $this->formCheckbox($this->form->get('newsletter')); ?><i></i> Newsletter</label> 
-                                </div> -->
-                            <!-- <?php //echo $this->formLabel($this->form->get('publish')); ?> -->
-                            
-                        <!-- <section> -->
-                            <!-- <label class="label">Textarea</label> -->
-                            <!-- <?php //echo $this->formLabel($this->form->get('submit')); ?> -->
-                            <!-- <label class="button"> -->
-                            <?php //$form->setAttribute('action', $this->url('administrator_content/event_preview', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )))->prepare(); ?>
-                            <?php //echo $this->form()->openTag($form); ?>
-                            <?php echo $this->formButton($this->form->get('submit'), 'Publish'); ?>
-                            <?php //echo $this->form()->closeTag($form); ?>
-                            <!-- </label> -->
-                            <button type="submit" class="btn-u">Send to Subscribers</button>
-                            <button type="submit" class="btn-u">Create event on Facebook</button>
-                        <!-- </section> -->
-                        <!-- <button type="submit" class="btn-u">Submit</button> --><!-- 
-                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button> -->
                     </footer>
                 <!-- </form> -->
                     

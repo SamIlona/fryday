@@ -9,14 +9,10 @@
             <!--End Left Sidebar-->
             
             <div class="col-md-9">
-                <!--Profile Body-->
-                
+                <!--Profile Body-->              
                 <div class="profile-body">
-                    <!-- <div class="col-md-12"> -->
-                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create-first-step' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-left margin-bottom-20">Create Event</a>
-
-                        <br>
-                        <br><br>
+                    <!-- <div class="col-md-12"> --> 
+                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create-first-step' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20">Create Event</a>
                     <!-- </div> -->
                     <!-- <div class="profile-body margin-bottom-20"> -->
                     <!-- <div class="col-md-12"> -->
@@ -57,7 +53,7 @@
                                                     <td  class="m-center">
                                                         <div class="m-marker">
                                                             <!-- <a href="#"> -->
-                                                            <?php if ($event->getPubished() == true): ?>
+                                                            <?php if ($event->getPublished() == true): ?>
                                                                 <i class="color-green fa fa-check-circle"></i>
                                                             <?php else: ?>
                                                                 <i class="color-red fa fa-minus-circle"></i>

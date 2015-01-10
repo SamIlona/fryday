@@ -64,10 +64,10 @@ class Event extends \Admin\Entity\Event implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'title', 'titleslug', 'dateslug', 'dateTimeEvent', 'image', 'city', 'venue', 'description', 'details', 'user', 'entrancefee', 'pubished', 'newsletter', 'newsletterCreated', 'newsletterSend', 'dateTimeCreated');
+            return array('__isInitialized__', 'id', 'title', 'titleslug', 'dateslug', 'dateTimeEvent', 'image', 'xStartCrop', 'yStartCrop', 'widthCrop', 'heightCrop', 'widthCurrent', 'heightCurrent', 'city', 'venue', 'description', 'details', 'user', 'entrancefee', 'published', 'newsletter', 'newsletterCreated', 'newsletterSend', 'dateTimeCreated');
         }
 
-        return array('__isInitialized__', 'id', 'title', 'titleslug', 'dateslug', 'dateTimeEvent', 'image', 'city', 'venue', 'description', 'details', 'user', 'entrancefee', 'pubished', 'newsletter', 'newsletterCreated', 'newsletterSend', 'dateTimeCreated');
+        return array('__isInitialized__', 'id', 'title', 'titleslug', 'dateslug', 'dateTimeEvent', 'image', 'xStartCrop', 'yStartCrop', 'widthCrop', 'heightCrop', 'widthCurrent', 'heightCurrent', 'city', 'venue', 'description', 'details', 'user', 'entrancefee', 'published', 'newsletter', 'newsletterCreated', 'newsletterSend', 'dateTimeCreated');
     }
 
     /**
@@ -279,6 +279,138 @@ class Event extends \Admin\Entity\Event implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function setXStartCrop($xStartCrop)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setXStartCrop', array($xStartCrop));
+
+        return parent::setXStartCrop($xStartCrop);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getXStartCrop()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getXStartCrop', array());
+
+        return parent::getXStartCrop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setYStartCrop($yStartCrop)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setYStartCrop', array($yStartCrop));
+
+        return parent::setYStartCrop($yStartCrop);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getYStartCrop()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getYStartCrop', array());
+
+        return parent::getYStartCrop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHeightCrop($heightCrop)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHeightCrop', array($heightCrop));
+
+        return parent::setHeightCrop($heightCrop);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHeightCrop()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHeightCrop', array());
+
+        return parent::getHeightCrop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setWidthCrop($widthCrop)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setWidthCrop', array($widthCrop));
+
+        return parent::setWidthCrop($widthCrop);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getWidthCrop()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getWidthCrop', array());
+
+        return parent::getWidthCrop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setWidthCurrent($widthCurrent)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setWidthCurrent', array($widthCurrent));
+
+        return parent::setWidthCurrent($widthCurrent);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getWidthCurrent()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getWidthCurrent', array());
+
+        return parent::getWidthCurrent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHeightCurrent($heightCurrent)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHeightCurrent', array($heightCurrent));
+
+        return parent::setHeightCurrent($heightCurrent);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHeightCurrent()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHeightCurrent', array());
+
+        return parent::getHeightCurrent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setVenue($venue)
     {
 
@@ -411,23 +543,23 @@ class Event extends \Admin\Entity\Event implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setEntranceFee($entrancefee)
+    public function setEntrancefee($entrancefee)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEntranceFee', array($entrancefee));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEntrancefee', array($entrancefee));
 
-        return parent::setEntranceFee($entrancefee);
+        return parent::setEntrancefee($entrancefee);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getEntranceFee()
+    public function getEntrancefee()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEntranceFee', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEntrancefee', array());
 
-        return parent::getEntranceFee();
+        return parent::getEntrancefee();
     }
 
     /**
@@ -444,23 +576,23 @@ class Event extends \Admin\Entity\Event implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setPubished($pubished)
+    public function setPublished($published)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPubished', array($pubished));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPublished', array($published));
 
-        return parent::setPubished($pubished);
+        return parent::setPublished($published);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getPubished()
+    public function getPublished()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPubished', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPublished', array());
 
-        return parent::getPubished();
+        return parent::getPublished();
     }
 
     /**

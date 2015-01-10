@@ -58,6 +58,7 @@ class VenueController extends Action
         return array(
             'venues' => $venues, 
             'filesDir' => end(explode("public", $this->getUploadPath())),
+            'flashMessages' => $this->flashMessenger()->getMessages(),
         );
     }
 
@@ -195,6 +196,8 @@ class VenueController extends Action
 
                 $this->entityManager->persist($venueEntity);
                 $this->entityManager->flush();
+
+                $this->flashMessenger()->addMessage('<strong>Well done!</strong> Venue has been successfully created!');
 
                 return $this->redirect()->toRoute('administrator_content/default', array('controller' => 'venue', 'action' => 'index'));
             }

@@ -26,7 +26,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
  * @package    Admin
  * @subpackage Form
  */
-class CreateEventSecondStepForm extends Form 
+class EditEventForm extends Form 
 {
     /**
      * @var EntityManager
@@ -46,6 +46,7 @@ class CreateEventSecondStepForm extends Form
     public function __construct($name, $entityManager, $user, $dir)
     {
         parent::__construct($name);
+        $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\Event'));
         $this->setAttributes(
             array(
                 'method'    => 'post',
@@ -60,6 +61,39 @@ class CreateEventSecondStepForm extends Form
 
     public function addElements($user)
     {
+        $title = new Element\Text('title');
+        $title->setLabel('Title')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'label',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'event-title');
+        $this->add($title);
+
+        $date = new Element\Text('date');
+        $date->setLabel('Date')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'label',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'event-date');
+        $this->add($date);
+
+        $time = new Element\Text('time');
+        $time->setLabel('Time')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'label',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'event-time');
+        $this->add($time);
+
         $xStartCrop = new Element\Hidden('xStartCrop');
         $xStartCrop->setAttribute('id', 'x-start-crop');
         $this->add($xStartCrop);
@@ -91,7 +125,8 @@ class CreateEventSecondStepForm extends Form
                     'class' => 'label',
                 )
             )
-            ->setAttribute('id', 'event-image')
+            // ->setAttribute('class', 'file col-lg-10')
+            ->setAttribute('id', 'image')
             ->setAttribute('onchange', 'this.parentNode.nextSibling.value = this.value');
         $this->add($image);
 
@@ -105,7 +140,7 @@ class CreateEventSecondStepForm extends Form
             ->setValueOptions($this->entityManager->getRepository('Admin\Entity\Venue')->getAllVenuesAsOptions($user))
             ->setEmptyOption('Select venue...')
             ->setAttribute('class', 'form-control')
-            ->setAttribute('id', 'event-venue');
+            ->setAttribute('id', 'venue');
         $this->add($venue);
 
         $details = new Element\Textarea('details');
@@ -119,27 +154,23 @@ class CreateEventSecondStepForm extends Form
                 array(
                     'class'     => 'form-control',
                     'rows'      => '7',
-                    'id'        => 'event-details',
+                    'id'        => 'details',
                 )
             );
         $this->add($details);
 
         $entrancefee = new Element\Text('entrancefee');
         $entrancefee->setLabel('Entrancee Fee (Optional)')
-            ->setLabelAttributes(
-                array(
-                    'class' => 'label',
-                )
-            )
+            ->setLabelAttributes(array('class' => 'label'))
             ->setAttribute('class', 'form-control')
-            ->setAttribute('id', 'event-entrancefee');
+            ->setAttribute('id', 'venue-entrancefee');
         $this->add($entrancefee);
 
         $submit = new Element\Submit('submit');
         $submit
             ->setValue('Save')
             ->setAttribute('class', 'btn-u')
-            ->setAttribute('id', 'event-submit');
+            ->setAttribute('id', 'submit');
         $this->add($submit);
     }
 
@@ -151,6 +182,39 @@ class CreateEventSecondStepForm extends Form
     public function addInputFilter()
     {
         $inputFilter = new InputFilter\InputFilter();
+
+        $inputFilter->add(
+            array(
+                'name' => 'title',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'title'
+        );
+
+        $inputFilter->add(
+            array(
+                'name' => 'date',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'date'
+        );
+
+        $inputFilter->add(
+            array(
+                'name' => 'time',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'time'
+        );
 
         // Image Input
         $imageInput = new InputFilter\FileInput('image');
@@ -165,23 +229,6 @@ class CreateEventSecondStepForm extends Form
             )
         );
         $inputFilter->add($imageInput);
-
-        
-
-        // $inputFilter->add( 
-        //     array(
-        //         'name' => 'newsletter',
-        //         'required' => false,
-        //     ),
-        //     array(
-        //         'name' => 'newsletter',
-        //         'required' => false,
-        //     ),
-        //     array(
-        //         'name' => 'newsletter',
-        //         'required' => false,
-        //     ),
-        // );
 
         $this->setInputFilter($inputFilter);
     }

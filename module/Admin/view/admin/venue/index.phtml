@@ -11,6 +11,13 @@
             <div class="col-md-9">
                 <!--Profile Body-->
                 <div class="profile-body">
+                    <?php if(count($flashMessages)) : ?>
+                    <div class="alert alert-success fade in">
+                        <?php foreach ($flashMessages as $msg) : ?>
+                        <?php echo $msg; ?> <br>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php endif; ?>
                     <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'venue', 'action' => 'create-first-step' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-left margin-bottom-20">Add Venue</a>
                     <div class="table-search-v2 margin-bottom-20">
                         <div class="table-responsive">
