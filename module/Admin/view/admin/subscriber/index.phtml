@@ -11,46 +11,46 @@
             <div class="col-md-9">
                 <!--Profile Body-->
                 <div class="profile-body">
-                    <!--Table Search v2-->
                     <div>
-                    <a href="<?php echo $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'create' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-default btn-u-xs margin-bottom-20">Add Subscriber</a>
-                    <a href="<?php echo $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'csv-parse' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-red btn-u-xs margin-bottom-20">CSV Parser</a>
-                    </div>
-                    <div class="table-search-v2 margin-bottom-20">
-                        <div class="table-responsive">
-
-                            <?php if(count($flashMessages)) : ?>
-                            <div class="alert alert-danger fade in">
-                                Subscribers with following email already exist and did not add to Fryday database: <br> <br>
+                        <?php if(count($flashMessages)) : ?>
+                            <div class="alert alert-success fade in">
                                 <?php foreach ($flashMessages as $msg) : ?>
                                 <?php echo $msg; ?> <br>
                                 <?php endforeach; ?>
                             </div>
                             <?php endif; ?>
-
+                    </div>
+                    <div>
+                    <a href="<?php echo $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'create' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-default btn-u-xs margin-bottom-20">Add Subscriber</a>
+                    <a href="<?php echo $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'csv-parse-text' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-red btn-u-xs margin-bottom-20">CSV Text Parser</a>
+                    <a href="<?php echo $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'csv-parse-file' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-red btn-u-xs margin-bottom-20">CSV File Parser</a>
+                    </div>
+                    <div class="table-search-v2 margin-bottom-20">
+                        <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="hidden-sm">Name</th>
-                                        <th>Status</th>
-                                        <th>Contacts</th>
+                                        <th>Name</th>
+                                        <th>City</th>
+                                        <th>Name</th>
+                                        <!-- <th>Last Name</th> -->
+                                        <th>Company</th>
+                                        <th>Position</th>
+                                        <!-- <th class="hidden-sm">Contacts</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($subscribers as $subscriber): ?>
                                     <tr>
-                                        <td class="td-width">
-                                            <h3><a href="#"><?php echo $subscriber->getFirstName(); ?></a></h3>
-                                            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non malesuada ante. Donec vel arcu.</p>
-                                            <small class="hex">Joined February 28, 2014</small> -->
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-                                            <span><a href="#"><?php echo $subscriber->getEmail(); ?></a></span>
-                                            <span><a href="#"><?php echo $subscriber->getCity()->getName(); ?></a></span>
-                                        </td>
+                                        <td><?php echo $subscriber->getEmail();?></td>
+                                        <td><?php echo $subscriber->getCity()->getName();?></td>
+                                        <td><?php echo $subscriber->getFirstName();?> <?php echo $subscriber->getLastName();?></td>
+                                        <!-- <td></td> -->
+                                        <td><?php echo $subscriber->getCompany();?></td>
+                                        <td><?php echo $subscriber->getPosition();?></td>
+                                        <!-- <td class="td-width">
+                                            <span><a href="#"><?php //echo $subscriber->getEmail(); ?></a></span>
+                                        </td> -->
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

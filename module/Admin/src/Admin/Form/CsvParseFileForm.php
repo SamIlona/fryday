@@ -26,7 +26,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
  * @package    Admin
  * @subpackage Form
  */
-class CsvParseForm extends Form 
+class CsvParseFileForm extends Form 
 {
     /**
      * @var EntityManager
@@ -43,7 +43,7 @@ class CsvParseForm extends Form
      *
      * @param null|string|int $name Optional name for the element
      */
-    public function __construct($name, $entityManager)
+    public function __construct($name, $entityManager, $dir)
     {
         parent::__construct($name);
         $this->setAttributes(
@@ -52,7 +52,7 @@ class CsvParseForm extends Form
                 'class'     => 'sky-form'
             )
         );
-        // $this->_dir = $dir;
+        $this->_dir = $dir;
         $this->entityManager = $entityManager;
         $this->addElements();
         $this->addInputFilter();
@@ -60,8 +60,8 @@ class CsvParseForm extends Form
 
     public function addElements()
     {
-        $csvText = new Element\Textarea('csvText');
-        $csvText->setLabel('CSV Text')
+        $csvFile = new Element\File('csvFile');
+        $csvFile->setLabel('File *.csv')
             ->setLabelAttributes(
                 array(
                     'class' => 'label',
@@ -69,12 +69,12 @@ class CsvParseForm extends Form
             )
             ->setAttributes(
                 array(
-                    'class'     => 'form-control',
-                    'rows'      => '7',
-                    'id'        => 'csv-parse-text',
+                    // 'class'         => 'file col-lg-10',
+                    'id'            => 'csv-file',
+                    'onchange'      => 'this.parentNode.nextSibling.value = this.value',
                 )
             );
-        $this->add($csvText);
+        $this->add($csvFile);
 
         $city = new Element\Select('city');
         $city->setLabel('City')
@@ -106,19 +106,21 @@ class CsvParseForm extends Form
     {
         $inputFilter = new InputFilter\InputFilter();
 
-        // Image Input
-        // $imageInput = new InputFilter\FileInput('image');
-        // $imageInput->setRequired(false);
-        // $imageInput->getFilterChain()->attachByName(
-        //     'filerenameupload',
-        //     array(
-        //         'target'        =>  $this->_dir . DIRECTORY_SEPARATOR . 'original_image',
-        //         'randomize'     => true,
-        //         // 'overwrite'     => true,
-        //         // 'use_upload_name' => true,
-        //     )
-        // );
-        // $inputFilter->add($imageInput);
+        $csvFile = new InputFilter\FileInput('csvFile');
+        // $csvFile->setRequired(false);
+        $csvFile->getValidatorChain()
+            ->attachByName('filesize', array('max' => 40000000))
+            ->attach(new \Zend\Validator\File\Extension('csv'));
+        $csvFile->getFilterChain()->attachByName(
+            'filerenameupload',
+            array(
+                'target'        =>  $this->_dir . DIRECTORY_SEPARATOR . 'database_',
+                'randomize'     => true,
+                // 'overwrite'     => true,
+                // 'use_upload_name' => true,
+            )
+        );
+        $inputFilter->add($csvFile);
 
         
 

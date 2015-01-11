@@ -197,7 +197,7 @@ class VenueController extends Action
                 $this->entityManager->persist($venueEntity);
                 $this->entityManager->flush();
 
-                $this->flashMessenger()->addMessage('<strong>Well done!</strong> Venue has been successfully created!');
+                $this->flashMessenger()->addMessage('<strong>Well done!</strong> Venue has been successfully added!');
 
                 return $this->redirect()->toRoute('administrator_content/default', array('controller' => 'venue', 'action' => 'index'));
             }

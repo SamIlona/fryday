@@ -22,7 +22,8 @@ return array(
                     'all'         => 'administrator',
                 ),
                 'Admin\Controller\Subscriber' => array(
-                    'all'         => 'administrator',
+                    'all'                   => 'administrator',
+                    'do-parse-file-console' => 'guest'
                 ),
                 'Main\Controller\Index' => array(
                     'all'         => 'guest',
@@ -44,6 +45,9 @@ return array(
                 ),
                 'Admin\Controller\Newsletter' => array(
                     'all'      => array('administrator', 'franchisor'),
+                ),
+                'MyModule\Controller\Do' => array(
+                    'all'       => 'guest',
                 ),
             )
         )

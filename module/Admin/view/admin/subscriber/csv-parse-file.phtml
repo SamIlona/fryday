@@ -12,7 +12,7 @@
                 <!--Profile Body-->
                 <div class="profile-body">
                     <!--Table Search v2-->
-                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'csv-parse')))->prepare(); ?>
+                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'csv-parse-file')))->prepare(); ?>
                     <?php echo $this->form()->openTag($form); ?>
                     <!-- <form action="" class="sky-form"> -->
                     <header>CSV Parser</header>
@@ -28,12 +28,16 @@
                         </section>
 
                         <section class="col-md-12">
-                            <!-- <label class="label">Textarea</label> -->
-                            <?php echo $this->formLabel($this->form->get('csvText')); ?>
-                            <label class="textarea">
-                                <?php echo $this->formTextarea($this->form->get('csvText')); ?>
-                            </label>
-                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('csvText')); ?>
+                                <?php echo $this->formLabel($this->form->get('csvFile')); ?>
+                                <label for="csvFile" class="input input-file">
+                                    <div class="button">
+                                        <?php echo $this->formFile($this->form->get('csvFile')); ?>
+                                        Browse
+                                    </div>
+                                    <input readonly="" type="text">
+                                    <?php //echo $this->formFile($this->form->get('profileImage')); ?>
+                                </label>
+                                <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('csvFile')); ?>
                         </section>
 
 

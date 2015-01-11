@@ -10,6 +10,9 @@
 namespace Admin;
 
 return array(
+    'path_to_data_files' => array(
+        'csv'       => 'data/csv'
+    ),
     'path_to_uploads' => array(
         'partner'   => 'public/uploads/partners',
         'event'     => 'public/uploads/events',
@@ -226,6 +229,25 @@ return array(
                 ),
             ),
         ),
+    ),
+
+    'console' => array(
+        'router' => array(
+            'routes' => array(
+                'parse-file' => array(
+                    'options' => array(
+                                    // add [ and ] if optional ( ex : [<doname>] )
+                        // 'route' => 'get happen [--verbose|-v] <doname>',
+                        'route' => 'parse file <filename> <cityid>',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Admin\Controller',
+                            'controller' => 'subscriber',
+                            'action' => 'do-parse-file-console'
+                        ),
+                    ),
+                ),
+            )
+        )
     ),
 
     'navigation' => array(

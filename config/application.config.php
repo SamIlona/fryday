@@ -12,6 +12,7 @@ return array(
         'WebinoImageThumb',
         'Main',
         'Admin',
+        'MyModule',
         //'Content',
         // 'Backend',
     ),
