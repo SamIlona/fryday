@@ -22,6 +22,12 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 use Zend\Console\Request as ConsoleRequest;
 
+// Pagination
+use DoctrineModule\Paginator\Adapter\Selectable as SelectableAdapter;
+use Doctrine\Common\Collecttions\Criteria as DoctrineCriteria; // for criteria
+use Zend\Paginator\Paginator;
+
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 
 /**
  * Subscriber controller
@@ -54,11 +60,19 @@ class SubscriberController extends Action
      */
     public function indexAction()
     {
-        $this->entityManager = $this->getEntityManager();
-        $subscribers = $this->entityManager->getRepository('Admin\Entity\Subscriber')->findAll();
+        $em = $this->getEntityManager();
+
+        $adapter = new SelectableAdapter($em->getRepository('Admin\Entity\Subscriber'));
+        $paginator = new Paginator($adapter);
+        $page = 1;
+        if ($this->params()->fromRoute('page')) 
+            $page = $this->params()->fromRoute('page');
+        $paginator->setCurrentPageNumber((int)$page)
+                  ->setItemCountPerPage(300); 
+        // $subscribers = $this->entityManager->getRepository('Admin\Entity\Subscriber')->findAll();
 
         return array(
-            'subscribers' => $subscribers,
+            'paginator' => $paginator,
             'flashMessages' => $this->flashMessenger()->getMessages(),
         );
     }
@@ -239,12 +253,12 @@ class SubscriberController extends Action
         if (! $handle)
             throw new \RuntimeException("Could not open the file!");
 
-        // echo $handle;
-
         if ($handle) {
             while (($data = fgets($handle, 4096)) !== false) {
                 if(strlen($data) > 1)
                 {
+                    $time = new \Datetime();
+
                     $row_data = explode(',', $data);
 
                     $email      = $row_data[0];
@@ -258,7 +272,15 @@ class SubscriberController extends Action
                         // $cityID     = $row_data[6];
                         $city       = $em->getRepository('Admin\Entity\City')->getCityByID($cityID);
 
+                        // $validator = new \DoctrineModule\Validator\NoObjectExists(
+                        //     array(
+                        //         'object_repository' => $this->entityManager->getRepository('Admin\Entity\Subscriber'),
+                        //         'fields' => array('email'),
+                        //     )
+                        // );
+
                         if(($subscriber = $em->getRepository('Admin\Entity\Subscriber')->getSubscriberByEmail($email)) == null)
+                        // if($validator->isValid($email))
                         {
                             $subscriberEntity = new Entity\Subscriber();
 
@@ -273,16 +295,19 @@ class SubscriberController extends Action
                             $em->persist($subscriberEntity);
                             $em->flush();
 
-                            echo $email . " successfully added to the Fryday database! \n";
+                            echo '[' . $time->format("Y-m-d H:i:s") . "] " . 
+                                $email . " successfully added to the Fryday database! \n";
                         }
                         else
                         {
-                            echo "FAIL! " . $email . " already exist in the Fryday database! \n";
+                            echo "FAIL! [" . $time->format("Y-m-d H:i:s") . "] " . 
+                                $email . " already exist in the Fryday database! \n";
                         }
                     } 
                     else
                     {
-                        echo "FAIL! " . $email . " not valid! \n";
+                        echo "FAIL! [" . $time->format("Y-m-d H:i:s") . "] " . 
+                            $email . " not valid! \n";
                     }
                 }
             }

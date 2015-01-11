@@ -40,7 +40,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($subscribers as $subscriber): ?>
+                                    <?php foreach ($paginator as $subscriber): ?>
                                     <tr>
                                         <td><?php echo $subscriber->getEmail();?></td>
                                         <td><?php echo $subscriber->getCity()->getName();?></td>
@@ -58,6 +58,9 @@
                         </div>    
                     </div>
                     <!--End Table Search v2-->
+                    <?php echo $this->paginationControl($this->paginator,
+                                    'Sliding', // All, Elastic, Jumping, Sliding
+                                    'search_pagination.phtml', array('route' => 'administrator/paginator')); ?>
                 </div>
                 <!--End Profile Body-->
             </div>

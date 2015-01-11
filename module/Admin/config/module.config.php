@@ -145,6 +145,20 @@ return array(
                             ),
                         ),
                     ),
+                    'paginator' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:controller/[page/:page]',
+                            'constraints' => array(
+                                'page' => '[0-9]*',
+                            ),
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Admin\Controller',
+                                'controller'    => 'Subscriber',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
                 ),
             ),
             'administrator_content' => array(
@@ -311,7 +325,7 @@ return array(
             ),
             array(
                 'label' => '<i class="fa fa-database "></i> Subscribers',
-                'route' => 'administrator/default',
+                'route' => 'administrator/paginator',
                 'controller' => 'subscriber',
                 'class' => 'list-group-item',
             ),

@@ -61,7 +61,7 @@ class CsvParseFileForm extends Form
     public function addElements()
     {
         $csvFile = new Element\File('csvFile');
-        $csvFile->setLabel('File *.csv')
+        $csvFile->setLabel('File *.csv (size < 3 MB)')
             ->setLabelAttributes(
                 array(
                     'class' => 'label',
