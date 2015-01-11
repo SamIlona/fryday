@@ -4,7 +4,7 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 
 <?php if ($this->pageCount): ?>
 <div class="text-center">
-  <ul class="pagination">
+  <ul class="pagination pagination-sm">
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
   <li><a href="<?php echo $this->url($this->route, array('page' => $this->previous)); ?>">«</a></li>

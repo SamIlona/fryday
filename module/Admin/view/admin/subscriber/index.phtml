@@ -25,6 +25,9 @@
                     <a href="<?php echo $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'csv-parse-text' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-red btn-u-xs margin-bottom-20">CSV Text Parser</a>
                     <a href="<?php echo $this->url('administrator/default', array('controller' => 'subscriber', 'action' => 'csv-parse-file' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-red btn-u-xs margin-bottom-20">CSV File Parser</a>
                     </div>
+                    <?php echo $this->paginationControl($this->paginator,
+                                    'Sliding', // All, Elastic, Jumping, Sliding
+                                    'search_pagination.phtml', array('route' => 'administrator/paginator')); ?>
                     <div class="table-search-v2 margin-bottom-20">
                         <div class="table-responsive">
                             <table class="table table-hover">
