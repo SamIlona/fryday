@@ -10,6 +10,7 @@
 namespace Admin\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * User Repository
@@ -21,7 +22,7 @@ use Doctrine\ORM\EntityRepository;
 
 class SubscriberRepository extends EntityRepository
 {
-    public function getPagedUsers($offset = 0, $limit = 10)
+    public function getPagedSubscribers($offset = 0, $limit = 10)
     {
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
@@ -32,12 +33,12 @@ class SubscriberRepository extends EntityRepository
             ->setMaxResults($limit)
             ->setFirstResult($offset);
 
-        // $query = $qb->getQuery();
-        $query = $qb->getQuery()->getResult();
-        // $paginator = new Paginator( $query );
+        $query = $qb->getQuery();
+        // $query = $qb->getQuery()->getResult();
+        $paginator = new Paginator( $query );
 
-        // return $paginator;
-        return $query; 
+        return $paginator;
+        // return $query; 
     }
 
 	public function getSubscriberByEmailAndIndx($email, $indx)

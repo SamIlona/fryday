@@ -10,6 +10,11 @@
 namespace Admin;
 
 return array(
+    'view_helpers' => array(
+        'invokables'=> array(
+            'PaginationHelper' => 'Admin\View\Helper\PaginationHelper'
+        )
+    ),
     'path_to_data_files' => array(
         'csv'       => 'data/csv'
     ),

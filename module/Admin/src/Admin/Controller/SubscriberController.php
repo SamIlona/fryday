@@ -60,22 +60,40 @@ class SubscriberController extends Action
      */
     public function indexAction()
     {
-        $em = $this->getEntityManager();
+        $page = $this->params()->fromRoute('page', 1);
+        # move to service
+        $limit = 500;
+        $offset = ($page == 0) ? 0 : ($page - 1) * $limit;
+        $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $pagedSubscribers = $em->getRepository('Admin\Entity\Subscriber')->getPagedSubscribers($offset, $limit);
 
-        // $adapter = new SelectableAdapter($em->getRepository('Admin\Entity\Subscriber'));
-        // $paginator = new Paginator($adapter);
-        // $page = 1;
-        // if ($this->params()->fromRoute('page')) 
-        //     $page = $this->params()->fromRoute('page');
-        // $paginator->setCurrentPageNumber((int)$page)->setItemCountPerPage(500); 
-        // $subscribers = $this->entityManager->getRepository('Admin\Entity\Subscriber')->findAll();
-
-        $paginator = $em->getRepository('Admin\Entity\Subscriber')->getPagedUsers();
-        
         return array(
-            'paginator' => $paginator,
+            'pagedSubscribers' => $pagedSubscribers,
+            'page' => $page,
             'flashMessages' => $this->flashMessenger()->getMessages(),
         );
+        # end move to service
+        // $viewModel = new ViewModel();
+        // $viewModel->setVariable( 'pagedSubscribers', $pagedSubscribers );
+        // $viewModel->setVariable( 'page', $page );
+
+        // return $viewModel;
+        // $em = $this->getEntityManager();
+
+        // // $adapter = new SelectableAdapter($em->getRepository('Admin\Entity\Subscriber'));
+        // // $paginator = new Paginator($adapter);
+        // // $page = 1;
+        // // if ($this->params()->fromRoute('page')) 
+        // //     $page = $this->params()->fromRoute('page');
+        // // $paginator->setCurrentPageNumber((int)$page)->setItemCountPerPage(500); 
+        // // $subscribers = $this->entityManager->getRepository('Admin\Entity\Subscriber')->findAll();
+
+        // $paginator = $em->getRepository('Admin\Entity\Subscriber')->getPagedUsers();
+
+        // return array(
+        //     'paginator' => $paginator,
+        //     'flashMessages' => $this->flashMessenger()->getMessages(),
+        // );
     }
 
     public function createAction()
