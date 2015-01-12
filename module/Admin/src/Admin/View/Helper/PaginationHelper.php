@@ -12,7 +12,7 @@ class PaginationHelper extends AbstractHelper
     private $paging;
     private $page;
 
-    public function __invoke($pagedResults, $page, $baseUrl, $resultsPerPage=10)
+    public function __invoke($pagedResults, $page, $baseUrl, $resultsPerPage = 10)
     {
         $this->resultsPerPage = $resultsPerPage;
         $this->totalResults = $pagedResults->count();
@@ -37,25 +37,47 @@ class PaginationHelper extends AbstractHelper
             return;
         }
 
+        $this->paging = '<ul class="pagination pagination-sm">';
         # Show back to first page if not first page
         if($this->page != 1)
         {
-            $this->paging = "<a href=" . $this->baseUrl . "page/1><<</a>";
+            $this->paging .= "<li><a href='" . $this->baseUrl . "page/1'> First </a></li>";
+            $this->paging .= "<li><a href=" . $this->baseUrl . "page/" . ($this->page - 1) . "> « </a></li>";
         }
 
-        # Create a link for each page
-        $pageCount = 1;
-        while($pageCount <= $pages)
+        # Calculating range 
+        if(($pageCount = $this->page - 3) < 1)
+            $pageCount = 1;
+
+        if(($this->page + 3) > $pages)
+            $pageCount = $pages - 6;
+
+        if((3 - $this->page) < 0)
+            $range = 3;
+        else
+            $range = 7 - $this->page;
+
+        if(($maxPage = $this->page + $range) > $pages)
+            $maxPage = $pages;
+
+        # Create a link for each page in rage
+        while($pageCount <= $maxPage)
         {
-            $this->paging .= "<a href=" . $this->baseUrl . "page/" . $pageCount . ">" . $pageCount . "</a>";
+            if($pageCount == $this->page)
+                $this->paging .= '<li class="active"><a href="#">' . $pageCount . '</a></li>';
+            else
+                $this->paging .= "<li><a href=" . $this->baseUrl . "page/" . $pageCount . "> " . $pageCount . " </a></li>";
             $pageCount++;
         }
 
         # Show go to last page option if not the last page
         if($this->page != $pages)
         {
-            $this->paging .= "<a href=" . $this->baseUrl . "page/" . $pages . ">>></a>";
+            $this->paging .= "<li><a href=" . $this->baseUrl . "page/" . ($this->page + 1) . "> » </a></li>";
+            $this->paging .= "<li><a href='" . $this->baseUrl . "page/" . $pages . "'> Last </a></li>";
         }
+
+        $this->paging .= "</ul>";
 
         return $this->paging;
     }

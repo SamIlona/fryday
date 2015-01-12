@@ -71,6 +71,7 @@ class SubscriberController extends Action
             'pagedSubscribers' => $pagedSubscribers,
             'page' => $page,
             'flashMessages' => $this->flashMessenger()->getMessages(),
+            'limit' => $limit,
         );
         # end move to service
         // $viewModel = new ViewModel();
