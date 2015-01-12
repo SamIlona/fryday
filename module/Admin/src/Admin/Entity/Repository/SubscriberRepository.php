@@ -21,13 +21,54 @@ use Doctrine\ORM\EntityRepository;
 
 class SubscriberRepository extends EntityRepository
 {
+    public function getPagedUsers($offset = 0, $limit = 10)
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('s')
+            ->from('Admin\Entity\Subscriber', 's')
+            ->orderBy('s.email')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        // $query = $qb->getQuery();
+        $query = $qb->getQuery()->getResult();
+        // $paginator = new Paginator( $query );
+
+        // return $paginator;
+        return $query; 
+    }
+
+	public function getSubscriberByEmailAndIndx($email, $indx)
+	{
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+
+		$qb->select( 's.id' )
+            ->from( 'Admin\Entity\Subscriber',  's' )
+            ->where('s.email = :email')
+            ->andWhere('s.indx = :indx')
+            ->setParameter('email', $email)
+            ->setParameter('indx', $indx);
+
+		try
+        {
+            return  $qb->getQuery()->getSingleResult();
+        }
+        catch(\Doctrine\ORM\NoResultException $e)
+        {
+            return null;
+        }
+	}
+
 	public function getSubscriberByEmail($email)
 	{
 		$em = $this->getEntityManager();
 
 		$qb = $em->createQueryBuilder();
 
-		$qb->select( 's' )
+		$qb->select( 's.id' )
             ->from( 'Admin\Entity\Subscriber',  's' )
             ->where('s.email = :email')
             ->setParameter('email', $email);

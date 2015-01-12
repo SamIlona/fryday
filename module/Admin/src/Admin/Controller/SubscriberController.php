@@ -62,15 +62,16 @@ class SubscriberController extends Action
     {
         $em = $this->getEntityManager();
 
-        $adapter = new SelectableAdapter($em->getRepository('Admin\Entity\Subscriber'));
-        $paginator = new Paginator($adapter);
-        $page = 1;
-        if ($this->params()->fromRoute('page')) 
-            $page = $this->params()->fromRoute('page');
-        $paginator->setCurrentPageNumber((int)$page)
-                  ->setItemCountPerPage(300); 
+        // $adapter = new SelectableAdapter($em->getRepository('Admin\Entity\Subscriber'));
+        // $paginator = new Paginator($adapter);
+        // $page = 1;
+        // if ($this->params()->fromRoute('page')) 
+        //     $page = $this->params()->fromRoute('page');
+        // $paginator->setCurrentPageNumber((int)$page)->setItemCountPerPage(500); 
         // $subscribers = $this->entityManager->getRepository('Admin\Entity\Subscriber')->findAll();
 
+        $paginator = $em->getRepository('Admin\Entity\Subscriber')->getPagedUsers();
+        
         return array(
             'paginator' => $paginator,
             'flashMessages' => $this->flashMessenger()->getMessages(),
@@ -217,6 +218,11 @@ class SubscriberController extends Action
 
                 $cityID         = $dataForm['city'];
                 $targetFile     = '/var/www/html/fryday/' . $dataForm['csvFile']['tmp_name'];
+
+                // $data = file($targetFile);
+                // $lines = count($data);
+                // var_dump($lines);
+
                 $shell          = 'php public/index.php parse file ' . $targetFile . " " . $cityID . 
                     ' >' . $targetFile . '.log 2>/var/www/html/fryday/data/csv/errlog.txt &';
 
@@ -235,16 +241,62 @@ class SubscriberController extends Action
 
     public function doParseFileConsoleAction()
     {
-        $request = $this->getRequest();
-        $em = $this->getEntityManager();
-        $uploadDir = $this->getUploadPath();
+        $request                = $this->getRequest();
+        $em                     = $this->getEntityManager();
+        $uploadDir              = $this->getUploadPath();
+        $subscriberRepository   = $em->getRepository('Admin\Entity\Subscriber');
+        $cityRepository         = $em->getRepository('Admin\Entity\City');
 
-        if (!$request instanceof ConsoleRequest){
+        if (!$request instanceof ConsoleRequest)
             throw new \RuntimeException('You can only use this action from a console!');
-        }
 
-        $fileName = $request->getParam('filename', false);
-        $cityID = $request->getParam('cityid', false);
+        $fileName   = $request->getParam('filename', false);
+        $cityID     = $request->getParam('cityid', false);
+
+        $city       = $cityRepository->getCityByID($cityID);
+
+        // $data = file($fileName);
+        // $lines = count($data);
+        // // var_dump($lines);
+        // $x=0;
+        // while($x<=$lines)
+        // {
+        //     $time = new \Datetime();
+        //     $row_data = explode(',', $data[$x]);
+        //     $x++;
+
+        //     if(filter_var($row_data[0], FILTER_VALIDATE_EMAIL))
+        //     {
+        //         if(($subscriber = $subscriberRepository->getSubscriberByEmail($row_data[0])) == null)
+        //         {
+        //             $subscriberEntity = new Entity\Subscriber();
+
+        //             $subscriberEntity->setEmail($row_data[0]);
+        //             $subscriberEntity->setFirstName($row_data[1]);
+        //             $subscriberEntity->setCompany($row_data[2]);
+        //             $subscriberEntity->setLastName($row_data[3]);
+        //             $subscriberEntity->setPhone($row_data[4]);
+        //             $subscriberEntity->setPosition($row_data[5]);
+        //             $subscriberEntity->setCity($city);
+
+        //             $em->persist($subscriberEntity);
+        //             $em->flush();
+
+        //             echo '[' . $time->format("Y-m-d H:i:s") . "] " . 
+        //                 $row_data[0] . " successfully added to the Fryday database! \n";
+        //         }
+        //         else
+        //         {
+        //             echo "FAIL! [" . $time->format("Y-m-d H:i:s") . "] " . 
+        //                 $row_data[0] . " already exist in the Fryday database! \n";
+        //         }
+        //     } 
+        //     else
+        //     {
+        //         echo "FAIL! [" . $time->format("Y-m-d H:i:s") . "] " . 
+        //             $row_data[0] . " not valid! \n";
+        //     }
+        // }
 
         if (!file_exists($fileName))
             echo "The file $fileName does not exist\n";
@@ -255,65 +307,53 @@ class SubscriberController extends Action
 
         if ($handle) {
             while (($data = fgets($handle, 4096)) !== false) {
-                if(strlen($data) > 1)
+                $time = new \Datetime();
+                $row_data = explode(',', $data);
+                /*
+                $row_data[0] - email
+                $row_data[1] - $firstName
+                $row_data[2] - $company
+                $row_data[3] - $lastName
+                $row_data[4] - $phone
+                $row_data[5] - $position
+                $row_data[6] - $city
+                */
+                if(filter_var($row_data[0], FILTER_VALIDATE_EMAIL))
                 {
-                    $time = new \Datetime();
-
-                    $row_data = explode(',', $data);
-
-                    $email      = $row_data[0];
-                    if(filter_var($email, FILTER_VALIDATE_EMAIL))
+                    if(($subscriber = $subscriberRepository->getSubscriberByEmail($row_data[0])) == null)
                     {
-                        $firstName  = $row_data[1];
-                        $company    = $row_data[2];
-                        $lastName   = $row_data[3];
-                        $phone      = $row_data[4];
-                        $position   = $row_data[5];
-                        // $cityID     = $row_data[6];
-                        $city       = $em->getRepository('Admin\Entity\City')->getCityByID($cityID);
+                        $subscriberEntity = new Entity\Subscriber();
 
-                        // $validator = new \DoctrineModule\Validator\NoObjectExists(
-                        //     array(
-                        //         'object_repository' => $this->entityManager->getRepository('Admin\Entity\Subscriber'),
-                        //         'fields' => array('email'),
-                        //     )
-                        // );
+                        $subscriberEntity->setEmail($row_data[0]);
+                        $subscriberEntity->setFirstName($row_data[1]);
+                        $subscriberEntity->setCompany($row_data[2]);
+                        $subscriberEntity->setLastName($row_data[3]);
+                        $subscriberEntity->setPhone($row_data[4]);
+                        $subscriberEntity->setPosition($row_data[5]);
+                        $subscriberEntity->setCity($city);
 
-                        if(($subscriber = $em->getRepository('Admin\Entity\Subscriber')->getSubscriberByEmail($email)) == null)
-                        // if($validator->isValid($email))
-                        {
-                            $subscriberEntity = new Entity\Subscriber();
+                        $em->persist($subscriberEntity);
+                        $em->flush();
 
-                            $subscriberEntity->setFirstName($firstName);
-                            $subscriberEntity->setLastName($lastName);
-                            $subscriberEntity->setEmail($email);
-                            $subscriberEntity->setPhone($phone);
-                            $subscriberEntity->setCompany($company);
-                            $subscriberEntity->setPosition($position);
-                            $subscriberEntity->setCity($city);
-
-                            $em->persist($subscriberEntity);
-                            $em->flush();
-
-                            echo '[' . $time->format("Y-m-d H:i:s") . "] " . 
-                                $email . " successfully added to the Fryday database! \n";
-                        }
-                        else
-                        {
-                            echo "FAIL! [" . $time->format("Y-m-d H:i:s") . "] " . 
-                                $email . " already exist in the Fryday database! \n";
-                        }
-                    } 
+                        echo '[' . $time->format("Y-m-d H:i:s") . "] " . 
+                            $row_data[0] . " successfully added to the Fryday database! \n";
+                    }
                     else
                     {
                         echo "FAIL! [" . $time->format("Y-m-d H:i:s") . "] " . 
-                            $email . " not valid! \n";
+                            $row_data[0] . " already exist in the Fryday database! \n";
                     }
+                } 
+                else
+                {
+                    echo "FAIL! [" . $time->format("Y-m-d H:i:s") . "] " . 
+                        $row_data[0] . " not valid! \n";
                 }
             }
-            if (!feof($handle)) {
+
+            if (!feof($handle))
                 echo "Error: unexpected fgets() fail\n";
-            }
+
             fclose($handle);
         }
     }

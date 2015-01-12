@@ -154,7 +154,7 @@ return array(
                             ),
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Admin\Controller',
-                                'controller'    => 'Subscriber',
+                                'controller'    => 'subscriber',
                                 'action'        => 'index',
                             ),
                         ),
