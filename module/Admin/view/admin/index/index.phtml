@@ -65,7 +65,7 @@
 	                    <div class="col-md-4">
 	                        <h2 class="heading-sm">
 	                            <!-- <i class="icon-custom icon-sm icon-bg-red icon-line icon-rocket"></i> -->
-	                            <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'city', 'action' => 'create' )); ?>"><span><i class="fa fa-plus"></i> Add City</span></a>
+	                            <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'city', 'action' => 'create-first-step' )); ?>"><span><i class="fa fa-plus"></i> Add City</span></a>
 	                        </h2><!-- 
 	                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p> -->
 	                    </div>
@@ -77,34 +77,34 @@
                         <!--Profile Event-->
                         <div class="col-sm-12 md-margin-bottom-20">
                             <div class="panel panel-profile no-bg">
-                                <div class="panel-heading overflow-h">
+                                <!-- <div class="panel-heading overflow-h">
                                     <h2 class="panel-title heading-sm pull-left"><i class="fa fa-briefcase"></i>Upcoming Events</h2>
-                                    <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'index' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-right">View All</a>
-                                </div>
-                                <div id="scrollbar2" class="panel-body contentHolder ps-container">
+                                    <a href="<?php //echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'index' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-right">View All</a>
+                                </div> -->
+                               <!--  <div id="scrollbar2" class="panel-body contentHolder ps-container">
 
-                                <?php foreach ($upcomingEvents as $event): ?>
+                                <?php //foreach ($upcomingEvents as $event): ?>
 
                                     <div class="profile-event">
                                         <div class="date-formats">
-                                            <span><?php echo $event->getDateTimeEvent()->format('d'); ?></span>
-                                            <small><?php echo $event->getDateTimeEvent()->format('m'); ?>, <?php echo $event->getDateTimeEvent()->format('Y'); ?></small>
+                                            <span><?php //echo $event->getDateTimeEvent()->format('d'); ?></span>
+                                            <small><?php //echo $event->getDateTimeEvent()->format('m'); ?>, <?php //echo $event->getDateTimeEvent()->format('Y'); ?></small>
                                         </div>
                                         <div class="overflow-h">
-                                            <h3 class="heading-xs"><a href="<?php echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>"><?php echo $event->getTitle(); ?></a></h3>
-                                            <p><?php echo $event->getDescription(); ?></p>
+                                            <h3 class="heading-xs"><a href="<?php //echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>"><?php //echo $event->getTitle(); ?></a></h3>
+                                            <p><?php //echo $event->getDescription(); ?></p>
                                         </div>    
                                     </div>
 
-                                <?php endforeach; ?>
+                                <?php //endforeach; ?>
 
                                     
-                                <div style="width: 389px; display: none; left: 0px; bottom: 3px;" class="ps-scrollbar-x-rail"><div style="left: 0px; width: 0px;" class="ps-scrollbar-x"></div></div><div style="top: 0px; height: 320px; display: inherit; right: 3px;" class="ps-scrollbar-y-rail"><div style="top: 0px; height: 178px;" class="ps-scrollbar-y"></div></div></div>    
-                            </div>
+                                <div style="width: 389px; display: none; left: 0px; bottom: 3px;" class="ps-scrollbar-x-rail"><div style="left: 0px; width: 0px;" class="ps-scrollbar-x"></div></div><div style="top: 0px; height: 320px; display: inherit; right: 3px;" class="ps-scrollbar-y-rail"><div style="top: 0px; height: 178px;" class="ps-scrollbar-y"></div></div></div> -->   
+                            </div> 
                         </div>
                         <!--End Profile Event-->
                     </div><!--/end row-->
-                    <hr>
+                    <!-- <hr> -->
                 </div>
                 <!--End Profile Body-->
             </div>

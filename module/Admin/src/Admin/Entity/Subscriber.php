@@ -14,9 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+//@ORM\Table(name="subscribers", indexes={@ORM\Index(name="search_idx", columns={"email"})})
+
 /**
  * @ORM\Entity(repositoryClass="Admin\Entity\Repository\SubscriberRepository")
- * @ORM\Table(name="subscriber")
+ * @ORM\Table(name="subscribers", indexes={@ORM\Index(name="search_idx", columns={"email"})})
  */
 class Subscriber
 {

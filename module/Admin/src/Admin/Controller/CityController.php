@@ -160,7 +160,7 @@ class CityController extends Action
                 }
 
                 $thumb->resize(640, 320);
-                $resizedImg = $currentCityUploadDir . DIRECTORY_SEPARATOR . 'resize_' . $imageName;
+                $resizedImg = $currentCityUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName;
                 $thumb->save($resizedImg);
 
                 if($currentDimantions['height'] / $currentDimantions['width'] < 1)
@@ -192,15 +192,48 @@ class CityController extends Action
 
     public function viewAction()
     {
-        $cityId = $this->params()->fromRoute('id');
-        // if (!empty($parentId)) {
-        //     $routeName = 'content/document/create-w-parent';
-        // } else {
-        //     $routeName = 'content/document/create';
-        // }
+        $em = $this->getEntityManager();
+        $authUser = $this->getAuthenticatedUser();
+        $request = $this->getRequest();
+        $cityID = $this->params()->fromRoute('id');
+        $uploadDir = $this->getUploadPath();
+        $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $cityID;
+        $cityEntity = $em->getRepository('Admin\Entity\City')->findOneBy(array('id' => $cityID));
+        $linkUserToCityForm = new Form\LinkUserToCityForm('link-user-to-city-form', $em, $authUser, $cityID);
+        $usersLinkedToCity = $em->getRepository('Admin\Entity\LinkCityUser')->getUsersLinkedToCity($cityID);
+
+        if($request->isPost())
+        {
+            $post = $request->getPost();
+
+            $linkUserToCityForm->setData($post);
+
+            if($linkUserToCityForm->isValid()) 
+            {
+                $postDataForm = $linkUserToCityForm->getData();
+
+                $linkUserToCityForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\LinkCityUser'));
+                $linkCityUserEntity = new Entity\LinkCityUser();
+                $linkUserToCityForm->bind($linkCityUserEntity);
+
+                $city = $em->getRepository('Admin\Entity\City')->getCityByID($cityID);
+                $user = $em->getRepository('Admin\Entity\User')->getUserByID($postDataForm['user']);
+
+                $linkCityUserEntity->setCity($city);
+                $linkCityUserEntity->setUser($user);
+
+                $em->persist($linkCityUserEntity);
+                $em->flush();
+
+                $usersLinkedToCity = $em->getRepository('Admin\Entity\LinkCityUser')->getUsersLinkedToCity($cityID);
+            }
+        }
 
 		return array(
-			'cityId' => $cityId,
+            'form' => $linkUserToCityForm,
+			'city' => $cityEntity,
+            'currentUploadDir' => end(explode('public', $currentUploadDir)),
+            'usersLinkedToCity' => $usersLinkedToCity,
         );
     }
 }

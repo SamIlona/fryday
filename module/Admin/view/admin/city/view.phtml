@@ -1,0 +1,168 @@
+<div class="profile container content">
+    	<div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $this->identity()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $this->identity()->getImage(); ?>" alt="">
+                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
+                <hr>
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                
+                 
+                    <div class="profile-body">
+                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'city', 'action' => 'edit', 'id' => $city->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-pencil"></i> Edit</a>
+                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-trash-o"></i> Delete City</a>
+
+                        <div class="profile-bio">
+                            <div class="row margin-bottom-10">
+                                <div class="col-md-5">
+                                    <img class="img-responsive" src="<?php echo $currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $city->getImage(); ?>" alt="<?php //echo $event->getTitle(); ?>">
+                                    <!-- <a class="btn-u btn-u-sm" href="#">Change Picture</a> -->
+                                </div>
+                                <div class="col-md-7">
+                                    <h2><?php echo $city->getName(); ?></h2>
+                                    <span><strong>Country:</strong> <?php echo $city->getCountry()->getName(); ?></span>
+                                    <!-- <span><strong>Position:</strong> Web Designer</span> -->
+                                    <hr>
+                                </div>
+                            </div>    
+                        </div>
+                        <!-- <div class="profile-bio">
+                            <div class="row margin-bottom-10">
+                                <div class="col-md-12 text-center">
+                                <h2><?php //echo $city->getName(); ?></h2>
+                                </div>
+                            </div>
+                        </div> -->
+                        <hr></hr>
+                        <div class="row">
+                            <div class="col-sm-6 sm-margin-bottom-20">
+                                <div class="panel panel-profile">
+                                    <div class="panel-heading overflow-h">
+                                        <h2 class="panel-title heading-sm pull-left"><i class="fa fa-tasks"></i>Contacts</h2>
+                                        <!-- <a href="profile_users.html" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-right">View All</a> -->
+                                    </div>
+                                    <div class="panel-body">
+                                        <?php foreach ($usersLinkedToCity as $userLinkedToCity): ?>
+                                        <div class="row margin-bottom-20">
+                                            <div class="col-sm-12 ">
+                                                <div class="profile-blog blog-border">
+                                                    <img class="rounded-x" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $userLinkedToCity->getUser()->getId() . DIRECTORY_SEPARATOR . 'square60x60_' . $userLinkedToCity->getUser()->getImage(); ?>" alt="">
+                                                    <div class="name-location">
+                                                        <strong><?php echo $userLinkedToCity->getUser()->getFirstName() . " " . $userLinkedToCity->getUser()->getLastName(); ?></strong>
+                                                        <span><i class="fa fa-map-marker"></i><a href="#"><?php echo $userLinkedToCity->getUser()->getCity()->getName(); ?>,</a> <a href="#"><?php echo $userLinkedToCity->getUser()->getCity()->getCountry()->getName(); ?></a></span>
+                                                    </div>
+                                                    <!-- <div class="clearfix margin-bottom-20"></div>    
+                                                    <p>Donec non dignissim eros. Mauris faucibus turpis volutpat sagittis rhoncus. Pellentesque et rhoncus sapien, sed ullamcorper justo.</p>
+                                                    <hr>
+                                                    <ul class="list-inline share-list">
+                                                        <li><i class="fa fa-bell"></i><a href="#">12 Notifications</a></li>
+                                                        <li><i class="fa fa-group"></i><a href="#">54 Followers</a></li>
+                                                        <li><i class="fa fa-twitter"></i><a href="#">Retweet</a></li>
+                                                    </ul> -->
+                                                </div>
+                                            </div>        
+                                        </div>
+                                        <?php endforeach; ?>
+                                        
+                                        <?php $form->setAttribute('action', $this->url('administrator_content/default', array('controller' => 'city', 'action' => 'view', 'id' => $city->getId())))->prepare(); ?>
+                                        <?php echo $this->form()->openTag($form); ?>
+                                        <div class="input-group">
+                                            <label class="select">
+                                                <?php echo $this->formSelect($this->form->get('user')); ?>
+                                                <i></i>
+                                            </label>
+                                            <!-- <input class="form-control" type="text"> -->
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-danger btn-add-user" type="submit">Add User</button>
+                                            </span>
+                                        </div>
+                                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('user')); ?>
+
+                                        <?php echo $this->form()->closeTag($form); ?>
+                                        <!-- </div> -->
+                                    </div>        
+                                </div>
+                            </div>
+                            <div class="col-sm-6 md-margin-bottom-30">
+                            <div class="panel panel-profile no-bg">
+                                <div class="panel-heading overflow-h">
+                                    <h2 class="panel-title heading-sm pull-left"><i class="fa fa-briefcase"></i>Upcoming Events</h2>
+                                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                                </div>
+                                <div class="panel-body contentHolder ps-container">
+                                    <div class="profile-event">
+                                        <div class="date-formats">
+                                            <span>25</span>
+                                            <small>05, 2014</small>
+                                        </div>
+                                        <div class="overflow-h">
+                                            <h3 class="heading-xs"><a href="#">GitHub seminars in Japan.</a></h3>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry printing.</p>
+                                        </div>    
+                                    </div>
+                                    <div class="profile-event">
+                                        <div class="date-formats">
+                                            <span>31</span>
+                                            <small>06, 2014</small>
+                                        </div>
+                                        <div class="overflow-h">
+                                            <h3 class="heading-xs"><a href="#">Bootstrap Update</a></h3>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry printing.</p>
+                                        </div>    
+                                    </div>
+                                    <div class="profile-event">
+                                        <div class="date-formats">
+                                            <span>07</span>
+                                            <small>08, 2014</small>
+                                        </div>
+                                        <div class="overflow-h">
+                                            <h3 class="heading-xs"><a href="#">Apple Conference</a></h3>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry printing.</p>
+                                        </div>    
+                                    </div>
+                                    <div class="profile-event">
+                                        <div class="date-formats">
+                                            <span>22</span>
+                                            <small>10, 2014</small>
+                                        </div>
+                                        <div class="overflow-h">
+                                            <h3 class="heading-xs"><a href="#">Backend Meeting</a></h3>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry printing.</p>
+                                        </div>    
+                                    </div>
+                                    <div class="profile-event">
+                                        <div class="date-formats">
+                                            <span>14</span>
+                                            <small>11, 2014</small>
+                                        </div>
+                                        <div class="overflow-h">
+                                            <h3 class="heading-xs"><a href="#">Google Conference</a></h3>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry printing.</p>
+                                        </div>    
+                                    </div>
+                                    <div class="profile-event">
+                                        <div class="date-formats">
+                                            <span>05</span>
+                                            <small>12, 2014</small>
+                                        </div>
+                                        <div class="overflow-h">
+                                            <h3 class="heading-xs"><a href="#">FontAwesome Update</a></h3>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry printing.</p>
+                                        </div>    
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                        
+                          
+                    </div>
+                </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div>

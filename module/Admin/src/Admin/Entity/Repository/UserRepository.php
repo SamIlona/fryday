@@ -21,6 +21,23 @@ use Doctrine\ORM\EntityRepository;
 
 class UserRepository extends EntityRepository
 {
+    // TODO: Check the correctness!!
+    public function getUserByID($id)
+    {
+        $em = $this->getEntityManager();
+
+        $qb = $em->createQueryBuilder();
+
+        $qb->select( 'u' )
+            ->from( 'Admin\Entity\User',  'u' )
+            ->where('u.id = :id')
+            ->setParameter('id', $id);
+
+        $city = $qb->getQuery()->getSingleResult();
+
+        return $city;
+    }
+
 	public function getAllUsersAsOptions()
 	{
 		$usersSet = $this->getEntityManager()->getRepository('Admin\Entity\User')->findAll();

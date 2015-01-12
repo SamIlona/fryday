@@ -54,8 +54,8 @@ class EventController extends Action
     	$em = $this->getEntityManager();
 
 		return array(
-			'upcomingEvents'    => $em->getRepository('Admin\Entity\Event')->getEvents(10, 0, 'upcoming'),
-            'pastEvents'        => $em->getRepository('Admin\Entity\Event')->getEvents(10, 0, 'past'),
+			'upcomingEvents'    => $em->getRepository('Admin\Entity\Event')->getEvents(10, 0, 'upcoming', 'all', 'all'),
+            'pastEvents'        => $em->getRepository('Admin\Entity\Event')->getEvents(10, 0, 'past', 'all', 'all'),
         );
    	}
 

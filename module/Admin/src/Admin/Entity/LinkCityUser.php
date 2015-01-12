@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @ORM\Entity(repositoryClass="Admin\Entity\Repository\NewsletterRepository")
+ * @ORM\Entity(repositoryClass="Admin\Entity\Repository\LinkCityUserRepository")
  * @ORM\Table(name="link_city_user")
  */
 class LinkCityUser
@@ -54,6 +54,14 @@ class LinkCityUser
     }
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @param null|Admin\Entity\User $user
      */
     public function setUser($user)
@@ -88,7 +96,8 @@ class LinkCityUser
     /**
     * @return \DateTime
     */
-    public function getDateTimeCreated() {
+    public function getDateTimeCreated() 
+    {
         return $this->dateTimeCreated;
     }
 }

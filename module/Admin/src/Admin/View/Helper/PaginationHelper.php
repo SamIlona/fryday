@@ -50,7 +50,8 @@ class PaginationHelper extends AbstractHelper
             $pageCount = 1;
 
         if(($this->page + 3) > $pages)
-            $pageCount = $pages - 6;
+            if(($pageCount = $pages - 6) < 1)
+                $pageCount = 1;
 
         if((3 - $this->page) < 0)
             $range = 3;

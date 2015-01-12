@@ -19,8 +19,8 @@ class IndexController extends Action
         $em = $this->getEntityManager();
 
         return array(
-            'eventsFirstLine'   => $em->getRepository('Admin\Entity\Event')->getEvents(4, 0, 'upcoming'),
-            'eventsSecondLine'  => $em->getRepository('Admin\Entity\Event')->getEvents(4, 4, 'upcoming'),
+            'eventsFirstLine'   => $em->getRepository('Admin\Entity\Event')->getEvents(4, 0, 'upcoming', 1, 'all'),
+            'eventsSecondLine'  => $em->getRepository('Admin\Entity\Event')->getEvents(4, 4, 'upcoming', 1, 'all'),
         );
     }
     public function venueAction()

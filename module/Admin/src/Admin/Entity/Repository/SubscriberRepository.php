@@ -41,7 +41,7 @@ class SubscriberRepository extends EntityRepository
         // return $query; 
     }
 
-	public function getSubscriberByEmailAndIndx($email, $indx)
+	public function isSubscriberExistByEmail($email)
 	{
 		$em = $this->getEntityManager();
 		$qb = $em->createQueryBuilder();
@@ -49,10 +49,8 @@ class SubscriberRepository extends EntityRepository
 		$qb->select( 's.id' )
             ->from( 'Admin\Entity\Subscriber',  's' )
             ->where('s.email = :email')
-            ->andWhere('s.indx = :indx')
             ->setParameter('email', $email)
-            ->setParameter('indx', $indx);
-
+            ->setMaxResults(1);
 		try
         {
             return  $qb->getQuery()->getSingleResult();

@@ -18,7 +18,7 @@
 /*Scrollbar*/
 .contentHolder {
 	padding: 0;
-	height: 320px; 
+	/*height: 320px; */
 	margin: 0px auto;
 	overflow: hidden; 
 	position: relative; 

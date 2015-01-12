@@ -339,7 +339,7 @@ class SubscriberController extends Action
                 */
                 if(filter_var($row_data[0], FILTER_VALIDATE_EMAIL))
                 {
-                    if(($subscriber = $subscriberRepository->getSubscriberByEmail($row_data[0])) == null)
+                    if(($subscriber = $subscriberRepository->isSubscriberExistByEmail($row_data[0])) == null)
                     {
                         $subscriberEntity = new Entity\Subscriber();
 

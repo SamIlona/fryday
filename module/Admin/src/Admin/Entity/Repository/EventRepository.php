@@ -40,7 +40,7 @@ class EventRepository extends EntityRepository
             return null;
         }
     }
-	public function getEvents($limit, $offset, $type, $city = null)
+	public function getEvents($limit, $offset, $type, $published, $city = null)
 	{
 		$em = $this->getEntityManager();
 
@@ -65,12 +65,16 @@ class EventRepository extends EntityRepository
         
         $qb->setParameter('time', $timeNow);
 
-        if($city != null)
+        if($city != 'all')
         {
-        	// var_dump($city);
-
         	$qb->andWhere('e.city = :cityID')
         		->setParameter('cityID', $city->getId());
+        }
+
+        if($published != 'all')
+        {
+            $qb->andWhere('e.published = :published')
+                ->setParameter('published', $published);
         }
 
         $events = $qb->getQuery()->getResult();
