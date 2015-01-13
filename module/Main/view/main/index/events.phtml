@@ -22,7 +22,7 @@
                                         </p>
                                     </div><!--//date-label-wrapper-->
                                     <div class="details col-md-11 col-sm-10">
-                                        <h3 class="title"><a href="<?php echo $this->url('main/event_details', array('id' => $event->getId() )); ?>"><?php echo $event->getTitle(); ?></a></h3>
+                                        <h3 class="title"><a href="<?php echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>"><?php echo $event->getTitle(); ?></a></h3>
                                         <p class="meta"><span class="time"><i class="fa fa-clock-o"></i><?php echo $event->getDateTimeEvent()->format('H:i'); ?></span><span class="location"><i class="fa fa-map-marker"></i><?php echo $event->getVenue()->getName(); ?>, <?php echo $event->getVenue()->getCity()->getName(); ?></a></span></p>  
                                         <p class="desc"><?php echo $event->getDescription(); ?></p>                       
                                     </div><!--//details-->

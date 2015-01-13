@@ -106,8 +106,8 @@ class IndexController extends Action
 
         
         return array(
-            'eventsFirstLine'   => $em->getRepository('Admin\Entity\Event')->getEvents(4, 0, 'upcoming', $city),
-            'eventsSecondLine'  => $em->getRepository('Admin\Entity\Event')->getEvents(4, 4, 'upcoming', $city),
+            'eventsFirstLine'   => $em->getRepository('Admin\Entity\Event')->getEvents(4, 0, 'upcoming', 1, $city),
+            'eventsSecondLine'  => $em->getRepository('Admin\Entity\Event')->getEvents(4, 4, 'upcoming', 1, $city),
         );
     }
 }

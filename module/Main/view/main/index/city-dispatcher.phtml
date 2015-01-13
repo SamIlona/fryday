@@ -39,14 +39,14 @@
                         </div>
 
                         <div class="overflow-hidden">
-                            <a href="<?php echo $this->url('main/event_details', array('id' => $event->getId() )); ?>">
-                                <img class="img-responsive" src="<?php echo $event->getProfileImage(); ?>" alt="">
+                            <a href="<?php echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>">
+                                <img class="img-responsive" src="<?php echo '/uploads/events/' . $event->getId() . DIRECTORY_SEPARATOR . 'rect640x320_' . $event->getImage(); ?>" alt="">
                             </a>
                         </div>
                     </div>
                     <div class="caption">
-                        <a class="index-event-title  hover-effect fryday-w" href="<?php echo $this->url('main/event_details', array('id' => $event->getId() )); ?>"> <?php echo $event->getTitle(); ?> <span><?php echo $event->getVenue()->getCity()->getName(); ?>, <?php echo $event->getVenue()->getName(); ?></span>
-                        </a>  
+                        <a class="index-event-title  hover-effect fryday-w" href="<?php echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>"> <?php echo $event->getTitle(); ?> <span><?php echo $event->getVenue()->getCity()->getName(); ?>, <?php echo $event->getVenue()->getName(); ?></span>
+                        </a>    
                     </div>
                 </div>
             </div>
