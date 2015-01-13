@@ -195,4 +195,119 @@ class UserController extends Action
         );
     }
 
+    public function editProfileAction()
+    {
+        $em = $this->getEntityManager();
+        $authUser = $this->getAuthenticatedUser();
+        $request = $this->getRequest();
+        $id = $authUser->getId();
+        $uploadDir = $this->getUploadPath();
+        $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $id;
+        $thumbnailer = $this->getServiceLocator()->get('WebinoImageThumb');
+
+        // User Entity
+        $entity = $this->getAuthenticatedUser();
+        // Edit Form
+        $form = new Form\EditUserForm('link-user-to-city-form', $em, $currentUploadDir);
+
+        if($request->isPost())
+        {
+            // $post = $request->getPost();
+            $post = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+
+            // remember name and path to the image if new image has not been uploaded
+            $imageName = $entity->getImage();
+            $imagePath = $currentUploadDir. DIRECTORY_SEPARATOR . $imageName;
+
+            $form->bind($entity);
+            $form->setData($post);
+
+            if($form->isValid()) 
+            {
+                $postDataForm   = $form->getData();
+                $imageData      = $postDataForm->getImage();
+
+                if(!$imageData['tmp_name'] == '')
+                {
+                    $imageName          = end(explode("$currentUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
+                    $imagePath          = $imageData['tmp_name'];
+                }
+
+                $thumb              = $thumbnailer->create($imagePath, $options = array(), $plugins = array());
+                $thumb_square       = $thumbnailer->create($imagePath, $options = array(), $plugins = array());
+                $currentDimantions  = $thumb->getCurrentDimensions();
+
+                if($post['xStartCrop'] === '' ||
+                    $post['yStartCrop'] === '') 
+                {
+                    if($currentDimantions['height'] / $currentDimantions['width'] < 0.5) 
+                        $thumb->cropFromCenter($currentDimantions['height'] * 2, $currentDimantions['height']);
+                    else 
+                        $thumb->cropFromCenter($currentDimantions['width'], $currentDimantions['width'] / 2);
+                }
+                else 
+                {
+                    $scale = $currentDimantions['width'] / $post['widthCurrent'];
+
+                    $thumb->crop($post['xStartCrop'] * $scale, 
+                                 $post['yStartCrop'] * $scale,
+                                 $post['widthCrop'] * $scale, 
+                                 $post['heightCrop'] * $scale
+                                );
+                }
+
+                $thumb->resize(640, 320);
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName;
+                $thumb->save($resizedImg);
+
+                $thumb->resize(224, 112);
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName;    
+                $thumb->save($resizedImg);
+
+                if($currentDimantions['height'] / $currentDimantions['width'] < 1)
+                    $thumb_square->cropFromCenter($currentDimantions['height'], $currentDimantions['height']);
+                else 
+                    $thumb_square->cropFromCenter($currentDimantions['width'], $currentDimantions['width']);
+
+                $thumb_square->resize(264, 264);
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square264x264_' . $imageName;    
+                $thumb_square->save($resizedImg);  
+
+                $thumb_square->resize(60, 60);
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
+                $thumb_square->save($resizedImg);
+
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName, 0777);
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName, 0777); 
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName, 0777);
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'square264x264_' . $imageName, 0777); 
+
+                $entity->setImage($imageName);
+
+                $this->getEntityManager()->persist($entity);
+                $this->getEntityManager()->flush();
+
+                return $this->redirect()->toRoute('administrator_content/default', array(
+                    'controller' => 'user', 
+                    'action' => 'profile',
+                ));
+            }
+        }
+        else
+        {
+            $form->bind($entity);
+            // $form->get('country')->setValue($entity->getCountry()->getId());
+        }
+
+        return array(
+            'form' => $form,
+            'entity' => $entity,
+            'currentUploadDir' => end(explode('public', $currentUploadDir)),
+            'flashMessages' => $this->flashMessenger()->getMessages(),
+        );
+    }
+
 }

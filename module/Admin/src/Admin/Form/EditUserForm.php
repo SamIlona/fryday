@@ -14,19 +14,19 @@ use Zend\Form\Form;
 use Zend\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 
-use Admin\Entity\VenueCategory;
+// use Admin\Entity\VenueCategory;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 /**
- * City form
+ * Create User form
  *
  * @category   Fryday_Application
  * @package    Admin
  * @subpackage Form
  */
-class EditCityForm extends Form 
+class EditUserForm extends Form 
 {
     /**
      * @var EntityManager
@@ -46,13 +46,11 @@ class EditCityForm extends Form
     public function __construct($name = null, $entityManager, $dir)
     {
         parent::__construct($name);
-        $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\City'));
-        $this->setAttributes(
-            array(
-                'method'    => 'post',
-                'class'     => 'sky-form',
-            )
-        );
+        $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\User'));
+        $this->setAttributes(array(
+            'method'    => 'post',
+            'class'     => 'sky-form',
+        ));
         $this->_dir = $dir;
         $this->entityManager = $entityManager;
         $this->addElements();
@@ -61,34 +59,47 @@ class EditCityForm extends Form
 
     public function addElements()
     {
-        $name = new Element\Text('name');
-        $name->setLabel('Name')
-            ->setLabelAttributes(
-                array(
-                    'class' => 'label',
-                )
-            )
-            ->setAttribute('class', 'form-control')
-            ->setAttribute('id', 'city-name');
-        $this->add($name);
+        $firstName = new Element\Text('firstName');
+        $firstName->setLabel('First Name')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array('class' => 'form-control'));
+        $this->add($firstName);
 
-        $country = new Element\Select('country');
-        $country->setLabel('Country')
-            ->setLabelAttributes(
-                array(
-                    'class' => 'label',
-                )
-            )
-            ->setValueOptions($this->entityManager->getRepository('Admin\Entity\Country')->getAllCountriesAsOptions())
-            ->setEmptyOption('Select country...')
-            ->setOptions(
-                array(
-                    'disable_inarray_validator' => true,
-                )
-            )
-            ->setAttribute('class', 'form-control')
-            ->setAttribute('id', 'city-country');
-        $this->add($country);
+        $lastName = new Element\Text('lastName');
+        $lastName->setLabel('Last Name')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array('class' => 'form-control'));
+        $this->add($lastName);
+
+        $facebook = new Element\Text('facebook');
+        $facebook->setLabel('Facebook')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array('class' => 'form-control'));
+        $this->add($facebook);
+
+        $linkedin = new Element\Text('linkedin');
+        $linkedin->setLabel('LinkedIn')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array('class' => 'form-control'));
+        $this->add($linkedin);
+
+        $skype = new Element\Text('skype');
+        $skype->setLabel('Skype')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array('class' => 'form-control'));
+        $this->add($skype);
+
+        $phone = new Element\Text('phone');
+        $phone->setLabel('Phone')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array('class' => 'form-control'));
+        $this->add($phone);
+
+        $twitter = new Element\Text('twitter');
+        $twitter->setLabel('Twitter')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array('class' => 'form-control'));
+        $this->add($twitter);
 
         $xStartCrop = new Element\Hidden('xStartCrop');
         $xStartCrop->setAttribute('id', 'x-start-crop');
@@ -116,12 +127,7 @@ class EditCityForm extends Form
 
         $image = new Element\File('image');
         $image->setLabel('Image')
-            ->setLabelAttributes(
-                array(
-                    'class' => 'label',
-                )
-            )
-            // ->setAttribute('class', 'file col-lg-10')
+            ->setLabelAttributes(array('class' => 'label'))
             ->setAttribute('id', 'image')
             ->setAttribute('onchange', 'this.parentNode.nextSibling.value = this.value');
         $this->add($image);
@@ -137,6 +143,28 @@ class EditCityForm extends Form
     public function addInputFilter()
     {
         $inputFilter = new InputFilter\InputFilter();
+
+        $inputFilter->add(
+            array(
+                'name' => 'firstName',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'firstName'
+        );
+
+        $inputFilter->add(
+            array(
+                'name' => 'lastName',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'lastName'
+        );
 
         // Image Input
         $imageInput = new InputFilter\FileInput('image');

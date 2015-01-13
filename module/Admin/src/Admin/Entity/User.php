@@ -42,9 +42,45 @@ class User
 
     /**
      * @var string
-     * @ORM\Column(name="email", type="string", length=255, nullable=true, unique=false)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true, unique=true)
      */
     protected $email;
+
+    /**
+     * @var string
+     * @ORM\Column(name="facebook", type="string", length=255, nullable=true, unique=false)
+     */
+    protected $facebook;
+
+    /**
+     * @var string
+     * @ORM\Column(name="linkedin", type="string", length=255, nullable=true, unique=false)
+     */
+    protected $linkedin;
+
+    /**
+     * @var string
+     * @ORM\Column(name="twitter", type="string", length=255, nullable=true, unique=false)
+     */
+    protected $twitter;
+
+    /**
+     * @var string
+     * @ORM\Column(name="skype", type="string", length=255, nullable=true, unique=false)
+     */
+    protected $skype;
+
+    /**
+     * @var string
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true, unique=false)
+     */
+    protected $phone;
+
+    /**
+     * @var string
+     * @ORM\Column(name="googleplus", type="string", length=255, nullable=true, unique=false)
+     */
+    protected $googleplus;
 
     /**
      * @var string
@@ -129,6 +165,85 @@ class User
         return $this->email;
     }
 
+    /**
+     * @param string $facebook
+     */
+    public function setFacebook($facebook)
+    {
+        $this->facebook = $facebook;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getFacebook()
+    {
+        return $this->facebook;
+    }
+
+    /**
+     * @param string $linkedin
+     */
+    public function setLinkedin($linkedin)
+    {
+        $this->linkedin = $linkedin;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getLinkedin()
+    {
+        return $this->linkedin;
+    }
+
+    /**
+     * @param string $twitter
+     */
+    public function setTwitter($twitter)
+    {
+        $this->twitter = $twitter;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getTwitter()
+    {
+        return $this->twitter;
+    }
+
+    /**
+     * @param string $skype
+     */
+    public function setSkype($skype)
+    {
+        $this->skype = $skype;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getSkype()
+    {
+        return $this->skype;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
     /**
      * @param string $password
      */

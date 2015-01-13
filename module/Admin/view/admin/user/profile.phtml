@@ -11,11 +11,16 @@
             <div class="col-md-9">
                 <!--Profile Body-->
                 <div class="profile-body">
+                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'user', 'action' => 'edit-profile')); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-pencil"></i> Edit</a>
                         <div class="profile-bio">
                             <div class="row">
                                 <div class="col-md-5">
+                                    <?php if($this->identity()->getImage() != null): ?>
                                     <img class="img-responsive md-margin-bottom-10" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $this->identity()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $this->identity()->getImage(); ?>" alt="">
-                                    <a class="btn-u btn-u-sm" href="#">Change Picture</a>
+                                    <!-- <a class="btn-u btn-u-sm" href="#">Change Picture</a> -->
+                                    <?php else: ?>
+                                    <img class="img-responsive md-margin-bottom-10" src="/frontend/img/noavatar.png" alt="">
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-7">
                                     <h2><?php echo $user->getFirstName() . " " . $user->getLastName(); ?></h2>
@@ -43,11 +48,19 @@
                                     </div>
                                     <div class="panel-body">
                                          <ul class="list-unstyled social-contacts-v2">
-                                            <li><i class="rounded-x tw fa fa-twitter"></i> <a href="#">edward.rooster</a></li>
-                                            <li><i class="rounded-x fb fa fa-facebook"></i> <a href="#">Edward Rooster</a></li>
-                                            <li><i class="rounded-x sk fa fa-skype"></i> <a href="#">edwardRooster77</a></li>
-                                            <li><i class="rounded-x gp fa fa-google-plus"></i> <a href="#">rooster77edward</a></li>
-                                            <li><i class="rounded-x gm fa fa-envelope"></i> <a href="#">edward77@gmail.com</a></li>
+                                            <?php if($this->identity()->getTwitter() != null || $this->identity()->getTwitter() != ''): ?>
+                                            <li><i class="rounded-x tw fa fa-twitter"></i> <a href="#"><?php echo $this->identity()->getTwitter(); ?></a></li>
+                                            <?php endif; ?>
+                                            <?php if($this->identity()->getFacebook() != null || $this->identity()->getFacebook() != ''): ?>
+                                            <li><i class="rounded-x fb fa fa-facebook"></i> <a href="<?php echo $this->identity()->getFacebook(); ?>"><?php echo $this->identity()->getFacebook(); ?></a></li>
+                                            <?php endif; ?>
+                                            <?php if($this->identity()->getSkype() != null || $this->identity()->getSkype() != ''): ?>
+                                            <li><i class="rounded-x sk fa fa-skype"></i> <a href="#">><?php echo $this->identity()->getSkype(); ?></a></li>
+                                            <?php endif; ?>
+                                            <!-- <li><i class="rounded-x gp fa fa-google-plus"></i> <a href="#">rooster77edward</a></li> -->
+                                            <?php if($this->identity()->getEmail() != null || $this->identity()->getEmail() != ''): ?>
+                                            <li><i class="rounded-x gm fa fa-envelope"></i> <a href="#"><?php echo $this->identity()->getEmail(); ?></a></li>
+                                            <?php endif; ?>
                                         </ul>
                                     </div>       
                                 </div>

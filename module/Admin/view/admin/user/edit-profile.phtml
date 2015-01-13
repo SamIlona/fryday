@@ -1,0 +1,175 @@
+<div class="profile container content">
+        <div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $this->identity()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $this->identity()->getImage(); ?>" alt="">
+                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
+                <hr>
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                <div class="profile-body">
+                    <!--Table Search v2-->
+                    <?php $form->setAttribute('action', $this->url('administrator_content/default', array('controller' => 'user', 'action' => 'edit-profile')))->prepare(); ?>
+                    <?php echo $this->form()->openTag($form); ?>
+                    <!-- <form action="" class="sky-form"> -->
+                    <header>Edit City</header>
+
+                    <!-- <form method="POST">
+                         <div id="dynamicInput">
+                              Entry 1<br><input type="text" name="myInputs[]">
+                         </div>
+                         
+                    </form> -->
+                                        
+                    <fieldset id="fieldset_test">
+
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('firstName')); ?>
+                            <label class="input">
+                                <i class="icon-prepend fa fa-user"></i>
+                                <?php echo $this->formInput($this->form->get('firstName')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('firstName')); ?>
+                        </section>
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('lastName')); ?>
+                            <label class="input">
+                                <i class="icon-prepend fa fa-user"></i>
+                                <?php echo $this->formInput($this->form->get('lastName')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('lastName')); ?>
+                        </section>
+
+                            <?php if($entity->getImage() != null): ?>
+                            <div class="col-md-12 imag_center">
+                                <img style="max-height: 264px;max-width: 264px; "id="imagepreview" src="<?php echo $currentUploadDir . DIRECTORY_SEPARATOR . 'square264x264_' . $entity->getImage(); ?>" alt="your image" />
+                            </div>
+                            <?php else: ?>
+                            <div class="col-md-12 imag_center">
+                                <img style="max-height: 320px;max-width: 640px; "id="imagepreview" src="/frontend/img/noavatar.png" alt="your image" />
+                            </div>
+                            <?php endif; ?>
+
+                            <section class="col-md-12">
+                                <?php echo $this->formLabel($this->form->get('image')); ?>
+                                <label for="file" class="input input-file">
+                                    <div class="button">
+                                        <?php echo $this->formFile($this->form->get('image')); ?>
+                                        Browse
+                                    </div>
+                                    <input readonly="" type="text">
+                                    <?php //echo $this->formFile($this->form->get('profileImage')); ?>
+                                </label>
+                                <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('image')); ?>
+                                <?php echo $this->formInput($this->form->get('xStartCrop')); ?>
+                                <?php echo $this->formInput($this->form->get('yStartCrop')); ?>
+                                <?php echo $this->formInput($this->form->get('widthCrop')); ?>
+                                <?php echo $this->formInput($this->form->get('heightCrop')); ?>
+                                <?php echo $this->formInput($this->form->get('widthCurrent')); ?>
+                                <?php echo $this->formInput($this->form->get('heightCurrent')); ?>
+                            </section>
+
+                    </fieldset>
+                    <fieldset id="fieldset_test">
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('phone')); ?>
+                            <label class="input">
+                                <i class="icon-prepend fa fa-phone"></i>
+                                <?php echo $this->formInput($this->form->get('phone')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('phone')); ?>
+                        </section>
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('facebook')); ?>
+                            <label class="input">
+                                <i class="icon-prepend fa fa-facebook"></i>
+                                <?php echo $this->formInput($this->form->get('facebook')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('facebook')); ?>
+                        </section>
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('linkedin')); ?>
+                            <label class="input">
+                                <i class="icon-prepend fa fa-linkedin"></i>
+                                <?php echo $this->formInput($this->form->get('linkedin')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('linkedin')); ?>
+                        </section>
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('skype')); ?>
+                            <label class="input">
+                                <i class="icon-prepend fa fa-skype"></i>
+                                <?php echo $this->formInput($this->form->get('skype')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('skype')); ?>
+                        </section>
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('twitter')); ?>
+                            <label class="input">
+                                <i class="icon-prepend fa fa-twitter"></i>
+                                <?php echo $this->formInput($this->form->get('twitter')); ?>
+                            </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('twitter')); ?>
+                        </section>
+                    </fieldset>
+                    
+                    <footer>
+                        <button type="submit" class="btn-u">Save</button>
+                        <!-- <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button> -->
+                    </footer>
+                <!-- </form> -->
+                    <?php echo $this->form()->closeTag($form); ?>
+                    <!--End Table Search v2-->
+                </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div>
+
+    <script>
+    
+    function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imagepreview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(document).ready(function () {
+        $('#imagepreview').imgAreaSelect({ 
+            // maxWidth: 200, 
+            // maxHeight: 150, 
+            aspectRatio: '1:1',
+            handles: true,
+            // show: true,
+            onSelectChange: preview,
+            x1: parseInt($('#x-start-crop').val(), 10),
+            y1: parseInt($('#y-start-crop').val(), 10),
+            x2: parseInt($('#x-start-crop').val(), 10) + parseInt($('#width-crop').val(), 10),
+            y2: parseInt($('#y-start-crop').val(), 10) + parseInt($('#height-crop').val(), 10),
+        });
+    });
+
+    $("#image").change(function(){
+        readURL(this);
+    });
+
+    function preview(img, selection) 
+    {  
+        $('#width-current').val(img.clientWidth);  
+        $('#height-current').val(img.clientHeight); 
+        $('#x-start-crop').val(selection.x1);  
+        $('#y-start-crop').val(selection.y1);
+        $('#width-crop').val(selection.width);  
+        $('#height-crop').val(selection.height); 
+    }
+    </script>

@@ -84,24 +84,6 @@ class CreateCitySecondStepForm extends Form
         $ch->setAttribute('id', 'city-ch');
         $this->add($ch);
 
-        // $user = new Element\Select('user');
-        // $user->setLabel('User')
-        //     ->setLabelAttributes(
-        //         array(
-        //             'class' => 'label',
-        //         )
-        //     )
-        //     ->setValueOptions($this->entityManager->getRepository('Admin\Entity\User')->getAllUsersAsOptions())
-        //     ->setEmptyOption('Select user...')
-        //     ->setOptions(
-        //         array(
-        //             'disable_inarray_validator' => true,
-        //         )
-        //     )
-        //     ->setAttribute('class', 'form-control')
-        //     ->setAttribute('id', 'city-user');
-        // $this->add($user);
-
         $image = new Element\File('image');
         $image->setLabel('Image')
             ->setLabelAttributes(
@@ -131,7 +113,7 @@ class CreateCitySecondStepForm extends Form
         $imageInput->getFilterChain()->attachByName(
             'filerenameupload',
             array(
-                'target'        => $this->_dir . DIRECTORY_SEPARATOR . 'city_image',
+                'target'        => $this->_dir . DIRECTORY_SEPARATOR . 'img_',
                 'randomize'     => true,
                 // 'overwrite'     => true,
                 // 'use_upload_name' => true,
