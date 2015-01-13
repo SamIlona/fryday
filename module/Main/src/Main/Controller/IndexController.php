@@ -84,7 +84,7 @@ class IndexController extends Action
         $em = $this->getEntityManager();
 
         return array(
-            'events' => $em->getRepository('Admin\Entity\Event')->findAll(),
+            'events' => $em->getRepository('Admin\Entity\Event')->getEvents(10, 0, 'upcoming', 1, 'all'),
         );
     }
     public function viewEventAction()
