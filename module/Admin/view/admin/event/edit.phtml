@@ -29,11 +29,11 @@
 
                             <?php if($event->getImage() != null): ?>
                             <div class="col col-12 imag_center">
-                                <img style="max-height: 320px;max-width: 640px; "id="blah" src="<?php echo '/uploads/events' . DIRECTORY_SEPARATOR . $event->getId() . DIRECTORY_SEPARATOR . $event->getImage(); ?>" alt="your image" />
+                                <img style="max-height: 320px;max-width: 640px; "id="imagepreview" src="<?php echo '/uploads/events' . DIRECTORY_SEPARATOR . $event->getId() . DIRECTORY_SEPARATOR . $event->getImage(); ?>" alt="your image" />
                             </div>
                             <?php else: ?>
                             <div class="col col-12 imag_center">
-                                <img style="max-height: 320px;max-width: 640px; "id="blah" src="/frontend/img/noimage.png" alt="your image" />
+                                <img style="max-height: 320px;max-width: 640px; "id="imagepreview" src="/frontend/img/noimage.png" alt="your image" />
                             </div>
                             <?php endif; ?>
 
@@ -128,22 +128,15 @@
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#blah').attr('src', e.target.result);
+            $('#imagepreview').attr('src', e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
         }
     }
 
-    var x1 = 20;
-
-    console.log(typeof $('#x-start-crop').val());
-    console.log($('#y-start-crop').val() + $('#height-crop').val());
-    console.log($('#y-start-crop').val() + $('#height-crop').val());
-    console.log($('#y-start-crop').val() + $('#height-crop').val());
-
     $(document).ready(function () {
-        $('#blah').imgAreaSelect({ 
+        $('#imagepreview').imgAreaSelect({ 
             // maxWidth: 200, 
             // maxHeight: 150, 
             aspectRatio: '2:1',

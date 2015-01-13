@@ -25,11 +25,11 @@
                     </form> -->
                                         
                     <fieldset id="fieldset_test">
-                        <div class="col col-12 imag_center">
+                        <div class="col-md-12 imag_center">
                             <img style="max-height: 320px;max-width: 640px; "id="imagepreview" src="/frontend/img/noimage.png" alt="your image" />
                         </div>
 
-                            <section class="col col-6">
+                            <section class="col-md-12">
                                 <?php echo $this->formLabel($this->form->get('image')); ?>
                                 <label for="file" class="input input-file">
                                     <div class="button">
@@ -46,16 +46,6 @@
                                 <?php echo $this->formInput($this->form->get('cw')); ?>
                                 <?php echo $this->formInput($this->form->get('ch')); ?>
                             </section>
-
-                        <section class="col-md-6">
-                            <!-- <label class="label">Select</label> -->
-                            <?php echo $this->formLabel($this->form->get('user')); ?>
-                            <label class="select">
-                                <?php echo $this->formSelect($this->form->get('user')); ?>
-                                <i></i>
-                            </label>
-                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('user')); ?>
-                        </section>
 
                         <!-- <input type="button" value="Add another text input" onClick="addInput('fieldset_test');"> -->
                         <!-- <section class="col-md-6">

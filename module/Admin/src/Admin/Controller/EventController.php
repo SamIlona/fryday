@@ -312,8 +312,6 @@ class EventController extends Action
                 $request->getFiles()->toArray()
             );
 
-            var_dump($post);
-
             // remember name and path to the image if new image has not been uploaded
             $imageName = $eventEntity->getImage();
             $imagePath = $currentUploadDir. DIRECTORY_SEPARATOR . $imageName;

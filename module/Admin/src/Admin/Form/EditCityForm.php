@@ -26,7 +26,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
  * @package    Admin
  * @subpackage Form
  */
-class CreateCitySecondStepForm extends Form 
+class EditCityForm extends Form 
 {
     /**
      * @var EntityManager
@@ -46,6 +46,7 @@ class CreateCitySecondStepForm extends Form
     public function __construct($name = null, $entityManager, $user, $dir)
     {
         parent::__construct($name);
+        $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\City'));
         $this->setAttributes(
             array(
                 'method'    => 'post',
@@ -60,47 +61,58 @@ class CreateCitySecondStepForm extends Form
 
     public function addElements()
     {
-        $x = new Element\Hidden('x');
-        $x->setAttribute('id', 'city-x');
-        $this->add($x);
+        $name = new Element\Text('name');
+        $name->setLabel('Name')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'label',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'city-name');
+        $this->add($name);
 
-        $y = new Element\Hidden('y');
-        $y->setAttribute('id', 'city-y');
-        $this->add($y);
+        $country = new Element\Select('country');
+        $country->setLabel('Country')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'label',
+                )
+            )
+            ->setValueOptions($this->entityManager->getRepository('Admin\Entity\Country')->getAllCountriesAsOptions())
+            ->setEmptyOption('Select country...')
+            ->setOptions(
+                array(
+                    'disable_inarray_validator' => true,
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'city-country');
+        $this->add($country);
 
-        $w = new Element\Hidden('w');
-        $w->setAttribute('id', 'city-w');
-        $this->add($w);
+        $xStartCrop = new Element\Hidden('xStartCrop');
+        $xStartCrop->setAttribute('id', 'x-start-crop');
+        $this->add($xStartCrop);
 
-        $h = new Element\Hidden('h');
-        $h->setAttribute('id', 'city-h');
-        $this->add($h);
+        $yStartCrop = new Element\Hidden('yStartCrop');
+        $yStartCrop->setAttribute('id', 'y-start-crop');
+        $this->add($yStartCrop);
 
-        $cw = new Element\Hidden('cw');
-        $cw->setAttribute('id', 'city-cw');
-        $this->add($cw);
+        $widthCrop = new Element\Hidden('widthCrop');
+        $widthCrop->setAttribute('id', 'width-crop');
+        $this->add($widthCrop);
 
-        $ch = new Element\Hidden('ch');
-        $ch->setAttribute('id', 'city-ch');
-        $this->add($ch);
+        $heightCrop = new Element\Hidden('heightCrop');
+        $heightCrop->setAttribute('id', 'height-crop');
+        $this->add($heightCrop);
 
-        // $user = new Element\Select('user');
-        // $user->setLabel('User')
-        //     ->setLabelAttributes(
-        //         array(
-        //             'class' => 'label',
-        //         )
-        //     )
-        //     ->setValueOptions($this->entityManager->getRepository('Admin\Entity\User')->getAllUsersAsOptions())
-        //     ->setEmptyOption('Select user...')
-        //     ->setOptions(
-        //         array(
-        //             'disable_inarray_validator' => true,
-        //         )
-        //     )
-        //     ->setAttribute('class', 'form-control')
-        //     ->setAttribute('id', 'city-user');
-        // $this->add($user);
+        $widthCurrent = new Element\Hidden('widthCurrent');
+        $widthCurrent->setAttribute('id', 'width-current');
+        $this->add($widthCurrent);
+
+        $heightCurrent = new Element\Hidden('heightCurrent');
+        $heightCurrent->setAttribute('id', 'height-current');
+        $this->add($heightCurrent);
 
         $image = new Element\File('image');
         $image->setLabel('Image')
@@ -109,8 +121,9 @@ class CreateCitySecondStepForm extends Form
                     'class' => 'label',
                 )
             )
-            ->setAttribute('class', 'file col-lg-10')
-            ->setAttribute('id', 'city-image');
+            // ->setAttribute('class', 'file col-lg-10')
+            ->setAttribute('id', 'image')
+            ->setAttribute('onchange', 'this.parentNode.nextSibling.value = this.value');
         $this->add($image);
 
         $submit = new Element\Submit('submit');
@@ -131,7 +144,7 @@ class CreateCitySecondStepForm extends Form
         $imageInput->getFilterChain()->attachByName(
             'filerenameupload',
             array(
-                'target'        => $this->_dir . DIRECTORY_SEPARATOR . 'city_image',
+                'target'        => $this->_dir . DIRECTORY_SEPARATOR . 'city_image_',
                 'randomize'     => true,
                 // 'overwrite'     => true,
                 // 'use_upload_name' => true,
