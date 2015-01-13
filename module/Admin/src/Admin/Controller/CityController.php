@@ -258,7 +258,7 @@ class CityController extends Action
         // City Entity
         $entity = $em->getRepository('Admin\Entity\City')->findOneBy(array('id' => $id));
         // Edit Form
-        $form = new Form\EditCityForm('link-user-to-city-form', $em, $authUser, $currentUploadDir);
+        $form = new Form\EditCityForm('link-user-to-city-form', $em, $currentUploadDir);
 
         if($request->isPost())
         {
