@@ -64,10 +64,10 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'password', 'role', 'city', 'image');
+            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image');
         }
 
-        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'password', 'role', 'city', 'image');
+        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image');
     }
 
     /**
@@ -252,6 +252,116 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmail', array());
 
         return parent::getEmail();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setFacebook($facebook)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFacebook', array($facebook));
+
+        return parent::setFacebook($facebook);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFacebook()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFacebook', array());
+
+        return parent::getFacebook();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setLinkedin($linkedin)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLinkedin', array($linkedin));
+
+        return parent::setLinkedin($linkedin);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLinkedin()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLinkedin', array());
+
+        return parent::getLinkedin();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTwitter($twitter)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTwitter', array($twitter));
+
+        return parent::setTwitter($twitter);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTwitter()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTwitter', array());
+
+        return parent::getTwitter();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSkype($skype)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSkype', array($skype));
+
+        return parent::setSkype($skype);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSkype()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSkype', array());
+
+        return parent::getSkype();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPhone($phone)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPhone', array($phone));
+
+        return parent::setPhone($phone);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPhone()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPhone', array());
+
+        return parent::getPhone();
     }
 
     /**

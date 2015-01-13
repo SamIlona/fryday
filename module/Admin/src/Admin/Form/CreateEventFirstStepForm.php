@@ -92,6 +92,14 @@ class CreateEventFirstStepForm extends Form
             ->setAttribute('id', 'event-time');
         $this->add($time);
 
+        $venue = new Element\Select('venue');
+        $venue->setLabel('Venue')
+            ->setLabelAttributes(array('class' => 'label')            )
+            ->setValueOptions($this->entityManager->getRepository('Admin\Entity\Venue')->getAllVenuesAsOptions($user))
+            ->setEmptyOption('Select venue...')
+            ->setAttribute('class', 'form-control');
+        $this->add($venue);
+
         $submit = new Element\Submit('submit');
         $submit
             ->setValue('Save')
@@ -134,6 +142,17 @@ class CreateEventFirstStepForm extends Form
         $inputFilter->add(
             array(
                 'name' => 'time',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'time'
+        );
+
+        $inputFilter->add(
+            array(
+                'name' => 'venue',
                 'required' => true,
                 'validators' => array(
                     array('name' => 'not_empty'),

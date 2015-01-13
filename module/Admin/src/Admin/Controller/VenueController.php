@@ -132,10 +132,9 @@ class VenueController extends Action
     	$venueForm = new Form\CreateVenueSecondStepForm('venue', $em, $currentUploadDir);
         $venueForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\Venue'));
         $venueEntity = $em->getRepository('Admin\Entity\Venue')->findOneBy(array('id' => $venueID));
-
-        // var_dump($venueEntity);
-
         $venueForm->bind($venueEntity);
+
+                // var_dump($venueEntity);
 
         $request = $this->getRequest();
         if($request->isPost())

@@ -152,7 +152,7 @@ class CreateVenueSecondStepForm extends Form
                     'class' => 'label',
                 )
             )
-            ->setAttribute('class', 'file col-lg-10')
+            ->setAttribute('onchange', 'this.parentNode.nextSibling.value = this.value')
             ->setAttribute('id', 'venue-image');
         $this->add($image);
 

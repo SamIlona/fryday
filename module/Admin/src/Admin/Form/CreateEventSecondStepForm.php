@@ -54,11 +54,11 @@ class CreateEventSecondStepForm extends Form
         );
         $this->_dir = $dir;
         $this->entityManager = $entityManager;
-        $this->addElements($user);
+        $this->addElements();
         $this->addInputFilter();
     }
 
-    public function addElements($user)
+    public function addElements()
     {
         $xStartCrop = new Element\Hidden('xStartCrop');
         $xStartCrop->setAttribute('id', 'x-start-crop');
@@ -94,19 +94,6 @@ class CreateEventSecondStepForm extends Form
             ->setAttribute('id', 'event-image')
             ->setAttribute('onchange', 'this.parentNode.nextSibling.value = this.value');
         $this->add($image);
-
-        $venue = new Element\Select('venue');
-        $venue->setLabel('Venue')
-            ->setLabelAttributes(
-                array(
-                    'class' => 'label',
-                )
-            )
-            ->setValueOptions($this->entityManager->getRepository('Admin\Entity\Venue')->getAllVenuesAsOptions($user))
-            ->setEmptyOption('Select venue...')
-            ->setAttribute('class', 'form-control')
-            ->setAttribute('id', 'event-venue');
-        $this->add($venue);
 
         $details = new Element\Textarea('details');
         $details->setLabel('Details')
@@ -159,29 +146,13 @@ class CreateEventSecondStepForm extends Form
             'filerenameupload',
             array(
                 'target'        =>  $this->_dir . DIRECTORY_SEPARATOR . 'original_image',
+                // 'target'        =>  'public' . DIRECTORY_SEPARATOR . 'original_image',
                 'randomize'     => true,
                 // 'overwrite'     => true,
                 // 'use_upload_name' => true,
             )
         );
         $inputFilter->add($imageInput);
-
-        
-
-        // $inputFilter->add( 
-        //     array(
-        //         'name' => 'newsletter',
-        //         'required' => false,
-        //     ),
-        //     array(
-        //         'name' => 'newsletter',
-        //         'required' => false,
-        //     ),
-        //     array(
-        //         'name' => 'newsletter',
-        //         'required' => false,
-        //     ),
-        // );
 
         $this->setInputFilter($inputFilter);
     }

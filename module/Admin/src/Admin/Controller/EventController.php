@@ -94,6 +94,7 @@ class EventController extends Action
             {
                 $dataForm = $eventForm->getData();
 
+                $city           = $dataForm->getVenue()->getCity();
                 $dateEventSlug  = $slug->create($dateEvent);
                 $titleEventSlug = $slug->create($titleEvent);
 
@@ -101,6 +102,7 @@ class EventController extends Action
                 $eventEntity->setUser($user);
                 $eventEntity->setTitleSlug($titleEventSlug);
                 $eventEntity->setDateSlug($dateEventSlug);
+                $eventEntity->setCity($city);
 
                 $this->entityManager->persist($eventEntity);
                 $this->entityManager->flush();
@@ -138,6 +140,7 @@ class EventController extends Action
         $eventID = $this->params()->fromRoute('id');
         $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $eventID;
         $thumbnailer = $this->getServiceLocator()->get('WebinoImageThumb');
+        // var_dump($currentUploadDir);
     	$eventForm = new Form\CreateEventSecondStepForm('event', $em, $user, $currentUploadDir);
         $eventForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\Event'));
         $eventEntity = $em->getRepository('Admin\Entity\Event')->findOneBy(array('id' => $eventID));
@@ -151,14 +154,20 @@ class EventController extends Action
                 $request->getFiles()->toArray()
             );
 
+            // var_dump($post);
+
             $eventForm->setData($post);
 
             if($eventForm->isValid()) 
             {
                 $dataForm           = $eventForm->getData();
 
-                $city               = $dataForm->getVenue()->getCity();
+                // var_dump($dataForm);
+
                 $imageData          = $dataForm->getImage();
+
+                // var_dump($imageData);
+
                 $imageName          = end(explode("$currentUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
                 $thumb              = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());
                 $thumb_square       = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());
@@ -206,7 +215,6 @@ class EventController extends Action
                 chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName, 0777);    
 
                 $eventEntity->setImage($imageName);
-                $eventEntity->setCity($city);
                 $eventEntity->setPublished(false);
                 $eventEntity->setNewsletterCreated(false);
                 $eventEntity->setNewsletterSend(false);
