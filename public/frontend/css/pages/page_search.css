@@ -10,6 +10,22 @@
 	background: url(../../img/bg_index.jpg) 50% 0 repeat fixed;	
 }
 
+.btn-u.btn-brd.btn-u-light.btn-inversed {
+	background-color: #fff;
+  	color: #000;
+  	border-color: #fff;
+}
+.btn-u.btn-brd.btn-u-light.btn-inversed:hover {
+	background: none repeat scroll 0% 0% transparent;
+	color: #fff;
+  	border-color: #fff;
+}
+.btn-u.btn-brd.btn-u-light.btn-brd-hover.btn-inversed:hover {
+	color: #fff!important; 
+  	/*background: #fff;*/
+   	/*color: #555 !important;*/
+}
+
 .search-block:before {
 	top: 0;
 	left: 0;
@@ -22,18 +38,29 @@
 
 .search-block h1 {
 	color: #FFF;
+	font-size: 25px;
+	font-weight: 300;
+	text-align: center;
+	/*margin-bottom: 30px;*/
+	text-transform: uppercase;
+	/*background: rgba(0,0,0,0.2);*/
+	/*padding: 15px;*/
+}
+
+.search-block h2 {
+	color: #FFF;
 	font-size: 30px;
 	font-weight: 200;
 	text-align: center;
 	/*margin-bottom: 30px;*/
 	text-transform: uppercase;
 	/*background: rgba(0,0,0,0.2);*/
-	padding: 15px;
+	/*padding: 15px;*/
 
 }
 
 .title-background {
-	background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.4); 
+	background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.3); 
 	padding: 0px 0px 30px;
 }
 
