@@ -113,9 +113,9 @@ class CityController extends Action
         $user = $this->getAuthenticatedUser();
         $cityID = $this->params()->fromRoute('id');
         $uploadDir = $this->getUploadPath();
-        $currentCityUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $cityID;
+        $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $cityID;
         $thumbnailer = $this->getServiceLocator()->get('WebinoImageThumb');
-        $createCityForm = new Form\CreateCitySecondStepForm('new-city-form', $em, $user, $currentCityUploadDir);
+        $createCityForm = new Form\CreateCitySecondStepForm('new-city-form', $em, $user, $currentUploadDir);
         $createCityForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\City'));
         $cityEntity = $em->getRepository('Admin\Entity\City')->findOneBy(array('id' => $cityID));
         $createCityForm->bind($cityEntity);
@@ -135,7 +135,7 @@ class CityController extends Action
                 $dataForm           = $createCityForm->getData();
                 
                 $imageData          = $dataForm->getImage();
-                $imageName          = end(explode("$currentCityUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
+                $imageName          = end(explode("$currentUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
                 $thumb              = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());
                 $thumb_square       = $thumbnailer->create($imageData['tmp_name'], $options = array(), $plugins = array());  
                 $currentDimantions  = $thumb->getCurrentDimensions();
@@ -160,7 +160,7 @@ class CityController extends Action
                 }
 
                 $thumb->resize(640, 320);
-                $resizedImg = $currentCityUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName;
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName;
                 $thumb->save($resizedImg);
 
                 $thumb->resize(224, 112);
@@ -173,7 +173,7 @@ class CityController extends Action
                     $thumb_square->cropFromCenter($currentDimantions['width'], $currentDimantions['width']);
 
                 $thumb_square->resize(60, 60);
-                $mailImg = $currentCityUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
+                $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
                 $thumb_square->save($mailImg);
 
                 chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName, 0777);

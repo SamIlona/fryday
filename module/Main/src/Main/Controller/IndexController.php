@@ -11,6 +11,7 @@ namespace Main\Controller;
 
 use Fryday\Mvc\Controller\Action; // use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Admin\Form;
 
 class IndexController extends Action
 {
@@ -18,11 +19,45 @@ class IndexController extends Action
     {
         $em = $this->getEntityManager();
 
+        $signupForm = new Form\SignUpForm('sign-up-form', $em);
+
         return array(
             'eventsFirstLine'   => $em->getRepository('Admin\Entity\Event')->getEvents(4, 0, 'upcoming', 1, 'all'),
             'eventsSecondLine'  => $em->getRepository('Admin\Entity\Event')->getEvents(4, 4, 'upcoming', 1, 'all'),
+            'signupform' => $signupForm,
         );
     }
+
+    public function signUpAction()
+    {
+        $em = $this->getEntityManager();
+
+        $request = $this->getRequest();
+        $response = $this->getResponse();
+
+        $signupForm = new Form\SignUpForm('sign-up-form', $em);
+
+        if ($request->isPost()) 
+        {
+            $data = $request->getPost();
+            $signupForm->setData($data);
+
+            if($signupForm->isValid()) 
+            {
+
+            } 
+            else 
+            {
+                $message = $signupForm->getInputFilter()->getMessages();
+                
+                $response->setContent(\Zend\Json\Json::encode(array(
+                    'error_message' => $message,
+                )));
+            }
+        }
+        return $response;
+    }
+
     public function venueAction()
     {
         return new ViewModel(

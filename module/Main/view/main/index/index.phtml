@@ -13,19 +13,27 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <?php $signupform->setAttribute('action', $this->url('administrator/default', array('controller' => 'event', 'action' => 'create-first-step')))->prepare(); ?>
+                                                <?php echo $this->form()->openTag($signupform); ?>
+                                                <fieldset>
                                                 <!-- <h4>Some Input</h4> -->
-                                                <p><input class="form-control" placeholder="E-mail" type="text"></p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <!-- <h4>Some More Input</h4> -->
-                                                <p><input class="form-control" placeholder="Select city" type="text"></p>
+                                                <!-- <p><input class="form-control" placeholder="E-mail" type="text"></p> -->
+                                                    <section class="col-md-12">
+                                                        <?php echo $this->formInput($this->signupform->get('email')); ?>
+                                                        <label class="input">
+                                                        <?php echo $this->FormElementErrors($this->signupform->get('email')); ?>
+                                                        </label>
+                                                        <div id="email-errors"></div>
+                                                    </section>
+                                                </fieldset>
+                                                <?php echo $this->form()->closeTag($signupform); ?>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn-u btn-u-primary">SignUp</button>
+                                        <button id="sign-up-button" type="button" class="btn-u btn-u-primary">SignUp</button>
                                     </div>
                                 </div>
                             </div>
@@ -409,3 +417,39 @@
         </div>
     </div>
     </div>
+
+<script>
+    $( "form" ).submit(function( event ) {
+        if ( $( "input:first" ).val() === "correct" ) {
+            $( "span" ).text( "Validated..." ).show();
+            return;
+        }
+        $( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
+        event.preventDefault();
+    });
+
+    $(document).ready(function() {
+        $("#sign-up-button").click(function(){
+            // alert("button");
+            $.post("/sign-up", { email: $("#signup-email").val(), }, function(data){
+
+                console.log(data.message);
+                console.log(data.error_message);
+
+                for (var key in data.error_message) {
+                   var obj = data.error_message[key];
+                   for (var prop in obj) {
+                      // important check that this is objects own property 
+                      // not from prototype prop inherited
+                      if(obj.hasOwnProperty(prop)){
+                        $( "#email-errors" ).append('<div class="note note-error">' + obj[prop] + '</div>');
+                      }
+                   }
+                }
+
+
+
+            }, 'json');
+        }); 
+    });
+</script>

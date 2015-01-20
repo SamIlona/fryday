@@ -93,6 +93,13 @@
 	padding-bottom: 15px;
 }
 
+.topbar .sociallinks ul.loginbar > li > a, 
+.topbar .sociallinks ul.loginbar > li > a:hover {
+	color: #7c8082;
+	font-size: 15px;
+	text-transform: uppercase;
+}
+
 .topbar ul.loginbar > li > a, 
 .topbar ul.loginbar > li > a:hover {
 	color: #7c8082;
@@ -101,7 +108,8 @@
 }
 
 .topbar ul.loginbar li i.fa { 
-	color: #bbb;
+	/*color: #bbb;*/
+	font-size: 20px;
 }
 
 .topbar ul.loginbar li.topbar-devider { 

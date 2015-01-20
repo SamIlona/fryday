@@ -74,7 +74,24 @@
                 <div class="topbar">
                     <div class="container">
                         <!-- Topbar Navigation -->
-                        <ul class="loginbar pull-right">
+                        <ul class="loginbar sociallinks pull-right ">
+                        <!-- <ul class="social-icons social-icons-color pull-right"> -->
+                            <li>
+                                <!-- <a href="#" data-original-title="Facebook" class="rounded-x social_facebook"></a> -->
+                                <!-- <a href="#" data-original-title="Facebook" class="rounded social_facebook"></a> -->
+                                <a href="https://www.facebook.com/fryday.network"><i class="fa fa-facebook-square"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/groups/Fryday-3346258/about"><i class="fa fa-linkedin-square"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.twitter.com/frydaykyiv"><i class="fa fa-twitter-square"></i></a>
+                            </li>
+                            <li>
+                                <a href="www.youtube.com/frydaykyiv"><i class="fa fa-youtube-square"></i></a>
+                            </li>   
+
+
                         <?php if ($authenticatedUser = $this->identity()): ?>
                             <li class="index-top-welcome">
                                 <?php echo "Welcome, " ?>
@@ -86,13 +103,13 @@
                             </li>
                                 </ul>
                         <?php else: ?>
-                            <li>
+                            <!-- <li>
                                 <i class="fa fa-globe"></i>
                                 <a>Choose Your City</a>
-                                <?php echo $this->navigation('Navigation_c')->menu()->setUlClass('lenguages'); ?>
-                            </li>
-                            <li class="topbar-devider"></li>   
-                            <li><a href="page_faq.html">Registration</a></li>
+                                <?php //echo $this->navigation('Navigation_c')->menu()->setUlClass('lenguages'); ?>
+                            </li> -->
+                            <!-- <li class="topbar-devider"></li>    -->
+                            <!-- <li><a href="page_faq.html">Registration</a></li> -->
                         <?php endif; ?>
                         </ul>
                         <!-- End Topbar Navigation -->
