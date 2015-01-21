@@ -22,6 +22,17 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class SubscriberRepository extends EntityRepository
 {
+    public function getCount()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('count(s.id)')
+            ->from('Admin\Entity\Subscriber', 's');
+
+        return  $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function getPagedSubscribers($offset = 0, $limit = 10)
     {
         $em = $this->getEntityManager();

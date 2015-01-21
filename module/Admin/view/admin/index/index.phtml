@@ -12,99 +12,41 @@
             <div class="col-md-9">
                 <!--Profile Body-->
                 <div class="profile-body">
-                    <!--Service Block v3-->
-                    <div class="row margin-bottom-10">
-
-                        <div class="col-sm-4 sm-margin-bottom-20">
-                            <div class="servive-block servive-block-blue">
-	                            <i class="icon-2x color-light fa fa-glass"></i>
-	                            <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create-first-step' )); ?>"><h2 class="heading-md">Create a New Event</h2></a>
-                        	</div>
-                        </div>
-
-                        <div class="col-sm-4 sm-margin-bottom-20">
-                            <div class="servive-block servive-block-yellow">
-	                            <i class="icon-2x color-light fa fa-picture-o"></i>
-	                            <h2 class="heading-md">Upload Photos</h2>
-                        	</div>
-                        </div>
-
-                        <div class="col-sm-4 sm-margin-bottom-20">
-                            <div class="servive-block servive-block-green">
-	                            <i class="icon-2x color-light fa fa-newspaper-o"></i>
-	                            <h2 class="heading-md">Post News</h2>
-                        	</div>
-                        </div>
-                    </div><!--/end row-->
-                    <!--End Service Block v3-->
-                    <hr>
-					<div class="row content-boxes-v1 margin-bottom-30">
-	                    <div class="col-md-4 md-margin-bottom-30">                
-	                        <h2 class="heading-sm">
-	                            <!-- <i class="icon-custom icon-sm icon-bg-u fa fa-lightbulb-o"></i> -->
-	                            <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'venue', 'action' => 'create' )); ?>"><span><i class="fa fa-plus"></i> Add Venue</span></a>
-	                        </h2><!-- 
-	                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p> -->
-	                    </div>
-                        <div class="col-md-4 md-margin-bottom-30">                
-                            <h2 class="heading-sm">
-                                <!-- <i class="icon-custom icon-sm icon-bg-u fa fa-lightbulb-o"></i> -->
-                                <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'partner', 'action' => 'create-first-step' )); ?>"><span><i class="fa fa-plus"></i> Add Partner</span></a>
-                            </h2><!-- 
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p> -->
-                        </div>
-                        <?php if ($this->identity()->getRole()->getName() == 'administrator'): ?>
-	                    <div class="col-md-4 md-margin-bottom-30">
-	                        <h2 class="heading-sm">
-	                            <!-- <i class="icon-custom icon-sm icon-bg-blue fa fa-bullhorn"></i> -->
-	                            <a href="<?php echo $this->url('administrator/default', array('controller' => 'user', 'action' => 'create' )); ?>"><span><i class="fa fa-plus"></i> Add Franchisor</span></a>
-	                        </h2><!-- 
-	                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p> -->
-	                    </div>
-
-	                    <div class="col-md-4">
-	                        <h2 class="heading-sm">
-	                            <!-- <i class="icon-custom icon-sm icon-bg-red icon-line icon-rocket"></i> -->
-	                            <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'city', 'action' => 'create-first-step' )); ?>"><span><i class="fa fa-plus"></i> Add City</span></a>
-	                        </h2><!-- 
-	                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p> -->
-	                    </div>
-                        <?php endif; ?>
-	                </div>
-	                <hr>
-
                     <div class="row margin-bottom-20">
-                        <!--Profile Event-->
-                        <div class="col-sm-12 md-margin-bottom-20">
-                            <div class="panel panel-profile no-bg">
-                                <!-- <div class="panel-heading overflow-h">
-                                    <h2 class="panel-title heading-sm pull-left"><i class="fa fa-briefcase"></i>Upcoming Events</h2>
-                                    <a href="<?php //echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'index' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-right">View All</a>
-                                </div> -->
-                               <!--  <div id="scrollbar2" class="panel-body contentHolder ps-container">
-
-                                <?php //foreach ($upcomingEvents as $event): ?>
-
-                                    <div class="profile-event">
-                                        <div class="date-formats">
-                                            <span><?php //echo $event->getDateTimeEvent()->format('d'); ?></span>
-                                            <small><?php //echo $event->getDateTimeEvent()->format('m'); ?>, <?php //echo $event->getDateTimeEvent()->format('Y'); ?></small>
-                                        </div>
-                                        <div class="overflow-h">
-                                            <h3 class="heading-xs"><a href="<?php //echo $this->url('main/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>"><?php //echo $event->getTitle(); ?></a></h3>
-                                            <p><?php //echo $event->getDescription(); ?></p>
-                                        </div>    
-                                    </div>
-
-                                <?php //endforeach; ?>
-
-                                    
-                                <div style="width: 389px; display: none; left: 0px; bottom: 3px;" class="ps-scrollbar-x-rail"><div style="left: 0px; width: 0px;" class="ps-scrollbar-x"></div></div><div style="top: 0px; height: 320px; display: inherit; right: 3px;" class="ps-scrollbar-y-rail"><div style="top: 0px; height: 178px;" class="ps-scrollbar-y"></div></div></div> -->   
-                            </div> 
+                        <div class="col-sm-6 sm-margin-bottom-20">
+                            <div class="service-block-v3 service-block-u">
+                                <i class="icon-users"></i>
+                                <span class="service-heading">Overall Subscribers</span>
+                                <span class="counter"><?php echo number_format($overallSubscribers); ?></span> 
+                            </div>
                         </div>
-                        <!--End Profile Event-->
-                    </div><!--/end row-->
-                    <!-- <hr> -->
+                        <div class="col-sm-6">
+                            <div class="service-block-v3 service-block-blue">
+                                <i class="icon-globe"></i>
+                                <span class="service-heading">Overall Cities</span>
+                                <span class="counter"><?php echo number_format($overallCities); ?></span> 
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row margin-bottom-30"> 
+                        <div class="col-md-4 sm-margin-bottom-20">
+                            <form action="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create-first-step' )); ?>">
+                                <input class="btn-u btn-u-lg btn-block btn-u-dark-blue" type="submit" value="Create Event">
+                            </form>
+                        </div>
+                        <div class="col-md-4 sm-margin-bottom-20">
+                            <form action="<?php echo $this->url('administrator_content/default', array('controller' => 'partner', 'action' => 'create-first-step' )); ?>">
+                                <input class="btn-u btn-u-lg btn-block btn-u-dark-blue" type="submit" value="Add Partner">
+                            </form>
+                        </div>
+                        <div class="col-md-4 sm-margin-bottom-20">
+                            <form action="<?php echo $this->url('administrator_content/default', array('controller' => 'venue', 'action' => 'create-first-step' )); ?>">
+                                <input class="btn-u btn-u-lg btn-block btn-u-dark-blue" type="submit" value="Add Venue">
+                            </form>
+                        </div>
+                    </div>
+                    <!--End Service Block v3-->
                 </div>
                 <!--End Profile Body-->
             </div>
@@ -114,5 +56,14 @@
     jQuery(document).ready(function ($) {
         "use strict";
         $('.contentHolder').perfectScrollbar();
+    });
+</script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        App.initCounter();
+        Datepicker.initDatepicker();
+        StyleSwitcher.initStyleSwitcher();      
     });
 </script>

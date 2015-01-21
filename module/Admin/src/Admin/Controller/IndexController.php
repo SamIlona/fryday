@@ -20,7 +20,8 @@ class IndexController extends Action
     	$em = $this->getEntityManager();
 
         return new ViewModel(array(
-        	// 'upcomingEvents'    => $em->getRepository('Admin\Entity\Event')->getEvents(10, 0, 'upcoming'),
+        	'overallSubscribers' => $em->getRepository('Admin\Entity\Subscriber')->getCount(),
+        	'overallCities' => $em->getRepository('Admin\Entity\City')->getCount(),
    		));
     }
 

@@ -21,6 +21,16 @@ use Doctrine\ORM\EntityRepository;
 
 class CityRepository extends EntityRepository
 {
+    public function getCount()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('count(c.id)')
+            ->from('Admin\Entity\City', 'c');
+
+        return  $qb->getQuery()->getSingleScalarResult();
+    }
 
     public function getLastAddedCity()
     {

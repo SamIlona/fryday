@@ -55,40 +55,17 @@ class CreateCityFirstStepForm extends Form
     {
         $name = new Element\Text('name');
         $name->setLabel('Name')
-            ->setLabelAttributes(
-                array(
-                    'class' => 'label',
-                )
-            )
+            ->setLabelAttributes(array('class' => 'label'))
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'city-name');
         $this->add($name);
 
-        // $profileImage = new Element\File('profileImage');
-        // $profileImage->setLabel('Profile Image')
-        //     ->setLabelAttributes(
-        //         array(
-        //             'class' => 'label',
-        //         )
-        //     )
-        //     ->setAttribute('class', 'file col-lg-10')
-        //     ->setAttribute('id', 'city-profileImage');
-        // $this->add($profileImage);
-
         $country = new Element\Select('country');
         $country->setLabel('Country')
-            ->setLabelAttributes(
-                array(
-                    'class' => 'label',
-                )
-            )
+            ->setLabelAttributes(array('class' => 'label'))
             ->setValueOptions($this->entityManager->getRepository('Admin\Entity\Country')->getAllCountriesAsOptions())
             ->setEmptyOption('Select country...')
-            ->setOptions(
-                array(
-                    'disable_inarray_validator' => true,
-                )
-            )
+            ->setOptions(array('disable_inarray_validator' => true))
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'city-country');
         $this->add($country);

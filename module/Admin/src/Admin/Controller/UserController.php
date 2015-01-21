@@ -101,8 +101,8 @@ class UserController extends Action
                 return $this->redirect()->toRoute('administrator/default', array('controller' => 'user', 'action' => 'create-second-step', 'id' => $userID));
             }
 
-            $message = $createUserForm->getInputFilter()->getMessages();
-            var_dump($message);
+            // $message = $createUserForm->getInputFilter()->getMessages();
+            // var_dump($message);
         }
 
         return array(
