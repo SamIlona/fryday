@@ -40,6 +40,7 @@ class SignUpForm extends Form
     public function __construct($name = null, $entityManager)
     {
         parent::__construct($name);
+        $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\Subscriber'));
         $this->setAttributes(array(
                 'method'    => 'post',
                 'class'     => 'sky-form'
@@ -91,16 +92,16 @@ class SignUpForm extends Form
                 'validators' => array(
                     array('name' => 'not_empty'),
                     array('name' => 'email_address'),
-                    // array(
-                    //     'name' => '\DoctrineModule\Validator\NoObjectExists',
-                    //     'options' => array(
-                    //         'object_repository' => $this->entityManager->getRepository('Admin\Entity\User'),
-                    //         'fields' => array('email'),
-                    //         'messages' => array(
-                    //             \DoctrineModule\Validator\NoObjectExists::ERROR_OBJECT_FOUND => 'Email Address Already in Use',
-                    //         ),
-                    //     ),
-                    // ),
+                    array(
+                        'name' => '\DoctrineModule\Validator\NoObjectExists',
+                        'options' => array(
+                            'object_repository' => $this->entityManager->getRepository('Admin\Entity\Subscriber'),
+                            'fields' => array('email'),
+                            'messages' => array(
+                                \DoctrineModule\Validator\NoObjectExists::ERROR_OBJECT_FOUND => 'Email Address Already in Use',
+                            ),
+                        ),
+                    ),
                 ),
             ),
             'email'

@@ -90,13 +90,14 @@ return array(
                     'static_pages' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => ':action',
+                            'route'    => ':action[/:token]',
                             'constraints' => array(
                                 // '__NAMESPACE__' => 'Main\Controller',
                                 'controller'    => 'Index',
                                 // 'action'        => 'index',
                                 // 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'        => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'token'         => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 // 'id'         => '[0-9:-]+',
                                 // 'did'        => '[0-9_-]+',
                             ),

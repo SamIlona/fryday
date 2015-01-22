@@ -12,13 +12,11 @@
                                         <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="row">
+                                        <div id="emailinput" class="row">
                                             <div class="col-md-12">
                                                 <?php $signupform->setAttribute('action', $this->url('administrator/default', array('controller' => 'event', 'action' => 'create-first-step')))->prepare(); ?>
                                                 <?php echo $this->form()->openTag($signupform); ?>
                                                 <fieldset>
-                                                <!-- <h4>Some Input</h4> -->
-                                                <!-- <p><input class="form-control" placeholder="E-mail" type="text"></p> -->
                                                     <section class="col-md-12">
                                                         <?php echo $this->formInput($this->signupform->get('email')); ?>
                                                         <label class="input">
@@ -433,19 +431,44 @@
             // alert("button");
             $.post("/sign-up", { email: $("#signup-email").val(), }, function(data){
 
-                console.log(data.message);
+                // console.log(data.message);
                 console.log(data.error_message);
+                console.log(data.success);
 
-                for (var key in data.error_message) {
-                   var obj = data.error_message[key];
-                   for (var prop in obj) {
-                      // important check that this is objects own property 
-                      // not from prototype prop inherited
-                      if(obj.hasOwnProperty(prop)){
-                        $( "#email-errors" ).append('<div class="note note-error">' + obj[prop] + '</div>');
-                      }
-                   }
+                if(data.success)
+                {
+                    // $( "#email-errors" ).empty();
+                    $( "#emailinput" ).empty();
+                    $( "#emailinput" ).append('<div class="note note-error">Check your mail for continue registration.</div>');
                 }
+                else
+                {
+                    $( "#email-errors" ).empty();
+
+                    for (var key in data.error_message) 
+                    {
+                       var obj = data.error_message[key];
+                       for (var prop in obj) 
+                       {
+                            // important check that this is objects own property 
+                            // not from prototype prop inherited
+                            
+                            if(obj.hasOwnProperty(prop))
+                            {
+                                if(prop == 'objectFound')
+                                {
+                                    console.log(prop);
+                                    $( "#email-errors" ).append('<div class="note note-error">' + obj[prop] + '. Please use your password.</div>');
+                                }
+                                else
+                                {
+                                    $( "#email-errors" ).append('<div class="note note-error">' + obj[prop] + '</div>');
+                                }
+                            }
+                        }
+                    }
+                }
+                
 
 
 
