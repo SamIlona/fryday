@@ -184,7 +184,8 @@ class IndexController extends Action
     {
         $token = $this->params()->fromRoute('id');
         $viewModel = new ViewModel(array('token' => $token));
-        try {
+        try
+        {
             $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
             $user = $entityManager->getRepository('AuthDoctrine\Entity\User')->findOneBy(array('usrRegistrationToken' => $token)); // 
             $user->setUsrActive(1);
@@ -192,7 +193,8 @@ class IndexController extends Action
             $entityManager->persist($user);
             $entityManager->flush();
         }
-        catch(\Exception $e) {
+        catch(\Exception $e)
+        {
             $viewModel->setTemplate('auth-doctrine/registration/confirm-email-error.phtml');
         }
         return $viewModel;
@@ -281,7 +283,8 @@ class IndexController extends Action
          }
      
          // create arrays if special character(s) required
-         if($count) {
+         if($count) 
+         {
               // split base password to array; create special chars array
               $tmp1 = str_split($out);
               $tmp2 = array();
@@ -338,8 +341,8 @@ class IndexController extends Action
         $this->getRequest()->getServer();  //Server vars
         $mailService = $this->getServiceLocator()->get('AcMailer\Service\MailService');
         $mailService->setSubject('Email Confirmation')
-            ->setBody("Please, click the link to confirm your registration => " . 
-                $this->getRequest()->getServer('HTTP_ORIGIN') .
+            ->setBody("Please, click the link to confirm your registration => http://" . 
+                $this->getRequest()->getServer('HTTP_HOST') .
                 $this->url()->fromRoute('main/static_pages', array(
                     'controller' => 'index', 
                     'action' => 'confirm-email', 

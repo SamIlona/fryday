@@ -101,6 +101,12 @@ class UserController extends Action
                 return $this->redirect()->toRoute('administrator/default', array('controller' => 'user', 'action' => 'create-second-step', 'id' => $userID));
             }
 
+            // $this->getRequest()->getServer();
+            // $base = $this->getRequest()->getServer('HTTP_ORIGIN');
+            // $server = $this->getRequest()->getServer();
+            // var_dump($server);
+            // var_dump($base);
+            // var_dump($_SERVER);
             // $message = $createUserForm->getInputFilter()->getMessages();
             // var_dump($message);
         }
