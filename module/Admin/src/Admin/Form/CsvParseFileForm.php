@@ -14,8 +14,6 @@ use Zend\Form\Form;
 use Zend\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 
-use Main\Entity\VenueCategory;
-
 use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 

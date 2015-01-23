@@ -48,6 +48,18 @@ class User
 
     /**
      * @var string
+     * @ORM\Column(name="company", type="string", length=255, nullable=true, unique=false)
+     */
+    protected $company;
+
+    /**
+     * @var string
+     * @ORM\Column(name="position", type="string", length=255, nullable=true, unique=false)
+     */
+    protected $position;
+
+    /**
+     * @var string
      * @ORM\Column(name="facebook", type="string", length=255, nullable=true, unique=false)
      */
     protected $facebook;

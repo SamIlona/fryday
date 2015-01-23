@@ -13,10 +13,10 @@
 
 return array(
 	'module_layouts' => array(
-        'Main' 		=> 'layout/main.phtml',
+        'Fryday' 	=> 'layout/main.phtml',
         'Admin'     => 'layout/main.phtml',
-        'Content'   => 'layout/main.phtml',
-        'Backend'	=> 'layout/backend.phtml',
+        // 'Content'   => 'layout/main.phtml',
+        // 'Backend'	=> 'layout/backend.phtml',
     ),
     // ...
 );

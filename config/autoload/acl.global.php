@@ -25,10 +25,10 @@ return array(
                     'all'                   => 'administrator',
                     'do-parse-file-console' => 'guest'
                 ),
-                'Main\Controller\Index' => array(
+                'Fryday\Controller\Index' => array(
                     'all'         => 'guest',
                 ),
-                'Main\Controller\Javascript' => array(
+                'Fryday\Controller\Javascript' => array(
                     'all'         => 'guest',
                 ),
                 'Admin\Controller\City' => array(
@@ -45,9 +45,6 @@ return array(
                 ),
                 'Admin\Controller\Newsletter' => array(
                     'all'      => array('administrator', 'franchisor'),
-                ),
-                'MyModule\Controller\Do' => array(
-                    'all'       => 'guest',
                 ),
             )
         )

@@ -14,8 +14,6 @@ use Zend\Form\Form;
 use Zend\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 
-use Main\Entity\VenueCategory;
-
 use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
@@ -181,50 +179,4 @@ class CreateVenueForm extends Form
 
         $this->setInputFilter($inputFilter);
     }
-
-    /**
-     * Fetching all categories
-     *
-     * @return array|$categories
-     */
-    // private function getCategories()
-    // {
-    //     $categories = array(
-    //         '0' => '...',
-    //     );
-
-    //     $categoriesSet = $this
-    //         ->entityManager
-    //         ->getRepository('Main\Entity\VenueCategory')
-    //         ->findAll();
-
-    //     foreach ($categoriesSet as $category) {
-    //         $categories[$category->getId()] = $category->getName();
-    //     }
-
-    //     return $categories;
-    // }
-
-    /**
-     * Fetching all cities
-     *
-     * @return array|$cities
-     */
-    // private function getCities()
-    // {
-    //     $cities = array(
-    //         '0' => '...',
-    //     );
-
-    //     $citiesSet = $this
-    //         ->entityManager
-    //         ->getRepository('Main\Entity\City')
-    //         ->findAll();
-
-    //     foreach ($citiesSet as $city) {
-    //         $cities[$city->getId()] = $city->getName();
-    //     }
-
-    //     return $cities;
-    // }
 }

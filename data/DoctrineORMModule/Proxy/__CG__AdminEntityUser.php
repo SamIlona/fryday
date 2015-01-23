@@ -64,10 +64,10 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image');
+            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image');
         }
 
-        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image');
+        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image');
     }
 
     /**

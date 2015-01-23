@@ -11,8 +11,6 @@ use Zend\View\Model\ViewModel;
 
 use Admin\Form\LoginForm;
 
-// use Main\Entity\Venue;
-
 class IndexController extends Action
 {
     public function indexAction()
@@ -119,6 +117,6 @@ class IndexController extends Action
         // return $view;
         
         // return $this->redirect()->toRoute('home');
-        return $this->redirect()->toRoute('main', array('controller' => 'index', 'action' => 'index'));
+        return $this->redirect()->toRoute('fryday', array('controller' => 'index', 'action' => 'index'));
     }
 }
