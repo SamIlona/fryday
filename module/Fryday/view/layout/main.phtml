@@ -36,7 +36,8 @@
 
         <!-- SCRIPTS -->
         <?php echo $this->headScript()
-
+            ->prependFile($this->basePath() . '/frontend/plugins/geocomplete/examples/logger.js')
+            ->prependFile($this->basePath() . '/frontend/plugins/geocomplete/jquery.geocomplete.js')
             ->prependFile($this->basePath() . '/frontend/js/plugins/validation.js')
             ->prependFile($this->basePath() . '/frontend/js/plugins/datepicker.js')
             ->prependFile($this->basePath() . '/frontend/js/plugins/masking.js')
@@ -63,6 +64,7 @@
             // ->prependFile($this->basePath() . '/frontend/plugins/jquery-1.10.2.min.js')
             ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.js')
             ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.js')
+            ->prependFile('https://maps.googleapis.com/maps/api/js?libraries=places')
             //->prependFile($this->basePath() . 'http://www.google-analytics.com/ga.js')
         ; ?>
 

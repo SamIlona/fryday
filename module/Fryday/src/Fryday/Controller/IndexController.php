@@ -12,6 +12,7 @@ namespace Fryday\Controller;
 use Fryday\Mvc\Controller\Action; // use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Admin\Form;
+use Fryday\Form as FrydayForm;
 use Admin\Entity;
 
 use Zend\Mail;
@@ -182,8 +183,13 @@ class IndexController extends Action
 
     public function confirmEmailAction()
     {
+        $em = $this->getEntityManager();
         $token = $this->params()->fromRoute('token');
-        $viewModel = new ViewModel(array('token' => $token));
+        $form = new FrydayForm\MemberRegistrationForm('member-regisration-form', $em);
+        $viewModel = new ViewModel(array(
+            'token' => $token,
+            'form' => $form,
+        ));
         try
         {
             // $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
@@ -200,6 +206,36 @@ class IndexController extends Action
         }
         return $viewModel;
     }
+
+    public function getCityIdAction()
+    {
+        $em = $this->getEntityManager();
+
+        $request = $this->getRequest();
+        $response = $this->getResponse();
+
+        $post = $request->getPost();
+
+        // $parsedPlace = str_getcsv($post['place']);
+
+        // if(count($parsedPlace) === 3)
+        // {
+        //     $countryName = $parsedPlace[2];
+        // }
+
+        // $countryName = $parsedPlace[1];
+
+        // $cityName = $parsedPlace[0];
+
+        $country = $em->getRepository('Admin\Entity\Country')->findOneBy(array('name' => $post['country']));
+
+        $response->setContent(\Zend\Json\Json::encode(array(
+            'countryId' => $country->getId(),
+        )));
+
+        return $response;
+    }
+
     public function prepareData($user)
     {
         // $user->setUsrActive(0);

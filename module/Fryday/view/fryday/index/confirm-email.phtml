@@ -12,6 +12,191 @@
     	<div class="row margin-bottom-40">
         	<h1>Thank you! Yor registration has been confirmed.<?php echo $token?></h1>
         </div><!--/row-->
+        <div class="row col-md-8 col-md-offset-2 margin-bottom-40">
+            <?php $form->setAttribute('action', $this->url('fryday/registration', array('controller' => 'index', 'action' => 'email-confirm', 'token' => $token)))->prepare(); ?>
+            <?php echo $this->form()->openTag($form); ?>
+                    <header>Checkout form</header>
+                    
+                    <fieldset>                  
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend fa fa-user"></i>
+                                    <?php echo $this->formInput($this->form->get('firstName')); ?>
+                                </label>
+                            </section>
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend fa fa-user"></i>
+                                    <?php echo $this->formInput($this->form->get('lastName')); ?>
+                                </label>
+                            </section>
+                        </div>
+                        
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend fa fa-envelope"></i>
+                                    <?php echo $this->formInput($this->form->get('email')); ?>
+                                </label>
+                            </section>
+                            <section class="col col-6">
+                                <label class="input">
+                                    <i class="icon-prepend fa fa-phone"></i>
+                                    <input name="phone" placeholder="Phone" type="tel">
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-4">
+                                <label class="input">
+                                    <?php echo $this->formInput($this->form->get('city')); ?>
+                                </label>
+                                <pre id="logger">Log:</pre>
+                                <li>Country Code: <span data-geo="country_short"></span></li>
+                            </section>
 
-    	
+                            <section class="col col-5">
+                                <label class="select">
+                                    <?php echo $this->formSelect($this->form->get('country')); ?>
+                                    <i></i>
+                                </label>
+                            </section>
+                            
+                            <section class="col col-3">
+                                <label class="input">
+                                    <input name="code" placeholder="Post code" type="text">
+                                </label>
+                            </section>
+                        </div>
+                        
+                        <section>
+                            <label for="file" class="input">
+                                <input name="address" placeholder="Address" type="text">
+                            </label>
+                        </section>
+                        
+                        <section>
+                            <label class="textarea">
+                                <textarea rows="3" name="info" placeholder="Additional info"></textarea>
+                            </label>
+                        </section>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <section>
+                            <div class="inline-group">
+                                <label class="radio"><input name="radio-inline" checked="" type="radio"><i class="rounded-x"></i>Visa</label>
+                                <label class="radio"><input name="radio-inline" type="radio"><i class="rounded-x"></i>MasterCard</label>
+                                <label class="radio"><input name="radio-inline" type="radio"><i class="rounded-x"></i>PayPal</label>
+                            </div>
+                        </section>                  
+                        
+                        <section>
+                            <label class="input">
+                                <input name="name" placeholder="Name on card" type="text">
+                            </label>
+                        </section>
+                        
+                        <div class="row">
+                            <section class="col col-10">
+                                <label class="input">
+                                    <input name="card" id="card" placeholder="Card number" type="text">
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <label class="input">
+                                    <input name="cvv" id="cvv" placeholder="CVV2" type="text">
+                                </label>
+                            </section>
+                        </div>
+                        
+                        <div class="row">
+                            <label class="label col col-4">Expiration date</label>
+                            <section class="col col-5">
+                                <label class="select">
+                                    <select name="month">
+                                        <option value="0" selected="" disabled="">Month</option>
+                                        <option value="1">January</option>
+                                        <option value="1">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                    <i></i>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <label class="input">
+                                    <input name="year" id="year" placeholder="Year" type="text">
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    
+                    <footer>
+                        <button type="submit" class="btn-u">Continue</button>
+                    </footer>
+                <?php echo $this->form()->closeTag($form); ?>
+        </div>    	
     </div>
+
+    <script>
+    $(function(){
+        
+        $("#member-registration-city").geocomplete()
+            .bind("geocode:result", function(event, result)
+            {
+                console.log(result.address_components)
+                // console.log(result.address_components[0].long_name);
+                // console.log(result.address_components[3].long_name);
+
+                var countryName;
+
+                if(result.address_components.length === 4)
+                {
+                    countryName = result.address_components[3].long_name
+                } 
+                else if (result.address_components.length === 2)
+                {
+                    countryName = result.address_components[1].long_name
+                }
+
+                // console.log(countryName);
+
+                $.log("Result: " + result);
+                $.post("/registration/get-city-id", { country: countryName, }, function(data)
+                {
+                    // console.log(data.countryId);
+                    // console.log(data.cityName);
+                    $("#member-registration-country").val(data.countryId);
+                }, 'json');
+
+                $("#member-registration-city").val(result.address_components[0].long_name);
+            })
+            .bind("geocode:error", function(event, status)
+            {
+                $.log("ERROR: " + status);
+            })
+            .bind("geocode:multiple", function(event, results)
+            {
+                $.log("Multiple: " + results.length + " results found");
+            });
+        
+        $("#find").click(function()
+        {
+            $("#member-registration-city").trigger("geocode");
+        });
+        
+      });
+    </script>
