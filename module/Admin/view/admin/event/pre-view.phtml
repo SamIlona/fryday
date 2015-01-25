@@ -83,7 +83,7 @@
                                     <span><strong>Date:</strong> <?php echo $event->getDateTimeEvent()->format('l, F jS'); ?></span>
                                     <span><strong>Time:</strong> <?php echo $event->getDateTimeEvent()->format('H:i'); ?></span>
                                     <span><strong>Venue:</strong> <?php echo $event->getVenue()->getName(); ?></span>
-                                    <span><strong>Entrance fee:</strong> <?php echo $event->getEntranceFee(); ?> UAH</span>
+                                    <span><strong>Entrance fee:</strong> <?php echo $event->getEntranceFee() . " " . $event->getCurrency()->getCode(); ?></span>
                                     <hr>
                                     <p><?php echo nl2br($event->getDetails()); ?></p>
                                 </div>

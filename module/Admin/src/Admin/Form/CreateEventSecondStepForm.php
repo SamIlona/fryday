@@ -120,6 +120,15 @@ class CreateEventSecondStepForm extends Form
             ->setAttribute('id', 'event-entrancefee');
         $this->add($entrancefee);
 
+        $currency = new Element\Select('currency');
+        $currency->setLabel('Currency')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setValueOptions($this->entityManager->getRepository('Fryday\Entity\Iso4217')->getAllCurrenciesAsOptions())
+            ->setEmptyOption('Select currency...')
+            ->setOptions(array('disable_inarray_validator' => true));
+            // ->setAttribute('class', 'form-control');
+        $this->add($currency);
+
         $submit = new Element\Submit('submit');
         $submit
             ->setValue('Save')

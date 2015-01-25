@@ -106,7 +106,7 @@ return array(
                 'drivers' => array(
                     // register `my_annotation_driver` for any entity under namespace `My\Namespace`
                     // 'My\Namespace' => 'my_annotation_driver'
-                    // 'AuthDoctrine' => 'my_annotation_driver'
+                    // 'Fyday\Entity' => __NAMESPACE__ . '_driver',
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver',
 //-                 'Auth\Entity' => __NAMESPACE__ . '_driver' // Stoyan added to allow the module Auth also to use Doctrine
                 )

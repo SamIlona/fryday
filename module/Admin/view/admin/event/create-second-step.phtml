@@ -19,11 +19,11 @@
                     
 
                     <fieldset>
-                            <div class="col col-12 imag_center">
+                            <div class="col-md-12 imag_center">
                                 <img style="max-height: 320px;max-width: 640px; "id="blah" src="/frontend/img/noimage.png" alt="your image" />
                             </div>
 
-                            <section class="col col-6">
+                            <section class="col-md-12">
                                 <?php echo $this->formLabel($this->form->get('image')); ?>
                                 <label for="file" class="input input-file">
                                     <div class="button">
@@ -41,12 +41,21 @@
                                 <?php echo $this->formInput($this->form->get('heightCurrent')); ?>
                             </section>
                         
-                        <section class="col-md-12">
+                        <section class="col-md-3">
                             <?php echo $this->formLabel($this->form->get('entrancefee')); ?>
                             <label class="input">
                                 <?php echo $this->formInput($this->form->get('entrancefee')); ?>
                             </label>
                         </section>
+
+                        <section class="col-md-3">
+                            <?php echo $this->formLabel($this->form->get('currency')); ?>
+                            <label class="select">
+                                <?php echo $this->formSelect($this->form->get('currency')); ?>
+                            </label>
+                        </section>
+
+                        
 
                         <section class="col-md-12">
                             <!-- <label class="label">Textarea</label> -->

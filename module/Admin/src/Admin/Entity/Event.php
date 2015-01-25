@@ -11,6 +11,8 @@ namespace Admin\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Fryday\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -132,6 +134,13 @@ class Event
      * @ORM\Column(name="entrance_fee", type="integer", nullable=true)
      */
     protected $entrancefee;
+
+    /**
+     * @var Currency
+     * @ORM\ManyToOne(targetEntity="Fryday\Entity\Iso4217")
+     * @ORM\JoinColumn(name="currency", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    protected $currency;
 
     /**
      * @var boolean
@@ -367,6 +376,22 @@ class Event
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * @param null|Fryday\Entity\Iso4217 $currency
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+    }
+
+    /**
+     * @return Fryday\Entity\Iso4217|null 
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 
     /**
