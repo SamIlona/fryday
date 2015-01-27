@@ -85,6 +85,8 @@ class UserController extends Action
             {
                 $data = $createUserForm->getData();
 
+                $userEntity->setEmailConfirmed(1);
+
                 $em->persist($userEntity);
                 $em->flush();
 

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="col-md-6 col-md-offset-3 title-background">
             <h1>Fryday is a Network of <br>Cosmopolitan Professionals</h2>
-            <a href="page_login.html" class="btn-u btn-brd btn-brd-hover btn-u-light margin-right-5">Sign In</a>
+            <a href="<?php echo $this->url('administrator/default', array('controller' => 'index', 'action' => 'login' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-light margin-right-5">Sign In</a>
             <button class="btn-u btn-brd btn-brd-hover btn-u-light btn-inversed margin-right-5" data-toggle="modal" data-target="#responsive">Sign Up</button>
                         <div style="display: none;" class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -95,13 +95,13 @@
                         </div>
 
                         <div class="overflow-hidden">
-                            <a href="#">
-                                <img class="img-responsive" src="<?php echo $event->getProfileImage(); ?>" alt="">
+                            <a href="<?php echo $this->url('fryday/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>">
+                                <img class="img-responsive" src="<?php echo '/uploads/events/' . $event->getId() . DIRECTORY_SEPARATOR . 'rect640x320_' . $event->getImage(); ?>" alt="">
                             </a>
                         </div>
                     </div>
                     <div class="caption">
-                        <p><a class="index-event-title  hover-effect fryday-w" href="#">
+                        <p><a class="index-event-title  hover-effect fryday-w" href="<?php echo $this->url('fryday/event_details', array('country' => $event->getCity()->getCountry()->getName(), 'city' => $event->getCity()->getName(), 'dateslug' => $event->getDateSlug(), 'titleslug' => $event->getTitleSlug() )); ?>">
                             <?php echo $event->getTitle(); ?>
                             <span><?php echo $event->getVenue()->getCity()->getName(); ?>, <?php echo $event->getVenue()->getName(); ?></span>
                         </a> </p>

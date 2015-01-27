@@ -64,10 +64,10 @@ class Event extends \Admin\Entity\Event implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'title', 'titleslug', 'dateslug', 'dateTimeEvent', 'image', 'xStartCrop', 'yStartCrop', 'widthCrop', 'heightCrop', 'widthCurrent', 'heightCurrent', 'city', 'venue', 'description', 'details', 'user', 'entrancefee', 'published', 'newsletter', 'newsletterCreated', 'newsletterSend', 'dateTimeCreated');
+            return array('__isInitialized__', 'id', 'title', 'titleslug', 'dateslug', 'dateTimeEvent', 'image', 'xStartCrop', 'yStartCrop', 'widthCrop', 'heightCrop', 'widthCurrent', 'heightCurrent', 'city', 'venue', 'description', 'details', 'user', 'entrancefee', 'currency', 'published', 'newsletter', 'newsletterCreated', 'newsletterSend', 'dateTimeCreated');
         }
 
-        return array('__isInitialized__', 'id', 'title', 'titleslug', 'dateslug', 'dateTimeEvent', 'image', 'xStartCrop', 'yStartCrop', 'widthCrop', 'heightCrop', 'widthCurrent', 'heightCurrent', 'city', 'venue', 'description', 'details', 'user', 'entrancefee', 'published', 'newsletter', 'newsletterCreated', 'newsletterSend', 'dateTimeCreated');
+        return array('__isInitialized__', 'id', 'title', 'titleslug', 'dateslug', 'dateTimeEvent', 'image', 'xStartCrop', 'yStartCrop', 'widthCrop', 'heightCrop', 'widthCurrent', 'heightCurrent', 'city', 'venue', 'description', 'details', 'user', 'entrancefee', 'currency', 'published', 'newsletter', 'newsletterCreated', 'newsletterSend', 'dateTimeCreated');
     }
 
     /**
@@ -450,6 +450,28 @@ class Event extends \Admin\Entity\Event implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCity', array());
 
         return parent::getCity();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCurrency($currency)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCurrency', array($currency));
+
+        return parent::setCurrency($currency);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCurrency()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCurrency', array());
+
+        return parent::getCurrency();
     }
 
     /**

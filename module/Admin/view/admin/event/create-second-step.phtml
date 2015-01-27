@@ -46,6 +46,7 @@
                             <label class="input">
                                 <?php echo $this->formInput($this->form->get('entrancefee')); ?>
                             </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('entrancefee')); ?>
                         </section>
 
                         <section class="col-md-3">
@@ -53,6 +54,7 @@
                             <label class="select">
                                 <?php echo $this->formSelect($this->form->get('currency')); ?>
                             </label>
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('currency')); ?>
                         </section>
 
                         <section class="col-md-12">
