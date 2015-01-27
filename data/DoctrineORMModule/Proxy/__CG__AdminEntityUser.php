@@ -64,10 +64,10 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image');
+            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image', 'registrationToken', 'emailConfirmed');
         }
 
-        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image');
+        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image', 'registrationToken', 'emailConfirmed');
     }
 
     /**
@@ -450,6 +450,50 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCity', array());
 
         return parent::getCity();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRegistrationToken($registrationToken)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRegistrationToken', array($registrationToken));
+
+        return parent::setRegistrationToken($registrationToken);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRegistrationToken()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRegistrationToken', array());
+
+        return parent::getRegistrationToken();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEmailConfirmed($emailConfirmed)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmailConfirmed', array($emailConfirmed));
+
+        return parent::setEmailConfirmed($emailConfirmed);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEmailConfirmed()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmailConfirmed', array());
+
+        return parent::getEmailConfirmed();
     }
 
 }

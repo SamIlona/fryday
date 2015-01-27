@@ -21,7 +21,7 @@ return array(
                     'route'    => '/',
                     'defaults' => array(
                         // '__NAMESPACE__' => 'Fryday\Controller',
-                        'controller' => 'Main\Controller\Index',
+                        'controller' => 'Fryday\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),

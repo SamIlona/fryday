@@ -63,24 +63,23 @@ class IndexController extends Action
                 //      redirect to verify your email
                 $data = $signupForm->getData();
 
-                $subscriberEntity = new Entity\Subscriber();
-                $signupForm->bind($subscriberEntity);
+                $entity = new Entity\User();
+                $signupForm->bind($entity);
 
-                $subscriberEntity->setEmail($data['email']);
+                $entity->setEmail($data['email']);
 
-                $this->prepareData($subscriberEntity);
-                $this->sendConfirmationEmail($subscriberEntity);
+                $this->prepareData($entity);
+                $this->sendConfirmationEmail($entity);
 
-                $em->persist($subscriberEntity);
+                $em->persist($entity);
                 $em->flush();
 
                 $response->setContent(\Zend\Json\Json::encode(array(
                     'success' => true,
                     'error_message' => null,
                 )));
-                // return $this->redirect()->toRoute('administrator/default', array('controller' => 'subscriber', 'action' => 'index'));
             } 
-            else 
+            else
             {
                 $message = $signupForm->getInputFilter()->getMessages();
                 
@@ -184,6 +183,8 @@ class IndexController extends Action
     public function confirmEmailAction()
     {
         $em = $this->getEntityManager();
+        $request = $this->getRequest();
+
         $token = $this->params()->fromRoute('token');
         $form = new FrydayForm\MemberRegistrationForm('member-regisration-form', $em);
         $viewModel = new ViewModel(array(
@@ -192,18 +193,42 @@ class IndexController extends Action
         ));
         try
         {
-            // $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-            $em = $this->getEntityManager();
-            $user = $em->getRepository('Admin\Entity\Subscriber')->findOneBy(array('registrationToken' => $token)); // 
-            // $user->setActive(1);
-            $user->setEmailConfirmed(1);
-            $em->persist($user);
+            $entity = $em->getRepository('Admin\Entity\User')->findOneBy(array('registrationToken' => $token)); // 
+            $form->bind($entity);
+            // $entity->setActive(1);
+            $entity->setEmailConfirmed(1);
+            $em->persist($entity);
             $em->flush();
         }
         catch(\Exception $e)
         {
             $viewModel->setTemplate('auth-doctrine/registration/confirm-email-error.phtml');
         }
+
+        if ($request->isPost()) 
+        {
+            $post = $request->getPost();
+            $form->setData($post);
+
+            if($form->isValid()) 
+            {
+                //TODO: entry email to db
+                //      send mail to subscriber
+                //      redirect to verify your email
+                $data = $form->getData();
+
+                // $entity = new Entity\User();
+                
+
+                // $this->prepareData($entity);
+                // $this->sendConfirmationEmail($entity);
+
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirect()->toRoute('fryday');
+            } 
+        } 
         return $viewModel;
     }
 

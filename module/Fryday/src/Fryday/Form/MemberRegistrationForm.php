@@ -40,6 +40,7 @@ class MemberRegistrationForm extends Form
     public function __construct($name = null, $entityManager)
     {
         parent::__construct($name);
+        $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\User'));
         $this->setAttributes(
             array(
                 'method'    => 'post',
@@ -65,14 +66,23 @@ class MemberRegistrationForm extends Form
             ->setAttributes(array('placeholder' => 'Last Name'));
         $this->add($lastName);
 
+        $password = new Element\Text('password');
+        $password->setLabel('Password')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array('placeholder' => 'Password'));
+        $this->add($password);
+
         $email = new Element\Text('email');
         $email->setLabel('E-mail')
             ->setLabelAttributes(array('class' => 'label'))
-            ->setAttributes(array(
-                'placeholder' => 'E-mail',
-                'id' => 'member-registration-email',
-        ));
+            ->setAttributes(array('placeholder' => 'E-mail'));
         $this->add($email);
+
+        $phone = new Element\Text('phone');
+        $phone->setLabel('Phone')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array('placeholder' => 'Phone'));
+        $this->add($phone);
 
         $city = new Element\Text('city');
         $city->setLabel('City')
@@ -92,9 +102,45 @@ class MemberRegistrationForm extends Form
             ->setAttribute('id', 'member-registration-country');
         $this->add($country);
 
+        $facebook = new Element\Text('facebook');
+        $facebook->setLabel('Facebook')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array(
+                'placeholder' => 'Facebook',
+                'class' => 'form-control'
+            ));
+        $this->add($facebook);
+
+        $linkedin = new Element\Text('linkedin');
+        $linkedin->setLabel('LinkedIn')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array(
+                'placeholder' => 'LinkedIn',
+                'class' => 'form-control'
+            ));
+        $this->add($linkedin);
+
+        $skype = new Element\Text('skype');
+        $skype->setLabel('Skype')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array(
+                'placeholder' => 'Skype',
+                'class' => 'form-control'
+            ));
+        $this->add($skype);
+
+        $twitter = new Element\Text('twitter');
+        $twitter->setLabel('Twitter')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttributes(array(
+                'placeholder' => 'Twitter',
+                'class' => 'form-control'
+            ));
+        $this->add($twitter);
+
         $submit = new Element\Submit('submit');
         $submit
-            ->setValue('Create')
+            ->setValue('Finish')
             ->setAttribute('class', 'btn btn-primary btn-sm col-lg-12')
             ->setAttribute('id', 'venue-submit');
         $this->add($submit);
@@ -124,28 +170,6 @@ class MemberRegistrationForm extends Form
                 ),
             ),
             'lastName'
-        );
-
-        $inputFilter->add(
-            array(
-                'name' => 'email',
-                'required' => true,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                    array('name' => 'email_address'),
-                    array(
-                        'name' => '\DoctrineModule\Validator\NoObjectExists',
-                        'options' => array(
-                            'object_repository' => $this->entityManager->getRepository('Admin\Entity\User'),
-                            'fields' => array('email'),
-                            'messages' => array(
-                                \DoctrineModule\Validator\NoObjectExists::ERROR_OBJECT_FOUND => 'Email Address Already in Use',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            'email'
         );
 
         $this->setInputFilter($inputFilter);

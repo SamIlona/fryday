@@ -14,8 +14,6 @@ use Zend\Form\Form;
 use Zend\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 
-use Admin\Entity\VenueCategory;
-
 use Doctrine\Common\Persistence\ObjectManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
@@ -40,7 +38,7 @@ class SignUpForm extends Form
     public function __construct($name = null, $entityManager)
     {
         parent::__construct($name);
-        $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\Subscriber'));
+        $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\User'));
         $this->setAttributes(array(
                 'method'    => 'post',
                 'class'     => 'sky-form'
@@ -54,24 +52,11 @@ class SignUpForm extends Form
     {
         $email = new Element\Text('email');
         $email->setLabel('E-mail')
-            ->setLabelAttributes(array('class' => 'required control-label col-lg-4'))
+            ->setLabelAttributes(array('class' => 'control-label'))
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'signup-email')
             ->setAttribute('placeholder', 'E-mail');
         $this->add($email);
-
-        // $password = new Element\Password('password');
-        // $password->setLabel('Password')
-        //     ->setLabelAttributes(
-        //         array(
-        //             'class' => 'required control-label col-lg-4',
-        //         )
-        //     )
-        //     // ->setValueOptions($this->getVenues())
-        //     ->setAttribute('class', 'form-control')
-        //     ->setAttribute('id', 'password')
-        //     ->setAttribute('placeholder', 'Password');
-        // $this->add($password);
 
         $submit = new Element\Submit('submit');
         $submit
@@ -95,7 +80,7 @@ class SignUpForm extends Form
                     array(
                         'name' => '\DoctrineModule\Validator\NoObjectExists',
                         'options' => array(
-                            'object_repository' => $this->entityManager->getRepository('Admin\Entity\Subscriber'),
+                            'object_repository' => $this->entityManager->getRepository('Admin\Entity\User'),
                             'fields' => array('email'),
                             'messages' => array(
                                 \DoctrineModule\Validator\NoObjectExists::ERROR_OBJECT_FOUND => 'Email Address Already in Use',

@@ -7,6 +7,7 @@ return array(
             'guest'         => null,
             'administrator' => 'guest',
             'franchisor'    => 'guest',
+            'member'        => 'guest',
         ),
         'resources' => array(
             'allow' => array(

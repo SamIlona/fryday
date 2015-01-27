@@ -100,7 +100,6 @@ class User
      */
     protected $password;
 
-
     /**
      * @var Role
      * @ORM\ManyToOne(targetEntity="Admin\Entity\Role", inversedBy="users")
@@ -120,6 +119,18 @@ class User
      * @ORM\Column(name="image", type="string", length=255, nullable=true, unique=false)
      */
     protected $image;
+
+    /**
+     * @var string
+     * @ORM\Column(name="registration_token", type="string", length=255, nullable=true)
+     */
+    protected $registrationToken;
+
+    /**
+     * @var string
+     * @ORM\Column(name="email_confirmed", type="boolean", nullable=false)
+     */
+    protected $emailConfirmed;
 
     /**
      * @return int
@@ -318,5 +329,37 @@ class User
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * @param string $registrationToken
+     */
+    public function setRegistrationToken($registrationToken)
+    {
+        $this->registrationToken = $registrationToken;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getRegistrationToken()
+    {
+        return $this->registrationToken;
+    }
+
+    /**
+     * @param string $emailConfirmed
+     */
+    public function setEmailConfirmed($emailConfirmed)
+    {
+        $this->emailConfirmed = $emailConfirmed;
+    }
+
+    /**
+     * @return string 
+     */
+    public function getEmailConfirmed()
+    {
+        return $this->emailConfirmed;
     }
 }
