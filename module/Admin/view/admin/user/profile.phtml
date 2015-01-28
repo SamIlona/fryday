@@ -32,7 +32,7 @@
                                     <span><strong>Position:</strong> 
                                         <?php if($user->getRole()->getRoleId() === 2): ?>
                                             Administrator</span>
-                                        <?php else if($user->getRole()->getRoleId() === 1): ?>
+                                        <?php elseif($user->getRole()->getRoleId() === 1): ?>
                                             Franchisor</span>
                                         <?php endif; ?>
                                     <hr>
