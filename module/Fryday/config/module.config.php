@@ -293,7 +293,85 @@ return array(
                 'label' => 'Dashboard',
                 'route' => 'administrator',
                 'resource'      => 'Admin\Controller\Index',
-                'privilege'     => 'index'
+                'privilege'     => 'index',
+                // 'class' => 'list-group-item',
+                'pages' => array(
+                    array(
+                        'label' => '<i class="fa fa-tachometer"></i> Dashboard',
+                        'route' => 'administrator',
+                        'class' => 'list-group-item',
+                    ),
+                    array(
+                        'label' => '<i class="fa fa-user"></i> Profile',
+                        'route' => 'administrator/default',
+                        'controller' => 'user',
+                        'action' => 'profile',
+                        'class' => 'list-group-item',
+                        // 'pages' => array(
+                        //     array(
+                        //         'label' => 'Profile', // 'Child #1',
+                        //         // 'route' => 'album',
+                        //         'params' => array('action' => 'profile'),
+                        //         // 'resource' => 'Album\Controller\Album',
+                        //         // 'privilege'    => 'add',
+                        //     ),
+                        // ),
+                    ),
+                    array(
+                        'label' => '<i class="fa fa-group"></i> Users',
+                        'route' => 'administrator/default',
+                        'controller' => 'user',
+                        'action' => 'index',
+                        'class' => 'list-group-item',
+                        // 'pages' => array(
+                        //     array(
+                        //         'label' => '<i class="fa fa-user"></i> Profile', // 'Child #1',
+                        //         'route' => 'administrator/default',
+                        //         'controller' => 'user',
+                        //         'action' => 'profile',
+                        //         // 'params' => array('action' => 'profile'),
+                        //         // 'resource' => 'Album\Controller\Album',
+                        //         // 'privilege'    => 'add',
+                        //     ),
+                        // ),
+                    ),
+                    array(
+                        'label' => '<i class="fa fa-glass"></i> Events',
+                        'route' => 'administrator_content/default',
+                        'controller' => 'event',
+                        'class' => 'list-group-item',
+                    ),
+                    array(
+                        'label' => '<i class="fa fa-briefcase"></i> Partners',
+                        'route' => 'administrator/default',
+                        'controller' => 'partner',
+                        'class' => 'list-group-item',
+                    ),
+                    array(
+                        'label' => '<i class="fa fa-envelope"></i> Mailer',
+                        'route' => 'administrator/default',
+                        'controller' => 'mailer',
+                        'class' => 'list-group-item',
+                    ),
+                    array(
+                        'label' => '<i class="fa fa-database "></i> Subscribers',
+                        'route' => 'administrator/paginator',
+                        'controller' => 'subscriber',
+                        'class' => 'list-group-item',
+                    ),
+                    array(
+                        'label' => '<i class="fa fa-map-marker"></i> Cities',
+                        'route' => 'administrator_content/default',
+                        'controller' => 'city',
+                        'class' => 'list-group-item',
+                    ),
+                    array(
+                        'label' => '<i class="fa fa-building"></i> Venues',
+                        'route' => 'administrator_content/default',
+                        'controller' => 'venue',
+                        'class' => 'list-group-item',
+                    ),
+                ),
             ),
         )
     ),

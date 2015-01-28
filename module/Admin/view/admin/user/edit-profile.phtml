@@ -1,16 +1,3 @@
-<div class="profile container content">
-        <div class="row">
-            <!--Left Sidebar-->
-            <div class="col-md-3 md-margin-bottom-40">
-                <?php if($this->identity()->getImage() != null): ?>
-                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $this->identity()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $this->identity()->getImage(); ?>" alt="<?php echo $this->identity()->getFirstName() . " " . $this->identity()->getLastName(); ?>">
-                <?php else: ?>
-                <img class="img-responsive md-margin-bottom-10" src="/frontend/img/noavatar.png" alt="<?php echo $this->identity()->getFirstName() . " " . $this->identity()->getLastName(); ?>">
-                <?php endif; ?>
-                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
-                <hr>
-            </div>
-            <!--End Left Sidebar-->
             
             <div class="col-md-9">
                 <!--Profile Body-->
@@ -130,8 +117,6 @@
                 </div>
                 <!--End Profile Body-->
             </div>
-        </div><!--/end row-->
-    </div>
 
     <script>
     

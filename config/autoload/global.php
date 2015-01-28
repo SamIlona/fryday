@@ -14,7 +14,7 @@
 return array(
 	'module_layouts' => array(
         'Fryday' 	=> 'layout/main.phtml',
-        'Admin'     => 'layout/main.phtml',
+        'Admin'     => 'layout/admin.phtml',
         // 'Content'   => 'layout/main.phtml',
         // 'Backend'	=> 'layout/backend.phtml',
     ),
