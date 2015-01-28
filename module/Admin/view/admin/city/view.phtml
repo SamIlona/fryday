@@ -41,10 +41,14 @@
                                         <div class="row margin-bottom-20">
                                             <div class="col-sm-12 ">
                                                 <div class="profile-blog blog-border">
+                                                    <?php if($userLinkedToCity->getUser()->getImage() != null): ?>
                                                     <img class="rounded-x" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $userLinkedToCity->getUser()->getId() . DIRECTORY_SEPARATOR . 'square60x60_' . $userLinkedToCity->getUser()->getImage(); ?>" alt="">
+                                                    <?php else: ?>
+                                                    <img class="img-responsive md-margin-bottom-10" src="/frontend/img/noavatar.png" alt="<?php echo $this->identity()->getFirstName() . " " . $this->identity()->getLastName(); ?>">
+                                                    <?php endif; ?>
                                                     <div class="name-location">
-                                                        <strong><?php echo $userLinkedToCity->getUser()->getFirstName() . " " . $userLinkedToCity->getUser()->getLastName(); ?></strong>
-                                                        <span><i class="fa fa-map-marker"></i><a href="#"><?php echo $userLinkedToCity->getUser()->getCity()->getName(); ?>,</a> <a href="#"><?php echo $userLinkedToCity->getUser()->getCity()->getCountry()->getName(); ?></a></span>
+                                                        <strong><a href="<?php echo $this->url('administrator/default', array('controller' => 'user', 'action' => 'view', 'id' => $userLinkedToCity->getUser()->getId() )); ?>"><?php echo $userLinkedToCity->getUser()->getFirstName() . " " . $userLinkedToCity->getUser()->getLastName(); ?></strong><br></a><br>
+                                                        <!-- <span><i class="fa fa-map-marker"></i><a href="#"><?php //echo $userLinkedToCity->getUser()->getCity()->getName(); ?>,</a> <a href="#"><?php //echo $userLinkedToCity->getUser()->getCity()->getCountry()->getName(); ?></a></span> -->
                                                     </div>
                                                     <!-- <div class="clearfix margin-bottom-20"></div>    
                                                     <p>Donec non dignissim eros. Mauris faucibus turpis volutpat sagittis rhoncus. Pellentesque et rhoncus sapien, sed ullamcorper justo.</p>
