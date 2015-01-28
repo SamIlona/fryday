@@ -81,6 +81,9 @@ class IndexController extends Action
 		*/
 			}
 		}
+
+		$this->layout('layout/main'); 
+
 		return new ViewModel(array(
 			'error' => 'Your authentication credentials are not valid',
 			'form'	=> $form,
