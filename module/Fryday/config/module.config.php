@@ -321,19 +321,19 @@ return array(
                         'label' => '<i class="fa fa-group"></i> Users',
                         'route' => 'administrator/default',
                         'controller' => 'user',
-                        // 'action' => 'index',
+                        'action' => 'index',
                         'class' => 'list-group-item',
-                        // 'pages' => array(
-                        //     array(
-                        //         'label' => '<i class="fa fa-user"></i> Profile', // 'Child #1',
-                        //         'route' => 'administrator/default',
-                        //         'controller' => 'user',
-                        //         'action' => 'profile',
-                        //         // 'params' => array('action' => 'profile'),
-                        //         // 'resource' => 'Album\Controller\Album',
-                        //         // 'privilege'    => 'add',
-                        //     ),
-                        // ),
+                        'pages' => array(
+                            array(
+                                'label' => 'View', // 'Child #1',
+                                'route' => 'administrator/default',
+                                'controller' => 'user',
+                                // 'action' => 'profile',
+                                'params' => array('action' => 'view'),
+                                // 'resource' => 'Album\Controller\Album',
+                                // 'privilege'    => 'add',
+                            ),
+                        ),
                     ),
                     array(
                         'label' => '<i class="fa fa-glass"></i> Events',
