@@ -307,15 +307,14 @@ return array(
                         'controller' => 'user',
                         'action' => 'profile',
                         'class' => 'list-group-item',
-                        // 'pages' => array(
-                        //     array(
-                        //         'label' => 'Profile', // 'Child #1',
-                        //         // 'route' => 'album',
-                        //         'params' => array('action' => 'profile'),
-                        //         // 'resource' => 'Album\Controller\Album',
-                        //         // 'privilege'    => 'add',
-                        //     ),
-                        // ),
+                        'pages' => array(
+                            array(
+                                'label' => 'Edit Profile', // 'Child #1',
+                                'route' => 'administrator/default',
+                                'controller' => 'user',
+                                'params' => array('action' => 'edit-profile'),
+                            ),
+                        ),
                     ),
                     array(
                         'label' => '<i class="fa fa-group"></i> Users',
@@ -323,15 +322,15 @@ return array(
                         'controller' => 'user',
                         'action' => 'index',
                         'class' => 'list-group-item',
+                        'resource'      => 'Admin\Controller\User',
+                        'privilege'     => 'index',
                         'pages' => array(
                             array(
                                 'label' => 'View', // 'Child #1',
                                 'route' => 'administrator/default',
                                 'controller' => 'user',
                                 // 'action' => 'profile',
-                                'params' => array('action' => 'view'),
-                                // 'resource' => 'Album\Controller\Album',
-                                // 'privilege'    => 'add',
+                                'params'        => array('action' => 'view'),
                             ),
                         ),
                     ),
@@ -363,18 +362,24 @@ return array(
                         'route' => 'administrator/default',
                         'controller' => 'mailer',
                         'class' => 'list-group-item',
+                        'resource' => 'Admin\Controller\Mailer',
+                        'privilege'    => 'index',
                     ),
                     array(
                         'label' => '<i class="fa fa-database "></i> Subscribers',
                         'route' => 'administrator/paginator',
                         'controller' => 'subscriber',
                         'class' => 'list-group-item',
+                        'resource' => 'Admin\Controller\Subscribers',
+                        'privilege'    => 'index',
                     ),
                     array(
                         'label' => '<i class="fa fa-map-marker"></i> Cities',
                         'route' => 'administrator/default',
                         'controller' => 'city',
                         'class' => 'list-group-item',
+                        'resource' => 'Admin\Controller\City',
+                        'privilege'    => 'index',
                     ),
                     array(
                         'label' => '<i class="fa fa-building"></i> Venues',

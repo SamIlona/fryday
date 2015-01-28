@@ -17,7 +17,10 @@ return array(
                     'logout'        => array('administrator', 'franchisor'),
                 ),
                 'Admin\Controller\User' => array(
-                    'all'         => 'administrator',
+                    'profile'       => array('administrator', 'franchisor'),
+                    'edit-profile'  => array('administrator', 'franchisor'),
+                    'index'         => 'administrator',
+                    'all'           => 'administrator',
                 ),
                 'Admin\Controller\Mailer' => array(
                     'all'         => 'administrator',

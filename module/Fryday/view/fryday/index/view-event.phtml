@@ -30,7 +30,13 @@
                                         <li><strong>Time:</strong> <?php echo $event->getDateTimeEvent()->format('H:i'); ?></li>
                                         <li><strong>Venue:</strong> <?php echo $event->getVenue()->getName(); ?></li>
                                         <li><strong>Address:</strong> <?php echo $event->getVenue()->getAddress(); ?></li>
-                                        <li><strong>Entrance fee:</strong> <?php echo $event->getEntranceFee() . " " . $event->getCurrency()->getCode(); ?></li>
+                                        <?php if($event->getCurrency() === null): ?>
+                                        <li>
+                                            <strong>Entrance fee:</strong> Free
+                                        <?php else: ?>
+                                            <strong>Entrance fee:</strong> <?php echo $event->getEntranceFee() . " " . $event->getCurrency()->getCode(); ?>
+                                        <?php endif; ?>
+                                        </li>
                                     </ul>  
                                 </blockquote>
                               

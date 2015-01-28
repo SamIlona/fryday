@@ -41,7 +41,7 @@ class SignUpForm extends Form
         $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\User'));
         $this->setAttributes(array(
                 'method'    => 'post',
-                'class'     => 'sky-form'
+                'class'     => 'sky-form sky-form-without-border'
         ));
         $this->entityManager = $entityManager;
         $this->addElements();

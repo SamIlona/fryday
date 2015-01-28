@@ -189,8 +189,12 @@ class PartnerController extends Action
                 $thumb->save($resizedImg);
 
                 $thumb->resize(224, 112);
-                $mailImg = $currentPartnerUploadDir . DIRECTORY_SEPARATOR . 'mail_' . $logoName;    
-                $thumb->save($mailImg);
+                $resizedImg = $currentPartnerUploadDir . DIRECTORY_SEPARATOR . 'mail_' . $logoName;    
+                $thumb->save($resizedImg);
+
+                $thumb->resize(144, 72);
+                $resizedImg = $currentPartnerUploadDir . DIRECTORY_SEPARATOR . 'carousel144x72_' . $logoName;    
+                $thumb->save($resizedImg);
 
                 $partnerEntity->setLogo($logoName);
 

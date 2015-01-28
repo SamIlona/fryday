@@ -6,9 +6,17 @@
 /**/
 /* defaults */
 /**/
+
+
+
+.sky-form .sky-form-without-border {
+  box-shadow: none;
+  border: none;
+}
+
 .sky-form {
   box-shadow: none;
-  border: 1px solid #eee;
+  border: 0px solid #eee;
 }
 
 .sky-form header {

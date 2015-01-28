@@ -38,7 +38,8 @@ class IndexController extends Action
         return array(
             'eventsFirstLine'   => $em->getRepository('Admin\Entity\Event')->getEvents(4, 0, 'upcoming', 1, 'all'),
             'eventsSecondLine'  => $em->getRepository('Admin\Entity\Event')->getEvents(4, 4, 'upcoming', 1, 'all'),
-            'signupform' => $signupForm,
+            'signupform'        => $signupForm,
+            'partners'          => $em->getRepository('Admin\Entity\Partner')->findAll(),
         );
     }
 
@@ -142,6 +143,13 @@ class IndexController extends Action
         );
     }
     public function aboutAction()
+    {
+        return new ViewModel(
+            array(
+            )
+        );
+    }
+    public function contactUsAction()
     {
         return new ViewModel(
             array(
@@ -402,8 +410,8 @@ class IndexController extends Action
         // $transport->send($message);
         $this->getRequest()->getServer();  //Server vars
         $mailService = $this->getServiceLocator()->get('AcMailer\Service\MailService');
-        $mailService->setSubject('Email Confirmation')
-            ->setBody("Please, click the link to confirm your registration => http://" . 
+        $mailService->setSubject('Fryday Subscription Confirmation')
+            ->setBody("Hello!<br>Welcome to Fryday! Please click on the link below to confirm your subscription<br>http://" . 
                 $this->getRequest()->getServer('HTTP_HOST') .
                 $this->url()->fromRoute('fryday/registration', array(
                     'controller' => 'index', 

@@ -352,6 +352,8 @@ return array(
                 'route' => 'administrator_content/default',
                 'controller' => 'city',
                 'class' => 'list-group-item',
+                'resource' => 'Admin\Controller\City',
+                'privilege'    => 'index',
             ),
             array(
                 'label' => '<i class="fa fa-building"></i> Venues',

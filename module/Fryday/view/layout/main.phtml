@@ -16,6 +16,7 @@
         
             ->prependStylesheet($this->basePath() . '/frontend/plugins/jquery.imgareaselect-0.9.10/css/imgareaselect-default.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.css')
+
             ->prependStylesheet($this->basePath() . '/frontend/css/custom.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/themes/default.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/profile.css')
@@ -23,6 +24,7 @@
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_log_reg_v1.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_clients.css')
             ->prependStylesheet($this->basePath() . '/frontend/css/pages/page_search.css')
+            ->prependStylesheet($this->basePath() . '/frontend/plugins/OwlCarousel/owl-carousel/owl.carousel.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/scrollbar/src/perfect-scrollbar.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css')
             ->prependStylesheet($this->basePath() . '/frontend/plugins/sky-forms/version-2.0.1/css/sky-forms.css')
@@ -36,13 +38,15 @@
 
         <!-- SCRIPTS -->
         <?php echo $this->headScript()
+            ->prependFile('https://maps.googleapis.com/maps/api/js?libraries=places')
+            
+            ->prependFile($this->basePath() . '/frontend/plugins/OwlCarousel/owl-carousel/owl.carousel.js')
             ->prependFile($this->basePath() . '/frontend/plugins/geocomplete/examples/logger.js')
             ->prependFile($this->basePath() . '/frontend/plugins/geocomplete/jquery.geocomplete.js')
             ->prependFile($this->basePath() . '/frontend/js/plugins/validation.js')
             ->prependFile($this->basePath() . '/frontend/js/plugins/datepicker.js')
             ->prependFile($this->basePath() . '/frontend/js/plugins/masking.js')
             //->prependFile($this->basePath() . '/frontend/js/pages/index.js')
-            ->prependFile($this->basePath() . '/frontend/js/app.js')
             ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.js')
             ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.js')
             // ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.js')
@@ -64,7 +68,7 @@
             // ->prependFile($this->basePath() . '/frontend/plugins/jquery-1.10.2.min.js')
             ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.datetimepicker.js')
             ->prependFile($this->basePath() . '/frontend/plugins/datetimepicker/jquery.js')
-            ->prependFile('https://maps.googleapis.com/maps/api/js?libraries=places')
+            // ->prependFile($this->basePath() . '/frontend/js/app.js')
             //->prependFile($this->basePath() . 'http://www.google-analytics.com/ga.js')
         ; ?>
 
@@ -80,10 +84,10 @@
                         <!-- <ul class="social-icons social-icons-color pull-right"> -->
                               
                             
-                            <li><a href="https://www.facebook.com/fryday.network"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="https://www.linkedin.com/groups/Fryday-3346258/about"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="https://www.twitter.com/frydaykyiv"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="www.youtube.com/frydaykyiv"><i class="fa fa-youtube"></i></a></li>  
+                            <li><a href="https://www.facebook.com/fryday.network" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.linkedin.com/groups/Fryday-3346258/about" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://www.twitter.com/frydaykyiv" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.youtube.com/frydaykyiv" target="_blank"><i class="fa fa-youtube"></i></a></li>  
                             <li class="topbar-devider"></li>  
                             <!-- <li><i class="fa fa-envelope"></i> Email: <a href="page_faq.html">marketing@fryday.net</a></li> -->
                             
@@ -107,7 +111,8 @@
                             </li> -->
                             <!-- <li class="topbar-devider"></li>    -->
                             <!-- <li><a href="page_faq.html">Sign Up</a></li> -->
-                            <li><button class="btn-u btn-brd btn-brd-hover btn-u-light btn-inversed margin-right-5" data-toggle="modal" data-target="#responsive">Sign Up</button></li>
+                            <li><!-- <button class="btn-u btn-brd btn-brd-hover btn-u-light btn-inversed margin-right-5" data-toggle="modal" data-target="#responsive">Sign Up</button></li> -->
+                            <li><a href="<?php echo $this->url('administrator/default', array('controller' => 'index', 'action' => 'login' )); ?>">Registration</a></li>
                             <li class="topbar-devider"></li>   
                             <li><a href="<?php echo $this->url('administrator/default', array('controller' => 'index', 'action' => 'login' )); ?>">Sign In</a></li>
                         <?php endif; ?>
@@ -159,7 +164,9 @@
                     <!-- About -->
                     <div class="col-md-3 md-margin-bottom-40">
                         <!-- <a href="index.html"><img class="footer-logo" src="assets/img/logo2-default.png" alt=""></a> -->
-                        <p>Fryday is one of the largest networking clubs for professionals organising series of social and business networking events across Eastern Europe and Central Asia.</p>    
+                        <p><!-- Fryday is one of the largest networking clubs for professionals organising series of social and business networking events across Eastern Europe and Central Asia. -->
+                            Fryday is an International Network of Cosmopolitan Professionals. Fryday was established in 2010 and has since expanded to 20+ countries on several continents
+                        </p>    
                     </div><!--/col-md-3-->
                     <!-- End About -->                    
 
@@ -168,11 +175,11 @@
                         <ul class="list-unstyled simple-list margin-bottom-20">
                             <li><a href="/about">About</a></li>
                             <li><a href="/media">Media</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="/contact-us">Contact Us</a></li>
                         </ul>
                     </div><!--/col-md-3--> 
 
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="thumb-headline"><h2>Help &amp; Information Center</h2></div>
                         <ul class="list-unstyled simple-list">
                             <li><a href="#">Help</a></li>
@@ -181,7 +188,7 @@
                             <li><a href="#">Disclaimer</a></li>
                             <li><a href="#">Privacy</a></li>
                         </ul>
-                    </div><!--/col-md-3-->
+                    </div> --><!--/col-md-3-->
                 </div>
             </div> 
         </div><!--/footer-->
@@ -191,17 +198,17 @@
                 <div class="row">
                     <div class="col-md-6">                     
                         <p>
-                            2014 © All Rights Reserved. Fryday 
-                            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                            2015 © All Rights Reserved. Fryday 
+                            <!-- <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> -->
                         </p>
                     </div>
                     <!-- Social Links -->
                     <div class="col-md-6">  
                         <ul class="social-icons pull-right">
-                            <li><a href="https://www.facebook.com/fryday.network" data-original-title="Facebook" class="rounded-x social_facebook"></a></li>
-                            <li><a href="https://www.twitter.com/frydaykyiv" data-original-title="Twitter" class="rounded-x social_twitter"></a></li>
+                            <li><a href="https://www.facebook.com/fryday.network" data-original-title="Facebook" class="rounded-x social_facebook" target="_blank"></a></li>
+                            <li><a href="https://www.twitter.com/frydaykyiv" data-original-title="Twitter" class="rounded-x social_twitter" target="_blank"></a></li>
                             <!-- <li><a href="#" data-original-title="Goole Plus" class="rounded-x social_googleplus"></a></li> -->
-                            <li><a href="https://www.linkedin.com/groups/Fryday-3346258/about" data-original-title="Linkedin" class="rounded-x social_linkedin"></a></li>
+                            <li><a href="https://www.linkedin.com/groups/Fryday-3346258/about" data-original-title="Linkedin" class="rounded-x social_linkedin" target="_blank"></a></li>
                             <!-- <li><a href="#" data-original-title="Pinterest" class="rounded-x social_pintrest"></a></li> -->
                         </ul>
                     </div>
@@ -292,17 +299,25 @@
         </div> 
     </div> -->
         <script type="text/javascript">
-            jQuery(document).ready(function() {
-                App.init();
-                Masking.initMasking();
-                Datepicker.initDatepicker();
-                Validation.initValidation();
-            });
+            // jQuery(document).ready(function() {
+            //     App.init();
+            //     Masking.initMasking();
+            //     Datepicker.initDatepicker();
+            //     Validation.initValidation();
+            // });
         </script>
         <script type="text/javascript">
             // jQuery(document).ready(function() {
             //     App.init();
-            //     App.initSliders();        
+            //     OwlCarousel.initOwlCarousel();
+            //     StyleSwitcher.initStyleSwitcher();        
+            //     RevolutionSlider.initRSfullWidth();
+            // });
+
+            // jQuery(document).ready(function() {
+            //     App.init();
+            //     App.initSliders();   
+
             // });
         </script>
         <script type="text/javascript">

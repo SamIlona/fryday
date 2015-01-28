@@ -1,7 +1,7 @@
 <div style="background-position: 50% 16px;" class="search-block parallaxBg">
     <div class="container">
         <div class="col-md-6 col-md-offset-3 title-background">
-            <h1>Fryday is a Network of <br>Cosmopolitan Professionals</h2>
+            <h1>Fryday is an International Network of <br>Cosmopolitan Professionals</h2>
             <a href="<?php echo $this->url('administrator/default', array('controller' => 'index', 'action' => 'login' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-light margin-right-5">Sign In</a>
             <button class="btn-u btn-brd btn-brd-hover btn-u-light btn-inversed margin-right-5" data-toggle="modal" data-target="#responsive">Sign Up</button>
                         <div style="display: none;" class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -9,30 +9,51 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Sign Up Now To Receive Invitations to Fryday’s events!</h4>
                                     </div>
                                     <div class="modal-body">
                                         <div id="emailinput" class="row">
                                             <div class="col-md-12">
-                                                <?php $signupform->setAttribute('action', $this->url('administrator/default', array('controller' => 'event', 'action' => 'create-first-step')))->prepare(); ?>
-                                                <?php echo $this->form()->openTag($signupform); ?>
-                                                <fieldset>
-                                                    <section class="col-md-12">
-                                                        <?php echo $this->formInput($this->signupform->get('email')); ?>
-                                                        <label class="input">
-                                                        <?php echo $this->FormElementErrors($this->signupform->get('email')); ?>
-                                                        </label>
-                                                        <div id="email-errors"></div>
-                                                    </section>
-                                                </fieldset>
-                                                <?php echo $this->form()->closeTag($signupform); ?>
+                                                <?php //$signupform->setAttribute('action', $this->url('administrator/default', array('controller' => 'event', 'action' => 'create-first-step')))->prepare(); ?>
+                                                <?php //echo $this->form()->openTag($signupform); ?>
+                                                <!-- <fieldset> -->
+                                                    <!-- <section class="col-md-12"> -->
+                                                        <?php //echo $this->formInput($this->signupform->get('email')); ?>
+                                                        <!-- <label class="input"> -->
+                                                        <?php //echo $this->FormElementErrors($this->signupform->get('email')); ?>
+                                                        <!-- </label> -->
+                                                        <!-- <span class="input-group-btn"> -->
+                                                            <!-- <button class="btn btn-danger btn-add-user" type="submit">Add User</button> -->
+                                                        <!-- </span> -->
+                                                        <!-- <div id="email-errors"></div> -->
+                                                    <!-- </section> -->
+                                                <!-- </fieldset> -->
+                                                <?php //echo $this->form()->closeTag($signupform); ?>
+                                        
+
+                                        <?php $signupform->setAttribute('action', $this->url('administrator/default', array('controller' => 'event', 'action' => 'create-first-step')))->prepare(); ?>
+                                        <?php echo $this->form()->openTag($signupform); ?>
+                                        <div class="input-group">
+                                            <label class="input">
+                                                <?php echo $this->formInput($this->signupform->get('email')); ?>
+                                            </label>
+                                            <!-- <input class="form-control" type="text"> -->
+                                            <span class="input-group-btn">
+                                                <button id="sign-up-button" type="button" class="btn btn-danger btn-add-user">SignUp</button>
+                                                <!-- <button class="btn btn-danger btn-add-user" type="submit">SignUp</button> -->
+                                            </span>
+                                        </div>
+                                        <div id="email-errors"></div>
+                                        <?php echo $this->form()->closeTag($signupform); ?>
+
+
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
+                                    <!-- <div class="modal-footer">
                                         <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
                                         <button id="sign-up-button" type="button" class="btn-u btn-u-primary">SignUp</button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -199,7 +220,10 @@
             <div class="headline"><h2>PHOTOS AND VIDEOS</h2></div>  
             <div class="row service-v1 margin-bottom-40">
                 <div class="col-md-3 md-margin-bottom-40">
-                    <div id="myCarousel1" class="carousel slide carousel-v1">
+                    <iframe width="100%" height="175px" src="//www.youtube.com/embed/NZyxjlPjG4M" frameborder="0" allowfullscreen></iframe> 
+
+                    
+                    <!-- <div id="myCarousel1" class="carousel slide carousel-v1">
                         <div class="carousel-inner">
                             <div class="item">
                                 <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
@@ -229,11 +253,12 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="col-md-3">
-                    <div id="myCarousel2" class="carousel slide carousel-v1">
+                    <iframe width="100%" height="175px" src="//www.youtube.com/embed/raT9Q-8AtLY" frameborder="0" allowfullscreen></iframe>    
+                    <!-- <div id="myCarousel2" class="carousel slide carousel-v1">
                         <div class="carousel-inner">
                             <div class="item">
                                 <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
@@ -263,13 +288,15 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
-                    </div>      
+                    </div>       -->
                 </div>
                 <div class="col-md-3 md-margin-bottom-40">
-                    <iframe width="100%" height="175px" src="//www.youtube.com/embed/014A0PlAFh8" frameborder="0" allowfullscreen></iframe>    
+                    <iframe width="100%" height="175px" src="//www.youtube.com/embed/8gUNHReHcMM" frameborder="0" allowfullscreen></iframe>  
+                      
                 </div>
                 <div class="col-md-3">
-                    <div id="myCarousel" class="carousel slide carousel-v1">
+                    <iframe width="100%" height="175px" src="//www.youtube.com/embed/HEUBe_OoYFs" frameborder="0" allowfullscreen></iframe>  
+                    <!-- <div id="myCarousel" class="carousel slide carousel-v1">
                         <div class="carousel-inner">
                             <div class="item">
                                 <img src="/frontend/img/10470771_932227246804927_7082111769254898822_n.jpg" alt="">
@@ -299,7 +326,7 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
-                    </div>      
+                    </div> -->      
                 </div>
             </div>  
         </div>
@@ -307,7 +334,7 @@
         <div id="clients-flexslider" class="flexslider home clients">
             <div class="headline"><h2>FRYDAY'S PARTNERS</h2></div>    
             
-            <div style="overflow: hidden; position: relative;" class="flex-viewport"></div><div style="overflow: hidden; position: relative;" class="flex-viewport"><ul style="width: 3400%; transition-duration: 0.6s; transform: translate3d(0px, 0px, 0px);" class="slides">
+           <!--  <div style="overflow: hidden; position: relative;" class="flex-viewport"></div><div style="overflow: hidden; position: relative;" class="flex-viewport"><ul style="width: 3400%; transition-duration: 0.6s; transform: translate3d(0px, 0px, 0px);" class="slides">
                     <li style="width: 125.667px; float: left; display: block;">
                         <a href="#">
                             <img src="/frontend/img/clients/hp_grey.png" alt=""> 
@@ -412,11 +439,60 @@
                     </li>
                 </ul>
             </div>
-        </div>
-    </div>
+        </div> -->
+
+
+
+        <?php //foreach ($partners as $partner): ?>
+        <!-- <div id="owl-demo">
+            <div class="item"><img src="<?php //echo '/uploads/partners/' . $partner->getId() . DIRECTORY_SEPARATOR . 'mail_' . $partner->getLogo(); ?>" alt="Owl Image"></div>
+        </div> -->
+        <?php //endforeach; ?>
+
+
+
+    <div id="owl-demo">
+        <?php foreach ($partners as $partner): ?>
+        <div class="item"><img src="<?php echo '/uploads/partners/' . $partner->getId() . DIRECTORY_SEPARATOR . 'carousel144x72_' . $partner->getLogo(); ?>" alt="Owl Image"></div>
+        <!-- <div class="item"><img src="assets/owl2.jpg" alt="Owl Image"></div>
+        <div class="item"><img src="assets/owl3.jpg" alt="Owl Image"></div>
+        <div class="item"><img src="assets/owl4.jpg" alt="Owl Image"></div>
+        <div class="item"><img src="assets/owl5.jpg" alt="Owl Image"></div>
+        <div class="item"><img src="assets/owl6.jpg" alt="Owl Image"></div>
+        <div class="item"><img src="assets/owl7.jpg" alt="Owl Image"></div>
+        <div class="item"><img src="assets/owl8.jpg" alt="Owl Image"></div> -->
+        <?php endforeach; ?>
     </div>
 
+
+
+
+
+
+
+
+    </div>
+</div>
+
 <script>
+
+    
+
+    $(document).ready(function() 
+    {
+        $("#owl-demo").owlCarousel(
+        {    
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+             
+            items : 6,
+            itemsDesktop : [1199,3],
+            itemsDesktopSmall : [979,3]
+         
+        });
+    });
+
+
+
     $( "form" ).submit(function( event ) {
         if ( $( "input:first" ).val() === "correct" ) {
             $( "span" ).text( "Validated..." ).show();
@@ -439,7 +515,8 @@
                 {
                     // $( "#email-errors" ).empty();
                     $( "#emailinput" ).empty();
-                    $( "#emailinput" ).append('<div class="note note-error">Check your mail for continue registration.</div>');
+                    $( "#emailinput" ).append('<div class="note note-error">Please check your email for a message from Fryday to confirm your subscription</div>');
+                    // $("#myModalLabel").replaceWith("");
                 }
                 else
                 {

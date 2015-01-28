@@ -10,7 +10,8 @@
 
 <div class="container content">		
     	<div class="row col-md-8 col-md-offset-2 margin-bottom-40">
-        	<h1>Your email has been confirmed. <br>Please fill the form.</h1>
+        	<h1>Thank you! You have now signed up to receive invitations to Fryday’s events.<br>
+                Please continue to fill in the below form to complete your registration.Your email has been confirmed. </h1>
         </div><!--/row-->
         <div class="row col-md-8 col-md-offset-2 margin-bottom-40">
             <?php $form->setAttribute('action', $this->url('fryday/registration', array('controller' => 'index', 'action' => 'confirm-email', 'token' => $token)))->prepare(); ?>

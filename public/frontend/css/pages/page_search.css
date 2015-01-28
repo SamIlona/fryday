@@ -69,13 +69,13 @@
 	bottom: 0px;
 	width: 100%;
 	background: none repeat scroll 0% 0% rgba(0, 0, 0, 1);
-	padding: 3px;
+	padding: 1px;
 }
 
 .cities-list-line-bar a {
 	text-decoration: none;
 	color: #AAA;
-	font-size: 13px;
+	font-size: 11px;
 }
 
 .cities-list-line ul > li {
