@@ -32,6 +32,8 @@
                                     <span><strong>Position:</strong> 
                                         <?php if($user->getRole()->getRoleId() === 2): ?>
                                             Administrator</span>
+                                        <?php else if($user->getRole()->getRoleId() === 1): ?>
+                                            Franchisor</span>
                                         <?php endif; ?>
                                     <hr>
                                     <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>

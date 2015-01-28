@@ -31,9 +31,11 @@
                                     <!-- <span><strong>Job:</strong> Web Developer</span> -->
                                     <span><strong>Position:</strong> 
                                         <?php if($user->getRole()): ?>
-                                        <?php if($user->getRole()->getRoleId() === 2): ?>
-                                            Administrator</span>
-                                        <?php endif; ?>
+                                            <?php if($user->getRole()->getRoleId() === 2): ?>
+                                                Administrator</span>
+                                            <?php elseif($user->getRole()->getRoleId() === 1): ?>
+                                                Franchisor</span>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                     <hr>
                                     <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>

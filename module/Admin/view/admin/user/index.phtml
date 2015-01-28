@@ -54,29 +54,30 @@
                                         </td>
                                         <td>
                                             <ul class="list-inline s-icons">
+                                                <?php if ($user->getFacebook()): ?>
                                                 <li>
-                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="#">
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="<?php echo $user->getFacebook(); ?>">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
                                                 </li>
+                                                <?php endif; ?>
+                                                <?php if ($user->getTwitter()): ?>
                                                 <li>
-                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="#">
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="<?php echo $user->getTwitter(); ?>">
                                                         <i class="fa fa-twitter"></i>
                                                     </a>
                                                 </li>
+                                                <?php endif; ?>
+                                                <?php if ($user->getLinkedin()): ?>
                                                 <li>
-                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Dropbox" href="#">
-                                                    <i class="fa fa-dropbox"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="#">
+                                                    <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="<?php echo $user->getLinkedin(); ?>">
                                                         <i class="fa fa-linkedin"></i>
                                                     </a>
                                                 </li>
+                                                <?php endif; ?>
                                             </ul>
-                                            <span><a href="#">info@example.com</a></span>
-                                            <span><a href="#">www.htmlstream.com</a></span>
+                                            <span><a href="#"><?php echo $user->getEmail(); ?></a></span>
+                                            <!-- <span><a href="#">www.htmlstream.com</a></span> -->
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
