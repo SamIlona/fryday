@@ -321,4 +321,16 @@ class UserController extends Action
         );
     }
 
+    public function viewAction()
+    {
+        $em = $this->getEntityManager();
+        $id = $this->params()->fromRoute('id');
+        $entity = $em->getRepository('Admin\Entity\User')->findOneBy(array('id' => $id));
+        return array(
+            'user' => $entity,
+            'filesDir' => end(explode("public", $this->getUploadPath())),
+        );
+    }
+
+
 }

@@ -1,0 +1,78 @@
+<div class="profile container content">
+    	<div class="row">
+            <!--Left Sidebar-->
+            <div class="col-md-3 md-margin-bottom-40">
+                <img class="img-responsive profile-img margin-bottom-20" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $this->identity()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $this->identity()->getImage(); ?>" alt="">
+                <?php echo $this->navigation('admin_navigation')->menu()->setUlClass('list-group sidebar-nav-v1 margin-bottom-40')->setAddClassToListItem(true)->escapeLabels(false); ?>
+                <hr>
+            </div>
+            <!--End Left Sidebar-->
+            
+            <div class="col-md-9">
+                <!--Profile Body-->
+                <div class="profile-body">
+                        <!-- <a href="<?php //echo $this->url('administrator_content/default', array('controller' => 'user', 'action' => 'edit-profile')); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-pencil"></i> Edit</a> -->
+                        <div class="profile-bio">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <?php if($user->getImage() != null): ?>
+                                    <img class="img-responsive md-margin-bottom-10" src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $user->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $user->getImage(); ?>" alt="">
+                                    <!-- <a class="btn-u btn-u-sm" href="#">Change Picture</a> -->
+                                    <?php else: ?>
+                                    <img class="img-responsive md-margin-bottom-10" src="/frontend/img/noavatar.png" alt="">
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-md-7">
+                                    <h2><?php echo $user->getFirstName() . " " . $user->getLastName(); ?></h2>
+                                    <!-- <span><strong>Job:</strong> Web Developer</span> -->
+                                    <span><strong>Position:</strong> 
+                                        <?php if($user->getRole()): ?>
+                                        <?php if($user->getRole()->getRoleId() === 2): ?>
+                                            Administrator</span>
+                                        <?php endif; ?>
+                                        <?php endif; ?>
+                                    <hr>
+                                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
+                                    <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p> -->
+                                </div>
+                            </div>    
+                        </div><!--/end row-->
+                                
+                        <hr>
+
+                        <div class="row">
+                            <!--Social Icons v3-->
+                            <div class="col-sm-6 sm-margin-bottom-30">
+                                <div class="panel panel-profile">
+                                    <div class="panel-heading overflow-h">
+                                        <h2 class="panel-title heading-sm pull-left"><i class="fa fa-pencil"></i> Social Contacts </h2>
+                                        <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                                    </div>
+                                    <div class="panel-body">
+                                         <ul class="list-unstyled social-contacts-v2">
+                                            <?php if($user->getTwitter() != null || $this->identity()->getTwitter() != ''): ?>
+                                            <li><i class="rounded-x tw fa fa-twitter"></i> <a href="#"><?php echo $user->getTwitter(); ?></a></li>
+                                            <?php endif; ?>
+                                            <?php if($user->getFacebook() != null || $user->getFacebook() != ''): ?>
+                                            <li><i class="rounded-x fb fa fa-facebook"></i> <a href="<?php echo $this->identity()->getFacebook(); ?>"><?php echo $user->getFacebook(); ?></a></li>
+                                            <?php endif; ?>
+                                            <?php if($user->getSkype() != null || $user->getSkype() != ''): ?>
+                                            <li><i class="rounded-x sk fa fa-skype"></i> <a href="#">><?php echo $user->getSkype(); ?></a></li>
+                                            <?php endif; ?>
+                                            <!-- <li><i class="rounded-x gp fa fa-google-plus"></i> <a href="#">rooster77edward</a></li> -->
+                                            <?php if($user->getEmail() != null || $user->getEmail() != ''): ?>
+                                            <li><i class="rounded-x gm fa fa-envelope"></i> <a href="#"><?php echo $user->getEmail(); ?></a></li>
+                                            <?php endif; ?>
+                                        </ul>
+                                    </div>       
+                                </div>
+                            </div>
+                            <!--End Social Icons v3-->         
+                        </div><!--/end row-->    
+
+                        <hr>                                
+                    </div>
+                <!--End Profile Body-->
+            </div>
+        </div><!--/end row-->
+    </div>

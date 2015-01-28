@@ -127,17 +127,17 @@ class CreateUserSecondStepForm extends Form
             ->setAttribute('id', 'create-user-role');
         $this->add($role);
 
-        $city = new Element\Select('city');
-        $city->setLabel('City')
-            ->setLabelAttributes(
-                array(
-                    'class' => 'label',
-                )
-            )
-            ->setValueOptions($this->entityManager->getRepository('Admin\Entity\City')->getAllCitiesAsOptions())
-            ->setAttribute('class', 'form-control')
-            ->setAttribute('id', 'create-user-city');
-        $this->add($city);
+        // $city = new Element\Select('city');
+        // $city->setLabel('City')
+        //     ->setLabelAttributes(
+        //         array(
+        //             'class' => 'label',
+        //         )
+        //     )
+        //     ->setValueOptions($this->entityManager->getRepository('Admin\Entity\City')->getAllCitiesAsOptions())
+        //     ->setAttribute('class', 'form-control')
+        //     ->setAttribute('id', 'create-user-city');
+        // $this->add($city);
 
         $submit = new Element\Submit('submit');
         $submit
