@@ -3,7 +3,7 @@
                 <!--Profile Body-->
                 <div class="profile-body">
                     <!--Table Search v2-->
-                    <?php $form->setAttribute('action', $this->url('administrator_content/default', array('controller' => 'city', 'action' => 'edit', 'id' => $city->getId()) ))->prepare(); ?>
+                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'city', 'action' => 'edit', 'id' => $city->getId()) ))->prepare(); ?>
                     <?php echo $this->form()->openTag($form); ?>
                     <!-- <form action="" class="sky-form"> -->
                     <header>Edit City</header>

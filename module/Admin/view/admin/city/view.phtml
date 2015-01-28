@@ -4,7 +4,7 @@
                 
                  
                     <div class="profile-body">
-                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'city', 'action' => 'edit', 'id' => $city->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-pencil"></i> Edit</a>
+                        <a href="<?php echo $this->url('administrator/default', array('controller' => 'city', 'action' => 'edit', 'id' => $city->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-pencil"></i> Edit</a>
                         <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-trash-o"></i> Delete City</a>
 
                         <div class="profile-bio">
@@ -59,7 +59,7 @@
                                         </div>
                                         <?php endforeach; ?>
                                         
-                                        <?php $form->setAttribute('action', $this->url('administrator_content/default', array('controller' => 'city', 'action' => 'view', 'id' => $city->getId())))->prepare(); ?>
+                                        <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'city', 'action' => 'view', 'id' => $city->getId())))->prepare(); ?>
                                         <?php echo $this->form()->openTag($form); ?>
                                         <div class="input-group">
                                             <label class="select">

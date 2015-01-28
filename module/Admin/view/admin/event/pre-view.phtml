@@ -19,30 +19,30 @@
                                 <div class="alert alert-warning fade in">
                                     <h4>Newsletter has not been created, you can not sending mails to inform subcribers about this event</h4>
                                     <p>
-                                        <!-- <a class="btn-u btn-u-xs btn-u-red" href="#">Take this action</a> --> <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'create', 'id' => $event->getId())); ?>">Create newsletter</a>
+                                        <!-- <a class="btn-u btn-u-xs btn-u-red" href="#">Take this action</a> --> <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator/default', array('controller' => 'newsletter', 'action' => 'create', 'id' => $event->getId())); ?>">Create newsletter</a>
                                     </p>
                                 </div>
                                 <?php else: ?>
                                 <div class="alert alert-warning fade in">
                                     <h4>Newsletter about this event has not been sent to subscribers</h4>
                                     <p>
-                                        <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'send', 'id' => $event->getNewsletter()->getId())); ?>">Send</a>
-                                        <a class="btn-u btn-u-xs btn-u-dark-blue" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Preview</a>
-                                        <a class="btn-u btn-u-xs btn-u-orange" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Edit</a>
-                                        <a class="btn-u btn-u-xs btn-u-red" href="<?php echo $this->url('administrator_content/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Delete</a>
+                                        <a class="btn-u btn-u-xs btn-u-sea" href="<?php echo $this->url('administrator/default', array('controller' => 'newsletter', 'action' => 'send', 'id' => $event->getNewsletter()->getId())); ?>">Send</a>
+                                        <a class="btn-u btn-u-xs btn-u-dark-blue" href="<?php echo $this->url('administrator/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Preview</a>
+                                        <a class="btn-u btn-u-xs btn-u-orange" href="<?php echo $this->url('administrator/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Edit</a>
+                                        <a class="btn-u btn-u-xs btn-u-red" href="<?php echo $this->url('administrator/default', array('controller' => 'newsletter', 'action' => 'view', 'id' => $event->getNewsletter()->getId())); ?>" target="_blank">Delete</a>
                                     </p>
                                 </div> 
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'edit', 'id' => $event->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-pencil"></i> Edit</a>
+                        <a href="<?php echo $this->url('administrator/default', array('controller' => 'event', 'action' => 'edit', 'id' => $event->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-pencil"></i> Edit</a>
                         <?php if($event->getPublished()): ?>
-                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'unpublish', 'id' => $event->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-times"></i> Unpublish</a>
+                        <a href="<?php echo $this->url('administrator/default', array('controller' => 'event', 'action' => 'unpublish', 'id' => $event->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-times"></i> Unpublish</a>
                         <?php else: ?>
-                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'publish', 'id' => $event->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-share"></i> Publish</a>
+                        <a href="<?php echo $this->url('administrator/default', array('controller' => 'event', 'action' => 'publish', 'id' => $event->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-share"></i> Publish</a>
                         <?php endif; ?>
                         <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-facebook"></i> Create Event On Facebook</a>
-                        <a href="<?php echo $this->url('administrator_content/default', array('controller' => 'event', 'action' => 'create-first-step' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-trash-o"></i> Delete Event</a>
+                        <a href="<?php echo $this->url('administrator/default', array('controller' => 'event', 'action' => 'create-first-step' )); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-trash-o"></i> Delete Event</a>
                         <!-- <div class="alert alert-success fade in margin-bottom-40">
                             <h4>Event Published!</h4>
                             At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.

@@ -3,7 +3,7 @@
                 <!--Profile Body-->
                 <div class="profile-body">
                     <!--Table Search v2-->
-                    <?php $form->setAttribute('action', $this->url('administrator_content/default', array('controller' => 'partner', 'action' => 'create-second-step', 'id' => $partnerID)))->prepare(); ?>
+                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'partner', 'action' => 'create-second-step', 'id' => $partnerID)))->prepare(); ?>
                     <?php echo $this->form()->openTag($form); ?>
                     <!-- <form action="" class="sky-form"> -->
                     <header><?php echo $partner->getName(); ?></header>

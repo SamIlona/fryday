@@ -150,6 +150,19 @@ return array(
                             ),
                         ),
                     ),
+                    'event_preview' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:country/:city/previewevent/:dateslug/:titleslug',
+                            'constraints' => array(
+                                'dateslug'      => '[0-9:-]+',
+                            ),
+                            'defaults' => array(
+                                'controller'    => 'Admin\Controller\Event',
+                                'action'        => 'pre-view',
+                            ),
+                        ),
+                    ),
                     'paginator' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -296,7 +309,7 @@ return array(
                 'label' => '<i class="fa fa-group"></i> Users',
                 'route' => 'administrator/default',
                 'controller' => 'user',
-                'action' => 'index',
+                // 'action' => 'index',
                 'class' => 'list-group-item',
                 // 'pages' => array(
                 //     array(
