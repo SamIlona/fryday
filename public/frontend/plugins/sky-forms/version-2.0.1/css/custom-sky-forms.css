@@ -11,12 +11,12 @@
 
 .sky-form .sky-form-without-border {
   box-shadow: none;
-  border: none;
+  border: none!important; 
 }
 
 .sky-form {
   box-shadow: none;
-  border: 0px solid #eee;
+  border: 1px solid #eee;
 }
 
 .sky-form header {

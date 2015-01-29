@@ -26,7 +26,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
  * @package    Admin
  * @subpackage Form
  */
-class MemberRegistrationForm extends Form 
+class ContinueRegistrationForm extends Form 
 {
     /**
      * @var EntityManager
@@ -66,40 +66,11 @@ class MemberRegistrationForm extends Form
             ->setAttributes(array('placeholder' => 'Last Name'));
         $this->add($lastName);
 
-        $password = new Element\Password('password');
+        $password = new Element\Text('password');
         $password->setLabel('Password')
             ->setLabelAttributes(array('class' => 'label'))
-            ->setAttributes(array(
-                'placeholder' => 'Password',
-                'id' => 'password',
-            ));
+            ->setAttributes(array('placeholder' => 'Password'));
         $this->add($password);
-
-        $confirmPassword = new Element\Password('confirmPassword');
-        $confirmPassword->setLabel('Confirm Password')
-            ->setLabelAttributes(array('class' => 'label'))
-            ->setAttributes(array(
-                'placeholder' => 'Confirm Password',
-                'id' => 'confirm-password',
-            ));
-        $this->add($confirmPassword);
-
-        $gender = new Element\Select('gender');
-        $gender->setLabel('Gender')
-            ->setLabelAttributes(array('class' => 'required control-label col-lg-4'))
-            ->setValueOptions(array(
-                    '0' => 'Male',
-                    '1' => 'Female',
-            ))
-            ->setEmptyOption('Gender')
-            ->setAttributes(array('class' => 'form-control'));
-        $this->add($gender);
-
-        $email = new Element\Text('email');
-        $email->setLabel('E-mail')
-            ->setLabelAttributes(array('class' => 'label'))
-            ->setAttributes(array('placeholder' => 'E-mail'));
-        $this->add($email);
 
         $phone = new Element\Text('phone');
         $phone->setLabel('Phone')
@@ -173,42 +144,27 @@ class MemberRegistrationForm extends Form
     {
         $inputFilter = new InputFilter\InputFilter();
 
-        $inputFilter->add(array(
+        $inputFilter->add(
+            array(
                 'name' => 'firstName',
                 'required' => true,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
-            ), 'firstName');
+            ),
+            'firstName'
+        );
 
-        $inputFilter->add(array(
+        $inputFilter->add(
+            array(
                 'name' => 'lastName',
                 'required' => true,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
-            ), 'lastName');
-
-        $inputFilter->add(array(
-                'name' => 'password',
-                'required' => true,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
-            ), 'password');
-
-        $inputFilter->add(array(
-                'name' => 'confirmPassword',
-                'required' => true,
-                'validators' => array(
-                    array(
-                        'name'    => 'Identical',
-                        'options' => array(
-                            'token' => 'password',
-                        ),
-                    ),
-                ),
-            ), 'confirmPassword');
+            ),
+            'lastName'
+        );
 
         $this->setInputFilter($inputFilter);
     }

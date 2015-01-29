@@ -14,7 +14,7 @@ return array(
                 'Admin\Controller\Index' => array(
                     'index'         => array('administrator', 'franchisor'),
                     'login'         => 'guest',
-                    'logout'        => array('administrator', 'franchisor'),
+                    'logout'        => array('administrator', 'franchisor', 'member'),
                 ),
                 'Admin\Controller\User' => array(
                     'profile'       => array('administrator', 'franchisor'),

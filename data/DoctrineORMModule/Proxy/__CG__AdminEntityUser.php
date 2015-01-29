@@ -64,10 +64,10 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image', 'registrationToken', 'emailConfirmed');
+            return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image', 'registrationToken', 'emailConfirmed', 'active', 'gender');
         }
 
-        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image', 'registrationToken', 'emailConfirmed');
+        return array('__isInitialized__', 'id', 'firstName', 'lastName', 'email', 'company', 'position', 'facebook', 'linkedin', 'twitter', 'skype', 'phone', 'googleplus', 'password', 'role', 'city', 'image', 'registrationToken', 'emailConfirmed', 'active', 'gender');
     }
 
     /**
@@ -494,6 +494,50 @@ class User extends \Admin\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmailConfirmed', array());
 
         return parent::getEmailConfirmed();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setActive($active)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setActive', array($active));
+
+        return parent::setActive($active);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getActive()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getActive', array());
+
+        return parent::getActive();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setGender($gender)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setGender', array($gender));
+
+        return parent::setGender($gender);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getGender()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getGender', array());
+
+        return parent::getGender();
     }
 
 }

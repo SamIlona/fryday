@@ -188,13 +188,13 @@ class IndexController extends Action
         );
     }
 
-    public function confirmEmailAction()
+    public function confirmSubscriptionAction()
     {
         $em = $this->getEntityManager();
         $request = $this->getRequest();
 
         $token = $this->params()->fromRoute('token');
-        $form = new FrydayForm\MemberRegistrationForm('member-regisration-form', $em);
+        $form = new FrydayForm\ContinueRegistrationForm('member-regisration-form', $em);
         $viewModel = new ViewModel(array(
             'token' => $token,
             'form' => $form,
@@ -203,8 +203,11 @@ class IndexController extends Action
         {
             $entity = $em->getRepository('Admin\Entity\User')->findOneBy(array('registrationToken' => $token)); // 
             $form->bind($entity);
-            // $entity->setActive(1);
+            $entity->setActive(0);
             $entity->setEmailConfirmed(1);
+            $role = $em->getRepository('Admin\Entity\Role')->findOneBy(array('name' => 'subscriber'));
+                // var_dump($role);
+            $entity->setRole($role);
             $em->persist($entity);
             $em->flush();
         }
@@ -230,15 +233,95 @@ class IndexController extends Action
 
                 // $this->prepareData($entity);
                 // $this->sendConfirmationEmail($entity);
+                // $entity->setEmail($data['email']);
+                $role = $em->getRepository('Admin\Entity\Role')->findOneBy(array('name' => 'member'));
+                // var_dump($role);
+                $entity->setRole($role);
+                $entity->setActive(1);
 
                 $em->persist($entity);
                 $em->flush();
 
-                return $this->redirect()->toRoute('fryday');
+                return $this->redirect()->toRoute('fryday/registration', array(
+                    'controller' => 'index', 
+                    'action' => 'confirm-registration', 
+                    'token' => $token
+                ));
             } 
         } 
         return $viewModel;
     }
+
+    public function memberRegistrationAction()
+    {
+        $em = $this->getEntityManager();
+        $request = $this->getRequest();
+
+        $form = new FrydayForm\MemberRegistrationForm('member-regisration-form', $em);
+        $entity = new Entity\User();
+        $form->bind($entity);
+        
+        if ($request->isPost()) 
+        {
+            $post = $request->getPost();
+            $form->setData($post);
+
+            if($form->isValid()) 
+            {
+                //TODO: entry email to db
+                //      send mail to subscriber
+                //      redirect to verify your email
+                $data = $form->getData();
+
+                // $entity = new Entity\User();
+                
+
+                $this->prepareData($entity);
+                $this->sendRegistrationConfirmEmail($entity);
+                $role = $em->getRepository('Admin\Entity\Role')->findOneBy(array('name' => 'member'));
+                // var_dump($role);
+                $entity->setRole($role);
+
+                $em->persist($entity);
+                $em->flush();
+
+                // return $this->redirect()->toRoute('fryday');
+            } 
+        } 
+        return new ViewModel(array(
+            'form' => $form,
+        ));
+    }
+
+    public function confirmRegistrationAction()
+    {
+        $em = $this->getEntityManager();
+        $token = $this->params()->fromRoute('token');
+
+        $form = new Form\LoginForm('login-form', $em);
+        $form->get('submit')->setValue('Login');
+        $messages = null;
+
+        try
+        {
+            $entity = $em->getRepository('Admin\Entity\User')->findOneBy(array('registrationToken' => $token)); // 
+            // $form->bind($entity);
+            // $entity->setActive(1);
+            $entity->setActive(1);
+            $em->persist($entity);
+            $em->flush();
+        }
+        catch(\Exception $e)
+        {
+            $viewModel->setTemplate('auth-doctrine/registration/confirm-email-error.phtml');
+        }
+
+        $this->layout('layout/main'); 
+
+        return new ViewModel(array(
+            'form'  => $form,
+        ));
+    } 
 
     public function getCityIdAction()
     {
@@ -284,6 +367,7 @@ class IndexController extends Action
         $user->setRegistrationToken(md5(uniqid(mt_rand(), true))); // $this->generateDynamicSalt();
 //      $user->setUsrRegistrationToken(uniqid(php_uname('n'), true));   
         $user->setEmailConfirmed(0);
+        $user->setActive(0);
         return $user;
     }
 
@@ -415,7 +499,40 @@ class IndexController extends Action
                 $this->getRequest()->getServer('HTTP_HOST') .
                 $this->url()->fromRoute('fryday/registration', array(
                     'controller' => 'index', 
-                    'action' => 'confirm-email', 
+                    'action' => 'confirm-subscription', 
+                    'token' => $user->getRegistrationToken()
+            )));
+
+        $message = $mailService->getMessage();
+        $message->setTo($user->getEmail());
+
+        $result = $mailService->send();
+    }
+
+    public function sendRegistrationConfirmEmail($user)
+    {
+        // $view = $this->getServiceLocator()->get('View');
+        // $transport = $this->getServiceLocator()->get('mail.transport');
+        // $message = new Message();
+        // $this->getRequest()->getServer();  //Server vars
+        // $message->addTo($user->getUsrEmail())
+        //         ->addFrom('praktiki@coolcsn.com')
+        //         ->setSubject('Please, confirm your registration!')
+        //         ->setBody("Please, click the link to confirm your registration => " . 
+        //             $this->getRequest()->getServer('HTTP_ORIGIN') .
+        //             $this->url()->fromRoute('fryday/default', array(
+        //                 'controller' => 'index', 
+        //                 'action' => 'confirm-email', 
+        //                 'id' => $user->getRegistrationToken())));
+        // $transport->send($message);
+        $this->getRequest()->getServer();  //Server vars
+        $mailService = $this->getServiceLocator()->get('AcMailer\Service\MailService');
+        $mailService->setSubject('Fryday\'s Member Confirmation')
+            ->setBody("Hello!<br>Welcome to Fryday! Please click on the link below to confirm your registration<br>http://" . 
+                $this->getRequest()->getServer('HTTP_HOST') .
+                $this->url()->fromRoute('fryday/registration', array(
+                    'controller' => 'index', 
+                    'action' => 'confirm-registration', 
                     'token' => $user->getRegistrationToken()
             )));
 

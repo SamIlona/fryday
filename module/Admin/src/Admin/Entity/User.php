@@ -127,10 +127,22 @@ class User
     protected $registrationToken;
 
     /**
-     * @var string
-     * @ORM\Column(name="email_confirmed", type="boolean", nullable=false)
+     * @var boolean
+     * @ORM\Column(name="email_confirmed", type="boolean", nullable=true)
      */
     protected $emailConfirmed;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="active", type="boolean", nullable=true)
+     */
+    protected $active;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="gender", type="boolean", nullable=true)
+     */
+    protected $gender;
 
     /**
      * @return int
@@ -348,7 +360,7 @@ class User
     }
 
     /**
-     * @param string $emailConfirmed
+     * @param boolean $emailConfirmed
      */
     public function setEmailConfirmed($emailConfirmed)
     {
@@ -356,10 +368,42 @@ class User
     }
 
     /**
-     * @return string 
+     * @return boolean 
      */
     public function getEmailConfirmed()
     {
         return $this->emailConfirmed;
+    }
+
+    /**
+     * @param boolean $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
+
+    /**
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param boolean $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return boolean 
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 }
