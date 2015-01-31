@@ -137,30 +137,10 @@
 
     <script>
     $(function(){
-
-        // $("#confirm-password").validate({
-        //     rules: {
-        //         password: { 
-        //             required: true,
-        //                 minlength: 6,
-        //                 maxlength: 10,
-
-        //         } , 
-
-        //         cfmPassword: { 
-        //             equalTo: "#password",
-        //                 minlength: 6,
-        //                 maxlength: 10
-        //         }
-        //     },
-        //     messages:{
-        //         password: { 
-        //             required:"the password is required"
-        //         }
-        //     }
-        // });
         
-        $("#member-registration-city").geocomplete()
+        $("#member-registration-city").geocomplete({
+            types: ['(cities)'],
+        })
             .bind("geocode:result", function(event, result)
             {
                 console.log(result.address_components)

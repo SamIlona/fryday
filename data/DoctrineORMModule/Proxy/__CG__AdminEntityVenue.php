@@ -64,10 +64,10 @@ class Venue extends \Admin\Entity\Venue implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'name', 'phone', 'website', 'email', 'image', 'address', 'city');
+            return array('__isInitialized__', 'id', 'name', 'phone', 'website', 'email', 'image', 'xStartCrop', 'yStartCrop', 'widthCrop', 'heightCrop', 'widthCurrent', 'heightCurrent', 'address', 'city');
         }
 
-        return array('__isInitialized__', 'id', 'name', 'phone', 'website', 'email', 'image', 'address', 'city');
+        return array('__isInitialized__', 'id', 'name', 'phone', 'website', 'email', 'image', 'xStartCrop', 'yStartCrop', 'widthCrop', 'heightCrop', 'widthCurrent', 'heightCurrent', 'address', 'city');
     }
 
     /**
@@ -340,6 +340,138 @@ class Venue extends \Admin\Entity\Venue implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCity', array());
 
         return parent::getCity();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setXStartCrop($xStartCrop)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setXStartCrop', array($xStartCrop));
+
+        return parent::setXStartCrop($xStartCrop);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getXStartCrop()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getXStartCrop', array());
+
+        return parent::getXStartCrop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setYStartCrop($yStartCrop)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setYStartCrop', array($yStartCrop));
+
+        return parent::setYStartCrop($yStartCrop);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getYStartCrop()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getYStartCrop', array());
+
+        return parent::getYStartCrop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHeightCrop($heightCrop)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHeightCrop', array($heightCrop));
+
+        return parent::setHeightCrop($heightCrop);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHeightCrop()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHeightCrop', array());
+
+        return parent::getHeightCrop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setWidthCrop($widthCrop)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setWidthCrop', array($widthCrop));
+
+        return parent::setWidthCrop($widthCrop);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getWidthCrop()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getWidthCrop', array());
+
+        return parent::getWidthCrop();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setWidthCurrent($widthCurrent)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setWidthCurrent', array($widthCurrent));
+
+        return parent::setWidthCurrent($widthCurrent);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getWidthCurrent()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getWidthCurrent', array());
+
+        return parent::getWidthCurrent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHeightCurrent($heightCurrent)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHeightCurrent', array($heightCurrent));
+
+        return parent::setHeightCurrent($heightCurrent);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHeightCurrent()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHeightCurrent', array());
+
+        return parent::getHeightCurrent();
     }
 
 }

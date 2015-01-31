@@ -7,19 +7,14 @@
                     <!-- <form action="" class="sky-form"> -->
                     <header>Add City</header>
                     
-                    <fieldset>
-
-                        <!-- <section>
-                            <?php //echo $this->formLabel($this->form->get('profileImage')); ?>
-                            <label for="file" class="input input-file">
-                                <div class="button">
-                                    <?php //echo $this->formFile($this->form->get('profileImage')); ?>
-                                    Browse
-                                </div>
-                                <input readonly="" type="text">
-                                <?php //echo $this->formFile($this->form->get('profileImage')); ?>
+                    <fieldset>                        
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('name')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('name')); ?>
                             </label>
-                        </section>   -->            
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('name')); ?>
+                        </section>         
                             
                         <section class="col-md-6">
                             <!-- <label class="label">Select</label> -->
@@ -31,14 +26,11 @@
                             <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('country')); ?>
                         </section>
 
-                        <section class="col-md-6">
-                            <?php echo $this->formLabel($this->form->get('name')); ?>
-                            <label class="input">
-                                <?php echo $this->formInput($this->form->get('name')); ?>
-                            </label>
-                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('name')); ?>
+                        <section class="col-md-12">
+                            <div class="map_canvas">
+                            </div>
                         </section>
-
+                    
                     </fieldset>
                     
                     <footer>
@@ -51,3 +43,46 @@
                 </div>
                 <!--End Profile Body-->
             </div>
+<script>
+    $(function(){
+        
+        $("#city-name").geocomplete({
+            types: ['(cities)'],
+            map: ".map_canvas",
+        })
+        .bind("geocode:result", function(event, result)
+        {
+            console.log(result.address_components);
+            // console.log(result.address_components[0].long_name);
+            // console.log(result.address_components[3].long_name);
+
+            var countryName;
+
+            if(result.address_components.length === 4)
+            {
+                countryName = result.address_components[3].long_name
+            } 
+            else if (result.address_components.length === 3)
+            {
+                countryName = result.address_components[2].long_name
+            }
+            else if (result.address_components.length === 2)
+            {
+                countryName = result.address_components[1].long_name
+            }
+
+            // console.log(countryName);
+
+            $.log("Result: " + result);
+            $.post("/registration/get-city-id", { country: countryName, }, function(data)
+            {
+                // console.log(data.countryId);
+                // console.log(data.cityName);
+                $("#city-country").val(data.countryId);
+            }, 'json');
+
+            $("#city-name").val(result.address_components[0].long_name);
+        });
+        
+    });
+</script>

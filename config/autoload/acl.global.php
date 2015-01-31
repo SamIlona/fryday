@@ -32,14 +32,12 @@ return array(
                 'Fryday\Controller\Index' => array(
                     'all'         => 'guest',
                 ),
-                'Fryday\Controller\Javascript' => array(
-                    'all'         => 'guest',
-                ),
                 'Admin\Controller\City' => array(
                     'all'         => 'administrator',
                 ),
                 'Admin\Controller\Venue' => array(
                     'all'         => array('administrator', 'franchisor'),
+                    // 'all'         => 'guest',
                 ),
                 'Admin\Controller\Event' => array(
                     'all'      => array('administrator', 'franchisor'),

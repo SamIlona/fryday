@@ -66,6 +66,42 @@ class Venue
     protected $image;
 
     /**
+     * @var integer
+     * @ORM\Column(name="x_start_crop", type="integer", nullable=true)
+     */
+    protected $xStartCrop;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="y_start_crop", type="integer", nullable=true)
+     */
+    protected $yStartCrop;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="width_crop", type="integer", nullable=true)
+     */
+    protected $widthCrop;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="height_crop", type="integer", nullable=true)
+     */
+    protected $heightCrop;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="width_current", type="integer", nullable=true)
+     */
+    protected $widthCurrent;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="height_current", type="integer", nullable=true)
+     */
+    protected $heightCurrent;
+
+    /**
      * @var string
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
@@ -73,7 +109,7 @@ class Venue
 
     /**
      * @var City
-     * @ORM\ManyToOne(targetEntity="Admin\Entity\City", inversedBy="venues")
+     * @ORM\ManyToOne(targetEntity="Admin\Entity\City")
      * @ORM\JoinColumn(name="city", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $city;
@@ -217,5 +253,101 @@ class Venue
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * @param $xStartCrop
+     */
+    public function setXStartCrop($xStartCrop)
+    {
+        $this->xStartCrop = $xStartCrop;
+    }
+
+    /**
+     * @return
+     */
+    public function getXStartCrop()
+    {
+        return $this->xStartCrop;
+    }
+
+    /**
+     * @param $yStartCrop
+     */
+    public function setYStartCrop($yStartCrop)
+    {
+        $this->yStartCrop = $yStartCrop;
+    }
+
+    /**
+     * @return
+     */
+    public function getYStartCrop()
+    {
+        return $this->yStartCrop;
+    }
+
+    /**
+     * @param $heightCrop
+     */
+    public function setHeightCrop($heightCrop)
+    {
+        $this->heightCrop = $heightCrop;
+    }
+
+    /**
+     * @return
+     */
+    public function getHeightCrop()
+    {
+        return $this->heightCrop;
+    }
+
+    /**
+     * @param $widthCrop
+     */
+    public function setWidthCrop($widthCrop)
+    {
+        $this->widthCrop = $widthCrop;
+    }
+
+    /**
+     * @return
+     */
+    public function getWidthCrop()
+    {
+        return $this->widthCrop;
+    }
+
+    /**
+     * @param $widthCurrent
+     */
+    public function setWidthCurrent($widthCurrent)
+    {
+        $this->widthCurrent = $widthCurrent;
+    }
+
+    /**
+     * @return
+     */
+    public function getWidthCurrent()
+    {
+        return $this->widthCurrent;
+    }
+
+    /**
+     * @param $heightCurrent
+     */
+    public function setHeightCurrent($heightCurrent)
+    {
+        $this->heightCurrent = $heightCurrent;
+    }
+
+    /**
+     * @return
+     */
+    public function getHeightCurrent()
+    {
+        return $this->heightCurrent;
     }
 }

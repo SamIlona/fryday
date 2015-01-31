@@ -1,60 +1,158 @@
-<div class="breadcrumbs">
+<!-- <div class="breadcrumbs">
     <div class="container">
-        <h1 class="pull-left"><?php echo $event->getTitle(); ?></h1>
+        <h1 class="pull-left"><?php //echo $event->getTitle(); ?></h1>
         <ul class="pull-right breadcrumb">
             <li><a href="index.html">Home</a></li>
             <li class="active">Event</li>
         </ul>
     </div>
-</div>
+</div> -->
 
+    <div class="block-description">
+        <div class="container">
+            <!-- <i class="center-icon rounded-x fa fa-edit"></i> -->
+            <div class="title-box-v2">
+                <h2><?php echo $event->getTitle(); ?></h2>
+                <!-- <p>Pellentesque et erat ac massa cursus porttitor eget sed magna.</p> -->
+            </div> 
 
-<div class="content container">
-            <div class="page-wrapper">
-                <div class="page-content">
-                    <div class="row page-row">
-                        <div class="jobs-wrapper col-md-8 col-sm-7">           
-                            <h3 class="title"></h3>
+            <div class="row">
+                <!-- Left Inner -->
+                <div class="col-md-8">
+
+                    <div class="left-inner">
+                        <!-- <img src="assets/img/clients/walmart.png" alt=""> -->
+                        <!-- <h3>Wal-Mart Stores, Inc</h3> -->
+                        <!-- <a href="#"><i class="position-top fa fa-print"></i></a> -->
+                        <!-- <div class="overflow-h">
+                            <p class="hex">Worldwide, 16,329 Employees, Bentonville, Arkansas</p>
+                            <p class="hex">Worldwide, 16,329 Employees, Bentonville, Arkansas</p>
+                            <ul class="list-inline star-vote">
+                                <li><i class="color-green fa fa-star"></i></li>
+                                <li><i class="color-green fa fa-star"></i></li>
+                                <li><i class="color-green fa fa-star"></i></li>
+                                <li><i class="color-green fa fa-star-half-o"></i></li>
+                                <li><i class="color-green fa fa-star-o"></i></li>
+                            </ul>
+                            <span><a href="#">34 reviews</a></span>
+                        </div>    
+                        
+                        <hr> -->
+
+                        <!-- <div class="progression"> -->
                             <div class="event-main-img">
                                 <img class="img-responsive" src="<?php echo '/uploads/events/' . $event->getId() . DIRECTORY_SEPARATOR . 'rect640x320_' . $event->getImage(); ?>" alt="<?php echo $event->getTitle(); ?>">
                             </div>
-                           <!--  <div class="fb-like" data-href="https://fryday.net/event/<?php $event->getVenue()->getId(); ?>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">
-                            </div> -->
-                            <div class="fb-like" data-href="http://fryday.net/<?php echo $event->getVenue()->getCity()->getRoute() . '/event/' . $event->getDateSlug() . '/' . $event->getTitleSlug(); ?>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-
-                            <br><br>
-                            <div class="box box-border page-row">
-                                <blockquote class="hero-unify">
-                                    <ul class="list-unstyled">
-                                        <li><strong>Date:</strong> <?php echo $event->getDateTimeEvent()->format('l, F jS'); ?> </li>
-                                        <li><strong>Time:</strong> <?php echo $event->getDateTimeEvent()->format('H:i'); ?></li>
-                                        <li><strong>Venue:</strong> <?php echo $event->getVenue()->getName(); ?></li>
-                                        <li><strong>Address:</strong> <?php echo $event->getVenue()->getAddress(); ?></li>
-                                        <?php if($event->getCurrency() === null): ?>
-                                        <li>
-                                            <strong>Entrance fee:</strong> Free
-                                        <?php else: ?>
-                                            <strong>Entrance fee:</strong> <?php echo $event->getEntranceFee() . " " . $event->getCurrency()->getCode(); ?>
-                                        <?php endif; ?>
-                                        </li>
-                                    </ul>  
-                                </blockquote>
-                              
-                            </div>
-                            <p>
-                            <?php echo nl2br($event->getDetails()); ?>
+                        <!-- </div> -->
+                        
+                        <!-- <hr> -->
+                        <div class="overflow-h">
+                            <p class="hex"><i class="fa fa-calendar-o"></i> <?php echo $event->getDateTimeEvent()->format('l, F jS'); ?></p>
+                            <p class="hex"><i class="fa fa-clock-o"></i> <?php echo $event->getDateTimeEvent()->format('H:i'); ?></p>
+                            <p class="hex"><i class="fa fa-map-marker"></i> <?php echo $event->getVenue()->getCity()->getCountry()->getName(); ?>, <?php echo $event->getVenue()->getCity()->getName(); ?>, <?php echo $event->getVenue()->getName(); ?></p>
+                            <p class="hex"><i class="fa fa-arrow-circle-o-right"></i>
+                                <?php if($event->getCurrency() === null): ?>
+                                    Entrance fee: Free
+                                <?php else: ?>
+                                    Entrance fee: <?php echo $event->getEntranceFee() . " " . $event->getCurrency()->getCode(); ?>
+                                <?php endif; ?>
                             </p>
-                                                                                        
-                        </div><!--//jobs-wrapper-->
-                        <aside class="page-sidebar  col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-1">                    
-                            <section class="widget has-divider">
-                                <h3 class="title">Video tour</h3>
-                                <iframe class="iframe" src="//www.youtube.com/embed/Ks-_Mh1QhMc?rel=0&amp;wmode=transparent" allowfullscreen="" =""="" frameborder="0"></iframe>
-                            </section><!--//widget-->
+                        </div>   
+                        <hr>
 
-                        </aside>
-                    </div><!--//page-row-->
-                </div><!--//page-content-->
-            </div><!--//page--> 
-        </div>
+                        <!-- <h2>Description</h2> -->
+                        <p><?php echo nl2br($event->getDetails()); ?></p>
+                    </div>
+                </div>
+                <!-- End Left Inner -->
+                
+                <!-- Right Inner -->
+                <div class="col-md-4"> 
+                    <div class="right-inner">
+                        <h3>Posted by</h3>     
+                        <?php if($event->getUser()->getImage() != null): ?>
+                        <img src="<?php echo '/uploads/users' . DIRECTORY_SEPARATOR . $event->getUser()->getId() . DIRECTORY_SEPARATOR . 'square264x264_' . $event->getUser()->getImage(); ?>" alt="">
+                                    <!-- <a class="btn-u btn-u-sm" href="#">Change Picture</a> -->
+                        <?php else: ?>
+                        <img src="/frontend/img/noavatar.png" alt="">
+                        <?php endif; ?>
+                        <div class="overflow-h">
+                            <span class="font-s"><?php echo $event->getUser()->getFirstName(); ?> <?php echo $event->getUser()->getLastName(); ?></span>
+                            <p class="color-green">Position: <span class="hex">Manager, Accounter</span></p>
+                            <ul class="social-icons">
+                                <li><a class="social_facebook" data-original-title="Facebook" href="#"></a></li>
+                                <li><a class="social_googleplus" data-original-title="Google Plus" href="#"></a></li>
+                                <li><a class="social_tumblr" data-original-title="Tumblr" href="#"></a></li>
+                                <li><a class="social_twitter" data-original-title="Twitter" href="#"></a></li>
+                            </ul>
+                        </div>    
+                        
+                        <hr>
+                    </div>
+                </div>
+                <!-- End Right Inner -->
+            </div>    
+        </div>   
+    </div>
 
+    <div class="contacts">
+        <div class="container">
+            <i class="center-icon rounded-x fa fa-map-marker"></i>
+            <div class="title-box-v2">
+                <h2><?php echo $event->getVenue()->getName(); ?></h2>
+                <!-- <p>Pellentesque et erat ac massa cursus porttitor eget sed magna.</p> -->
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <!-- Google Map -->
+                    <input type="hidden" id="venue-address"></input>
+                    <div class="map_canvas"></div>
+                    <!-- End Google Map -->
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <!-- Get in Touch -->
+                    <!-- <h3>Get in Touch</h3>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem</p>
+
+                    <hr> -->
+
+                    <!-- Contacts -->
+                    <!-- <h3>The Office</h3> -->
+                    <ul class="list-unstyled who">
+                        <li><a href="#"><i class="fa fa-home"></i><?php echo $event->getVenue()->getAddress(); ?></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i><?php echo $event->getVenue()->getEmail(); ?></a></li>
+                        <li><a href="#"><i class="fa fa-phone"></i><?php echo $event->getVenue()->getPhone(); ?></li>
+                        <li><a href="#"><i class="fa fa-globe"></i><?php echo $event->getVenue()->getWebsite(); ?></a></li>
+                    </ul>
+
+                    <hr>
+                    
+                    <!-- Business Hours -->
+                    <!-- <h3>Business Hours</h3>
+                    <ul class="list-unstyled">
+                        <li><strong>Monday-Friday:</strong> 10am to 8pm</li>
+                        <li><strong>Saturday:</strong> 11am to 3pm</li>
+                        <li><strong>Sunday:</strong> Closed</li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>   
+    </div>
+
+<script>
+    $(function(){
+        
+        $("#venue-address").geocomplete({
+            // types: ['(cities)'],
+            map: ".map_canvas",
+            location: <?php echo json_encode($event->getVenue()->getAddress()); ?>,
+        })
+        .bind("geocode:result", function(event, result)
+        {
+            console.log(result.address_components);
+            // console.log(result.address_components[0].long_name);
+            // console.log(result.address_components[3].long_name);
+        });
+        
+    });
+</script>

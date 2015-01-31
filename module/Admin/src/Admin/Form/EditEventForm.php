@@ -237,6 +237,11 @@ class EditEventForm extends Form
         );
         $inputFilter->add($imageInput);
 
+        $inputFilter->add(array(
+                'name' => 'currency',
+                'required' => false,
+        ), 'currency');
+
         $this->setInputFilter($inputFilter);
     }
 }

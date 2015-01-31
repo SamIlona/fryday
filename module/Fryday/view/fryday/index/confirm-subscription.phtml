@@ -122,7 +122,9 @@
     <script>
     $(function(){
         
-        $("#member-registration-city").geocomplete()
+        $("#member-registration-city").geocomplete({
+            types: ['(cities)'],
+        })
             .bind("geocode:result", function(event, result)
             {
                 console.log(result.address_components)

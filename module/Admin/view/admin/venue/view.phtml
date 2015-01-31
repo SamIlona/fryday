@@ -1,0 +1,85 @@
+           
+            <div class="col-md-9">
+                <!--Profile Body-->
+                
+                 
+                    <div class="profile-body">
+                        <a href="<?php echo $this->url('administrator/default', array('controller' => 'venue', 'action' => 'edit', 'id' => $venue->getId())); ?>" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-pencil"></i> Edit</a>
+                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-20"><i class="fa fa-trash-o"></i> Delete Venue</a>
+
+                        <div class="profile-bio">
+                            <div class="row margin-bottom-10">
+                                <div class="col-md-5">
+                                    <img class="img-responsive" src="<?php echo $currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $venue->getImage(); ?>" alt="<?php //echo $event->getTitle(); ?>">
+                                    <!-- <a class="btn-u btn-u-sm" href="#">Change Picture</a> -->
+                                </div>
+                                <div class="col-md-7">
+                                    <h2><?php echo $venue->getName(); ?></h2>
+                                    <span><strong>Country:</strong> <?php echo $venue->getCity()->getCountry()->getName(); ?></span>
+                                    <span><strong>City:</strong> <?php echo $venue->getCity()->getName(); ?></span>
+                                    <span><strong>City:</strong> <?php echo $venue->getAddress(); ?></span>
+                                    <!-- <span><strong>Position:</strong> Web Designer</span> -->
+                                    <hr>
+                                </div>
+                            </div>    
+                        </div>
+                        <!-- <div class="profile-bio">
+                            <div class="row margin-bottom-10">
+                                <div class="col-md-12 text-center">
+                                <h2><?php //echo $venue->getName(); ?></h2>
+                                </div>
+                            </div>
+                        </div> -->
+                        <hr></hr>
+                        <div class="row">
+                            <div class="col-sm-6 sm-margin-bottom-20">
+                                <div class="panel panel-profile">
+                                    <div class="panel-heading overflow-h">
+                                        <h2 class="panel-title heading-sm pull-left"><i class="fa fa-tasks"></i>Contacts</h2>
+                                        <!-- <a href="profile_users.html" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-right">View All</a> -->
+                                    </div>
+                                    <div class="panel-body">
+                                        
+                                       
+                                    </div>        
+                                </div>
+                            </div>
+                            <div class="col-sm-6 md-margin-bottom-30">
+                            <div class="panel panel-profile no-bg">
+                                <!-- <div class="panel-heading overflow-h">
+                                    <h2 class="panel-title heading-sm pull-left"><i class="fa fa-briefcase"></i>Map</h2>
+                                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                                </div> -->
+                                <div class="panel-body contentHolder ps-container">
+                                    <input type="hidden" id="venue-address"></input>
+                                    <!-- <section class="col-md-12"> -->
+                                        <div class="map_canvas"></div>
+                                    <!-- </section> -->
+                                </div>    
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                        
+                          
+                    </div>
+                </div>
+                <!--End Profile Body-->
+            </div>
+
+<script>
+    $(function(){
+        
+        $("#venue-address").geocomplete({
+            // types: ['(cities)'],
+            map: ".map_canvas",
+            location: <?php echo json_encode($venue->getAddress()); ?>,
+        })
+        .bind("geocode:result", function(event, result)
+        {
+            console.log(result.address_components);
+            // console.log(result.address_components[0].long_name);
+            // console.log(result.address_components[3].long_name);
+        });
+        
+    });
+</script>

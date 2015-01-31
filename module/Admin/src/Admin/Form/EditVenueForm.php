@@ -24,7 +24,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
  * @package    Admin
  * @subpackage Form
  */
-class CreateVenueSecondStepForm extends Form 
+class EditVenueForm extends Form 
 {
     /**
      * @var EntityManager
@@ -44,6 +44,7 @@ class CreateVenueSecondStepForm extends Form
     public function __construct($name = null, $entityManager, $dir)
     {
         parent::__construct($name);
+        $this->setHydrator(new DoctrineHydrator($entityManager, 'Admin\Entity\Venue'));
         $this->setAttributes(
             array(
                 'method'    => 'post',
@@ -63,41 +64,46 @@ class CreateVenueSecondStepForm extends Form
      */
     public function addElements()
     {
-        $x = new Element\Hidden('x');
-        $x->setAttribute('id', 'venue-x');
-        $this->add($x);
+        $name = new Element\Text('name');
+        $name->setLabel('Name')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'venue-name');
+        $this->add($name);
 
-        $y = new Element\Hidden('y');
-        $y->setAttribute('id', 'venue-y');
-        $this->add($y);
+        $city = new Element\Select('city');
+        $city->setLabel('Select City')
+            ->setLabelAttributes(array('class' => 'label'))
+            ->setValueOptions($this->entityManager->getRepository('Admin\Entity\City')->getAllCitiesAsOptions())
+            ->setEmptyOption('Select city...')
+            ->setOptions(array('disable_inarray_validator' => true))
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'venue-city');
+        $this->add($city);
 
-        $w = new Element\Hidden('w');
-        $w->setAttribute('id', 'venue-w');
-        $this->add($w);
+        $xStartCrop = new Element\Hidden('xStartCrop');
+        $xStartCrop->setAttribute('id', 'x-start-crop');
+        $this->add($xStartCrop);
 
-        $h = new Element\Hidden('h');
-        $h->setAttribute('id', 'venue-h');
-        $this->add($h);
+        $yStartCrop = new Element\Hidden('yStartCrop');
+        $yStartCrop->setAttribute('id', 'y-start-crop');
+        $this->add($yStartCrop);
 
-        $cw = new Element\Hidden('cw');
-        $cw->setAttribute('id', 'venue-cw');
-        $this->add($cw);
+        $widthCrop = new Element\Hidden('widthCrop');
+        $widthCrop->setAttribute('id', 'width-crop');
+        $this->add($widthCrop);
 
-        $ch = new Element\Hidden('ch');
-        $ch->setAttribute('id', 'venue-ch');
-        $this->add($ch);
+        $heightCrop = new Element\Hidden('heightCrop');
+        $heightCrop->setAttribute('id', 'height-crop');
+        $this->add($heightCrop);
 
-        // $category = new Element\Select('category');
-        // $category->setLabel('Select Category')
-        //     ->setLabelAttributes(
-        //         array(
-        //             'class' => 'label',
-        //         )
-        //     )
-        //     ->setValueOptions($this->getCategories())
-        //     ->setAttribute('class', 'form-control')
-        //     ->setAttribute('id', 'venue-category');
-        // $this->add($category);
+        $widthCurrent = new Element\Hidden('widthCurrent');
+        $widthCurrent->setAttribute('id', 'width-current');
+        $this->add($widthCurrent);
+
+        $heightCurrent = new Element\Hidden('heightCurrent');
+        $heightCurrent->setAttribute('id', 'height-current');
+        $this->add($heightCurrent);
 
         $phone = new Element\Text('phone');
         $phone->setLabel('Phone')
@@ -155,7 +161,7 @@ class CreateVenueSecondStepForm extends Form
 
         // Image Input
         $imageInput = new InputFilter\FileInput('image');
-        // $imageInput->setRequired(true);
+        $imageInput->setRequired(false);
         $imageInput->getFilterChain()->attachByName(
             'filerenameupload',
             array(

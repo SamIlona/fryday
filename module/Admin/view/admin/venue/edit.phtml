@@ -2,17 +2,32 @@
                 <!--Profile Body-->
                 <div class="profile-body">
                     <!--Table Search v2-->
-                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'venue', 'action' => 'create-second-step', 'id' => $venueID)))->prepare(); ?>
+                    <?php $form->setAttribute('action', $this->url('administrator/default', array('controller' => 'venue', 'action' => 'edit', 'id' => $venue->getId())))->prepare(); ?>
                     <?php echo $this->form()->openTag($form); ?>
                     <!-- <form action="" class="sky-form"> -->
                     <header>Add Venue. Step 2</header>
                     
                     <fieldset>
-                        <div class="col col-12 imag_center">
-                            <img style="max-height: 320px;max-width: 640px; "id="imagepreview" src="/frontend/img/noimage.png" alt="your image" />
-                        </div>
-                        
                         <section class="col-md-12">
+                            <?php echo $this->formLabel($this->form->get('name')); ?>
+                            <label class="input">
+                                <?php echo $this->formInput($this->form->get('name')); ?>
+                            </label>
+
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('name')); ?>
+                        </section>
+
+                            <?php if($venue->getImage() != null): ?>
+                            <div class="col-md-12 imag_center">
+                                <img style="max-height: 320px;max-width: 640px; "id="imagepreview" src="<?php echo $currentUploadDir . DIRECTORY_SEPARATOR . $venue->getImage(); ?>" alt="your image" />
+                            </div>
+                            <?php else: ?>
+                            <div class="col-md-12 imag_center">
+                                <img style="max-height: 320px;max-width: 640px; "id="imagepreview" src="/frontend/img/noimage.png" alt="your image" />
+                            </div>
+                            <?php endif; ?>
+                        
+                        <section class="col-md-6">
                             <!-- <label class="label">File input</label>/ -->
                             <?php echo $this->formLabel($this->form->get('image')); ?>
                             <label for="file" class="input input-file">
@@ -24,22 +39,24 @@
                                 <input readonly="" type="text">
                                 <?php //echo $this->formFile($this->form->get('profileImage')); ?>
                             </label>
-                            <?php echo $this->formInput($this->form->get('x')); ?>
-                            <?php echo $this->formInput($this->form->get('y')); ?>
-                            <?php echo $this->formInput($this->form->get('w')); ?>
-                            <?php echo $this->formInput($this->form->get('h')); ?>
-                            <?php echo $this->formInput($this->form->get('cw')); ?>
-                            <?php echo $this->formInput($this->form->get('ch')); ?>
+                            <?php echo $this->formInput($this->form->get('xStartCrop')); ?>
+                            <?php echo $this->formInput($this->form->get('yStartCrop')); ?>
+                            <?php echo $this->formInput($this->form->get('widthCrop')); ?>
+                            <?php echo $this->formInput($this->form->get('heightCrop')); ?>
+                            <?php echo $this->formInput($this->form->get('widthCurrent')); ?>
+                            <?php echo $this->formInput($this->form->get('heightCurrent')); ?>
 
                             <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('image')); ?>
                         </section>
-<!-- 
-                        <section>
-                            <?php //echo $this->formLabel($this->form->get('username')); ?>
-                            <label class="input">
-                                <?php //echo $this->formInput($this->form->get('username')); ?>
+
+                        <section class="col-md-6">
+                            <?php echo $this->formLabel($this->form->get('city')); ?>
+                            <label class="select">
+                                <?php echo $this->formSelect($this->form->get('city')); ?>
                             </label>
-                        </section> -->
+
+                            <?php echo $this->formElementErrors()->setMessageOpenFormat('<div class="note note-error">')->setMessageSeparatorString('</div><div class="note note-error">')->setMessageCloseString('</div>')->render($this->form->get('city')); ?>
+                        </section>
 
                         <section class="col-md-12">
                             <?php echo $this->formLabel($this->form->get('address')); ?>
@@ -119,6 +136,10 @@
             handles: true,
             // show: true,
             onSelectChange: preview,
+            x1: parseInt($('#x-start-crop').val(), 10),
+            y1: parseInt($('#y-start-crop').val(), 10),
+            x2: parseInt($('#x-start-crop').val(), 10) + parseInt($('#width-crop').val(), 10),
+            y2: parseInt($('#y-start-crop').val(), 10) + parseInt($('#height-crop').val(), 10),
         });
     });
 
@@ -127,12 +148,12 @@
     });
 
     function preview(img, selection) {  
-        $('#venue-cw').val(img.clientWidth);  
-        $('#venue-ch').val(img.clientHeight);  
-        $('#venue-x').val(selection.x1);  
-        $('#venue-y').val(selection.y1); 
-        $('#venue-w').val(selection.width);  
-        $('#venue-h').val(selection.height);
+        $('#width-current').val(img.clientWidth);  
+        $('#height-current').val(img.clientHeight);  
+        $('#x-start-crop').val(selection.x1);  
+        $('#y-start-crop').val(selection.y1); 
+        $('#width-crop').val(selection.width);  
+        $('#height-crop').val(selection.height);
     }
     </script>
 
@@ -142,6 +163,7 @@
         $("#venue-address").geocomplete({
             // types: ['(cities)'],
             map: ".map_canvas",
+            location: <?php echo json_encode($address); ?>,
         })
         .bind("geocode:result", function(event, result)
         {

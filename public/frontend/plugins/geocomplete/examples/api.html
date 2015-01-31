@@ -8,7 +8,7 @@
   <body>
 
     <form>
-      <input id="geocomplete" type="text" placeholder="Type in an address" size="90" />
+      <input id="geocomplete" type="text" placeholder="Type in an address" size="90" width="400"/>
       <input id="find" type="button" value="find" />
     </form>
         
@@ -28,7 +28,7 @@
     <script>
       $(function(){
         $("#geocomplete").geocomplete({
-          map: ".map_canvas"
+          map: ".map_canvas",
         });
         
         $("#search").click(function(){

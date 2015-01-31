@@ -4075,3 +4075,9 @@ body.dark .tp-banner-container .btn-u.btn-brd.btn-u-light {
 .btn-add-user{
 	margin-bottom: 5px;
 }
+
+.map_canvas { 
+  /*width: 600px; */
+  height: 400px; 
+  /*margin: 10px 20px 10px 0;*/
+}

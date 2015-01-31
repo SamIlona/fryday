@@ -55,8 +55,8 @@
     },
 
     maxZoom: 16,
-    // types: ['geocode'],
-    types: ['(cities)'],
+    types: ['geocode'],
+    // types: ['(cities)'],
     blur: false,
     geocodeAfterResult: false
   };

@@ -243,6 +243,15 @@ return array(
                 'label' => 'Events',
                 'route' => 'fryday/static_pages',
                 'action' => 'events',
+                'pages' => array(
+                    array(
+                        'label' => 'View Event', // 'Child #1',
+                        'route' => 'fryday/event_details',
+                        // 'controller' => 'index',
+                        // 'action' => 'profile',
+                        // 'params' => array('action' => 'view-event'),
+                    ),
+                ),
             ),
             array(
                 'label' => 'Franchise',

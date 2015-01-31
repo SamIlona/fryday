@@ -176,17 +176,25 @@ class VenueController extends Action
                 }
 
                 $thumb->resize(640, 320);
-                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'rectangle640x320_' . $imageName;
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName;
                 $thumb->save($resizedImg);
-                
+
+                $thumb->resize(224, 112);
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName;    
+                $thumb->save($resizedImg);
+
                 if($currentDimantions['height'] / $currentDimantions['width'] < 1)
                     $thumb_square->cropFromCenter($currentDimantions['height'], $currentDimantions['height']);
                 else 
                     $thumb_square->cropFromCenter($currentDimantions['width'], $currentDimantions['width']);
 
                 $thumb_square->resize(60, 60);
-                $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
-                $thumb_square->save($mailImg);
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
+                $thumb_square->save($resizedImg);  
+
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName, 0777);
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName, 0777); 
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName, 0777); 
 
                 $venueEntity->setImage($imageName);
 
@@ -205,6 +213,164 @@ class VenueController extends Action
         return array(
         	'form' => $venueForm,
             'venueID' => $venueID,
+        );
+    }
+
+    public function viewAction()
+    {
+        $em = $this->getEntityManager();
+        $authUser = $this->getAuthenticatedUser();
+        $request = $this->getRequest();
+        $id = $this->params()->fromRoute('id');
+        $uploadDir = $this->getUploadPath();
+        $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $id;
+        $entity = $em->getRepository('Admin\Entity\Venue')->findOneBy(array('id' => $id));
+        // $linkUserToCityForm = new Form\LinkUserToCityForm('link-user-to-city-form', $em, $authUser, $id);
+        // $usersLinkedToCity = $em->getRepository('Admin\Entity\LinkCityUser')->getUsersLinkedToCity($id);
+
+        // if($request->isPost())
+        // {
+        //     $post = $request->getPost();
+
+        //     $linkUserToCityForm->setData($post);
+
+        //     if($linkUserToCityForm->isValid()) 
+        //     {
+        //         $postDataForm = $linkUserToCityForm->getData();
+
+        //         $linkUserToCityForm->setHydrator(new DoctrineHydrator($em, 'Admin\Entity\LinkCityUser'));
+        //         $linkCityUserEntity = new Entity\LinkCityUser();
+        //         $linkUserToCityForm->bind($linkCityUserEntity);
+
+        //         $city = $em->getRepository('Admin\Entity\City')->getCityByID($id);
+        //         $user = $em->getRepository('Admin\Entity\User')->getUserByID($postDataForm['user']);
+
+        //         $linkCityUserEntity->setCity($city);
+        //         $linkCityUserEntity->setUser($user);
+
+        //         $em->persist($linkCityUserEntity);
+        //         $em->flush();
+
+        //         $usersLinkedToCity = $em->getRepository('Admin\Entity\LinkCityUser')->getUsersLinkedToCity($id);
+        //     }
+        // }
+
+        return array(
+            // 'form' => $linkUserToCityForm,
+            'venue' => $entity,
+            'currentUploadDir' => end(explode('public', $currentUploadDir)),
+            // 'usersLinkedToCity' => $usersLinkedToCity,
+        );
+    }
+
+    public function editAction()
+    {
+        $em = $this->getEntityManager();
+        $id = $this->params()->fromRoute('id');
+        $uploadDir = $this->getUploadPath();
+        $currentUploadDir = $uploadDir . DIRECTORY_SEPARATOR . $id;
+        $user = $this->getAuthenticatedUser();
+        $form = new Form\EditVenueForm('event', $em, $currentUploadDir);
+        $entity = $em->getRepository('Admin\Entity\Venue')->findOneBy(array('id' => $id));
+        $thumbnailer = $this->getServiceLocator()->get('WebinoImageThumb');
+
+        $request = $this->getRequest();
+
+        if($request->isPost())
+        {
+            $post = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+
+            // remember name and path to the image if new image has not been uploaded
+            $imageName = $entity->getImage();
+            $imagePath = $currentUploadDir. DIRECTORY_SEPARATOR . $imageName;
+
+            $form->bind($entity);
+            $form->setData($post);
+            
+            if ($form->isValid()) 
+            {
+                $dataForm               = $form->getData();
+                $city                   = $dataForm->getCity();
+                $imageData              = $dataForm->getImage();
+
+                if(!$imageData['tmp_name'] == '')
+                {
+                    $imageName          = end(explode("$currentUploadDir". DIRECTORY_SEPARATOR, $imageData['tmp_name']));
+                    $imagePath          = $imageData['tmp_name'];
+                }
+                    
+                $thumb              = $thumbnailer->create($imagePath, $options = array(), $plugins = array());
+                $thumb_square       = $thumbnailer->create($imagePath, $options = array(), $plugins = array());
+                $currentDimantions  = $thumb->getCurrentDimensions();
+
+                if($post['xStartCrop'] === '' ||
+                    $post['yStartCrop'] === '') 
+                {
+                    if($currentDimantions['height'] / $currentDimantions['width'] < 0.5) 
+                        $thumb->cropFromCenter($currentDimantions['height'] * 2, $currentDimantions['height']);
+                    else 
+                        $thumb->cropFromCenter($currentDimantions['width'], $currentDimantions['width'] / 2);
+                }
+                else 
+                {
+                    $scale = $currentDimantions['width'] / $post['widthCurrent'];
+
+                    $thumb->crop($post['xStartCrop'] * $scale, 
+                                 $post['yStartCrop'] * $scale,
+                                 $post['widthCrop'] * $scale, 
+                                 $post['heightCrop'] * $scale
+                                );
+                }
+
+                $thumb->resize(640, 320);
+                $resizedImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName;
+                $thumb->save($resizedImg);
+
+                $thumb->resize(224, 112);
+                $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName;    
+                $thumb->save($mailImg);
+
+                if($currentDimantions['height'] / $currentDimantions['width'] < 1)
+                    $thumb_square->cropFromCenter($currentDimantions['height'], $currentDimantions['height']);
+                else 
+                    $thumb_square->cropFromCenter($currentDimantions['width'], $currentDimantions['width']);
+
+                $thumb_square->resize(60, 60);
+                $mailImg = $currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName;    
+                $thumb_square->save($mailImg);   
+
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'rect640x320_' . $imageName, 0777);
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'mail224x112_' . $imageName, 0777); 
+                chmod($currentUploadDir . DIRECTORY_SEPARATOR . 'square60x60_' . $imageName, 0777); 
+
+                $entity->setImage($imageName);
+                $entity->setCity($city);
+
+                $this->getEntityManager()->persist($entity);
+                $this->getEntityManager()->flush();
+
+                $entity = $em->getRepository('Admin\Entity\Venue')->findOneBy(array('id' => $id));
+                
+                return $this->redirect()->toRoute('administrator/default', array('controller' => 'venue', 'action' => 'index'));
+            }
+        }
+        else
+        {
+            $form->bind($entity);
+            // $dateTimeEvent = $entity->getDateTimeEvent();
+            // $form->get('date')->setValue($dateTimeEvent->format('d/m/Y'));
+            // $form->get('time')->setValue($dateTimeEvent->format('H:i'));
+        }
+
+        return array(
+            'venue' => $entity,
+            'form' => $form,
+            'flashMessages' => $this->flashMessenger()->getMessages(),
+            'currentUploadDir' => end(explode('public', $currentUploadDir)),
+            'address' => $form->get('address')->getValue(),
         );
     }
 }
